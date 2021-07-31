@@ -1,0 +1,15 @@
+{
+  "itemGroup.MiningMasterTab": "Mining Master",
+
+  "block.miningmaster.fire_ruby_ore": "Fire Ruby Ore",
+  "block.miningmaster.ice_sapphire_ore": "Ice Sapphire Ore",
+  "block.miningmaster.spirit_amethyst_ore": "Spirit Amethyst Ore",
+  "block.miningmaster.haste_peridot_ore": "Haste Peridot Ore",
+  "block.miningmaster.lucky_citrine_ore": "Lucky Citrine Ore",
+
+  "item.miningmaster.fire_ruby": "Fire Ruby",
+  "item.miningmaster.ice_sapphire": "Ice Sapphire",
+  "item.miningmaster.spirit_amethyst": "Spirit Amethyst",
+  "item.miningmaster.haste_peridot": "Haste Peridot",
+  "item.miningmaster.lucky_citrine": "Lucky Citrine"
+}

@@ -16,9 +16,17 @@
 
 package org.infernalstudios.miningmaster;
 
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.infernalstudios.miningmaster.init.MMBlocks;
+import org.infernalstudios.miningmaster.init.MMItems;
 
 
 @Mod(MiningMaster.MOD_ID)
@@ -27,6 +35,19 @@ public class MiningMaster {
     public static final String MOD_ID = "miningmaster";
 
     public MiningMaster() {
+        final ModLoadingContext modLoadingContext = ModLoadingContext.get();
+        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        MMBlocks.register(modEventBus);
+        MMItems.register(modEventBus);
     }
+
+    public static final ItemGroup TAB = new ItemGroup("MiningMasterTab") {
+
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(Items.DIAMOND_PICKAXE);
+        }
+
+    };
 }
