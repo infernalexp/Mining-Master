@@ -22,6 +22,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -57,7 +58,7 @@ public class MMBlocks {
 
     public static <T extends Block> RegistryObject<T> registerBlockWithDefaultItem(String name, Supplier<? extends T> blockSupplier) {
         RegistryObject<T> block = BLOCKS.register(name, blockSupplier);
-        MMItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(MiningMaster.TAB)));
+        MMItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
         return block;
     }
 

@@ -44,13 +44,4 @@ public class MiningMaster {
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
     }
-
-    public static final ItemGroup TAB = new ItemGroup("MiningMasterTab") {
-
-        @Override
-        public ItemStack createIcon() {
-            return new ItemStack(Items.DIAMOND_PICKAXE);
-        }
-
-    };
 }
