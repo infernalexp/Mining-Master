@@ -33,11 +33,11 @@ import java.util.function.Supplier;
 public class MMBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MiningMaster.MOD_ID);
 
-    public static final RegistryObject<Block> FIRE_RUBY_ORE = registerBlockWithDefaultItem("fire_ruby_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE)));
-    public static final RegistryObject<Block> ICE_SAPPHIRE_ORE = registerBlockWithDefaultItem("ice_sapphire_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE)));
-    public static final RegistryObject<Block> SPIRIT_AMETHYST_ORE = registerBlockWithDefaultItem("spirit_amethyst_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE)));
-    public static final RegistryObject<Block> HASTE_PERIDOT_ORE = registerBlockWithDefaultItem("haste_peridot_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE)));
-    public static final RegistryObject<Block> LUCKY_CITRINE_ORE = registerBlockWithDefaultItem("lucky_citrine_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> FIRE_RUBY_ORE = registerBlockWithDefaultItem("fire_ruby_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> ICE_SAPPHIRE_ORE = registerBlockWithDefaultItem("ice_sapphire_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> SPIRIT_AMETHYST_ORE = registerBlockWithDefaultItem("spirit_amethyst_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> HASTE_PERIDOT_ORE = registerBlockWithDefaultItem("haste_peridot_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> LUCKY_CITRINE_ORE = registerBlockWithDefaultItem("lucky_citrine_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
 
     public static AbstractBlock.Properties getProperties(Material materialIn, float hardnessAndResistanceIn) {
         return getProperties(materialIn, hardnessAndResistanceIn, hardnessAndResistanceIn);

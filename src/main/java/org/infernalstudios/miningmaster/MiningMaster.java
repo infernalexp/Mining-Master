@@ -19,6 +19,7 @@ package org.infernalstudios.miningmaster;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -40,6 +41,8 @@ public class MiningMaster {
 
         MMBlocks.register(modEventBus);
         MMItems.register(modEventBus);
+
+        MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
     }
 
     public static final ItemGroup TAB = new ItemGroup("MiningMasterTab") {
