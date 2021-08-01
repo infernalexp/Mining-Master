@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "miningmaster:spirit_amethyst_ore"
+              "name": "miningmaster:spirit_garnet_ore"
             },
             {
               "type": "minecraft:item",
@@ -38,7 +38,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "miningmaster:spirit_amethyst"
+              "name": "miningmaster:spirit_garnet"
             }
           ]
         }

@@ -31,7 +31,7 @@ public class MMItems {
 
     public static final RegistryObject<Item> FIRE_RUBY = registerItem("fire_ruby", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> ICE_SAPPHIRE = registerItem("ice_sapphire", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final RegistryObject<Item> SPIRIT_AMETHYST = registerItem("spirit_amethyst", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> SPIRIT_GARNET = registerItem("spirit_garnet", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> HASTE_PERIDOT = registerItem("haste_peridot", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> LUCKY_CITRINE = registerItem("lucky_citrine", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
 

@@ -16,9 +16,6 @@
 
 package org.infernalstudios.miningmaster;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -26,8 +23,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.infernalstudios.miningmaster.init.MMBlocks;
-import org.infernalstudios.miningmaster.init.MMItems;
+import org.infernalstudios.miningmaster.enchantments.LeechingEnchantment;
+import org.infernalstudios.miningmaster.init.*;
 
 
 @Mod(MiningMaster.MOD_ID)
@@ -41,7 +38,10 @@ public class MiningMaster {
 
         MMBlocks.register(modEventBus);
         MMItems.register(modEventBus);
+        MMEnchantments.register(modEventBus);
+        MMRecipes.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
+        MinecraftForge.EVENT_BUS.addListener(LeechingEnchantment::onEntityDamage);
     }
 }

@@ -42,7 +42,7 @@ public class RandomGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
         } else if (choice <= 4) {
             blockState = MMBlocks.ICE_SAPPHIRE_ORE.get().getDefaultState();
         } else if (choice <= 6) {
-            blockState = MMBlocks.SPIRIT_AMETHYST_ORE.get().getDefaultState();
+            blockState = MMBlocks.SPIRIT_GARNET_ORE.get().getDefaultState();
         } else if (choice == 7) {
             blockState = MMBlocks.HASTE_PERIDOT_ORE.get().getDefaultState();
         } else {

@@ -1,0 +1,9 @@
+{
+  "type": "miningmaster:gem_smithing_recipe",
+  "base": {
+    "tag": "miningmaster:enchantables"
+  },
+  "gem": {
+    "item": "miningmaster:lucky_citrine"
+  }
+}
