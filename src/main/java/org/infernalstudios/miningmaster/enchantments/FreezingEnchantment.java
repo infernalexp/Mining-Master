@@ -18,6 +18,7 @@ package org.infernalstudios.miningmaster.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
+import net.minecraft.enchantment.FireAspectEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -46,6 +47,11 @@ public class FreezingEnchantment extends Enchantment {
     @Override
     public int getMaxLevel() {
         return 3;
+    }
+
+    @Override
+    protected boolean canApplyTogether(Enchantment ench) {
+        return !(ench instanceof FireAspectEnchantment);
     }
 
     @Override
