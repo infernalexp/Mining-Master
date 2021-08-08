@@ -17,23 +17,23 @@
 package org.infernalstudios.miningmaster.init;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.infernalstudios.miningmaster.MiningMaster;
+import org.infernalstudios.miningmaster.items.GemItem;
 
 import java.util.function.Supplier;
 
 public class MMItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MiningMaster.MOD_ID);
 
-    public static final RegistryObject<Item> FIRE_RUBY = registerItem("fire_ruby", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final RegistryObject<Item> ICE_SAPPHIRE = registerItem("ice_sapphire", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final RegistryObject<Item> SPIRIT_GARNET = registerItem("spirit_garnet", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final RegistryObject<Item> HASTE_PERIDOT = registerItem("haste_peridot", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final RegistryObject<Item> LUCKY_CITRINE = registerItem("lucky_citrine", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> FIRE_RUBY = registerItem("fire_ruby", GemItem::new);
+    public static final RegistryObject<Item> ICE_SAPPHIRE = registerItem("ice_sapphire", GemItem::new);
+    public static final RegistryObject<Item> SPIRIT_GARNET = registerItem("spirit_garnet", GemItem::new);
+    public static final RegistryObject<Item> HASTE_PERIDOT = registerItem("haste_peridot", GemItem::new);
+    public static final RegistryObject<Item> LUCKY_CITRINE = registerItem("lucky_citrine", GemItem::new);
 
 
     public static void register(IEventBus eventBus) {
