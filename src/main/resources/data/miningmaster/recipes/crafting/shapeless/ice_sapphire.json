@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "miningmaster:ice_sapphire_block"
+    }
+  ],
+  "result": {
+    "item": "miningmaster:ice_sapphire",
+    "count": 9
+  }
+}

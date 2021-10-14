@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "miningmaster:lucky_citrine_block"
+    }
+  ],
+  "result": {
+    "item": "miningmaster:lucky_citrine",
+    "count": 9
+  }
+}

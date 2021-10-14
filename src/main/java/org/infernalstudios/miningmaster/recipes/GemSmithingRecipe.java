@@ -49,8 +49,8 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
     static {
         GEM_ENCHANTMENTS.put(MMItems.FIRE_RUBY.get(), Arrays.asList(Enchantments.FIRE_ASPECT, Enchantments.FLAME, Enchantments.FIRE_PROTECTION));
         GEM_ENCHANTMENTS.put(MMItems.ICE_SAPPHIRE.get(), Arrays.asList(Enchantments.FROST_WALKER, MMEnchantments.FREEZING.get()));
-        GEM_ENCHANTMENTS.put(MMItems.SPIRIT_GARNET.get(), Arrays.asList(Enchantments.THORNS, MMEnchantments.LEECHING.get()));
-        GEM_ENCHANTMENTS.put(MMItems.HASTE_PERIDOT.get(), Arrays.asList(Enchantments.EFFICIENCY));
+        GEM_ENCHANTMENTS.put(MMItems.SPIRIT_GARNET.get(), Arrays.asList(Enchantments.THORNS, Enchantments.LOYALTY, MMEnchantments.LEECHING.get()));
+        GEM_ENCHANTMENTS.put(MMItems.HASTE_PERIDOT.get(), Arrays.asList(Enchantments.EFFICIENCY, Enchantments.LURE, Enchantments.QUICK_CHARGE));
         GEM_ENCHANTMENTS.put(MMItems.LUCKY_CITRINE.get(), Arrays.asList(Enchantments.FORTUNE, Enchantments.LUCK_OF_THE_SEA, Enchantments.LOOTING));
     }
 

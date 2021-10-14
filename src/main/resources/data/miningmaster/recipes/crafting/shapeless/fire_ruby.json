@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "miningmaster:fire_ruby_block"
+    }
+  ],
+  "result": {
+    "item": "miningmaster:fire_ruby",
+    "count": 9
+  }
+}
