@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "miningmaster:ice_sapphire"
+    }
+  },
+  "result": {
+    "item": "miningmaster:ice_sapphire_block"
+  }
+}

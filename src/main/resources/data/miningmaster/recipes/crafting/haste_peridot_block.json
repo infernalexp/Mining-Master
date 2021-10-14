@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "miningmaster:haste_peridot"
+    }
+  },
+  "result": {
+    "item": "miningmaster:haste_peridot_block"
+  }
+}

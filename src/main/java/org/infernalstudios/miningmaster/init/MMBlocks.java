@@ -40,6 +40,12 @@ public class MMBlocks {
     public static final RegistryObject<Block> HASTE_PERIDOT_ORE = registerBlockWithDefaultItem("haste_peridot_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
     public static final RegistryObject<Block> LUCKY_CITRINE_ORE = registerBlockWithDefaultItem("lucky_citrine_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
 
+    public static final RegistryObject<Block> FIRE_RUBY_BLOCK = registerBlockWithDefaultItem("fire_ruby_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> ICE_SAPPHIRE_BLOCK = registerBlockWithDefaultItem("ice_sapphire_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> SPIRIT_GARNET_BLOCK = registerBlockWithDefaultItem("spirit_garnet_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> HASTE_PERIDOT_BLOCK = registerBlockWithDefaultItem("haste_peridot_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> LUCKY_CITRINE_BLOCK = registerBlockWithDefaultItem("lucky_citrine_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+
     public static AbstractBlock.Properties getProperties(Material materialIn, float hardnessAndResistanceIn) {
         return getProperties(materialIn, hardnessAndResistanceIn, hardnessAndResistanceIn);
     }

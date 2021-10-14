@@ -5,6 +5,12 @@
   "block.miningmaster.haste_peridot_ore": "Haste Peridot Ore",
   "block.miningmaster.lucky_citrine_ore": "Lucky Citrine Ore",
 
+  "block.miningmaster.fire_ruby_block": "Block of Fire Ruby",
+  "block.miningmaster.ice_sapphire_block": "Block of Ice Sapphire",
+  "block.miningmaster.spirit_garnet_block": "Block of Spirit Garnet",
+  "block.miningmaster.haste_peridot_block": "Block of Haste Peridot",
+  "block.miningmaster.lucky_citrine_block": "Block of Lucky Citrine",
+
   "item.miningmaster.fire_ruby": "Fire Ruby",
   "item.miningmaster.ice_sapphire": "Ice Sapphire",
   "item.miningmaster.spirit_garnet": "Spirit Garnet",

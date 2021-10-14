@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "miningmaster:lucky_citrine"
+    }
+  },
+  "result": {
+    "item": "miningmaster:lucky_citrine_block"
+  }
+}
