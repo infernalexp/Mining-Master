@@ -13,13 +13,13 @@ The five ores are:
 - Grants Frost Walker or Freezing, dependent on the item. Most commonly found under icy biomes.
 
 ### Spirit Garnet
-- Grants Thorns or Leeching, dependent on the item. Most commonly found under extremely hilly biomes.
+- Grants Thorns, Leeching, or Loyalty, dependent on the item. Most commonly found under extremely hilly biomes.
 
 ### Haste Peridot
-- Grants Efficiency when applied. Most commonly found under jungle biomes.
+- Grants Efficiency, Quick Draw, or Lure, dependent on the item. Most commonly found under jungle biomes.
 
 ### Lucky Citrine
-- Grants Fortune when applied. Most commonly found under mesa biomes.
+- Grants Fortune, Looting, or Luck of the Sea, dependent on the item. Most commonly found under mesa biomes.
 
 We've also added two new Enchantments from Dungeons for the Garnet and the Sapphire respectively, those being:
 
