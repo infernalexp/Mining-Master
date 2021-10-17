@@ -1,48 +1,41 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://plugins.gradle.org/m2/' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'gradle.plugin.com.modrinth.minotaur', name: 'Minotaur',    version: '1.2.1'
+        classpath group: 'gradle.plugin.com.matthewprenger',    name: 'CurseGradle', version: '1.4.0'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'com.matthewprenger.cursegradle'
 
-version = '1.1.0'
-group = 'org.infernalstudios.miningmaster' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'miningmaster'
+// This initializes the config. Please try to modify the variables in the config file, if needed, add more if you see a reason to.
+ext.config = parseConfig(file('build.properties'))
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+version = config.VERSION
+group = "${config.GROUP}.${config.ARTIFACT}"
+archivesBaseName = "${config.ARCHIVES_BASE_NAME}-${config.MINECRAFT_VERSION}"
+
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    // The mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   Snapshot are built nightly.
-    // stable_#            Stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'snapshot', version: '20210309-1.16.5'
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-    
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    mappings channel: config.MAPPINGS_CHANNEL, version: config.MAPPINGS_VERSION
 
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
             workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN'
-
-            // Recommended logging level for the console
+            arg '-mixin.config=infernal-expansion.mixins.json'
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            
-
             mods {
-                miningmaster {
+                infernalexp {
                     source sourceSets.main
                 }
             }
@@ -50,16 +43,11 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
+            arg '-mixin.config=infernal-expansion.mixins.json'
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-            
-
             mods {
-                miningmaster {
+                infernalexp {
                     source sourceSets.main
                 }
             }
@@ -67,18 +55,11 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-
-            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'foodeffects', '--all', '--output', file('src/generated/resources/')
-
+            args '--mod', 'infernalexp', '--all', '--output', file('src/generated/resources/')
             mods {
-                miningmaster {
+                infernalexp {
                     source sourceSets.main
                 }
             }
@@ -87,22 +68,105 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
+    minecraft "net.minecraftforge:forge:${config.MINECRAFT_VERSION}-${config.FORGE_VERSION}"
 }
 
-// Example for how to get properties into the manifest for reading by the runtime..
+
 jar {
     manifest {
         attributes([
-            "Specification-Title": "miningmaster",
-            "Specification-Vendor": "infernalstudios",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"infernalstudios",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                'Specification-Title'   : config.TITLE,
+                'Specification-Vendor'  : config.AUTHOR,
+                'Specification-Version' : '1',
+                'Implementation-Title'  : config.TITLE,
+                'Implementation-Version': config.VERSION,
+                'Implementation-Vendor' : config.AUTHOR,
+                'MixinConfigs'          : 'infernal-expansion.mixins.json',
+                'MixinConnector'        : 'org.infernalstudios.infernalexp.mixin.MixinConnector'
         ])
     }
 }
 
 jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = config.GROUP
+            artifactId = config.ARTIFACT
+            artifact jar
+
+            pom {
+                name = 'Mining Master'
+                url = 'https://infernalstudios.org/mining-master'
+                licenses {
+                    license {
+                        name = 'Apache License 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/infernalexp/Mining-Master.git'
+                    url = 'https://github.com/infernalexp/Mining-Master'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url 'https://maven.infernalstudios.org/releases'
+
+            
+            credentials {
+                username = System.getenv('MAVEN_USER')
+                password = System.getenv('MAVEN_TOKEN')
+            }
+            
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
+}
+
+// Modrinth publishing
+import com.modrinth.minotaur.TaskModrinthUpload
+
+task publishModrinth (type: TaskModrinthUpload) {
+    onlyIf {
+        System.getenv('MODRINTH')
+    }
+
+    token = System.getenv('MODRINTH')
+    projectId = 'Xu8V0UlK'
+    versionNumber = project.version
+    uploadFile = jar
+    addGameVersion(config.MINECRAFT_VERSION)
+    addLoader('forge')
+}
+
+// Curseforge publishing
+curseforge {
+  apiKey = System.getenv('CURSEFORGE') ?: 'If you\'re seeing this, you haven\'t set your "CURSEFORGE" environment variable'
+  
+  project {
+    id = '534956'
+    changelog = 'No changelog specified.'
+    releaseType = 'release'
+    addGameVersion config.MINECRAFT_VERSION
+    mainArtifact (jar) { 
+      displayName = "Mining Master Release ${project.version}"
+    }
+  }
+}
+
+
+// Config parse function
+def parseConfig(File config) {
+    config.withReader {
+        def prop = new Properties()
+        prop.load(it)
+        return (new ConfigSlurper().parse(prop))
+    }
+}
+
