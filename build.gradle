@@ -140,6 +140,7 @@ task publishModrinth (type: TaskModrinthUpload) {
     token = System.getenv('MODRINTH')
     projectId = 'Xu8V0UlK'
     versionNumber = project.version
+    versionName = "Mining Master Release ${project.version}"
     uploadFile = jar
     addGameVersion(config.MINECRAFT_VERSION)
     addLoader('forge')
