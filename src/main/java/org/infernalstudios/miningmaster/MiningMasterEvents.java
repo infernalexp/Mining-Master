@@ -49,7 +49,7 @@ public class MiningMasterEvents {
         } else if (biomeCategory == Biome.Category.ICY) {
             event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_ICE_SAPPHIRE_NATIVE);
         } else if (biomeCategory == Biome.Category.EXTREME_HILLS) {
-            event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_SPIRIT_garnet_NATIVE);
+            event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_SPIRIT_GARNET_NATIVE);
         } else if (biomeCategory == Biome.Category.JUNGLE) {
             event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_HASTE_PERIDOT_NATIVE);
         } else if (biomeCategory == Biome.Category.MESA) {
