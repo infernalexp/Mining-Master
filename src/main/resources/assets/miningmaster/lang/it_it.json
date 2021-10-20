@@ -1,0 +1,22 @@
+{
+  "block.miningmaster.fire_ruby_ore": "Minerale di rubino di fuoco",
+  "block.miningmaster.ice_sapphire_ore": "Minerale di zaffiro di ghiaccio",
+  "block.miningmaster.spirit_garnet_ore": "Minerale di granato dello spirito",
+  "block.miningmaster.haste_peridot_ore": "Minerale di peridoto della sollecitudine",
+  "block.miningmaster.lucky_citrine_ore": "Minerale di citrino della fortuna",
+
+  "block.miningmaster.fire_ruby_block": "Blocco di rubino di fuoco",
+  "block.miningmaster.ice_sapphire_block": "Blocco di zaffiro di ghiaccio",
+  "block.miningmaster.spirit_garnet_block": "Blocco di granato dello spirito",
+  "block.miningmaster.haste_peridot_block": "Blocco di peridoto della sollecitudine",
+  "block.miningmaster.lucky_citrine_block": "Blocco di citrino della fortuna",
+
+  "item.miningmaster.fire_ruby": "Rubino di fuoco",
+  "item.miningmaster.ice_sapphire": "Zaffiro di ghiaccio",
+  "item.miningmaster.spirit_garnet": "Granato dello spirito",
+  "item.miningmaster.haste_peridot": "Peridoto della sollecitudine",
+  "item.miningmaster.lucky_citrine": "Citrino della fortuna",
+
+  "enchantment.miningmaster.freezing": "Congelamento",
+  "enchantment.miningmaster.leeching": "Sanguisuga"
+}
