@@ -1,0 +1,22 @@
+{
+  "block.miningmaster.fire_ruby_ore": "Uguns rubīna rūda",
+  "block.miningmaster.ice_sapphire_ore": "Ledus safīra rūda",
+  "block.miningmaster.spirit_garnet_ore": "Gara granāta rūda",
+  "block.miningmaster.haste_peridot_ore": "Steigas peridota rūda",
+  "block.miningmaster.lucky_citrine_ore": "Veiksmīgā citrīna rūda",
+
+  "block.miningmaster.fire_ruby_block": "Uguns rubīna bloks",
+  "block.miningmaster.ice_sapphire_block": "Ledus safīra bloks",
+  "block.miningmaster.spirit_garnet_block": "Gara granāta rūda",
+  "block.miningmaster.haste_peridot_block": "Steigas peridota bloks",
+  "block.miningmaster.lucky_citrine_block": "Veiksmīgā citrīna rūda",
+
+  "item.miningmaster.fire_ruby": "Uguns rubīns",
+  "item.miningmaster.ice_sapphire": "Ledus safīrs",
+  "item.miningmaster.spirit_garnet": "Gara granāts",
+  "item.miningmaster.haste_peridot": "Steigas peridots",
+  "item.miningmaster.lucky_citrine": "Veiksmīgais citrīns",
+
+  "enchantment.miningmaster.freezing": "Sasalums",
+  "enchantment.miningmaster.leeching": "Izsūkšana"
+}
