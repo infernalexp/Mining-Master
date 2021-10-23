@@ -23,6 +23,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.infernalstudios.miningmaster.MiningMaster;
+import org.infernalstudios.miningmaster.enchantments.FloatationEnchantment;
 import org.infernalstudios.miningmaster.enchantments.FreezingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.LeechingEnchantment;
@@ -39,6 +40,7 @@ public class MMEnchantments {
     public static final RegistryObject<Enchantment> STONEBREAKER = ENCHANTMENTS.register("stonebreaker", () -> new StonebreakerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
     public static final RegistryObject<Enchantment> RUNNER = ENCHANTMENTS.register("runner", () -> new RunnerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.FEET));
     public static final RegistryObject<Enchantment> HEARTFELT = ENCHANTMENTS.register("heartfelt", () -> new HeartfeltEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.CHEST));
+    public static final RegistryObject<Enchantment> FLOATATION = ENCHANTMENTS.register("floatation", () -> new FloatationEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
 
     public static void register(IEventBus eventBus) {
         ENCHANTMENTS.register(eventBus);
