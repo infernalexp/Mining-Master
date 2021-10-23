@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "miningmaster:kinetic_opal"
+    }
+  },
+  "result": {
+    "item": "miningmaster:kinetic_opal_block"
+  }
+}

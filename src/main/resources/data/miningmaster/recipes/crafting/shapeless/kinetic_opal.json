@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "miningmaster:kinetic_opal_block"
+    }
+  ],
+  "result": {
+    "item": "miningmaster:kinetic_opal",
+    "count": 9
+  }
+}

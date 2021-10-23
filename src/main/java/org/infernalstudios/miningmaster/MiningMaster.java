@@ -24,6 +24,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.infernalstudios.miningmaster.enchantments.LeechingEnchantment;
+import org.infernalstudios.miningmaster.enchantments.SmeltingEnchantment;
 import org.infernalstudios.miningmaster.init.*;
 
 
@@ -40,8 +41,10 @@ public class MiningMaster {
         MMItems.register(modEventBus);
         MMEnchantments.register(modEventBus);
         MMRecipes.register(modEventBus);
+        MMLootModifiers.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
         MinecraftForge.EVENT_BUS.addListener(LeechingEnchantment::onEntityDamage);
+        //MinecraftForge.EVENT_BUS.addListener(SmeltingEnchantment::onBlockMined);
     }
 }

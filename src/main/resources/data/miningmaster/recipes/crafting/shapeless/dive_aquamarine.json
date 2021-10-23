@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "miningmaster:dive_aquamarine_block"
+    }
+  ],
+  "result": {
+    "item": "miningmaster:dive_aquamarine",
+    "count": 9
+  }
+}

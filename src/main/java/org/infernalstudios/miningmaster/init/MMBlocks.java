@@ -46,6 +46,18 @@ public class MMBlocks {
     public static final RegistryObject<Block> HASTE_PERIDOT_BLOCK = registerBlockWithDefaultItem("haste_peridot_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> LUCKY_CITRINE_BLOCK = registerBlockWithDefaultItem("lucky_citrine_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
 
+    public static final RegistryObject<Block> DIVE_AQUAMARINE_ORE = registerBlockWithDefaultItem("dive_aquamarine_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> HEART_RHODONITE_ORE = registerBlockWithDefaultItem("heart_rhodonite_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> POWER_PYRITE_ORE = registerBlockWithDefaultItem("power_pyrite_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> KINETIC_OPAL_ORE = registerBlockWithDefaultItem("kinetic_opal_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> AIR_MALACHITE_ORE = registerBlockWithDefaultItem("air_malachite_ore", () -> new Block(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+
+    public static final RegistryObject<Block> DIVE_AQUAMARINE_BLOCK = registerBlockWithDefaultItem("dive_aquamarine_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> HEART_RHODONITE_BLOCK = registerBlockWithDefaultItem("heart_rhodonite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> POWER_PYRITE_BLOCK = registerBlockWithDefaultItem("power_pyrite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> KINETIC_OPAL_BLOCK = registerBlockWithDefaultItem("kinetic_opal_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> AIR_MALACHITE_BLOCK = registerBlockWithDefaultItem("air_malachite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+
     public static AbstractBlock.Properties getProperties(Material materialIn, float hardnessAndResistanceIn) {
         return getProperties(materialIn, hardnessAndResistanceIn, hardnessAndResistanceIn);
     }

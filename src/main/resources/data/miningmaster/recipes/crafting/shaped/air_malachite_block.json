@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "miningmaster:air_malachite"
+    }
+  },
+  "result": {
+    "item": "miningmaster:air_malachite_block"
+  }
+}

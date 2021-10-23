@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "miningmaster:air_malachite_block"
+    }
+  ],
+  "result": {
+    "item": "miningmaster:air_malachite",
+    "count": 9
+  }
+}

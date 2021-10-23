@@ -34,7 +34,11 @@ public class MMItems {
     public static final RegistryObject<Item> SPIRIT_GARNET = registerItem("spirit_garnet", GemItem::new);
     public static final RegistryObject<Item> HASTE_PERIDOT = registerItem("haste_peridot", GemItem::new);
     public static final RegistryObject<Item> LUCKY_CITRINE = registerItem("lucky_citrine", GemItem::new);
-
+    public static final RegistryObject<Item> DIVE_AQUAMARINE = registerItem("dive_aquamarine", GemItem::new);
+    public static final RegistryObject<Item> HEART_RHODONITE = registerItem("heart_rhodonite", GemItem::new);
+    public static final RegistryObject<Item> POWER_PYRITE = registerItem("power_pyrite", GemItem::new);
+    public static final RegistryObject<Item> KINETIC_OPAL = registerItem("kinetic_opal", GemItem::new);
+    public static final RegistryObject<Item> AIR_MALACHITE = registerItem("air_malachite", GemItem::new);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

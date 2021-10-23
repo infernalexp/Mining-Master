@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "miningmaster:power_pyrite_block"
+    }
+  ],
+  "result": {
+    "item": "miningmaster:power_pyrite",
+    "count": 9
+  }
+}
