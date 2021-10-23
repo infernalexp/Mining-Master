@@ -23,7 +23,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.LeechingEnchantment;
+import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
 import org.infernalstudios.miningmaster.enchantments.SmeltingEnchantment;
 import org.infernalstudios.miningmaster.init.*;
 
@@ -45,6 +47,8 @@ public class MiningMaster {
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
         MinecraftForge.EVENT_BUS.addListener(LeechingEnchantment::onEntityDamage);
-        //MinecraftForge.EVENT_BUS.addListener(SmeltingEnchantment::onBlockMined);
+        MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onItemAttributeModifierCalculate);
+        MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemAttributeModifierCalculate);
+        MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemUnequip);
     }
 }

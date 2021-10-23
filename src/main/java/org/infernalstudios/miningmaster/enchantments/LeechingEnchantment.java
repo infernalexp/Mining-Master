@@ -38,6 +38,21 @@ public class LeechingEnchantment extends Enchantment {
         return stack.getItem() instanceof AxeItem || super.canApply(stack);
     }
 
+    @Override
+    public boolean canVillagerTrade() {
+        return false;
+    }
+
+    @Override
+    public boolean canGenerateInLoot() {
+        return false;
+    }
+
+    @Override
+    public boolean isAllowedOnBooks() {
+        return false;
+    }
+
     @SubscribeEvent
     public static void onEntityDamage(LivingDamageEvent event) {
         Entity source = event.getSource().getTrueSource();

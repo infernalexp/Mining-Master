@@ -17,7 +17,6 @@
 package org.infernalstudios.miningmaster.init;
 
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -25,9 +24,11 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.enchantments.FreezingEnchantment;
+import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.LeechingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.SmeltingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.StonebreakerEnchantment;
+import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
 
 public class MMEnchantments {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MiningMaster.MOD_ID);
@@ -36,6 +37,8 @@ public class MMEnchantments {
     public static final RegistryObject<Enchantment> LEECHING = ENCHANTMENTS.register("leeching", () -> new LeechingEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
     public static final RegistryObject<Enchantment> SMELTING = ENCHANTMENTS.register("smelting", () -> new SmeltingEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
     public static final RegistryObject<Enchantment> STONEBREAKER = ENCHANTMENTS.register("stonebreaker", () -> new StonebreakerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
+    public static final RegistryObject<Enchantment> RUNNER = ENCHANTMENTS.register("runner", () -> new RunnerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.FEET));
+    public static final RegistryObject<Enchantment> HEARTFELT = ENCHANTMENTS.register("heartfelt", () -> new HeartfeltEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.CHEST));
 
     public static void register(IEventBus eventBus) {
         ENCHANTMENTS.register(eventBus);

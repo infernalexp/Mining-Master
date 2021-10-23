@@ -69,4 +69,19 @@ public class FreezingEnchantment extends Enchantment {
             ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60 * level));
         }
     }
+
+    @Override
+    public boolean canVillagerTrade() {
+        return false;
+    }
+
+    @Override
+    public boolean canGenerateInLoot() {
+        return false;
+    }
+
+    @Override
+    public boolean isAllowedOnBooks() {
+        return false;
+    }
 }

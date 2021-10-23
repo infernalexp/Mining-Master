@@ -54,9 +54,9 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
         GEM_ENCHANTMENTS.put(MMItems.HASTE_PERIDOT.get(), Arrays.asList(Enchantments.EFFICIENCY, Enchantments.LURE, Enchantments.QUICK_CHARGE));
         GEM_ENCHANTMENTS.put(MMItems.LUCKY_CITRINE.get(), Arrays.asList(Enchantments.FORTUNE, Enchantments.LUCK_OF_THE_SEA, Enchantments.LOOTING));
         GEM_ENCHANTMENTS.put(MMItems.DIVE_AQUAMARINE.get(), Arrays.asList(Enchantments.AQUA_AFFINITY, Enchantments.RIPTIDE));
-        GEM_ENCHANTMENTS.put(MMItems.HEART_RHODONITE.get(), Arrays.asList());
+        GEM_ENCHANTMENTS.put(MMItems.HEART_RHODONITE.get(), Arrays.asList(MMEnchantments.HEARTFELT.get()));
         GEM_ENCHANTMENTS.put(MMItems.POWER_PYRITE.get(), Arrays.asList(Enchantments.SHARPNESS, Enchantments.POWER, Enchantments.IMPALING, MMEnchantments.STONEBREAKER.get()));
-        GEM_ENCHANTMENTS.put(MMItems.KINETIC_OPAL.get(), Arrays.asList(Enchantments.BLAST_PROTECTION, MMEnchantments.SMELTING.get()));
+        GEM_ENCHANTMENTS.put(MMItems.KINETIC_OPAL.get(), Arrays.asList(MMEnchantments.RUNNER.get(), MMEnchantments.SMELTING.get(), Enchantments.BLAST_PROTECTION));
         GEM_ENCHANTMENTS.put(MMItems.AIR_MALACHITE.get(), Arrays.asList(Enchantments.FEATHER_FALLING, Enchantments.RESPIRATION));
     }
 
@@ -88,33 +88,31 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
 
         boolean itemEnchanted = false;
 
+        outerLoop:
         for (Enchantment enchantment : gemEnchantments) {
-            if (itemstack.canApplyAtEnchantingTable(enchantment) && areEnchantsCompatible(itemstack, enchantment)) {
+            if (enchantment.canApply(itemstack) && areEnchantsCompatible(itemstack, enchantment)) {
                 ListNBT nbtList = itemstack.getEnchantmentTagList();
-                boolean itemStackHasEnchantment = false;
 
                 for (int i = 0; i < nbtList.size(); i++) {
                     CompoundNBT idTag = nbtList.getCompound(i);
 
                     if (idTag.getString("id").equals(enchantment.getRegistryName().toString())) {
-                        itemStackHasEnchantment = true;
                         int targetLevel = idTag.getInt("lvl") + 1;
                         if (targetLevel > enchantment.getMaxLevel()) {
-                            break;
+                            break outerLoop;
                         }
                         itemEnchanted = true;
                         nbtList.remove(i);
                         itemstack.addEnchantment(enchantment, targetLevel);
+                        break outerLoop;
                     }
                 }
 
-                if (!itemStackHasEnchantment) {
-                    itemEnchanted = true;
-                    itemstack.addEnchantment(enchantment, 1);
-                }
+                itemEnchanted = true;
+                itemstack.addEnchantment(enchantment, 1);
+                break;
             }
         }
-
         return itemEnchanted ? itemstack : null;
     }
 
