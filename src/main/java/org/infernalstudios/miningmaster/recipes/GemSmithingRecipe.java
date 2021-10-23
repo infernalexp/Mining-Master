@@ -20,6 +20,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -54,7 +55,7 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
         GEM_ENCHANTMENTS.put(MMItems.LUCKY_CITRINE.get(), Arrays.asList(Enchantments.FORTUNE, Enchantments.LUCK_OF_THE_SEA, Enchantments.LOOTING));
         GEM_ENCHANTMENTS.put(MMItems.DIVE_AQUAMARINE.get(), Arrays.asList(Enchantments.AQUA_AFFINITY, Enchantments.RIPTIDE));
         GEM_ENCHANTMENTS.put(MMItems.HEART_RHODONITE.get(), Arrays.asList());
-        GEM_ENCHANTMENTS.put(MMItems.POWER_PYRITE.get(), Arrays.asList(Enchantments.SHARPNESS, Enchantments.PUNCH, Enchantments.IMPALING));
+        GEM_ENCHANTMENTS.put(MMItems.POWER_PYRITE.get(), Arrays.asList(Enchantments.SHARPNESS, Enchantments.POWER, Enchantments.IMPALING, MMEnchantments.STONEBREAKER.get()));
         GEM_ENCHANTMENTS.put(MMItems.KINETIC_OPAL.get(), Arrays.asList(Enchantments.BLAST_PROTECTION, MMEnchantments.SMELTING.get()));
         GEM_ENCHANTMENTS.put(MMItems.AIR_MALACHITE.get(), Arrays.asList(Enchantments.FEATHER_FALLING, Enchantments.RESPIRATION));
     }
@@ -88,7 +89,7 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
         boolean itemEnchanted = false;
 
         for (Enchantment enchantment : gemEnchantments) {
-            if (itemstack.canApplyAtEnchantingTable(enchantment)) {
+            if (itemstack.canApplyAtEnchantingTable(enchantment) && areEnchantsCompatible(itemstack, enchantment)) {
                 ListNBT nbtList = itemstack.getEnchantmentTagList();
                 boolean itemStackHasEnchantment = false;
 
@@ -115,6 +116,17 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
         }
 
         return itemEnchanted ? itemstack : null;
+    }
+
+    private boolean areEnchantsCompatible(ItemStack itemStack, Enchantment enchant) {
+        Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(itemStack);
+        for (Enchantment e : map.keySet()) {
+            if (enchant != e && !enchant.isCompatibleWith(e)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

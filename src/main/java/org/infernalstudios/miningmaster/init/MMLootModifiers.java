@@ -8,7 +8,6 @@ import net.minecraft.item.crafting.FurnaceRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.loot.LootContext;
 import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.loot.functions.Smelt;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
@@ -26,6 +25,7 @@ public class MMLootModifiers {
     public static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, MiningMaster.MOD_ID);
 
     public static final RegistryObject<GlobalLootModifierSerializer<SmeltingEnchantmentLootModifier>> SMELTING_ENCHANTMENT_LOOT_MODIFIER = LOOT_MODIFIERS.register("smelting_enchantment_loot_modifier", SmeltingEnchantmentLootSerializer::new);
+    public static final RegistryObject<GlobalLootModifierSerializer<StonebreakerEnchantmentLootModifier>> STONEBREAKER_ENCHANTMENT_LOOT_MODIFIER = LOOT_MODIFIERS.register("stonebreaker_enchantment_loot_modifier", StonebreakerEnchantmentLootSerializer::new);
 
     private static class SmeltingEnchantmentLootModifier extends LootModifier {
 
@@ -66,6 +66,38 @@ public class MMLootModifiers {
 
         @Override
         public JsonObject write(SmeltingEnchantmentLootModifier instance) {
+            return null;
+        }
+    }
+
+    private static class StonebreakerEnchantmentLootModifier extends LootModifier {
+
+        /**
+         * Constructs a LootModifier.
+         *
+         * @param conditionsIn the ILootConditions that need to be matched before the loot is modified.
+         */
+        protected StonebreakerEnchantmentLootModifier(ILootCondition[] conditionsIn) {
+            super(conditionsIn);
+        }
+
+        @Nonnull
+        @Override
+        protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+            generatedLoot.removeIf(item -> item.isItemEqual(Items.COBBLESTONE.getDefaultInstance()) || item.isItemEqual(Items.NETHERRACK.getDefaultInstance()));
+            return generatedLoot;
+        }
+    }
+
+    private static class StonebreakerEnchantmentLootSerializer extends GlobalLootModifierSerializer<StonebreakerEnchantmentLootModifier> {
+
+        @Override
+        public StonebreakerEnchantmentLootModifier read(ResourceLocation location, JsonObject object, ILootCondition[] conditionsIn) {
+            return new StonebreakerEnchantmentLootModifier(conditionsIn);
+        }
+
+        @Override
+        public JsonObject write(StonebreakerEnchantmentLootModifier instance) {
             return null;
         }
     }

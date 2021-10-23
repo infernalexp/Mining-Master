@@ -5,8 +5,9 @@ import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.SilkTouchEnchantment;
 import net.minecraft.inventory.EquipmentSlotType;
 
-public class SmeltingEnchantment extends Enchantment {
-    public SmeltingEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
+public class StonebreakerEnchantment extends Enchantment {
+
+    public StonebreakerEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
         super(rarityIn, EnchantmentType.DIGGER, slots);
     }
 
@@ -27,6 +28,6 @@ public class SmeltingEnchantment extends Enchantment {
 
     @Override
     protected boolean canApplyTogether(Enchantment ench) {
-        return !(ench instanceof SilkTouchEnchantment || ench instanceof StonebreakerEnchantment);
+        return !(ench instanceof SilkTouchEnchantment || ench instanceof SmeltingEnchantment);
     }
 }
