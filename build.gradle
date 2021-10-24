@@ -2,10 +2,12 @@ buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = 'https://plugins.gradle.org/m2/' }
+        maven { url = 'https://repo.spongepowered.org/maven/' }
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle',           name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'org.spongepowered',                   name: 'mixingradle', version: '0.7-SNAPSHOT'
         classpath group: 'gradle.plugin.com.modrinth.minotaur', name: 'Minotaur',    version: '1.2.1'
         classpath group: 'gradle.plugin.com.matthewprenger',    name: 'CurseGradle', version: '1.4.0'
     }
@@ -14,6 +16,7 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.matthewprenger.cursegradle'
 
 // This initializes the config. Please try to modify the variables in the config file, if needed, add more if you see a reason to.
@@ -31,6 +34,7 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
+            arg '-mixin.config=mining-master.mixins.json'
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
             mods {
@@ -42,6 +46,7 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
+            arg '-mixin.config=mining-master.mixins.json'
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
             mods {
@@ -65,8 +70,20 @@ minecraft {
     }
 }
 
+mixin {
+    add sourceSets.main, 'mining-master.refmap.json'
+}
+
+repositories {
+    maven { url = 'https://repo.spongepowered.org/maven/' }
+
+    jcenter()
+    mavenCentral()
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${config.MINECRAFT_VERSION}-${config.FORGE_VERSION}"
+    compile 'org.spongepowered:mixin:0.8.1'
 }
 
 
@@ -78,7 +95,9 @@ jar {
                 'Specification-Version' : '1',
                 'Implementation-Title'  : config.TITLE,
                 'Implementation-Version': config.VERSION,
-                'Implementation-Vendor' : config.AUTHOR
+                'Implementation-Vendor' : config.AUTHOR,
+                'MixinConfigs'          : 'mining-master.mixins.json',
+                'MixinConnector'        : 'org.infernalstudios.miningmaster.mixin.MixinConnector'
         ])
     }
 }
