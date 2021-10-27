@@ -26,6 +26,7 @@ import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.enchantments.FloatationEnchantment;
 import org.infernalstudios.miningmaster.enchantments.FreezingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
+import org.infernalstudios.miningmaster.enchantments.KnightJumpEnchantment;
 import org.infernalstudios.miningmaster.enchantments.LeechingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.SmeltingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.StonebreakerEnchantment;
@@ -41,6 +42,7 @@ public class MMEnchantments {
     public static final RegistryObject<Enchantment> RUNNER = ENCHANTMENTS.register("runner", () -> new RunnerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.FEET));
     public static final RegistryObject<Enchantment> HEARTFELT = ENCHANTMENTS.register("heartfelt", () -> new HeartfeltEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.CHEST));
     public static final RegistryObject<Enchantment> FLOATATION = ENCHANTMENTS.register("floatation", () -> new FloatationEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
+    public static final RegistryObject<Enchantment> KNIGHT_JUMP = ENCHANTMENTS.register("knight_jump", () -> new KnightJumpEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.LEGS));
 
     public static void register(IEventBus eventBus) {
         ENCHANTMENTS.register(eventBus);

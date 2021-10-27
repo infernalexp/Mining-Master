@@ -23,6 +23,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.BowItem;
+import net.minecraft.item.CrossbowItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -56,7 +59,8 @@ public class FreezingEnchantment extends Enchantment {
 
     @Override
     public boolean canApply(ItemStack stack) {
-        return stack.getItem() instanceof AxeItem || super.canApply(stack);
+        Item stackItem = stack.getItem();
+        return stackItem instanceof AxeItem || stackItem instanceof BowItem || stackItem instanceof CrossbowItem || super.canApply(stack);
     }
 
     @Override
