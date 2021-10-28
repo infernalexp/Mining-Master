@@ -64,17 +64,6 @@ public class FreezingEnchantment extends Enchantment {
     }
 
     @Override
-    public void onEntityDamaged(LivingEntity user, Entity target, int level) {
-        if (target.getType().isContained(MMTags.EntityTypes.FIRE_ENTITIES)) {
-            target.attackEntityFrom(DamageSource.causeMobDamage(user), 1 + (level * 2));
-        }
-
-        if (target instanceof LivingEntity) {
-            ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60 * level));
-        }
-    }
-
-    @Override
     public boolean canVillagerTrade() {
         return false;
     }
@@ -87,5 +76,16 @@ public class FreezingEnchantment extends Enchantment {
     @Override
     public boolean isAllowedOnBooks() {
         return false;
+    }
+
+    @Override
+    public void onEntityDamaged(LivingEntity user, Entity target, int level) {
+        if (target.getType().isContained(MMTags.EntityTypes.FIRE_ENTITIES)) {
+            target.attackEntityFrom(DamageSource.causeMobDamage(user), 1 + (level * 2));
+        }
+
+        if (target instanceof LivingEntity) {
+            ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60 * level));
+        }
     }
 }

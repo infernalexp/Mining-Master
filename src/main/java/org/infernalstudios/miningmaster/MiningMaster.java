@@ -26,8 +26,11 @@ import org.apache.logging.log4j.Logger;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.LeechingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
-import org.infernalstudios.miningmaster.enchantments.SmeltingEnchantment;
-import org.infernalstudios.miningmaster.init.*;
+import org.infernalstudios.miningmaster.init.MMBlocks;
+import org.infernalstudios.miningmaster.init.MMEnchantments;
+import org.infernalstudios.miningmaster.init.MMItems;
+import org.infernalstudios.miningmaster.init.MMLootModifiers;
+import org.infernalstudios.miningmaster.init.MMRecipes;
 
 
 @Mod(MiningMaster.MOD_ID)

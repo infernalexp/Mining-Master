@@ -28,9 +28,9 @@ import org.infernalstudios.miningmaster.enchantments.FreezingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.KnightJumpEnchantment;
 import org.infernalstudios.miningmaster.enchantments.LeechingEnchantment;
+import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
 import org.infernalstudios.miningmaster.enchantments.SmeltingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.StonebreakerEnchantment;
-import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
 
 public class MMEnchantments {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MiningMaster.MOD_ID);
