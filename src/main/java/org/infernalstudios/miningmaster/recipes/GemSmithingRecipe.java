@@ -53,11 +53,11 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
 
     static {
         GEM_ENCHANTMENTS.put(MMItems.FIRE_RUBY.get(), Arrays.asList(Enchantments.FIRE_ASPECT, Enchantments.FLAME, Enchantments.FIRE_PROTECTION));
-        GEM_ENCHANTMENTS.put(MMItems.ICE_SAPPHIRE.get(), Arrays.asList(Enchantments.FROST_WALKER, MMEnchantments.FREEZING.get()));
+        GEM_ENCHANTMENTS.put(MMItems.ICE_SAPPHIRE.get(), Arrays.asList(Enchantments.FROST_WALKER, MMEnchantments.FREEZING.get(), MMEnchantments.SNOWPIERCER.get()));
         GEM_ENCHANTMENTS.put(MMItems.SPIRIT_GARNET.get(), Arrays.asList(Enchantments.THORNS, Enchantments.LOYALTY, MMEnchantments.LEECHING.get()));
         GEM_ENCHANTMENTS.put(MMItems.HASTE_PERIDOT.get(), Arrays.asList(Enchantments.EFFICIENCY, Enchantments.LURE, Enchantments.QUICK_CHARGE));
         GEM_ENCHANTMENTS.put(MMItems.LUCKY_CITRINE.get(), Arrays.asList(Enchantments.FORTUNE, Enchantments.LUCK_OF_THE_SEA, Enchantments.LOOTING));
-        GEM_ENCHANTMENTS.put(MMItems.DIVE_AQUAMARINE.get(), Arrays.asList(Enchantments.AQUA_AFFINITY, Enchantments.RIPTIDE));
+        GEM_ENCHANTMENTS.put(MMItems.DIVE_AQUAMARINE.get(), Arrays.asList(Enchantments.AQUA_AFFINITY, Enchantments.RIPTIDE, MMEnchantments.GRACE.get()));
         GEM_ENCHANTMENTS.put(MMItems.HEART_RHODONITE.get(), Arrays.asList(MMEnchantments.HEARTFELT.get()));
         GEM_ENCHANTMENTS.put(MMItems.POWER_PYRITE.get(), Arrays.asList(Enchantments.SHARPNESS, Enchantments.POWER, Enchantments.IMPALING, MMEnchantments.STONEBREAKER.get()));
         GEM_ENCHANTMENTS.put(MMItems.KINETIC_OPAL.get(), Arrays.asList(MMEnchantments.RUNNER.get(), MMEnchantments.SMELTING.get(), Enchantments.BLAST_PROTECTION));

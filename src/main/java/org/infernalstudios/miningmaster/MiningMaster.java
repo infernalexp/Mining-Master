@@ -23,9 +23,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.infernalstudios.miningmaster.enchantments.GraceEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.LeechingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
+import org.infernalstudios.miningmaster.enchantments.SnowpiercerEnchantment;
 import org.infernalstudios.miningmaster.init.MMBlocks;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
 import org.infernalstudios.miningmaster.init.MMItems;
@@ -53,5 +55,7 @@ public class MiningMaster {
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onItemAttributeModifierCalculate);
         MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemAttributeModifierCalculate);
         MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemUnequip);
+        MinecraftForge.EVENT_BUS.addListener(SnowpiercerEnchantment::onLivingUpdate);
+        MinecraftForge.EVENT_BUS.addListener(GraceEnchantment::onLivingUpdate);
     }
 }

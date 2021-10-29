@@ -16,8 +16,10 @@
 
 package org.infernalstudios.miningmaster.init;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
@@ -39,6 +41,14 @@ public class MMTags {
 
         private static ITag.INamedTag<Item> tag(String name) {
             return ItemTags.createOptional(new ResourceLocation(MiningMaster.MOD_ID, name));
+        }
+    }
+
+    public static class Blocks {
+        public static final ITag.INamedTag<Block> SNOWPIERCER_BLOCKS = tag("snowpiercer_blocks");
+
+        private static ITag.INamedTag<Block> tag(String name) {
+            return BlockTags.createOptional(new ResourceLocation(MiningMaster.MOD_ID, name));
         }
     }
 

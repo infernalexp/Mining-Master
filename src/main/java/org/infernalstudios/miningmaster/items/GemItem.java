@@ -1,5 +1,6 @@
 package org.infernalstudios.miningmaster.items;
 
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -18,6 +19,10 @@ public class GemItem extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new StringTextComponent("\u00A7dCombine with an item in a smithing table to enchant!"));
+        if (Screen.hasShiftDown()) {
+            tooltip.add(new StringTextComponent("\u00A7dCombine with an item in a smithing table to enchant!"));
+        } else {
+            tooltip.add(new StringTextComponent("\u00A78Hold Shift for Instructions"));
+        }
     }
 }
