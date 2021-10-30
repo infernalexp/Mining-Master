@@ -23,16 +23,21 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
+import org.infernalstudios.miningmaster.access.LivingEntityAccess;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
-public abstract class MixinLivingEntity extends Entity {
+public abstract class MixinLivingEntity extends Entity implements LivingEntityAccess {
     @Shadow private int jumpTicks;
 
     @Shadow protected abstract void jump();
@@ -42,6 +47,10 @@ public abstract class MixinLivingEntity extends Entity {
     private int knightJumpsUsed = 0;
     private boolean hasJumped = false;
     private int ticksSinceJump = 0;
+
+    @Unique
+    private static final DataParameter<Boolean> GRACE_RECHARGED = EntityDataManager.createKey(LivingEntity.class, DataSerializers.BOOLEAN);
+
 
     public MixinLivingEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
@@ -87,5 +96,30 @@ public abstract class MixinLivingEntity extends Entity {
                 this.jumpTicks = 10;
             }
         }
+    }
+
+    @Inject(at = @At("RETURN"), method = "registerData")
+    private void MM_registerData(CallbackInfo ci) {
+        ((LivingEntity) (Object) this).getDataManager().register(GRACE_RECHARGED, true);
+    }
+
+    @Inject(at = @At("RETURN"), method = "writeAdditional")
+    private void MM_writeAdditionalData(CompoundNBT compound, CallbackInfo ci) {
+        compound.putBoolean("GraceRecharged", ((LivingEntity) (Object) this).getDataManager().get(GRACE_RECHARGED));
+    }
+
+    @Inject(at = @At("RETURN"), method = "readAdditional")
+    private void MM_readAdditionalData(CompoundNBT compound, CallbackInfo ci) {
+        setGraceRecharged(compound.getBoolean("GraceRecharged"));
+    }
+
+    @Override
+    public void setGraceRecharged(boolean isGraceRecharged) {
+        ((LivingEntity) (Object) this).getDataManager().set(GRACE_RECHARGED, isGraceRecharged);
+    }
+
+    @Override
+    public boolean getGraceRecharged() {
+        return ((LivingEntity) (Object) this).getDataManager().get(GRACE_RECHARGED);
     }
 }

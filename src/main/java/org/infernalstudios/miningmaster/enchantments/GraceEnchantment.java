@@ -27,6 +27,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.infernalstudios.miningmaster.access.LivingEntityAccess;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
 
 import java.util.Random;
@@ -49,7 +50,7 @@ public class GraceEnchantment extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 1;
+        return 5;
     }
 
     @Override
@@ -75,16 +76,19 @@ public class GraceEnchantment extends Enchantment {
         ItemStack stack = livingEntity.getItemStackFromSlot(EquipmentSlotType.CHEST);
         ListNBT nbtList = stack.getEnchantmentTagList();
 
-        if (livingEntity.isInWater()) {
+        if (livingEntity.isInWater() && ((LivingEntityAccess) livingEntity).getGraceRecharged()) {
             for (int i = 0; i < nbtList.size(); i++) {
                 CompoundNBT idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.GRACE.getId().toString())) {
                     if (rand.nextInt(100) == 0) {
                         stack.attemptDamageItem(1, rand, null);
                     }
-                    livingEntity.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 5));
+                    livingEntity.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 120 * idTag.getInt("lvl")));
+                    ((LivingEntityAccess) livingEntity).setGraceRecharged(false);
                 }
             }
+        } else if (!livingEntity.isInWater() && livingEntity.isOnGround() && !((LivingEntityAccess) livingEntity).getGraceRecharged()) {
+            ((LivingEntityAccess) livingEntity).setGraceRecharged(true);
         }
     }
 
