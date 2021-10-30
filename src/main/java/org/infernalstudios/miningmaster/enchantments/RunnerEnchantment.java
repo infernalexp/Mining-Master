@@ -18,16 +18,20 @@ package org.infernalstudios.miningmaster.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
 
+import java.util.Random;
 import java.util.UUID;
 
 public class RunnerEnchantment extends Enchantment {
@@ -79,4 +83,35 @@ public class RunnerEnchantment extends Enchantment {
             }
         }
     }
+
+    @SubscribeEvent
+    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+        LivingEntity livingEntity = event.getEntityLiving();
+        PlayerEntity playerEntity = null;
+
+        if (livingEntity instanceof PlayerEntity) {
+            playerEntity = (PlayerEntity) livingEntity;
+            if (playerEntity.isCreative()) {
+                return;
+            }
+        }
+        Random rand = new Random();
+
+        if (playerEntity != null && playerEntity.isSprinting()) {
+            ItemStack stack = event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET);
+            ListNBT nbtList = stack.getEnchantmentTagList();
+
+            for (int i = 0; i < nbtList.size(); i++) {
+                CompoundNBT idTag = nbtList.getCompound(i);
+                if (idTag.getString("id").equals(MMEnchantments.RUNNER.getId().toString())) {
+                    if (rand.nextInt(100) == 0) {
+                        stack.damageItem(1, livingEntity, (onBroken) -> {
+                            onBroken.sendBreakAnimation(EquipmentSlotType.FEET);
+                        });
+                    }
+                }
+            }
+        }
+    }
+
 }

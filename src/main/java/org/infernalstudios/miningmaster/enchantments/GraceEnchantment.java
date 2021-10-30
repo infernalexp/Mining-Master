@@ -19,6 +19,7 @@ package org.infernalstudios.miningmaster.enchantments;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -71,20 +72,30 @@ public class GraceEnchantment extends Enchantment {
     @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
+        PlayerEntity playerEntity = null;
+
+        if (livingEntity instanceof PlayerEntity) {
+            playerEntity = (PlayerEntity) livingEntity;
+        }
+
         Random rand = new Random();
 
         ItemStack stack = livingEntity.getItemStackFromSlot(EquipmentSlotType.CHEST);
         ListNBT nbtList = stack.getEnchantmentTagList();
 
-        if (livingEntity.isInWater() && ((LivingEntityAccess) livingEntity).getGraceRecharged()) {
+        if (livingEntity.isInWater()) {
             for (int i = 0; i < nbtList.size(); i++) {
                 CompoundNBT idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.GRACE.getId().toString())) {
-                    if (rand.nextInt(100) == 0) {
-                        stack.attemptDamageItem(1, rand, null);
+                    if (livingEntity.isPotionActive(Effects.DOLPHINS_GRACE) && playerEntity != null && !playerEntity.isCreative() && rand.nextInt(100) == 0) {
+                        stack.damageItem(1, livingEntity, (onBroken) -> {
+                            onBroken.sendBreakAnimation(EquipmentSlotType.CHEST);
+                        });
                     }
-                    livingEntity.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 120 * idTag.getInt("lvl")));
-                    ((LivingEntityAccess) livingEntity).setGraceRecharged(false);
+                    if (((LivingEntityAccess) livingEntity).getGraceRecharged()) {
+                        livingEntity.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 120 * idTag.getInt("lvl")));
+                        ((LivingEntityAccess) livingEntity).setGraceRecharged(false);
+                    }
                 }
             }
         } else if (!livingEntity.isInWater() && livingEntity.isOnGround() && !((LivingEntityAccess) livingEntity).getGraceRecharged()) {
