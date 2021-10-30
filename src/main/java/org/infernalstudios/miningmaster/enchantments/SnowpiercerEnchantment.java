@@ -70,9 +70,11 @@ public class SnowpiercerEnchantment extends Enchantment {
     @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
+        Block block = livingEntity.world.getBlockState(livingEntity.getPosition()).getBlock();
         Block blockBelow = livingEntity.world.getBlockState(livingEntity.getPosition().down()).getBlock();
 
-        if (!(blockBelow.isIn(MMTags.Blocks.SNOWPIERCER_BLOCKS))) {
+
+        if (!blockBelow.isIn(MMTags.Blocks.SNOWPIERCER_BLOCKS) && !block.isIn(MMTags.Blocks.SNOWPIERCER_BLOCKS)) {
             return;
         }
 
@@ -82,7 +84,7 @@ public class SnowpiercerEnchantment extends Enchantment {
         for (int i = 0; i < nbtList.size(); i++) {
             CompoundNBT idTag = nbtList.getCompound(i);
             if (idTag.getString("id").equals(MMEnchantments.SNOWPIERCER.getId().toString())) {
-                livingEntity.addPotionEffect(new EffectInstance(Effects.SPEED, 5, 1));
+                livingEntity.addPotionEffect(new EffectInstance(Effects.SPEED, 20, 1));
             }
         }
     }

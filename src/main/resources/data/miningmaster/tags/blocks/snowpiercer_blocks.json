@@ -4,6 +4,7 @@
     "minecraft:ice",
     "minecraft:packed_ice",
     "minecraft:blue_ice",
-    "minecraft:snow_block"
+    "minecraft:snow_block",
+    "minecraft:snow"
   ]
 }
