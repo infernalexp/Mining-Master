@@ -70,11 +70,8 @@ public class SnowpiercerEnchantment extends Enchantment {
     @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
-        Block block = livingEntity.world.getBlockState(livingEntity.getPosition()).getBlock();
-        Block blockBelow = livingEntity.world.getBlockState(livingEntity.getPosition().down()).getBlock();
 
-
-        if (!blockBelow.isIn(MMTags.Blocks.SNOWPIERCER_BLOCKS) && !block.isIn(MMTags.Blocks.SNOWPIERCER_BLOCKS)) {
+        if (!livingEntity.world.getBlockState(livingEntity.getPosition().down()).getBlock().isIn(MMTags.Blocks.SNOWPIERCER_BLOCKS) && !livingEntity.world.getBlockState(livingEntity.getPosition()).getBlock().isIn(MMTags.Blocks.SNOWPIERCER_BLOCKS)) {
             return;
         }
 
