@@ -46,36 +46,30 @@ public abstract class MixinPlayerEntity {
             ItemStack itemStack = ((PlayerEntity) (Object) this).getHeldItemMainhand();
             ListNBT nbtList = itemStack.getEnchantmentTagList();
 
-            boolean hasLeeching = false;
-            boolean hasFreezing = false;
-            int leechingLevel = 0;
-            int freezingLevel = 0;
-
             for (int k = 0; k < nbtList.size(); k++) {
                 CompoundNBT idTag = nbtList.getCompound(k);
 
                 if (idTag.getString("id").equals(MMEnchantments.LEECHING.getId().toString())) {
-                    hasLeeching = true;
-                    leechingLevel = idTag.getInt("lvl");
+                    applyLeechingEffects(idTag.getInt("lvl"), f);
                 } else if (idTag.getString("id").equals(MMEnchantments.FREEZING.getId().toString())) {
-                    hasFreezing = true;
-                    freezingLevel = idTag.getInt("lvl");
-                }
-            }
-
-            if (hasLeeching) {
-                ((PlayerEntity) (Object) this).heal(f * 0.25F * leechingLevel);
-            }
-            if (hasFreezing) {
-                if (targetEntity instanceof LivingEntity) {
-                    LivingEntity livingTarget = (LivingEntity) targetEntity;
-                    livingTarget.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60, freezingLevel));
-                }
-
-                if (targetEntity.getType().isContained(MMTags.EntityTypes.FIRE_ENTITIES)) {
-                    targetEntity.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) (Object) this),f * 0.3F * freezingLevel);
+                    applyFreezingEffects(targetEntity, idTag.getInt("lvl"), f);
                 }
             }
         }
+    }
+
+    private void applyFreezingEffects(Entity targetEntity, int level, float damageAmount) {
+        if (targetEntity instanceof LivingEntity) {
+            LivingEntity livingTarget = (LivingEntity) targetEntity;
+            livingTarget.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60, level));
+        }
+
+        if (targetEntity.getType().isContained(MMTags.EntityTypes.FIRE_ENTITIES)) {
+            targetEntity.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) (Object) this),damageAmount * 0.3F * level);
+        }
+    }
+
+    private void applyLeechingEffects(int level, float damageAmount) {
+        ((PlayerEntity) (Object) this).heal(damageAmount * 0.25F * level);
     }
 }
