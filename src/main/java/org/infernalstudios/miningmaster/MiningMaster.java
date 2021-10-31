@@ -25,7 +25,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.infernalstudios.miningmaster.enchantments.GraceEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
-import org.infernalstudios.miningmaster.enchantments.LeechingEnchantment;
 import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
 import org.infernalstudios.miningmaster.enchantments.SnowpiercerEnchantment;
 import org.infernalstudios.miningmaster.init.MMBlocks;
@@ -51,7 +50,6 @@ public class MiningMaster {
         MMLootModifiers.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
-        MinecraftForge.EVENT_BUS.addListener(LeechingEnchantment::onEntityDamage);
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onItemAttributeModifierCalculate);
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemAttributeModifierCalculate);

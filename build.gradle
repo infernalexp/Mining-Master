@@ -35,7 +35,7 @@ minecraft {
         client {
             workingDirectory project.file('run')
             arg '-mixin.config=mining-master.mixins.json'
-            property 'forge.logging.markers', 'SCAN,REGISTRIES'
+            property 'forge.logging.markers', 'SCAN'
             property 'forge.logging.console.level', 'debug'
             mods {
                 miningmaster {
@@ -47,7 +47,7 @@ minecraft {
         server {
             workingDirectory project.file('run')
             arg '-mixin.config=mining-master.mixins.json'
-            property 'forge.logging.markers', 'SCAN,REGISTRIES'
+            property 'forge.logging.markers', 'SCAN'
             property 'forge.logging.console.level', 'debug'
             mods {
                 miningmaster {
@@ -58,7 +58,7 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES'
+            property 'forge.logging.markers', 'SCAN'
             property 'forge.logging.console.level', 'debug'
             args '--mod', 'miningmaster', '--all', '--output', file('src/generated/resources/')
             mods {

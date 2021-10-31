@@ -19,18 +19,12 @@ package org.infernalstudios.miningmaster.enchantments;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.FireAspectEnchantment;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
-import org.infernalstudios.miningmaster.init.MMTags;
 
 public class FreezingEnchantment extends Enchantment {
     public FreezingEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
@@ -76,16 +70,5 @@ public class FreezingEnchantment extends Enchantment {
     @Override
     public boolean isAllowedOnBooks() {
         return false;
-    }
-
-    @Override
-    public void onEntityDamaged(LivingEntity user, Entity target, int level) {
-        if (target.getType().isContained(MMTags.EntityTypes.FIRE_ENTITIES)) {
-            target.attackEntityFrom(DamageSource.causeMobDamage(user), 1 + (level * 2));
-        }
-
-        if (target instanceof LivingEntity) {
-            ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60 * level));
-        }
     }
 }
