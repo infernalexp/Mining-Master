@@ -19,7 +19,6 @@ package org.infernalstudios.miningmaster.init;
 import com.google.gson.JsonObject;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.FurnaceRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.loot.LootContext;
@@ -100,7 +99,7 @@ public class MMLootModifiers {
         @Nonnull
         @Override
         protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-            generatedLoot.removeIf(item -> item.isItemEqual(Items.COBBLESTONE.getDefaultInstance()) || item.isItemEqual(Items.NETHERRACK.getDefaultInstance()));
+            generatedLoot.removeIf(item -> item.getItem().isIn(MMTags.Items.STONEBREAKER_ITEMS));
             return generatedLoot;
         }
     }
