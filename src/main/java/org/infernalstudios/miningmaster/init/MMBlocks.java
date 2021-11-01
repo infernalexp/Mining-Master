@@ -58,6 +58,10 @@ public class MMBlocks {
     public static final RegistryObject<Block> KINETIC_OPAL_BLOCK = registerBlockWithDefaultItem("kinetic_opal_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> AIR_MALACHITE_BLOCK = registerBlockWithDefaultItem("air_malachite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
 
+    //MISC BLOCKS
+    public static final RegistryObject<Block> MALACORE = registerBlockWithDefaultItem("malacore", () -> new Block(getProperties(Blocks.END_STONE)));
+    public static final RegistryObject<Block> MALACRUST = registerBlockWithDefaultItem("malacrust", () -> new Block(getProperties(Blocks.END_STONE)));
+
     public static AbstractBlock.Properties getProperties(Material materialIn, float hardnessAndResistanceIn) {
         return getProperties(materialIn, hardnessAndResistanceIn, hardnessAndResistanceIn);
     }
