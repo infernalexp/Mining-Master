@@ -23,6 +23,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -37,7 +38,7 @@ import java.util.UUID;
 public class HeartfeltEnchantment extends Enchantment {
 
     public HeartfeltEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
-        super(rarityIn, EnchantmentType.ARMOR_CHEST, slots);
+        super(rarityIn, EnchantmentType.ARMOR, slots);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class HeartfeltEnchantment extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 5;
+        return 2;
     }
 
     @Override
@@ -87,13 +88,27 @@ public class HeartfeltEnchantment extends Enchantment {
 
     @SubscribeEvent
     public static void onItemAttributeModifierCalculate(ItemAttributeModifierEvent event) {
-        if (event.getSlotType().equals(EquipmentSlotType.CHEST)) {
-            ItemStack itemStack = event.getItemStack();
+        ItemStack itemStack = event.getItemStack();
+        EquipmentSlotType equipmentSlotType = null;
+        if (itemStack.getItem() instanceof ArmorItem) {
+            ArmorItem armorItem = (ArmorItem) itemStack.getItem();
+            equipmentSlotType = armorItem.getEquipmentSlot();
+        }
+
+        if (equipmentSlotType != null && event.getSlotType().equals(equipmentSlotType)) {
             ListNBT nbtList = itemStack.getEnchantmentTagList();
             for (int i = 0; i < nbtList.size(); i++) {
                 CompoundNBT idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.HEARTFELT.getId().toString())) {
-                    event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(UUID.fromString("ccac859c-0311-43d4-b254-572d7846a5be"), "heartfelt", 4.0D * idTag.getInt("lvl"), AttributeModifier.Operation.ADDITION));
+                    if (equipmentSlotType.equals(EquipmentSlotType.HEAD)) {
+                        event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(UUID.fromString("ccac859c-0311-43d4-b254-572d7846a5be"), "heartfelt", 2.0D * idTag.getInt("lvl"), AttributeModifier.Operation.ADDITION));
+                    } else if (equipmentSlotType.equals(EquipmentSlotType.CHEST)) {
+                        event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(UUID.fromString("9dcfe3cf-7d9a-41c4-90de-84ff86b8b7c3"), "heartfelt", 2.0D * idTag.getInt("lvl"), AttributeModifier.Operation.ADDITION));
+                    } else if (equipmentSlotType.equals(EquipmentSlotType.LEGS)) {
+                        event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(UUID.fromString("24572f77-4a5c-44a1-b6fa-09fc5da661b8"), "heartfelt", 2.0D * idTag.getInt("lvl"), AttributeModifier.Operation.ADDITION));
+                    } else {
+                        event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(UUID.fromString("031a1eac-7726-46d6-87d7-cec65a66186b"), "heartfelt", 2.0D * idTag.getInt("lvl"), AttributeModifier.Operation.ADDITION));
+                    }
                 }
             }
         }

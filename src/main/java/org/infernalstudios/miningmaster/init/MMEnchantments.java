@@ -42,7 +42,7 @@ public class MMEnchantments {
     public static final RegistryObject<Enchantment> SMELTING = ENCHANTMENTS.register("smelting", () -> new SmeltingEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
     public static final RegistryObject<Enchantment> STONEBREAKER = ENCHANTMENTS.register("stonebreaker", () -> new StonebreakerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
     public static final RegistryObject<Enchantment> RUNNER = ENCHANTMENTS.register("runner", () -> new RunnerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.FEET));
-    public static final RegistryObject<Enchantment> HEARTFELT = ENCHANTMENTS.register("heartfelt", () -> new HeartfeltEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.CHEST));
+    public static final RegistryObject<Enchantment> HEARTFELT = ENCHANTMENTS.register("heartfelt", () -> new HeartfeltEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET));
     public static final RegistryObject<Enchantment> FLOATATION = ENCHANTMENTS.register("floatation", () -> new FloatationEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
     public static final RegistryObject<Enchantment> KNIGHT_JUMP = ENCHANTMENTS.register("knight_jump", () -> new KnightJumpEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.LEGS));
     public static final RegistryObject<Enchantment> SNOWPIERCER = ENCHANTMENTS.register("snowpiercer", () -> new SnowpiercerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.LEGS));
