@@ -21,8 +21,10 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import org.infernalstudios.miningmaster.MiningMaster;
+import org.infernalstudios.miningmaster.gen.features.MalachiteMeteoriteFeature;
 import org.infernalstudios.miningmaster.gen.features.NativeGemOreFeature;
 import org.infernalstudios.miningmaster.gen.features.RandomGemOreFeature;
+import org.infernalstudios.miningmaster.gen.features.config.MalachiteMeteoriteFeatureConfig;
 import org.infernalstudios.miningmaster.gen.features.config.NativeGemOreFeatureConfig;
 import org.infernalstudios.miningmaster.gen.features.config.RandomGemOreFeatureConfig;
 
@@ -34,6 +36,8 @@ public class MMFeatures {
 
     public static final Feature<NativeGemOreFeatureConfig> NATIVE_GEM_ORE_FEATURE = registerFeature("native_gem_ore_feature", new NativeGemOreFeature(NativeGemOreFeatureConfig.CODEC));
     public static final Feature<RandomGemOreFeatureConfig> RANDOM_GEM_ORE_FEATURE = registerFeature("random_gem_ore_feature", new RandomGemOreFeature(RandomGemOreFeatureConfig.CODEC));
+
+    public static final Feature<MalachiteMeteoriteFeatureConfig> MALACHITE_METEORITE_FEATURE = registerFeature("malachite_meteorite_feature", new MalachiteMeteoriteFeature(MalachiteMeteoriteFeatureConfig.CODEC));
 
     public static <C extends IFeatureConfig, F extends Feature<C>> F registerFeature(String registryName, F feature) {
         ResourceLocation resourceLocation = new ResourceLocation(MiningMaster.MOD_ID, registryName);

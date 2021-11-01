@@ -59,5 +59,9 @@ public class MiningMasterEvents {
         if (!(biomeCategory == Biome.Category.NETHER || biomeCategory == Biome.Category.THEEND)) {
             event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_GEM_RANDOM);
         }
+
+        if (biomeCategory == Biome.Category.THEEND) {
+            event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.MALACHITE_METEORITE);
+        }
     }
 }
