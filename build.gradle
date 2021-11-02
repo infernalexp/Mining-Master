@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle',           name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle',           name: 'ForgeGradle', version: '5.1+', changing: true
         classpath group: 'org.spongepowered',                   name: 'mixingradle', version: '0.7-SNAPSHOT'
         classpath group: 'gradle.plugin.com.modrinth.minotaur', name: 'Minotaur',    version: '1.2.1'
         classpath group: 'gradle.plugin.com.matthewprenger',    name: 'CurseGradle', version: '1.4.0'
@@ -26,7 +26,7 @@ version = config.VERSION
 group = "${config.GROUP}.${config.ARTIFACT}"
 archivesBaseName = "${config.ARCHIVES_BASE_NAME}-${config.MINECRAFT_VERSION}"
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 minecraft {
     mappings channel: config.MAPPINGS_CHANNEL, version: config.MAPPINGS_VERSION
@@ -83,7 +83,7 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${config.MINECRAFT_VERSION}-${config.FORGE_VERSION}"
-    compile 'org.spongepowered:mixin:0.8.1'
+    annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 }
 
 
@@ -102,6 +102,13 @@ jar {
 }
 
 jar.finalizedBy('reobfJar')
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allJava
+}
+
+tasks.build.dependsOn sourcesJar
 
 publishing {
     publications {
@@ -182,6 +189,14 @@ def parseConfig(File config) {
         def prop = new Properties()
         prop.load(it)
         return (new ConfigSlurper().parse(prop))
+    }
+}
+
+if (System.getProperty("idea.sync.active") == "true") {
+    afterEvaluate {
+        tasks.withType(JavaCompile).all {
+            it.options.annotationProcessorPath = files()
+        }
     }
 }
 
