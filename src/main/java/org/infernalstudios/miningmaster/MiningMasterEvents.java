@@ -16,7 +16,11 @@
 
 package org.infernalstudios.miningmaster;
 
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.event.RegistryEvent;
@@ -40,10 +44,17 @@ public class MiningMasterEvents {
     public void onBiomeLoad(BiomeLoadingEvent event) {
         if (event.getCategory() == null) {
             return;
+        } else if (event.getName() == null) {
+            return;
         }
+
+        ResourceLocation name = event.getName();
+        RegistryKey<Biome> biome = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, name);
+
 
         Biome.Category biomeCategory = event.getCategory();
 
+        // NATIVE ORES
         if (biomeCategory == Biome.Category.DESERT) {
             event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_FIRE_RUBY_NATIVE);
         } else if (biomeCategory == Biome.Category.ICY) {
@@ -54,12 +65,27 @@ public class MiningMasterEvents {
             event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_HASTE_PERIDOT_NATIVE);
         } else if (biomeCategory == Biome.Category.MESA) {
             event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_LUCKY_CITRINE_NATIVE);
+        } else if (biomeCategory == Biome.Category.OCEAN) {
+            event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_DIVE_AQUAMARINE_NATIVE);
+        } else if (biome == Biomes.SOUL_SAND_VALLEY) {
+            event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_HEART_RHODONITE_NATIVE);
+        } else if (biome == Biomes.NETHER_WASTES) {
+            event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_POWER_PYRITE_NATIVE);
+        } else if (biome == Biomes.BASALT_DELTAS) {
+            event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_KINETIC_OPAL_NATIVE);
         }
 
+        // OVERWORLD RANDOM ORES
         if (!(biomeCategory == Biome.Category.NETHER || biomeCategory == Biome.Category.THEEND)) {
             event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_GEM_RANDOM);
         }
 
+        // NETHER RANDOM ORES
+        if (biomeCategory == Biome.Category.NETHER) {
+            event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_NETHER_GEM_RANDOM);
+        }
+
+        // MALACHITE METEORITES
         if (biomeCategory == Biome.Category.THEEND) {
             event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.MALACHITE_METEORITE);
         }

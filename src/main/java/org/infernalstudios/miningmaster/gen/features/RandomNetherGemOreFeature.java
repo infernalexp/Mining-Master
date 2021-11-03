@@ -22,33 +22,27 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
-import org.infernalstudios.miningmaster.gen.features.config.RandomGemOreFeatureConfig;
+import org.infernalstudios.miningmaster.gen.features.config.RandomNetherGemOreFeatureConfig;
 import org.infernalstudios.miningmaster.init.MMBlocks;
 
 import java.util.Random;
 
-public class RandomGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
-    public RandomGemOreFeature(Codec<RandomGemOreFeatureConfig> codec) {
+public class RandomNetherGemOreFeature extends Feature<RandomNetherGemOreFeatureConfig> {
+    public RandomNetherGemOreFeature(Codec<RandomNetherGemOreFeatureConfig> codec) {
         super(codec);
     }
 
     @Override
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, RandomGemOreFeatureConfig config) {
-        int choice = rand.nextInt(10);
+    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, RandomNetherGemOreFeatureConfig config) {
+        int choice = rand.nextInt(4);
         BlockState blockState;
 
         if (choice <= 1) {
-            blockState = MMBlocks.FIRE_RUBY_ORE.get().getDefaultState();
-        } else if (choice <= 3) {
-            blockState = MMBlocks.ICE_SAPPHIRE_ORE.get().getDefaultState();
-        } else if (choice <= 5) {
-            blockState = MMBlocks.SPIRIT_GARNET_ORE.get().getDefaultState();
-        } else if (choice <= 7) {
-            blockState = MMBlocks.DIVE_AQUAMARINE_ORE.get().getDefaultState();
-        } else if (choice == 8) {
-            blockState = MMBlocks.HASTE_PERIDOT_ORE.get().getDefaultState();
+            blockState = MMBlocks.POWER_PYRITE_ORE.get().getDefaultState();
+        } else if (choice <= 2) {
+            blockState = MMBlocks.KINETIC_OPAL_ORE.get().getDefaultState();
         } else {
-            blockState = MMBlocks.LUCKY_CITRINE_ORE.get().getDefaultState();
+            blockState = MMBlocks.HEART_RHODONITE_ORE.get().getDefaultState();
         }
 
         if (config.target.test(reader.getBlockState(pos), rand)) {
