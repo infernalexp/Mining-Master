@@ -26,7 +26,8 @@ public class MalachiteMeteoriteFeatureConfig implements IFeatureConfig {
             Codec.INT.fieldOf("min_island_radius").forGetter((config) -> config.minIslandRadius),
             Codec.INT.fieldOf("max_island_radius").forGetter((config) -> config.maxIslandRadius),
             Codec.INT.fieldOf("min_meteorite_radius").forGetter((config) -> config.minMeteoriteRadius),
-            Codec.INT.fieldOf("max_meteorite_radius").forGetter((config) -> config.maxMeteoriteRadius))
+            Codec.INT.fieldOf("max_meteorite_radius").forGetter((config) -> config.maxMeteoriteRadius),
+            Codec.INT.fieldOf("chance_to_generate").forGetter((config) -> config.chanceToGenerate))
         .apply(builder, MalachiteMeteoriteFeatureConfig::new);
     });
 
@@ -34,11 +35,13 @@ public class MalachiteMeteoriteFeatureConfig implements IFeatureConfig {
     public final int maxIslandRadius;
     public final int minMeteoriteRadius;
     public final int maxMeteoriteRadius;
+    public final int chanceToGenerate;
 
-    public MalachiteMeteoriteFeatureConfig(int minIslandRadius, int maxIslandRadius, int minMeteoriteRadius, int maxMeteoriteRadius) {
+    public MalachiteMeteoriteFeatureConfig(int minIslandRadius, int maxIslandRadius, int minMeteoriteRadius, int maxMeteoriteRadius, int chanceToGenerate) {
         this.minIslandRadius = minIslandRadius;
         this.maxIslandRadius = maxIslandRadius;
         this.minMeteoriteRadius = minMeteoriteRadius;
         this.maxMeteoriteRadius = maxMeteoriteRadius;
+        this.chanceToGenerate = chanceToGenerate;
     }
 }

@@ -22,6 +22,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -29,9 +30,9 @@ import net.minecraft.world.gen.feature.Feature;
 import org.infernalstudios.miningmaster.gen.features.config.MalachiteMeteoriteFeatureConfig;
 import org.infernalstudios.miningmaster.init.MMBlocks;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+
+import static java.lang.Math.sqrt;
 
 public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeatureConfig> {
 
@@ -41,78 +42,114 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
 
     @Override
     public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, MalachiteMeteoriteFeatureConfig config) {
-        BlockPos.Mutable mutable = new BlockPos.Mutable(pos.getX(), 0, pos.getZ());
-        IBlockReader blockView = generator.func_230348_a_(mutable.getX(), mutable.getZ());
 
-        boolean flag = true;
+        if (rand.nextInt(100) < config.chanceToGenerate) {
+            BlockPos.Mutable mutable = new BlockPos.Mutable(pos.getX(), 0, pos.getZ());
+            IBlockReader blockView = generator.func_230348_a_(mutable.getX(), mutable.getZ());
 
-        while (mutable.getY() <= world.getHeight()) {
-            BlockState state = blockView.getBlockState(mutable);
-            if (!state.isAir()) {
-                flag = false;
-                break;
-            } else {
-                mutable.move(Direction.UP);
+            boolean flag = true;
+
+            while (mutable.getY() <= world.getHeight()) {
+                BlockState state = blockView.getBlockState(mutable);
+                if (!state.isAir()) {
+                    flag = false;
+                    break;
+                } else {
+                    mutable.move(Direction.UP);
+                }
+            }
+
+            if (flag) {
+                float islandRadius = (float) (rand.nextInt(config.maxIslandRadius - config.minIslandRadius) + config.minIslandRadius);
+
+                double meteoriteRadius = rand.nextInt(config.maxMeteoriteRadius - config.minMeteoriteRadius) + config.minMeteoriteRadius + 0.5;
+                double meteoriteOffset = rand.nextInt((int) meteoriteRadius / 2) - (meteoriteRadius / 4);
+
+                generateIsland(world, rand, pos, islandRadius);
+                generateImpactCrater(world, pos, meteoriteOffset, meteoriteRadius);
+                generateMeteorite(world, pos, meteoriteOffset, meteoriteRadius);
+                scatterCrust(world, rand, pos, meteoriteRadius + 3, islandRadius);
+
+                return true;
             }
         }
+        return false;
+    }
 
-        if (rand.nextInt(100) < 1 && flag) {
-            float f = (float) (rand.nextInt(config.maxIslandRadius - config.minIslandRadius) + config.minIslandRadius);
-
-            for (int i = 0; f > 0.5F; --i) {
-                for (int j = MathHelper.floor(-f); j <= MathHelper.ceil(f); ++j) {
-                    for (int k = MathHelper.floor(-f); k <= MathHelper.ceil(f); ++k) {
-                        if ((float) (j * j + k * k) <= (f + 1.0F) * (f + 1.0F)) {
-                            this.setBlockState(world, pos.add(j, i, k), Blocks.END_STONE.getDefaultState());
-                        }
-                    }
-                }
-
-                f = (float) ((double) f - ((double) rand.nextInt(2) + 0.5D));
-            }
-
-            int meteoriteRadius = rand.nextInt(config.maxMeteoriteRadius - config.minMeteoriteRadius) + config.minMeteoriteRadius;
-
-            List<BlockPos> crustPosList = new ArrayList<>();
-
-            for (int x = (int) -meteoriteRadius; x < meteoriteRadius; x++) {
-                for (int y = (int) -meteoriteRadius; y < meteoriteRadius; y++) {
-                    for (int z = (int) -meteoriteRadius; z < meteoriteRadius; z++) {
-                        if ((x * x) + (y * y) + (z * z) <= (meteoriteRadius * meteoriteRadius)) {
-                            crustPosList.add(new BlockPos(x, y, z));
-                        }
+    private void generateIsland(ISeedReader world, Random rand, BlockPos pos, float islandRadius) {
+        for (int i = 0; islandRadius > 0.5F; --i) {
+            for (int j = MathHelper.floor(-islandRadius); j <= MathHelper.ceil(islandRadius); ++j) {
+                for (int k = MathHelper.floor(-islandRadius); k <= MathHelper.ceil(islandRadius); ++k) {
+                    if ((float) (j * j + k * k) <= (islandRadius + 1.0F) * (islandRadius + 1.0F)) {
+                        this.setBlockState(world, pos.add(j, i, k), Blocks.END_STONE.getDefaultState());
                     }
                 }
             }
 
-            for (BlockPos point : crustPosList) {
-                BlockPos pointPos = new BlockPos(pos.getX() + point.getX(), pos.getY() + point.getY(), pos.getZ() + point.getZ());
-                world.setBlockState(pointPos, MMBlocks.MALACRUST.get().getDefaultState(), 2);
-            }
-
-            List<BlockPos> corePosList = new ArrayList<>();
-
-            for (int x = (int) -(meteoriteRadius - 1); x < (meteoriteRadius - 1); x++) {
-                for (int y = (int) -(meteoriteRadius - 1); y < (meteoriteRadius - 1); y++) {
-                    for (int z = (int) -(meteoriteRadius - 1); z < (meteoriteRadius - 1); z++) {
-                        if ((x * x) + (y * y) + (z * z) <= ((meteoriteRadius - 1) * (meteoriteRadius - 1))) {
-                            corePosList.add(new BlockPos(x, y, z));
-                        }
-                    }
-                }
-            }
-
-            for (BlockPos point : corePosList) {
-                BlockPos pointPos = new BlockPos(pos.getX() + point.getX(), pos.getY() + point.getY(), pos.getZ() + point.getZ());
-                world.setBlockState(pointPos, MMBlocks.MALACORE.get().getDefaultState(), 2);
-            }
-
-            world.setBlockState(pos, MMBlocks.AIR_MALACHITE_ORE.get().getDefaultState(), 2);
-
-            return true;
-        } else {
-            return false;
+            islandRadius = (float) ((double) islandRadius - ((double) rand.nextInt(2) + 0.5D));
         }
+    }
 
+    private void generateMeteorite(ISeedReader world, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
+        Vector3d meteoritePos = new Vector3d(pos.getX(), pos.getY() + meteoriteOffset, pos.getZ());
+
+            for (double x = Math.floor(-meteoriteRadius); x <= Math.ceil(meteoriteRadius); x++) {
+                for (double y = Math.floor(-meteoriteRadius); y <= Math.ceil(meteoriteRadius); y++) {
+                    for (double z = Math.floor(-meteoriteRadius); z <= Math.ceil(meteoriteRadius); z++) {
+                        double squaring = new Vector3d(x, y, z).lengthSquared();
+
+                        if (squaring > (meteoriteRadius * meteoriteRadius)) {
+                            continue;
+                        }
+
+                        BlockPos pointPos = new BlockPos(meteoritePos.getX() + x, meteoritePos.getY() + y, meteoritePos.getZ() + z);
+
+                        if (squaring > (meteoriteRadius - 1) * (meteoriteRadius - 1)) {
+                            world.setBlockState(pointPos, MMBlocks.MALACRUST.get().getDefaultState(), 2);
+                        } else if (squaring > 2) {
+                            world.setBlockState(pointPos, MMBlocks.MALACORE.get().getDefaultState(), 2);
+                        } else if (squaring > 0) {
+                            world.setBlockState(pointPos, Blocks.AIR.getDefaultState(), 2);
+                        } else {
+                            world.setBlockState(pointPos, MMBlocks.AIR_MALACHITE_ORE.get().getDefaultState(), 2);
+                        }
+                    }
+                }
+        }
+    }
+
+    private void generateImpactCrater(ISeedReader world, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
+        double craterRadius = meteoriteRadius + 3;
+        Vector3d craterPos = new Vector3d(pos.getX(), pos.getY() + (craterRadius - (meteoriteRadius + meteoriteOffset) + 1), pos.getZ());
+
+        for (double y = Math.floor(-craterRadius); y <= Math.ceil(craterRadius); y++) {
+            for (double x = Math.floor(-craterRadius); x <= Math.ceil(craterRadius); x++) {
+                for (double z = Math.floor(-craterRadius); z <= Math.ceil(craterRadius); z++) {
+                    double squaring = new Vector3d(x, y, z).lengthSquared();
+
+                    if (squaring > (craterRadius * craterRadius)) {
+                        continue;
+                    }
+
+                    BlockPos pointPos = new BlockPos(craterPos.getX() + x, craterPos.getY() + y, craterPos.getZ() + z);
+                    if (pointPos.getY() <= pos.getY()) {
+                        world.setBlockState(pointPos, Blocks.AIR.getDefaultState(), 2);
+                    }
+                }
+            }
+        }
+    }
+
+    private void scatterCrust(ISeedReader world, Random rand, BlockPos pos, double craterRadius, float islandRadius) {
+        int numberOfChunks = rand.nextInt(30) + 30;
+        for (int i = 0; i < numberOfChunks; i++) {
+            double r = (rand.nextInt((int) (islandRadius - craterRadius + 1)) + craterRadius) * sqrt(rand.nextDouble());
+            double theta = rand.nextDouble() * 2 * Math.PI;
+            double xOffset = r * Math.cos(theta);
+            double zOffset = r * Math.sin(theta);
+
+            BlockPos randPos = new BlockPos(pos.getX() + xOffset, pos.getY() + rand.nextInt(2), pos.getZ() + zOffset);
+            world.setBlockState(randPos, MMBlocks.MALACRUST.get().getDefaultState(), 2);
+        }
     }
 }
