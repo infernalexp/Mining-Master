@@ -27,17 +27,93 @@ displayName = "Mining Master" #mandatory
 #displayURL="https://discord.gg/UYGSn94" #optional
 
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile = "logo.png" #optional
+logoFile = "Mining_Master_Banner.png" #optional
 
 # A text field displayed in the mod UI
 credits = "See the description!" #optional
 
 # A text field displayed in the mod UI
-authors = "HellionGames" #optional
+authors = "Infernal Studios" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description = '''
+# Mining Master
+## 📖 About
 
+Mining Master is a mod that adds 10 new 'Enchanting Ores' to the game. These ores, when applied to a tool or armour-piece on a Smithing Table, bestow an Enchantment!
+Using further Enchanting Ores on the same piece of equipment will up the enchantment level, too.
+The 10 ores are:
+
+## Overworld
+
+### Fire Ruby
+- Grants Flame, Fire Aspect, or Fire Protection, dependent on the item. Most commonly found under desert biomes.
+
+### Ice Sapphire
+- Grants Frost Walker or Freezing, dependent on the item. Most commonly found under icy biomes.
+
+### Spirit Garnet
+- Grants Thorns, Leeching, or Loyalty, dependent on the item. Most commonly found under extremely hilly biomes.
+
+### Haste Peridot
+- Grants Efficiency, Quick Draw, or Lure, dependent on the item. Most commonly found under jungle biomes.
+
+### Lucky Citrine
+- Grants Fortune, Looting, or Luck of the Sea, dependent on the item. Most commonly found under mesa biomes.
+
+### Dive Aquamarine
+- Grants Aqua Affinity, Riptide, or Grace, dependent on the item. Most commonly found under mesa biomes.
+
+## Nether
+
+### Power Pyrite
+- Grants Power (of course), Sharpness, or Stonebreaker, dependent on the item. Most commonly found in the Nether Wastes.
+
+### Heart Rhodonite
+- Grants Heartfelt, which can be applied to all armour pieces. Most commonly found in the Soul Sand Valley.
+
+### Kinetic Opal
+- Grants Blast Protection, Smelting, or Runner, dependent on the item. Most commonly found in the Basalt Deltas.
+
+## End
+
+### Malachite Meteorite
+- A meteorite made of two new blocks, Malacrust and Malacore. Contains Air Malachite Ore floating within.
+
+### Air Malachite
+- Grants Feather Falling, Knight Jump, or Floatation, dependent on the item. Most commonly found beyond the End Islands.
+
+## Enchantments
+
+We've added several new Enchantments that cannot be obtained in an Enchanting Table to flesh out some of these gems more, providing a greater incentive to mine them!
+
+- Leeching - Swords and Axes. 25% of any damage dealt is restored back to the attacker as health on-hit.
+
+- Freezing - Swords and Axes. Inflicts slowness and Criticals fire enemies.
+
+- Snowpiercer - Leggings. Grants Speed when running on Snow and Ice blocks.
+
+- Grace - Chestplates. Grants you the Dolphins Grace effect for a short amount of time, after which it will wear off and only activate again after having dried off on land. Pairs well with Depth Strider...
+
+- Stonebreaker - Pickaxes. Destroys Stone, Cobblestone, Diorite, Granite, Andesite, and Netherrack, leaving no drops.
+
+- Heartfelt - All Armours. Increases your maximum health by one heart per level. Damage each armour piece proportionally increases.
+
+- Smelting - Pickaxes. Smelts mined ore blocks! Must be paired with Silk Touch to mine Nether Gold Ore.
+
+- Runner - Boots. Increases your sprinting speed.
+
+- Knight Jump - Leggings. Gives you an additional mid-air jump per level.
+
+- Floatation - Bows. Inflicts enemies with Levitation.
+
+It's a small mod, but we think it'll add a lot! We hope you enjoy it! :D
+
+## 📰 Credits
+HellionGames - Developer
+Nekomaster1000 - Conceptualiser, 2D & 3D Artist,
+GLaDOS Edition, Luxintrus - Additional 2D Artists
+Reetam - Meteorite Concept
 '''
 
 [[dependencies.miningmaster]]
