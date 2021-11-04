@@ -23,25 +23,19 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 public class MalachiteMeteoriteFeatureConfig implements IFeatureConfig {
     public static final Codec<MalachiteMeteoriteFeatureConfig> CODEC = RecordCodecBuilder.create((builder) -> {
         return builder.group(
-            Codec.INT.fieldOf("min_island_radius").forGetter((config) -> config.minIslandRadius),
-            Codec.INT.fieldOf("max_island_radius").forGetter((config) -> config.maxIslandRadius),
-            Codec.INT.fieldOf("min_meteorite_radius").forGetter((config) -> config.minMeteoriteRadius),
-            Codec.INT.fieldOf("max_meteorite_radius").forGetter((config) -> config.maxMeteoriteRadius),
+            Codec.INT.fieldOf("min_radius").forGetter((config) -> config.minRadius),
+            Codec.INT.fieldOf("max_radius").forGetter((config) -> config.maxRadius),
             Codec.INT.fieldOf("chance_to_generate").forGetter((config) -> config.chanceToGenerate))
         .apply(builder, MalachiteMeteoriteFeatureConfig::new);
     });
 
-    public final int minIslandRadius;
-    public final int maxIslandRadius;
-    public final int minMeteoriteRadius;
-    public final int maxMeteoriteRadius;
+    public final int minRadius;
+    public final int maxRadius;
     public final int chanceToGenerate;
 
-    public MalachiteMeteoriteFeatureConfig(int minIslandRadius, int maxIslandRadius, int minMeteoriteRadius, int maxMeteoriteRadius, int chanceToGenerate) {
-        this.minIslandRadius = minIslandRadius;
-        this.maxIslandRadius = maxIslandRadius;
-        this.minMeteoriteRadius = minMeteoriteRadius;
-        this.maxMeteoriteRadius = maxMeteoriteRadius;
+    public MalachiteMeteoriteFeatureConfig(int minRadius, int maxRadius, int chanceToGenerate) {
+        this.minRadius = minRadius;
+        this.maxRadius = maxRadius;
         this.chanceToGenerate = chanceToGenerate;
     }
 }

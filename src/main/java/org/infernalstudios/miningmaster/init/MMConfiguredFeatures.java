@@ -46,7 +46,7 @@ public class MMConfiguredFeatures {
     public static ConfiguredFeature<?, ?> ORE_HEART_RHODONITE_NATIVE = registerConfiguredFeature("ore_heart_rhodonite_native", MMFeatures.NATIVE_NETHER_GEM_ORE_FEATURE.withConfiguration(new NativeNetherGemOreFeatureConfig(NativeNetherGemOreFeatureConfig.NETHERRACK, MMBlocks.HEART_RHODONITE_ORE.get().getDefaultState())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(0, 0, 256))).square().count(1));
     public static ConfiguredFeature<?, ?> ORE_KINETIC_OPAL_NATIVE = registerConfiguredFeature("ore_kinetic_opal_native", MMFeatures.NATIVE_NETHER_GEM_ORE_FEATURE.withConfiguration(new NativeNetherGemOreFeatureConfig(NativeNetherGemOreFeatureConfig.NETHERRACK, MMBlocks.KINETIC_OPAL_ORE.get().getDefaultState())).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(0, 0, 256))).square().count(1));
 
-    public static ConfiguredFeature<?, ?> MALACHITE_METEORITE = registerConfiguredFeature("malachite_meteorite", MMFeatures.MALACHITE_METEORITE_FEATURE.withConfiguration(new MalachiteMeteoriteFeatureConfig(15, 20, 5, 10, 1)).withPlacement(Placement.END_ISLAND.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+    public static ConfiguredFeature<?, ?> MALACHITE_METEORITE = registerConfiguredFeature("malachite_meteorite", MMFeatures.MALACHITE_METEORITE_FEATURE.withConfiguration(new MalachiteMeteoriteFeatureConfig(15, 24, 1)).withPlacement(Placement.END_ISLAND.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 
     public static ConfiguredFeature<?, ?> registerConfiguredFeature(String registryName, ConfiguredFeature<?, ?> configuredFeature) {
         ResourceLocation resourceLocation = new ResourceLocation(MiningMaster.MOD_ID, registryName);

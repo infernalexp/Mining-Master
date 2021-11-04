@@ -60,15 +60,15 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
             }
 
             if (flag) {
-                float islandRadius = (float) (rand.nextInt(config.maxIslandRadius - config.minIslandRadius) + config.minIslandRadius);
+                float islandRadius = (float) (rand.nextInt(config.maxRadius - config.minRadius) + config.minRadius);
 
-                double meteoriteRadius = rand.nextInt(config.maxMeteoriteRadius - config.minMeteoriteRadius) + config.minMeteoriteRadius + 0.5;
-                double meteoriteOffset = rand.nextInt((int) meteoriteRadius / 2) - (meteoriteRadius / 4);
+                double meteoriteRadius = islandRadius / (rand.nextInt(2) + 2) + rand.nextInt(3) + 0.5;
+                double meteoriteOffset = rand.nextInt( 2 * (int) meteoriteRadius / 3) - (meteoriteRadius / 3);
 
                 generateIsland(world, rand, pos, islandRadius);
-                generateImpactCrater(world, pos, meteoriteOffset, meteoriteRadius);
-                generateMeteorite(world, pos, meteoriteOffset, meteoriteRadius);
-                scatterCrust(world, rand, pos, meteoriteRadius + 3, islandRadius);
+                generateImpactCrater(world, rand, pos, meteoriteOffset, meteoriteRadius);
+                generateMeteorite(world, rand, pos, meteoriteOffset, meteoriteRadius);
+                scatterCrust(world, rand, pos, meteoriteRadius + rand.nextInt(3) + 3, islandRadius);
 
                 return true;
             }
@@ -90,7 +90,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
         }
     }
 
-    private void generateMeteorite(ISeedReader world, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
+    private void generateMeteorite(ISeedReader world, Random rand, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
         Vector3d meteoritePos = new Vector3d(pos.getX(), pos.getY() + meteoriteOffset, pos.getZ());
 
             for (double x = Math.floor(-meteoriteRadius); x <= Math.ceil(meteoriteRadius); x++) {
@@ -105,7 +105,9 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
                         BlockPos pointPos = new BlockPos(meteoritePos.getX() + x, meteoritePos.getY() + y, meteoritePos.getZ() + z);
 
                         if (squaring > (meteoriteRadius - 1) * (meteoriteRadius - 1)) {
-                            world.setBlockState(pointPos, MMBlocks.MALACRUST.get().getDefaultState(), 2);
+                            if (pointPos.getY() > pos.getY() || rand.nextInt(100) < 85) {
+                                world.setBlockState(pointPos, MMBlocks.MALACRUST.get().getDefaultState(), 2);
+                            }
                         } else if (squaring > 2) {
                             world.setBlockState(pointPos, MMBlocks.MALACORE.get().getDefaultState(), 2);
                         } else if (squaring > 0) {
@@ -118,7 +120,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
         }
     }
 
-    private void generateImpactCrater(ISeedReader world, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
+    private void generateImpactCrater(ISeedReader world, Random rand, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
         double craterRadius = meteoriteRadius + 3;
         Vector3d craterPos = new Vector3d(pos.getX(), pos.getY() + (craterRadius - (meteoriteRadius + meteoriteOffset) + 1), pos.getZ());
 
@@ -132,7 +134,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
                     }
 
                     BlockPos pointPos = new BlockPos(craterPos.getX() + x, craterPos.getY() + y, craterPos.getZ() + z);
-                    if (pointPos.getY() <= pos.getY()) {
+                    if (pointPos.getY() <= pos.getY() && rand.nextInt(5) < 4) {
                         world.setBlockState(pointPos, Blocks.AIR.getDefaultState(), 2);
                     }
                 }
@@ -141,7 +143,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
     }
 
     private void scatterCrust(ISeedReader world, Random rand, BlockPos pos, double craterRadius, float islandRadius) {
-        int numberOfChunks = rand.nextInt(30) + 30;
+        int numberOfChunks = rand.nextInt((int) islandRadius * 15) + (int) islandRadius * 8;
         for (int i = 0; i < numberOfChunks; i++) {
             double r = (rand.nextInt((int) (islandRadius - craterRadius + 1)) + craterRadius) * sqrt(rand.nextDouble());
             double theta = rand.nextDouble() * 2 * Math.PI;
