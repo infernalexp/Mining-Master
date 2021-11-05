@@ -93,6 +93,8 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
     private void generateMeteorite(ISeedReader world, Random rand, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
         Vector3d meteoritePos = new Vector3d(pos.getX(), pos.getY() + meteoriteOffset, pos.getZ());
 
+        int airCoreSize = Math.max(2, (int) meteoriteRadius / 2);
+
             for (double x = Math.floor(-meteoriteRadius); x <= Math.ceil(meteoriteRadius); x++) {
                 for (double y = Math.floor(-meteoriteRadius); y <= Math.ceil(meteoriteRadius); y++) {
                     for (double z = Math.floor(-meteoriteRadius); z <= Math.ceil(meteoriteRadius); z++) {
@@ -108,7 +110,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
                             if (pointPos.getY() > pos.getY() || rand.nextInt(100) < 85) {
                                 world.setBlockState(pointPos, MMBlocks.MALACRUST.get().getDefaultState(), 2);
                             }
-                        } else if (squaring > 2) {
+                        } else if (squaring > airCoreSize) {
                             world.setBlockState(pointPos, MMBlocks.MALACORE.get().getDefaultState(), 2);
                         } else if (squaring > 0) {
                             world.setBlockState(pointPos, Blocks.AIR.getDefaultState(), 2);
@@ -151,7 +153,9 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
             double zOffset = r * Math.sin(theta);
 
             BlockPos randPos = new BlockPos(pos.getX() + xOffset, pos.getY() + rand.nextInt(2), pos.getZ() + zOffset);
-            world.setBlockState(randPos, MMBlocks.MALACRUST.get().getDefaultState(), 2);
+            if (randPos.distanceSq(pos.getX(), pos.getY(), pos.getZ(), true) >= craterRadius) {
+                world.setBlockState(randPos, MMBlocks.MALACRUST.get().getDefaultState(), 2);
+            }
         }
     }
 }
