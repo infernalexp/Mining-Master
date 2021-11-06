@@ -66,11 +66,13 @@ It's a small mod, but we think it'll add a lot! We hope you enjoy it! :D
 
 HellionGames - Developer
 
-Nekomaster1000 - Conceptualiser, Artist
+Nekomaster1000 - Conceptualiser, Promo & Texture Artist
 
-GLaDOS Edition, Luxintrus - Additional Artists
+GLaDOS Edition, Luxintrus - Additional Texture Artists
 
 Reetam - Meteorite Concept
+
+Uraneptus - Logo
 
 ## ⛓ Links & License
 
