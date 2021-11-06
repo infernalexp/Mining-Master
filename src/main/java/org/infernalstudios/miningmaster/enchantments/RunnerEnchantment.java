@@ -56,6 +56,16 @@ public class RunnerEnchantment extends Enchantment {
     }
 
     @Override
+    public boolean canApply(ItemStack stack) {
+        return this.type.canEnchantItem(stack.getItem());
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        return false;
+    }
+
+    @Override
     public boolean canVillagerTrade() {
         return false;
     }

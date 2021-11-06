@@ -19,6 +19,7 @@ package org.infernalstudios.miningmaster.enchantments;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 
 public class KnightJumpEnchantment extends Enchantment {
 
@@ -39,6 +40,16 @@ public class KnightJumpEnchantment extends Enchantment {
     @Override
     public int getMaxLevel() {
         return 3;
+    }
+
+    @Override
+    public boolean canApply(ItemStack stack) {
+        return this.type.canEnchantItem(stack.getItem());
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        return false;
     }
 
     @Override

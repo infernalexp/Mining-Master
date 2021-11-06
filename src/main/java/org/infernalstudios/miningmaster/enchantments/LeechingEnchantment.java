@@ -48,6 +48,11 @@ public class LeechingEnchantment extends Enchantment {
     }
 
     @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        return false;
+    }
+
+    @Override
     public boolean canVillagerTrade() {
         return false;
     }

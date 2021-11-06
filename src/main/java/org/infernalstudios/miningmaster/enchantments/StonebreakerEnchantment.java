@@ -20,6 +20,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.enchantment.SilkTouchEnchantment;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
 
 public class StonebreakerEnchantment extends Enchantment {
 
@@ -45,6 +46,16 @@ public class StonebreakerEnchantment extends Enchantment {
     @Override
     protected boolean canApplyTogether(Enchantment ench) {
         return !(ench instanceof SilkTouchEnchantment || ench instanceof SmeltingEnchantment);
+    }
+
+    @Override
+    public boolean canApply(ItemStack stack) {
+        return this.type.canEnchantItem(stack.getItem());
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        return false;
     }
 
     @Override

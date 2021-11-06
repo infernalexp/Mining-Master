@@ -24,7 +24,7 @@ The 10 ores are:
 - Grants Fortune, Looting, or Luck of the Sea, dependent on the item. Most commonly found under mesa biomes.
 
 ### Dive Aquamarine
-- Grants Aqua Affinity, Riptide, or Grace, dependent on the item. Most commonly found under mesa biomes.
+- Grants Aqua Affinity, Riptide, or Grace, dependent on the item. Most commonly found under ocean biomes.
 
 ## Nether
 

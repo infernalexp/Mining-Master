@@ -34,7 +34,12 @@ public class FloatationEnchantment extends Enchantment {
 
     @Override
     public boolean canApply(ItemStack stack) {
-        return stack.getItem() instanceof CrossbowItem || super.canApply(stack);
+        return stack.getItem() instanceof CrossbowItem;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        return false;
     }
 
     @Override
