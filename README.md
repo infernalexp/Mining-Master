@@ -12,7 +12,7 @@ The 10 ores are:
 - Grants Flame, Fire Aspect, or Fire Protection, dependent on the item. Most commonly found under desert biomes.
 
 ### Ice Sapphire
-- Grants Frost Walker or Freezing, dependent on the item. Most commonly found under icy biomes.
+- Grants Frost Walker, Freezing, or Snowpiercer, dependent on the item. Most commonly found under icy biomes.
 
 ### Spirit Garnet
 - Grants Thorns, Leeching, or Loyalty, dependent on the item. Most commonly found under extremely hilly biomes.
@@ -50,15 +50,17 @@ The 10 ores are:
 We've added several new Enchantments that cannot be obtained in an Enchanting Table to flesh out some of these gems more, providing a greater incentive to mine them!
 
 - Leeching - Swords and Axes. 25% of any damage dealt is restored back to the attacker as health on-hit. III Levels.
-- Freezing - Swords and Axes. Inflicts slowness and Criticals fire enemies. (Mod Compatibility can be achieved with a tag!) III Levels.
+- Freezing - Swords, Axes, Bows and Crossbows. Inflicts slowness and Criticals fire enemies. (Mod Compatibility can be achieved with a tag!) III Levels.
 - Snowpiercer - Leggings. Grants Speed when running on Snow and Ice blocks. I Level.
 - Grace - Chestplates. Grants you the Dolphins Grace effect for a short amount of time, after which it will wear off and only activate again after having dried off on land. Pairs well with Depth Strider... V Levels.
 - Stonebreaker - Pickaxes. Destroys Stone, Cobblestone, Diorite, Granite, Andesite, and Netherrack, leaving no drops. I Level.
 - Heartfelt - All Armours. Increases your maximum health by one heart per level. Damage each armour piece proportionally increases. II Levels.
-- Smelting - Pickaxes. Smelts mined ore blocks! Must be paired with Silk Touch to mine Nether Gold Ore. I Level.
+- Smelting - Pickaxes and Shovels. Smelts mined ore blocks! Must be paired with Silk Touch to mine Nether Gold Ore. I Level.
 - Runner - Boots. Increases your sprinting speed. III levels.
 - Knight Jump - Leggings. Gives you an additional mid-air jump per level. III Levels.
-- Floatation - Bows. Inflicts enemies with Levitation. III levels.
+- Floatation - Bows and Crossbows. Inflicts enemies with Levitation. III levels.
+
+By default, the gems can only be applied to vanilla items, but there is a tag built into the mod to easily add functionality for enchanting any modded items you want!
 
 It's a small mod, but we think it'll add a lot! We hope you enjoy it! :D
 
