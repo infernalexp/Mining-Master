@@ -36,13 +36,23 @@
   "item.miningmaster.air_malachite": "Gaisa malahīts",
 
   "enchantment.miningmaster.freezing": "Sasalums",
+  "enchantment.miningmaster.freezing.desc": "Causes enemies to be slowed on hit. Also deals extra damage to fire entities.",
   "enchantment.miningmaster.leeching": "Izsūkšana",
+  "enchantment.miningmaster.leeching.desc": "Heals the user for a portion of damage dealt on critical hits.",
   "enchantment.miningmaster.smelting": "Kausēšana",
+  "enchantment.miningmaster.smelting.desc": "Causes blocks to drop the smelted version of usual drops on block broken.",
   "enchantment.miningmaster.stonebreaker": "Akmenslauzis",
+  "enchantment.miningmaster.stonebreaker.desc": "Causes stones and netherrack to not be dropped when broken.",
   "enchantment.miningmaster.runner": "Skrējējs",
+  "enchantment.miningmaster.runner.desc": "Gives the user a boost to speed when worn.",
   "enchantment.miningmaster.heartfelt": "Sirsnīgs",
+  "enchantment.miningmaster.heartfelt.desc": "Gives the user an increase to max health when worn.",
   "enchantment.miningmaster.floatation": "Flotācija",
+  "enchantment.miningmaster.floatation.desc": "Applies levitation to enemies on hit.",
   "enchantment.miningmaster.knight_jump": "Bruņinieka lēciens",
+  "enchantment.miningmaster.knight_jump.desc": "Gives the user extra jumps in midair when worn.",
   "enchantment.miningmaster.snowpiercer": "Sniegduris",
-  "enchantment.miningmaster.grace": "Grācija"
+  "enchantment.miningmaster.snowpiercer.desc": "Gives the user a speed boost when on snow or ice when worn.",
+  "enchantment.miningmaster.grace": "Grācija",
+  "enchantment.miningmaster.grace.desc": "Gives the user a burst of Dolphin's Grace when entering water. Requires the user to return to land to recharge."
 }
