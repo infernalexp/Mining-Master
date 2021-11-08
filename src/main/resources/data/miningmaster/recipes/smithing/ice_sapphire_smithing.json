@@ -1,7 +1,7 @@
 {
   "type": "miningmaster:gem_smithing_recipe",
-  "base": {
-    "tag": "miningmaster:enchantables"
+  "blacklist": {
+    "tag": "miningmaster:gem_enchanting_blacklist"
   },
   "gem": {
     "item": "miningmaster:ice_sapphire"

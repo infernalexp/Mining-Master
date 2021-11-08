@@ -37,7 +37,7 @@ public class MMTags {
     }
 
     public static class Items {
-        public static final ITag.INamedTag<Item> ENCHANTABLES = tag("enchantables");
+        public static final ITag.INamedTag<Item> GEM_ENCHANTING_BLACKLIST = tag("gem_enchanting_blacklist");
         public static final ITag.INamedTag<Item> STONEBREAKER_ITEMS = tag("stonebreaker_items");
 
         private static ITag.INamedTag<Item> tag(String name) {

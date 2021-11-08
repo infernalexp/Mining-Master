@@ -64,20 +64,20 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
         GEM_ENCHANTMENTS.put(MMItems.AIR_MALACHITE.get(), Arrays.asList(Enchantments.FEATHER_FALLING, Enchantments.RESPIRATION, MMEnchantments.FLOATATION.get(), MMEnchantments.KNIGHT_JUMP.get()));
     }
 
-    private final Ingredient base;
+    private final Ingredient blacklist;
     private final ItemStack gem;
     private final ResourceLocation recipeId;
 
-    public GemSmithingRecipe(ResourceLocation recipeId, Ingredient base, ItemStack gem) {
-        super(recipeId, base, Ingredient.EMPTY, ItemStack.EMPTY);
+    public GemSmithingRecipe(ResourceLocation recipeId, Ingredient blacklist, ItemStack gem) {
+        super(recipeId, blacklist, Ingredient.EMPTY, ItemStack.EMPTY);
         this.recipeId = recipeId;
-        this.base = base;
+        this.blacklist = blacklist;
         this.gem = gem;
     }
 
     @Override
     public boolean matches(IInventory inv, World worldIn) {
-        return this.base.test(inv.getStackInSlot(0)) && this.gem.isItemEqual(inv.getStackInSlot(1)) && getCraftingResult(inv) != null;
+        return !this.blacklist.test(inv.getStackInSlot(0)) && this.gem.isItemEqual(inv.getStackInSlot(1)) && getCraftingResult(inv) != null;
     }
 
     @Override
@@ -174,7 +174,7 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
 
         @Override
         public GemSmithingRecipe read(ResourceLocation recipeId, JsonObject json) {
-            Ingredient ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "base"));
+            Ingredient ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "blacklist"));
             ItemStack gem = GemSmithingRecipe.deserializeItem(JSONUtils.getJsonObject(json, "gem"));
             return new GemSmithingRecipe(recipeId, ingredient, gem);
         }
@@ -189,7 +189,7 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
 
         @Override
         public void write(PacketBuffer buffer, GemSmithingRecipe recipe) {
-            recipe.base.write(buffer);
+            recipe.blacklist.write(buffer);
             buffer.writeItemStack(recipe.gem);
         }
     }
