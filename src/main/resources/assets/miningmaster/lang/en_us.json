@@ -20,7 +20,6 @@
   "block.miningmaster.power_pyrite_block": "Block of Power Pyrite",
   "block.miningmaster.kinetic_opal_block": "Block of Kinetic Opal",
   "block.miningmaster.air_malachite_block": "Block of Air Malachite",
-
   "block.miningmaster.malacore": "Malacore",
   "block.miningmaster.malacrust": "Malacrust",
 
@@ -36,23 +35,23 @@
   "item.miningmaster.air_malachite": "Air Malachite",
 
   "enchantment.miningmaster.freezing": "Freezing",
-  "enchantment.miningmaster.freezing.desc": "Causes enemies to be slowed on hit. Also deals extra damage to fire entities.",
+  "enchantment.miningmaster.freezing.desc": "Inflicts Slowness on hit. Also deals extra damage to fire-based entities.",
   "enchantment.miningmaster.leeching": "Leeching",
-  "enchantment.miningmaster.leeching.desc": "Heals the user for a portion of damage dealt on critical hits.",
+  "enchantment.miningmaster.leeching.desc": "Heals the user for a portion of damage dealt on critical strikes.",
   "enchantment.miningmaster.smelting": "Smelting",
-  "enchantment.miningmaster.smelting.desc": "Causes blocks to drop the smelted version of usual drops on block broken.",
+  "enchantment.miningmaster.smelting.desc": "Causes blocks to drop the smelted version of their usual drops when broken.",
   "enchantment.miningmaster.stonebreaker": "Stonebreaker",
-  "enchantment.miningmaster.stonebreaker.desc": "Causes stones and netherrack to not be dropped when broken.",
+  "enchantment.miningmaster.stonebreaker.desc": "Causes certain stones and Netherrack to not be dropped when broken.",
   "enchantment.miningmaster.runner": "Runner",
-  "enchantment.miningmaster.runner.desc": "Gives the user a boost to speed when worn.",
+  "enchantment.miningmaster.runner.desc": "Gives the user a boost to their base speed when worn. Boots take durability damage when sprinting.",
   "enchantment.miningmaster.heartfelt": "Heartfelt",
-  "enchantment.miningmaster.heartfelt.desc": "Gives the user an increase to max health when worn.",
+  "enchantment.miningmaster.heartfelt.desc": "Gives the user an increase to their max health when worn.",
   "enchantment.miningmaster.floatation": "Floatation",
   "enchantment.miningmaster.floatation.desc": "Applies levitation to enemies on hit.",
   "enchantment.miningmaster.knight_jump": "Knight Jump",
-  "enchantment.miningmaster.knight_jump.desc": "Gives the user extra jumps in midair when worn.",
+  "enchantment.miningmaster.knight_jump.desc": "Gives the user extra mid-air jumps when worn.",
   "enchantment.miningmaster.snowpiercer": "Snowpiercer",
-  "enchantment.miningmaster.snowpiercer.desc": "Gives the user a speed boost when on snow or ice when worn.",
+  "enchantment.miningmaster.snowpiercer.desc": "Grants the user the Speed effect when on snow/ice when worn.",
   "enchantment.miningmaster.grace": "Grace",
-  "enchantment.miningmaster.grace.desc": "Gives the user a burst of Dolphin's Grace when entering water. Requires the user to return to land to recharge."
+  "enchantment.miningmaster.grace.desc": "Gives the user a burst of Dolphin's Grace when entering water, at the cost of durability decay while the effect is active. Requires the user to return to land to recharge."
 }
