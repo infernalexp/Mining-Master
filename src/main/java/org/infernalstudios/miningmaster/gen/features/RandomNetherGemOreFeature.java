@@ -30,13 +30,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomNetherGemOreFeature extends Feature<RandomNetherGemOreFeatureConfig> {
+    static ArrayList<BlockState> weightedOreStatesEnabled = new ArrayList<>(4);
+
     public RandomNetherGemOreFeature(Codec<RandomNetherGemOreFeatureConfig> codec) {
         super(codec);
     }
 
-    @Override
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, RandomNetherGemOreFeatureConfig config) {
-        ArrayList<BlockState> weightedOreStatesEnabled = new ArrayList<>();
+    public static void calculateEnabledOres() {
+        weightedOreStatesEnabled = new ArrayList<>(4);
 
         // Adds all enabled ores to the list, double copies for common to give them double chance of being chosen
         if (MiningMasterConfig.CONFIG.powerPyriteEnabled.get()) {
@@ -51,8 +52,12 @@ public class RandomNetherGemOreFeature extends Feature<RandomNetherGemOreFeature
         if (MiningMasterConfig.CONFIG.heartRhodoniteEnabled.get()) {
             weightedOreStatesEnabled.add(MMBlocks.HEART_RHODONITE_ORE.get().getDefaultState());
         }
+    }
 
-        if (weightedOreStatesEnabled.size() == 0) {
+    @Override
+    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, RandomNetherGemOreFeatureConfig config) {
+
+        if (weightedOreStatesEnabled.isEmpty()) {
             return false;
         }
 

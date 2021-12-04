@@ -30,13 +30,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
+    static ArrayList<BlockState> weightedOreStatesEnabled = new ArrayList<>(10);
+
     public RandomGemOreFeature(Codec<RandomGemOreFeatureConfig> codec) {
         super(codec);
     }
 
-    @Override
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, RandomGemOreFeatureConfig config) {
-        ArrayList<BlockState> weightedOreStatesEnabled = new ArrayList<>();
+    public static void calculateEnabledOres() {
+        weightedOreStatesEnabled = new ArrayList<>(4);
 
         // Adds all enabled ores to the list, double copies for common to give them double chance of being chosen
         if (MiningMasterConfig.CONFIG.fireRubyEnabled.get()) {
@@ -66,6 +67,11 @@ public class RandomGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
         if (MiningMasterConfig.CONFIG.luckyCitrineEnabled.get()) {
             weightedOreStatesEnabled.add(MMBlocks.LUCKY_CITRINE_ORE.get().getDefaultState());
         }
+
+    }
+
+    @Override
+    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, RandomGemOreFeatureConfig config) {
 
         if (weightedOreStatesEnabled.size() == 0) {
             return false;

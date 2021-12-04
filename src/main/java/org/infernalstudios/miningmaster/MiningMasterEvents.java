@@ -28,7 +28,10 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import org.infernalstudios.miningmaster.config.MiningMasterConfig;
+import org.infernalstudios.miningmaster.gen.features.RandomGemOreFeature;
+import org.infernalstudios.miningmaster.gen.features.RandomNetherGemOreFeature;
 import org.infernalstudios.miningmaster.init.MMConfiguredFeatures;
 import org.infernalstudios.miningmaster.init.MMFeatures;
 
@@ -39,6 +42,17 @@ public class MiningMasterEvents {
     @SubscribeEvent
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
         MMFeatures.features.forEach(feature -> event.getRegistry().register(feature));
+    }
+
+    // Called When Config is Changed
+    @SubscribeEvent
+    public static void onModConfigEvent(final ModConfig.ModConfigEvent event) {
+        final ModConfig config = event.getConfig();
+        //Recalculates what the configs should be when changed
+        if (config.getSpec() == MiningMasterConfig.CONFIG_SPEC) {
+            RandomNetherGemOreFeature.calculateEnabledOres();
+            RandomGemOreFeature.calculateEnabledOres();
+        }
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
