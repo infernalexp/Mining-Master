@@ -22,9 +22,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import org.infernalstudios.miningmaster.config.MiningMasterConfig;
 import org.infernalstudios.miningmaster.gen.features.config.RandomGemOreFeatureConfig;
 import org.infernalstudios.miningmaster.init.MMBlocks;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
@@ -34,22 +36,42 @@ public class RandomGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
 
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, RandomGemOreFeatureConfig config) {
-        int choice = rand.nextInt(10);
-        BlockState blockState;
+        ArrayList<BlockState> weightedOreStatesEnabled = new ArrayList<>();
 
-        if (choice <= 1) {
-            blockState = MMBlocks.FIRE_RUBY_ORE.get().getDefaultState();
-        } else if (choice <= 3) {
-            blockState = MMBlocks.ICE_SAPPHIRE_ORE.get().getDefaultState();
-        } else if (choice <= 5) {
-            blockState = MMBlocks.SPIRIT_GARNET_ORE.get().getDefaultState();
-        } else if (choice <= 7) {
-            blockState = MMBlocks.DIVE_AQUAMARINE_ORE.get().getDefaultState();
-        } else if (choice == 8) {
-            blockState = MMBlocks.HASTE_PERIDOT_ORE.get().getDefaultState();
-        } else {
-            blockState = MMBlocks.LUCKY_CITRINE_ORE.get().getDefaultState();
+        // Adds all enabled ores to the list, double copies for common to give them double chance of being chosen
+        if (MiningMasterConfig.CONFIG.fireRubyEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.FIRE_RUBY_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.FIRE_RUBY_ORE.get().getDefaultState());
         }
+
+        if (MiningMasterConfig.CONFIG.iceSapphireEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.ICE_SAPPHIRE_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.ICE_SAPPHIRE_ORE.get().getDefaultState());
+        }
+
+        if (MiningMasterConfig.CONFIG.spiritGarnetEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.SPIRIT_GARNET_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.SPIRIT_GARNET_ORE.get().getDefaultState());
+        }
+
+        if (MiningMasterConfig.CONFIG.diveAquamarineEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.DIVE_AQUAMARINE_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.DIVE_AQUAMARINE_ORE.get().getDefaultState());
+        }
+
+        if (MiningMasterConfig.CONFIG.hastePeridotEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.HASTE_PERIDOT_ORE.get().getDefaultState());
+        }
+
+        if (MiningMasterConfig.CONFIG.luckyCitrineEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.LUCKY_CITRINE_ORE.get().getDefaultState());
+        }
+
+        if (weightedOreStatesEnabled.size() == 0) {
+            return false;
+        }
+
+        BlockState blockState = weightedOreStatesEnabled.get(rand.nextInt(weightedOreStatesEnabled.size()));
 
         if (config.target.test(reader.getBlockState(pos), rand)) {
             reader.setBlockState(pos, blockState, 2);

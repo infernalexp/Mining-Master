@@ -16,13 +16,18 @@
 
 package org.infernalstudios.miningmaster;
 
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.infernalstudios.miningmaster.config.MiningMasterConfig;
 import org.infernalstudios.miningmaster.enchantments.GraceEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
@@ -43,6 +48,8 @@ public class MiningMaster {
         final ModLoadingContext modLoadingContext = ModLoadingContext.get();
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        modEventBus.addListener(this::clientSetup);
+
         MMBlocks.register(modEventBus);
         MMItems.register(modEventBus);
         MMEnchantments.register(modEventBus);
@@ -56,5 +63,12 @@ public class MiningMaster {
         MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemUnequip);
         MinecraftForge.EVENT_BUS.addListener(SnowpiercerEnchantment::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(GraceEnchantment::onLivingUpdate);
+
+        // Registering Configs
+        modLoadingContext.registerConfig(ModConfig.Type.COMMON, MiningMasterConfig.CONFIG_SPEC);
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event) {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> MiningMasterClient::init);
     }
 }

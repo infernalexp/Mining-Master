@@ -22,9 +22,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import org.infernalstudios.miningmaster.config.MiningMasterConfig;
 import org.infernalstudios.miningmaster.gen.features.config.RandomNetherGemOreFeatureConfig;
 import org.infernalstudios.miningmaster.init.MMBlocks;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomNetherGemOreFeature extends Feature<RandomNetherGemOreFeatureConfig> {
@@ -34,16 +36,27 @@ public class RandomNetherGemOreFeature extends Feature<RandomNetherGemOreFeature
 
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, RandomNetherGemOreFeatureConfig config) {
-        int choice = rand.nextInt(4);
-        BlockState blockState;
+        ArrayList<BlockState> weightedOreStatesEnabled = new ArrayList<>();
 
-        if (choice <= 1) {
-            blockState = MMBlocks.POWER_PYRITE_ORE.get().getDefaultState();
-        } else if (choice <= 2) {
-            blockState = MMBlocks.KINETIC_OPAL_ORE.get().getDefaultState();
-        } else {
-            blockState = MMBlocks.HEART_RHODONITE_ORE.get().getDefaultState();
+        // Adds all enabled ores to the list, double copies for common to give them double chance of being chosen
+        if (MiningMasterConfig.CONFIG.powerPyriteEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.POWER_PYRITE_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.POWER_PYRITE_ORE.get().getDefaultState());
         }
+
+        if (MiningMasterConfig.CONFIG.kineticOpalEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.KINETIC_OPAL_ORE.get().getDefaultState());
+        }
+
+        if (MiningMasterConfig.CONFIG.heartRhodoniteEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.HEART_RHODONITE_ORE.get().getDefaultState());
+        }
+
+        if (weightedOreStatesEnabled.size() == 0) {
+            return false;
+        }
+
+        BlockState blockState = weightedOreStatesEnabled.get(rand.nextInt(weightedOreStatesEnabled.size()));
 
         if (config.target.test(reader.getBlockState(pos), rand)) {
             reader.setBlockState(pos, blockState, 2);
