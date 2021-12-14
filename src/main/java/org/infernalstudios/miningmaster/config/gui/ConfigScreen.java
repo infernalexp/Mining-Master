@@ -31,6 +31,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.config.MiningMasterConfig;
+import org.infernalstudios.miningmaster.gen.features.RandomGemOreFeature;
+import org.infernalstudios.miningmaster.gen.features.RandomNetherGemOreFeature;
 
 import java.util.List;
 
@@ -139,6 +141,13 @@ public class ConfigScreen extends Screen {
         children.add(optionsRowList);
 
         addButton(new Button((width - 200) / 2, height - 26, 200, 20, new TranslationTextComponent("gui.done"), button -> closeScreen()));
+    }
+
+    @Override
+    public void closeScreen() {
+        super.closeScreen();
+        RandomNetherGemOreFeature.calculateEnabledOres();
+        RandomGemOreFeature.calculateEnabledOres();
     }
 
     @Override

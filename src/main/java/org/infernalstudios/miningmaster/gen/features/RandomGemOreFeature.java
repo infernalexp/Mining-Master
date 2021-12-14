@@ -67,7 +67,6 @@ public class RandomGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
         if (MiningMasterConfig.CONFIG.luckyCitrineEnabled.get()) {
             weightedOreStatesEnabled.add(MMBlocks.LUCKY_CITRINE_ORE.get().getDefaultState());
         }
-
     }
 
     @Override
