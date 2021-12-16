@@ -24,6 +24,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,6 +33,8 @@ import org.infernalstudios.miningmaster.enchantments.GraceEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
 import org.infernalstudios.miningmaster.enchantments.SnowpiercerEnchantment;
+import org.infernalstudios.miningmaster.gen.features.RandomGemOreFeature;
+import org.infernalstudios.miningmaster.gen.features.RandomNetherGemOreFeature;
 import org.infernalstudios.miningmaster.init.MMBlocks;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
 import org.infernalstudios.miningmaster.init.MMItems;
@@ -48,6 +51,7 @@ public class MiningMaster {
         final ModLoadingContext modLoadingContext = ModLoadingContext.get();
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
 
         MMBlocks.register(modEventBus);
@@ -66,6 +70,11 @@ public class MiningMaster {
 
         // Registering Configs
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, MiningMasterConfig.CONFIG_SPEC);
+    }
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        RandomNetherGemOreFeature.calculateEnabledOres();
+        RandomGemOreFeature.calculateEnabledOres();
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
