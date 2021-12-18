@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "type": "tetra:multi_major_module",
+  "slots": [
+    "double/head_left",
+    "double/head_right"
+  ],
+  "slotSuffixes": [
+    "_left",
+    "_right"
+  ],
+  "improvements": [
+    "tetra:enchantment/miningmaster_smelting",
+    "tetra:enchantment/miningmaster_stonebreaker"
+  ]
+}

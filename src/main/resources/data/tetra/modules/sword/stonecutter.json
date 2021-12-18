@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "type": "tetra:basic_major_module",
+  "slots": [
+    "sword/blade"
+  ],
+  "improvements": [
+    "tetra:enchantment/miningmaster_freezing",
+    "tetra:enchantment/miningmaster_leeching"
+  ]
+}

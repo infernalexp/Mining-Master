@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "slots": [
+    "crossbow/string"
+  ],
+  "type": "tetra:basic_module",
+  "improvements": [
+    "tetra:enchantment/miningmaster_floatation"
+  ]
+}
