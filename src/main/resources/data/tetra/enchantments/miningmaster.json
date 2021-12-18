@@ -1,0 +1,42 @@
+[
+  {
+    "enchantment": "miningmaster:floatation",
+    "improvement": "enchantment/miningmaster_floatation"
+  },
+  {
+    "enchantment": "miningmaster:freezing",
+    "improvement": "enchantment/miningmaster_freezing"
+  },
+  {
+    "enchantment": "miningmaster:grace",
+    "improvement": "enchantment/miningmaster_grace"
+  },
+  {
+    "enchantment": "miningmaster:heartfelt",
+    "improvement": "enchantment/miningmaster_heartfelt"
+  },
+  {
+    "enchantment": "miningmaster:knight_jump",
+    "improvement": "enchantment/miningmaster_knight_jump"
+  },
+  {
+    "enchantment": "miningmaster:leeching",
+    "improvement": "enchantment/miningmaster_leeching"
+  },
+  {
+    "enchantment": "miningmaster:runner",
+    "improvement": "enchantment/miningmaster_runner"
+  },
+  {
+    "enchantment": "miningmaster:smelting",
+    "improvement": "enchantment/miningmaster_smelting"
+  },
+  {
+    "enchantment": "miningmaster:snowpiercer",
+    "improvement": "enchantment/miningmaster_snowpiercer"
+  },
+  {
+    "enchantment": "miningmaster:stonebreaker",
+    "improvement": "enchantment/miningmaster_stonebreaker"
+  }
+]

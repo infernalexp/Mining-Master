@@ -94,5 +94,26 @@
   "enchantment.miningmaster.snowpiercer": "Snowpiercer",
   "enchantment.miningmaster.snowpiercer.desc": "Grants the user the Speed effect when on snow or ice.",
   "enchantment.miningmaster.grace": "Grace",
-  "enchantment.miningmaster.grace.desc": "Gives the user a burst of Dolphin's Grace when entering water, at the cost of durability decay while the effect is active. Requires the user to return to land to recharge."
+  "enchantment.miningmaster.grace.desc": "Gives the user a burst of Dolphin's Grace when entering water, at the cost of durability decay while the effect is active. Requires the user to return to land to recharge.",
+
+  "tetra.improvement.enchantment/miningmaster_floatation.name": "Floatation",
+  "tetra.improvement.enchantment/miningmaster_floatation.description": "Applies levitation to enemies on hit.",
+  "tetra.improvement.enchantment/miningmaster_freezing.name": "Freezing",
+  "tetra.improvement.enchantment/miningmaster_freezing.description": "Inflicts Slowness on hit. Also deals extra damage to fire-based entities.",
+  "tetra.improvement.enchantment/miningmaster_grace.name": "Grace",
+  "tetra.improvement.enchantment/miningmaster_grace.description": "Gives the user a burst of Dolphin's Grace when entering water, at the cost of durability decay while the effect is active. Requires the user to return to land to recharge.",
+  "tetra.improvement.enchantment/miningmaster_heartfelt.name": "Heartfelt",
+  "tetra.improvement.enchantment/miningmaster_heartfelt.description": "Gives the user an increase to their max health.",
+  "tetra.improvement.enchantment/miningmaster_knight_jump.name": "Knight Jump",
+  "tetra.improvement.enchantment/miningmaster_knight_jump.description": "Gives the user extra mid-air jumps.",
+  "tetra.improvement.enchantment/miningmaster_leeching.name": "Leeching",
+  "tetra.improvement.enchantment/miningmaster_leeching.description": "Heals the user for a portion of damage dealt on critical strikes.",
+  "tetra.improvement.enchantment/miningmaster_runner.name": "Runner",
+  "tetra.improvement.enchantment/miningmaster_runner.description": "Gives the user a boost to their base speed. Boots take durability damage when sprinting.",
+  "tetra.improvement.enchantment/miningmaster_smelting.name": "Smelting",
+  "tetra.improvement.enchantment/miningmaster_smelting.description": "Causes blocks to drop the smelted version of their usual drops.",
+  "tetra.improvement.enchantment/miningmaster_snowpiercer.name": "Snowpiercer",
+  "tetra.improvement.enchantment/miningmaster_snowpiercer.description": "Grants the user the Speed effect when on snow or ice.",
+  "tetra.improvement.enchantment/miningmaster_stonebreaker.name": "Stonebreaker",
+  "tetra.improvement.enchantment/miningmaster_stonebreaker.description": "Causes certain stones and Netherrack to not drop when mined."
 }

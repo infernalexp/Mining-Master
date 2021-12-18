@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "type": "tetra:basic_major_module",
+  "slots": [
+    "single/head"
+  ],
+  "improvements": [
+    "tetra:enchantment/miningmaster_smelting",
+    "tetra:enchantment/miningmaster_stonebreaker"
+  ]
+}
