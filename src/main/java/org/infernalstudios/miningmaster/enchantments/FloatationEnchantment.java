@@ -34,7 +34,7 @@ public class FloatationEnchantment extends Enchantment {
 
     @Override
     public boolean canApply(ItemStack stack) {
-        return stack.getItem() instanceof CrossbowItem;
+        return stack.getItem() instanceof CrossbowItem || this.type.canEnchantItem(stack.getItem());
     }
 
     @Override

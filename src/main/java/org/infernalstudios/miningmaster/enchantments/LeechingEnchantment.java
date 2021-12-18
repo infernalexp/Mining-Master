@@ -44,7 +44,7 @@ public class LeechingEnchantment extends Enchantment {
 
     @Override
     public boolean canApply(ItemStack stack) {
-        return stack.getItem() instanceof AxeItem || super.canApply(stack);
+        return stack.getItem() instanceof AxeItem || this.type.canEnchantItem(stack.getItem());
     }
 
     @Override
