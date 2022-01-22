@@ -34,6 +34,30 @@
   "item.miningmaster.kinetic_opal": "Kinetic Opal",
   "item.miningmaster.air_malachite": "Air Malachite",
 
+  "item.miningmaster.fire_ruby_sword": "Fire Ruby Sword",
+  "item.miningmaster.ice_sapphire_sword": "Ice Sapphire Sword",
+  "item.miningmaster.ultima_sword": "Ultima Sword",
+
+  "item.miningmaster.spirit_garnet_axe": "Spirit Garnet Axe",
+  "item.miningmaster.power_pyrite_axe": "Power Pyrite Axe",
+  "item.miningmaster.ultima_axe": "Ultima Axe",
+
+  "item.miningmaster.lucky_citrine_pickaxe": "Lucky Citrine Pickaxe",
+  "item.miningmaster.ultima_pickaxe": "Ultima Pickaxe",
+
+  "item.miningmaster.kinetic_opal_shovel": "Kinetic Opal Shovel",
+  "item.miningmaster.ultima_shovel": "Ultima Shovel",
+
+  "item.miningmaster.haste_peridot_hoe": "Haste Peridot Hoe",
+  "item.miningmaster.ultima_hoe": "Ultima Hoe",
+
+  "item.miningmaster.air_malachite_bow": "Air Malachite Bow",
+
+  "item.miningmaster.paragon_helmet": "Paragon Helmet",
+  "item.miningmaster.paragon_chestplate": "Paragon Chestplate",
+  "item.miningmaster.paragon_leggings": "Paragon Leggings",
+  "item.miningmaster.paragon_boots": "Paragon Boots",
+
   "miningmaster.config.title": "Mining Master Config",
 
   "miningmaster.config.option.fireRubyEnabled": "Fire Ruby Enabled",

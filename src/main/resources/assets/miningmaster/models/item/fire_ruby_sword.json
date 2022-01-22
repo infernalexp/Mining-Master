@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "miningmaster:item/fire_ruby_sword"
+  }
+}
