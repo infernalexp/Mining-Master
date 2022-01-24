@@ -39,6 +39,8 @@ public class MMTags {
     public static class Items {
         public static final ITag.INamedTag<Item> GEM_ENCHANTING_BLACKLIST = tag("gem_enchanting_blacklist");
         public static final ITag.INamedTag<Item> STONEBREAKER_ITEMS = tag("stonebreaker_items");
+        public static final ITag.INamedTag<Item> GEMS = tag("gems");
+        public static final ITag.INamedTag<Item> CATALYSTS = tag("catalysts");
 
         private static ITag.INamedTag<Item> tag(String name) {
             return ItemTags.createOptional(new ResourceLocation(MiningMaster.MOD_ID, name));

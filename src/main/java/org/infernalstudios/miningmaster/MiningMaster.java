@@ -28,6 +28,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.infernalstudios.miningmaster.client.MiningMasterClient;
 import org.infernalstudios.miningmaster.config.MiningMasterConfig;
 import org.infernalstudios.miningmaster.enchantments.GraceEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
@@ -36,10 +37,12 @@ import org.infernalstudios.miningmaster.enchantments.SnowpiercerEnchantment;
 import org.infernalstudios.miningmaster.gen.features.RandomGemOreFeature;
 import org.infernalstudios.miningmaster.gen.features.RandomNetherGemOreFeature;
 import org.infernalstudios.miningmaster.init.MMBlocks;
+import org.infernalstudios.miningmaster.init.MMContainerTypes;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
 import org.infernalstudios.miningmaster.init.MMItems;
 import org.infernalstudios.miningmaster.init.MMLootModifiers;
 import org.infernalstudios.miningmaster.init.MMRecipes;
+import org.infernalstudios.miningmaster.init.MMTileEntityTypes;
 
 
 @Mod(MiningMaster.MOD_ID)
@@ -59,6 +62,8 @@ public class MiningMaster {
         MMEnchantments.register(modEventBus);
         MMRecipes.register(modEventBus);
         MMLootModifiers.register(modEventBus);
+        MMContainerTypes.register(modEventBus);
+        MMTileEntityTypes.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onItemAttributeModifierCalculate);

@@ -28,6 +28,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.infernalstudios.miningmaster.MiningMaster;
+import org.infernalstudios.miningmaster.blocks.GemForgeBlock;
 import org.infernalstudios.miningmaster.blocks.GemOreBlock;
 
 import java.util.function.Supplier;
@@ -62,6 +63,7 @@ public class MMBlocks {
     //MISC BLOCKS
     public static final RegistryObject<Block> MALACORE = registerBlockWithDefaultItem("malacore", () -> new Block(getProperties(Blocks.END_STONE)));
     public static final RegistryObject<Block> MALACRUST = registerBlockWithDefaultItem("malacrust", () -> new Block(getProperties(Blocks.END_STONE).hardnessAndResistance(22.5F)));
+    public static final RegistryObject<Block> GEM_FORGE = registerBlockWithDefaultItem("gem_forge", () -> new GemForgeBlock(getProperties(Blocks.FURNACE)));
 
     public static AbstractBlock.Properties getProperties(Material materialIn, float hardnessAndResistanceIn) {
         return getProperties(materialIn, hardnessAndResistanceIn, hardnessAndResistanceIn);

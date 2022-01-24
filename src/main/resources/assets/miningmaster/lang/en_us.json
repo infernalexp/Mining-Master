@@ -22,6 +22,7 @@
   "block.miningmaster.air_malachite_block": "Block of Air Malachite",
   "block.miningmaster.malacore": "Malacore",
   "block.miningmaster.malacrust": "Malacrust",
+  "block.miningmaster.gem_forge": "Gem Forge",
 
   "item.miningmaster.fire_ruby": "Fire Ruby",
   "item.miningmaster.ice_sapphire": "Ice Sapphire",
@@ -57,6 +58,8 @@
   "item.miningmaster.paragon_chestplate": "Paragon Chestplate",
   "item.miningmaster.paragon_leggings": "Paragon Leggings",
   "item.miningmaster.paragon_boots": "Paragon Boots",
+
+  "miningmaster:container.gem_forge": "Gem Forge",
 
   "miningmaster.config.title": "Mining Master Config",
 

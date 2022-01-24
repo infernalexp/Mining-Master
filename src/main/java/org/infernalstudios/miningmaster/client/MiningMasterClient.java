@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Infernal Studios
+ * Copyright 2021 Infernal Studios
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package org.infernalstudios.miningmaster;
+package org.infernalstudios.miningmaster.client;
 
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
+import org.infernalstudios.miningmaster.client.gui.screen.inventory.GemForgeScreen;
 import org.infernalstudios.miningmaster.config.gui.ConfigScreen;
+import org.infernalstudios.miningmaster.init.MMContainerTypes;
 import org.infernalstudios.miningmaster.init.MMItems;
 
 public class MiningMasterClient {
@@ -38,5 +41,6 @@ public class MiningMasterClient {
 
         ItemModelsProperties.registerProperty(MMItems.AIR_MALACHITE_BOW.get(), new ResourceLocation("pulling"), (itemStack, clientWorld, livingEntity) -> livingEntity != null && livingEntity.isHandActive() && livingEntity.getActiveItemStack() == itemStack ? 1.0F : 0.0F);
 
+        ScreenManager.registerFactory(MMContainerTypes.GEM_FORGE_CONTAINER.get(), GemForgeScreen::new);
     }
 }

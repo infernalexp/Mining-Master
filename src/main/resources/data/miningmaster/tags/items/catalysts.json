@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:diamond_sword",
+    "miningmaster:fire_ruby_sword",
+    "miningmaster:ice_sapphire_sword",
+    "minecraft:diamond_axe",
+    "miningmaster:spirit_garnet_axe",
+    "miningmaster:power_pyrite_axe",
+    "minecraft:diamond_pickaxe",
+    "miningmaster:lucky_citrine_pickaxe",
+    "minecraft:diamond_shovel",
+    "miningmaster:kinetic_opal_shovel",
+    "minecraft:diamond_hoe",
+    "miningmaster:haste_peridot_hoe",
+    "minecraft:bow",
+    "minecraft:diamond_helmet",
+    "minecraft:diamond_chestplate",
+    "minecraft:diamond_leggings",
+    "minecraft:diamond_boots"
+  ]
+}

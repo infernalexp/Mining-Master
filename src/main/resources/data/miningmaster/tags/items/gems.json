@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "miningmaster:fire_ruby",
+    "miningmaster:ice_sapphire",
+    "miningmaster:spirit_garnet",
+    "miningmaster:lucky_citrine",
+    "miningmaster:haste_peridot",
+    "miningmaster:dive_aquamarine",
+    "miningmaster:air_malachite",
+    "miningmaster:heart_rhodonite",
+    "miningmaster:power_pyrite",
+    "miningmaster:kinetic_opal"
+  ]
+}
