@@ -27,7 +27,7 @@ import org.infernalstudios.miningmaster.MiningMaster;
 import java.util.function.Supplier;
 
 public enum MMArmorMaterials implements IArmorMaterial {
-    PARAGON("paragon", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, null);
+    PARAGON("paragon", 40, new int[]{3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4.0F, 0.1F, null);
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
     private final String name;

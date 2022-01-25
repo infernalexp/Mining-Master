@@ -1,0 +1,45 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:dive_aquamarine"
+    },
+    {
+      "item": "miningmaster:dive_aquamarine"
+    },
+    {
+      "item": "miningmaster:dive_aquamarine"
+    },
+    {
+      "item": "miningmaster:dive_aquamarine"
+    },
+    {
+      "item": "miningmaster:heart_rhodonite"
+    },
+    {
+      "item": "miningmaster:heart_rhodonite"
+    },
+    {
+      "item": "miningmaster:heart_rhodonite"
+    },
+    {
+      "item": "miningmaster:heart_rhodonite"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:diamond_chestplate"
+  },
+  "result": {
+    "item": "miningmaster:paragon_chestplate"
+  },
+  "enchantments": [
+    {
+      "enchantment": "miningmaster:grace",
+      "lvl": 5
+    },
+    {
+      "enchantment": "miningmaster:heartfelt",
+      "lvl": 4
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:air_malachite"
+    },
+    {
+      "item": "miningmaster:air_malachite"
+    },
+    {
+      "item": "miningmaster:air_malachite"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:bow"
+  },
+  "result": {
+    "item": "miningmaster:air_malachite_bow"
+  },
+  "enchantments": [
+    {
+      "enchantment": "miningmaster:floatation",
+      "lvl": 5
+    }
+  ]
+}

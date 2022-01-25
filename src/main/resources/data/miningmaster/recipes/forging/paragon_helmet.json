@@ -1,0 +1,43 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:fire_ruby"
+    },
+    {
+      "item": "miningmaster:fire_ruby"
+    },
+    {
+      "item": "miningmaster:kinetic_opal"
+    },
+    {
+      "item": "miningmaster:kinetic_opal"
+    },
+    {
+      "item": "miningmaster:spirit_garnet"
+    },
+    {
+      "item": "miningmaster:spirit_garnet"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:diamond_helmet"
+  },
+  "result": {
+    "item": "miningmaster:paragon_helmet"
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:thorns",
+      "lvl": 3
+    },
+    {
+      "enchantment": "minecraft:fire_protection",
+      "lvl": 3
+    },
+    {
+      "enchantment": "minecraft:blast_protection",
+      "lvl": 3
+    }
+  ]
+}

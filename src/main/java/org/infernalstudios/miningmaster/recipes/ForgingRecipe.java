@@ -20,6 +20,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,6 +35,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.infernalstudios.miningmaster.init.MMRecipes;
 
@@ -42,12 +45,14 @@ public class ForgingRecipe implements IForgingRecipe {
     private final ResourceLocation recipeId;
     private final Ingredient catalyst;
     private final NonNullList<Ingredient> recipeGems;
+    private final NonNullList<Pair<Enchantment,Integer>> enchantments;
     private final ItemStack result;
 
-    public ForgingRecipe(ResourceLocation recipeId, Ingredient catalyst, NonNullList<Ingredient> recipeGems, ItemStack result) {
+    public ForgingRecipe(ResourceLocation recipeId, Ingredient catalyst, NonNullList<Ingredient> recipeGems, NonNullList<Pair<Enchantment,Integer>> enchantments, ItemStack result) {
         this.recipeId = recipeId;
         this.catalyst = catalyst;
         this.recipeGems = recipeGems;
+        this.enchantments = enchantments;
         this.result = result;
     }
 
@@ -79,6 +84,10 @@ public class ForgingRecipe implements IForgingRecipe {
         CompoundNBT compoundnbt = inv.getStackInSlot(0).getTag();
         if (compoundnbt != null) {
             itemstack.setTag(compoundnbt.copy());
+        }
+
+        for (Pair<Enchantment, Integer> enchantment : this.enchantments) {
+            itemstack.addEnchantment(enchantment.getFirst(), enchantment.getSecond());
         }
 
         return itemstack;
@@ -124,6 +133,7 @@ public class ForgingRecipe implements IForgingRecipe {
         @Override
         public ForgingRecipe read(ResourceLocation recipeId, JsonObject json) {
             NonNullList<Ingredient> gemList = readIngredients(JSONUtils.getJsonArray(json, "gems"));
+            NonNullList<Pair<Enchantment,Integer>> enchantmentList = readEnchantments(JSONUtils.getJsonArray(json, "enchantments"));
 
             if (gemList.isEmpty()) {
                 throw new JsonParseException("No gems for forging recipe");
@@ -132,7 +142,8 @@ public class ForgingRecipe implements IForgingRecipe {
             } else {
                 ItemStack result = ForgingRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
                 Ingredient catalyst = Ingredient.deserialize(JSONUtils.getJsonObject(json, "catalyst"));
-                return new ForgingRecipe(recipeId, catalyst, gemList, result);
+
+                return new ForgingRecipe(recipeId, catalyst, gemList, enchantmentList, result);
             }
         }
 
@@ -149,6 +160,39 @@ public class ForgingRecipe implements IForgingRecipe {
             return nonnulllist;
         }
 
+        private static NonNullList<Pair<Enchantment,Integer>> readEnchantments(JsonArray enchantmentArray) {
+            NonNullList<Pair<Enchantment,Integer>> enchantments = NonNullList.create();
+
+            for(int i = 0; i < enchantmentArray.size(); ++i) {
+                Enchantment enchantment = parseEnchantment(JSONUtils.getJsonObject(enchantmentArray.get(i),"enchantment"));
+                int lvl = parseEnchantmentLevel(JSONUtils.getJsonObject(enchantmentArray.get(i), "lvl"));
+
+                enchantments.add(new Pair<>(enchantment, lvl));
+            }
+
+            return enchantments;
+        }
+
+        private static Enchantment parseEnchantment(JsonObject object) {
+            if (object.isJsonArray()) {
+                throw new JsonSyntaxException("Expected object to be a single Enchantment");
+            }
+            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(JSONUtils.getString(object, "enchantment")));
+
+            if (enchantment == null) {
+                throw new JsonSyntaxException("No valid Enchantment name supplied");
+            }
+
+            return enchantment;
+        }
+
+        private static int parseEnchantmentLevel(JsonObject object) {
+            if (object.isJsonArray()) {
+                throw new JsonSyntaxException("Expected object to be a single integer");
+            }
+            return JSONUtils.getInt(object, "lvl");
+        }
+
         @Nullable
         @Override
         public ForgingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
@@ -156,12 +200,22 @@ public class ForgingRecipe implements IForgingRecipe {
             int i = buffer.readVarInt();
             NonNullList<Ingredient> gemList = NonNullList.withSize(i, Ingredient.EMPTY);
 
-            for(int j = 0; j < gemList.size(); ++j) {
+            for(int j = 0; j < gemList.size(); j++) {
                 gemList.set(j, Ingredient.read(buffer));
             }
 
+            int k = buffer.readVarInt();
+            NonNullList<Pair<Enchantment,Integer>> enchantmentList = NonNullList.create();
+
+            for (int j = 0; j < k; j++) {
+                Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(buffer.readResourceLocation());
+                if (enchantment != null) {
+                    enchantmentList.add(new Pair<>(enchantment, buffer.readVarInt()));
+                }
+            }
+
             ItemStack result = buffer.readItemStack();
-            return new ForgingRecipe(recipeId, catalyst, gemList, result);
+            return new ForgingRecipe(recipeId, catalyst, gemList, enchantmentList, result);
         }
 
         @Override
@@ -171,6 +225,12 @@ public class ForgingRecipe implements IForgingRecipe {
 
             for(Ingredient ingredient : recipe.recipeGems) {
                 ingredient.write(buffer);
+            }
+
+            buffer.writeVarInt(recipe.enchantments.size());
+            for(Pair<Enchantment,Integer> enchantment : recipe.enchantments) {
+                buffer.writeResourceLocation(enchantment.getFirst().getRegistryName());
+                buffer.writeVarInt(enchantment.getSecond());
             }
 
             buffer.writeItemStack(recipe.result);

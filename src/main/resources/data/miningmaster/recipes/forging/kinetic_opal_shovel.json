@@ -1,0 +1,20 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:kinetic_opal"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:diamond_shovel"
+  },
+  "result": {
+    "item": "miningmaster:kinetic_opal_shovel"
+  },
+  "enchantments": [
+    {
+      "enchantment": "miningmaster:smelting",
+      "lvl": 1
+    }
+  ]
+}

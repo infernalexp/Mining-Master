@@ -1,0 +1,44 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:power_pyrite"
+    },
+    {
+      "item": "miningmaster:power_pyrite"
+    },
+    {
+      "item": "miningmaster:power_pyrite"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:lucky_citrine"
+    }
+  ],
+  "catalyst": {
+    "item": "miningmaster:spirit_garnet_axe"
+  },
+  "result": {
+    "item": "miningmaster:ultima_axe"
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:sharpness",
+      "lvl": 5
+    },
+    {
+      "enchantment": "minecraft:efficiency",
+      "lvl": 2
+    },
+    {
+      "enchantment": "minecraft:looting",
+      "lvl": 2
+    },
+    {
+      "enchantment": "miningmaster:leeching",
+      "lvl": 1
+    }
+  ]
+}

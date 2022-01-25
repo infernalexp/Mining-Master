@@ -1,0 +1,32 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:diamond_hoe"
+  },
+  "result": {
+    "item": "miningmaster:haste_peridot_hoe"
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:efficiency",
+      "lvl": 5
+    }
+  ]
+}

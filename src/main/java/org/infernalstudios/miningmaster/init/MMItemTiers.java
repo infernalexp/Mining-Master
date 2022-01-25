@@ -23,9 +23,8 @@ import net.minecraft.util.LazyValue;
 import java.util.function.Supplier;
 
 public enum MMItemTiers implements IItemTier {
-    SUPRA(0, 0, 0.0F, 0.0F, 0, null),
-    ULTIMA(0, 0, 0.0F, 0.0F, 0, null),
-    PARAGON(0, 0, 0.0F, 0.0F, 0, null);
+    SUPRA(3, 1851, 9.0F, 3.5F, 15, null),
+    ULTIMA(4, 2341, 10.5F, 4.5F, 20, null);
 
     private final int harvestLevel;
     private final int maxUses;

@@ -1,0 +1,44 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:ice_sapphire"
+    },
+    {
+      "item": "miningmaster:ice_sapphire"
+    },
+    {
+      "item": "miningmaster:spirit_garnet"
+    },
+    {
+      "item": "miningmaster:spirit_garnet"
+    },
+    {
+      "item": "miningmaster:lucky_citrine"
+    }
+  ],
+  "catalyst": {
+    "item": "miningmaster:fire_ruby_sword"
+  },
+  "result": {
+    "item": "miningmaster:ultima_sword"
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:fire_aspect",
+      "lvl": 3
+    },
+    {
+      "enchantment": "miningmaster:freezing",
+      "lvl": 3
+    },
+    {
+      "enchantment": "minecraft:looting",
+      "lvl": 2
+    },
+    {
+      "enchantment": "miningmaster:leeching",
+      "lvl": 1
+    }
+  ]
+}

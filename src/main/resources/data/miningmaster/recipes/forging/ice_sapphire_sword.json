@@ -2,21 +2,21 @@
   "type": "miningmaster:forging_recipe",
   "gems": [
     {
-      "item": "miningmaster:fire_ruby"
+      "item": "miningmaster:ice_sapphire"
     },
     {
-      "item": "miningmaster:fire_ruby"
+      "item": "miningmaster:ice_sapphire"
     }
   ],
   "catalyst": {
     "item": "minecraft:diamond_sword"
   },
   "result": {
-    "item": "miningmaster:fire_ruby_sword"
+    "item": "miningmaster:ice_sapphire_sword"
   },
   "enchantments": [
     {
-      "enchantment": "minecraft:fire_aspect",
+      "enchantment": "miningmaster:freezing",
       "lvl": 3
     }
   ]

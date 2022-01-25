@@ -1,0 +1,37 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:kinetic_opal"
+    }
+  ],
+  "catalyst": {
+    "item": "miningmaster:lucky_citrine_pickaxe"
+  },
+  "result": {
+    "item": "miningmaster:ultima_pickaxe"
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:efficiency",
+      "lvl": 4
+    },
+    {
+      "enchantment": "minecraft:fortune",
+      "lvl": 3
+    },
+    {
+      "enchantment": "miningmaster:smelting",
+      "lvl": 1
+    }
+  ]
+}

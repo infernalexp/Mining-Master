@@ -1,0 +1,43 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:kinetic_opal"
+    },
+    {
+      "item": "miningmaster:kinetic_opal"
+    },
+    {
+      "item": "miningmaster:ice_sapphire"
+    },
+    {
+      "item": "miningmaster:ice_sapphire"
+    },
+    {
+      "item": "miningmaster:air_malachite"
+    },
+    {
+      "item": "miningmaster:air_malachite"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:diamond_boots"
+  },
+  "result": {
+    "item": "miningmaster:paragon_boots"
+  },
+  "enchantments": [
+    {
+      "enchantment": "miningmaster:runner",
+      "lvl": 3
+    },
+    {
+      "enchantment": "minecraft:feather_falling",
+      "lvl": 3
+    },
+    {
+      "enchantment": "minecraft:frost_walker",
+      "lvl": 2
+    }
+  ]
+}
