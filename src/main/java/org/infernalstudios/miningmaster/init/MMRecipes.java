@@ -17,20 +17,29 @@
 package org.infernalstudios.miningmaster.init;
 
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.infernalstudios.miningmaster.MiningMaster;
+import org.infernalstudios.miningmaster.recipes.ForgingRecipe;
 import org.infernalstudios.miningmaster.recipes.GemSmithingRecipe;
 
 public class MMRecipes {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MiningMaster.MOD_ID);
 
     public static final RegistryObject<IRecipeSerializer<GemSmithingRecipe>> GEM_SMITHING_RECIPE = RECIPE_SERIALIZERS.register("gem_smithing_recipe", GemSmithingRecipe.GemSmithingRecipeSerializer::new);
+    public static final RegistryObject<IRecipeSerializer<ForgingRecipe>> FORGING_RECIPE = RECIPE_SERIALIZERS.register("forging_recipe", ForgingRecipe.ForgingRecipeSerializer::new);
+
+    public static IRecipeType<ForgingRecipe> FORGING_RECIPE_TYPE = new ForgingRecipe.ForgingRecipeType();
 
     public static void register(IEventBus eventBus) {
         RECIPE_SERIALIZERS.register(eventBus);
+
+        Registry.register(Registry.RECIPE_TYPE, ForgingRecipe.TYPE_ID, FORGING_RECIPE_TYPE);
+
         MiningMaster.LOGGER.info("Mining Master: Recipes Registered!");
     }
 }

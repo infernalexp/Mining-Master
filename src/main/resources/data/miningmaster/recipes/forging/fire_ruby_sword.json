@@ -1,0 +1,18 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:fire_ruby"
+    },
+    {
+      "item": "miningmaster:fire_ruby"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:diamond_sword"
+  },
+  "result": {
+    "item": "miningmaster:fire_ruby_sword",
+    "nbt": "{Enchantments:[{id:fire_aspect,lvl:3}]}"
+  }
+}

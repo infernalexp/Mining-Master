@@ -17,6 +17,8 @@ public class GemItem extends Item {
         super(new Item.Properties().group(ItemGroup.MATERIALS));
     }
 
+
+
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if (Screen.hasShiftDown()) {
