@@ -1,0 +1,26 @@
+{
+  "gemforge.cook": {
+    "sounds": [
+      {
+        "name": "miningmaster:gemforge/boil1",
+        "stream": true
+      },
+      {
+        "name": "miningmaster:gemforge/boil2",
+        "stream": true
+      },
+      {
+        "name": "miningmaster:gemforge/boil3",
+        "stream": true
+      },
+      {
+        "name": "miningmaster:gemforge/boil4",
+        "stream": true
+      },
+      {
+        "name": "miningmaster:gemforge/boil5",
+        "stream": true
+      }
+    ]
+  }
+}
