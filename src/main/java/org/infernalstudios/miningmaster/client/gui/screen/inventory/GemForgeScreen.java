@@ -19,7 +19,6 @@ package org.infernalstudios.miningmaster.client.gui.screen.inventory;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.recipebook.AbstractRecipeBookGui;
 import net.minecraft.client.gui.recipebook.FurnaceRecipeGui;
 import net.minecraft.client.gui.recipebook.IRecipeShownListener;
@@ -39,11 +38,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.containers.GemForgeContainer;
+import org.infernalstudios.miningmaster.network.MMNetworkHandler;
+import org.infernalstudios.miningmaster.network.UpdateGemForgePacket;
 
 @OnlyIn(Dist.CLIENT)
 public class GemForgeScreen extends ContainerScreen<GemForgeContainer> implements IRecipeShownListener {
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(MiningMaster.MOD_ID + ':' + "textures/gui/container/gem_forge.png");
-    private static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation("textures/gui/recipe_button.png");
+    private static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation(MiningMaster.MOD_ID + ':' + "textures/gui/recipe_button.png");
     private boolean widthTooNarrowIn;
     public final AbstractRecipeBookGui recipeGui;
 
@@ -57,7 +58,7 @@ public class GemForgeScreen extends ContainerScreen<GemForgeContainer> implement
         this.widthTooNarrowIn = this.width < 379;
         this.recipeGui.init(this.width, this.height, this.minecraft, this.widthTooNarrowIn, this.container);
         this.guiLeft = this.recipeGui.updateScreenPosition(this.widthTooNarrowIn, this.width, this.xSize);
-        this.addButton(new ConfirmButton(this.guiLeft + 143, this.guiTop + 34));
+        this.addButton(new ConfirmButton(142, 33, this));
         this.addButton(new ImageButton(this.guiLeft + 15, this.height / 2 - 49, 20, 18, 0, 0, 19, BUTTON_TEXTURE, (button) -> {
             this.recipeGui.initSearchBar(this.widthTooNarrowIn);
             this.recipeGui.toggleVisibility();
@@ -103,16 +104,6 @@ public class GemForgeScreen extends ContainerScreen<GemForgeContainer> implement
 //        this.blit(matrixStack, i + 79, j + 34, 176, 14, l + 1, 16);
     }
 
-    @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
-        super.drawGuiContainerForegroundLayer(matrixStack, x, y);
-        int i = this.guiLeft;
-        int j = this.guiTop;
-        this.itemRenderer.zLevel = 100.0F;
-        this.itemRenderer.renderItemAndEffectIntoGUI(new ItemStack(Items.LAVA_BUCKET), i + 143, j + 34);
-        this.itemRenderer.zLevel = 0.0F;
-    }
-
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (this.recipeGui.mouseClicked(mouseX, mouseY, button)) {
             return true;
@@ -156,64 +147,60 @@ public class GemForgeScreen extends ContainerScreen<GemForgeContainer> implement
     }
 
     @OnlyIn(Dist.CLIENT)
-    class ConfirmButton extends GemForgeScreen.SpriteButton {
-        public ConfirmButton(int x, int y) {
-            super(x, y, 39, 60);
+    class ConfirmButton extends GemForgeScreen.Button {
+        public ConfirmButton(int x, int y, GemForgeScreen screen) {
+            super(x, y, screen);
+        }
+
+        @Override
+        protected void func_230454_a_(MatrixStack p_230454_1_) {
         }
 
         public void onPress() {
-            GemForgeScreen.this.container.active = true;
-        }
-
-        public void renderToolTip(MatrixStack matrixStack, int mouseX, int mouseY) {
-            GemForgeScreen.this.renderTooltip(matrixStack, DialogTexts.GUI_DONE, mouseX, mouseY);
+            if (GemForgeScreen.this.container.isRecipeValid()) {
+                MMNetworkHandler.sendToServer(new UpdateGemForgePacket(true));
+            }
         }
     }
 
     @OnlyIn(Dist.CLIENT)
     abstract static class Button extends AbstractButton {
-        private boolean selected;
+        private final GemForgeScreen screen;
+        private final int xOffset;
+        private final int yOffset;
 
-        protected Button(int x, int y) {
-            super(x, y, 18, 18, StringTextComponent.EMPTY);
+        protected Button(int x, int y, GemForgeScreen screen) {
+            super(x, y, 20, 20, StringTextComponent.EMPTY);
+            this.screen = screen;
+            this.xOffset = x;
+            this.yOffset = y;
+            this.x = this.xOffset + this.screen.guiLeft;
+            this.y = this. yOffset + this.screen.guiTop;
         }
 
         public void renderWidget(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
             Minecraft.getInstance().getTextureManager().bindTexture(GemForgeScreen.GUI_TEXTURE);
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-            int j = 39;
-            if (this.isHovered()) {
-                j = 60;
+            int i = 165;
+            int j = 0;
+            if (this.screen.container.isForgeActive()) {
+                j += this.width;
+            } else if (!this.screen.container.isRecipeValid()) {
+                j += this.width * 2;
+            } else if (this.isHovered()) {
+                j += this.width * 3;
             }
 
-            this.blit(matrixStack, this.x, this.y, 179, j, this.width, this.height);
+            this.x = this.xOffset + this.screen.guiLeft;
+            this.y = this. yOffset + this.screen.guiTop;
+
+            this.active = this.screen.container.isRecipeValid() && !this.screen.container.isForgeActive();
+
+            this.blit(matrixStack, this.x, this.y, j, i, this.width, this.height);
+            this.screen.itemRenderer.renderItemIntoGUI(new ItemStack(Items.LAVA_BUCKET), this.x + 2, this.y + 2);
             this.func_230454_a_(matrixStack);
         }
 
         protected abstract void func_230454_a_(MatrixStack p_230454_1_);
-
-        public boolean isSelected() {
-            return this.selected;
-        }
-
-        public void setSelected(boolean selectedIn) {
-            this.selected = selectedIn;
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    abstract static class SpriteButton extends GemForgeScreen.Button {
-        private final int u;
-        private final int v;
-
-        protected SpriteButton(int x, int y, int u, int v) {
-            super(x, y);
-            this.u = u;
-            this.v = v;
-        }
-
-        protected void func_230454_a_(MatrixStack p_230454_1_) {
-            this.blit(p_230454_1_, this.x + 2, this.y + 2, this.u, this.v, 18, 18);
-        }
     }
 }

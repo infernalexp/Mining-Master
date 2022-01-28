@@ -32,6 +32,7 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.IIntArray;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -47,7 +48,7 @@ import org.infernalstudios.miningmaster.recipes.ForgingRecipe;
 import javax.annotation.Nullable;
 
 public class GemForgeTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IRecipeHolder, IRecipeHelperPopulator {
-    private final int FORGE_TIME_TOTAL = 250;
+    private final int FORGE_TIME_TOTAL = 150;
 
     @Nullable
     protected ITextComponent customName;
@@ -62,7 +63,36 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
     private final Object2IntOpenHashMap<ResourceLocation> recipes = new Object2IntOpenHashMap<>();
     private int forgeTime = 0;
 
-    private Boolean active = false;
+    private boolean forgeActive;
+    private boolean recipeValid;
+
+    // I know this is sloppy, but Containers can only track Int Arrays
+    protected final IIntArray forgeData = new IIntArray() {
+        public int get(int index) {
+            switch(index) {
+                case 0:
+                    return GemForgeTileEntity.this.forgeActive ? 1 : 0;
+                case 1:
+                    return GemForgeTileEntity.this.recipeValid ? 1 : 0;
+                default:
+                    return 0;
+            }
+        }
+
+        public void set(int index, int k) {
+            switch(index) {
+                case 0:
+                    GemForgeTileEntity.this.forgeActive = k == 1;
+                    break;
+                case 1:
+                    GemForgeTileEntity.this.recipeValid = k == 1;
+            }
+        }
+
+        public int size() {
+            return 2;
+        }
+    };;
 
     private static final int[] SLOTS_UP = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
     private static final int[] SLOTS_DOWN = new int[]{9};
@@ -84,14 +114,18 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
             if (!itemstack.isEmpty()) {
                 ForgingRecipe recipe = this.world.getRecipeManager().getRecipe(MMRecipes.FORGING_RECIPE_TYPE, this, this.world).orElse(null);
 
-                if (this.canForge(recipe)) {
+                this.recipeValid = this.canForge(recipe);
+
+                if (this.canForge(recipe) && this.forgeActive) {
                     ++this.forgeTime;
+
                     if (this.forgeTime >= FORGE_TIME_TOTAL) {
                         this.forgeTime = 0;
                         this.forge(recipe);
                         flag1 = true;
                     }
                 } else {
+                    this.forgeActive = false;
                     this.forgeTime = 0;
                 }
             }
@@ -129,6 +163,9 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
         inventory.deserializeNBT(nbt.getCompound("inv"));
         CompoundNBT compoundnbt = nbt.getCompound("RecipesUsed");
 
+        this.forgeActive = nbt.getBoolean("ForgeActive");
+        this.recipeValid = nbt.getBoolean("RecipeValid");
+
         for(String s : compoundnbt.keySet()) {
             this.recipes.put(new ResourceLocation(s), compoundnbt.getInt(s));
         }
@@ -143,17 +180,13 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
             compoundnbt.putInt(recipeId.toString(), craftedAmount);
         });
         compound.put("RecipesUsed", compoundnbt);
+        compound.putBoolean("ForgeActive", this.forgeActive);
+        compound.putBoolean("RecipeValid", this.recipeValid);
         return compound;
     }
 
-    @Nullable
-    public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
-        return new GemForgeContainer(id, inv, this.inventory, this.active);
-    }
-
-    @Override
     protected Container createMenu(int id, PlayerInventory inv) {
-        return new GemForgeContainer(id, inv, this.inventory, this.active);
+        return new GemForgeContainer(id, inv, this.inventory, this.forgeData);
     }
 
     public ITextComponent getDisplayName() {
@@ -188,6 +221,8 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
             for(int i = 0; i < 9; ++i) {
                 this.decrStackSize(i, 1);
             }
+
+            this.forgeActive = false;
         }
     }
 

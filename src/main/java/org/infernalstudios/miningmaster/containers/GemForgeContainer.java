@@ -27,6 +27,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.RecipeBookCategory;
 import net.minecraft.item.crafting.RecipeItemHelper;
+import net.minecraft.util.IIntArray;
+import net.minecraft.util.IntArray;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -40,15 +42,15 @@ import javax.annotation.Nonnull;
 public class GemForgeContainer extends RecipeBookContainer<IInventory> {
     private final ItemStackHandler forgeInventory;
     protected final World world;
-    public Boolean active;
+    public IIntArray forgeData;
 
     public GemForgeContainer(int id, PlayerInventory playerInventory) {
-        this(id, playerInventory, new ItemStackHandler(10), false);
+        this(id, playerInventory, new ItemStackHandler(10), new IntArray(2));
     }
 
-    public GemForgeContainer(int id, PlayerInventory playerInventory, ItemStackHandler inventory, Boolean active) {
+    public GemForgeContainer(int id, PlayerInventory playerInventory, ItemStackHandler inventory, IIntArray forgeData) {
         super(MMContainerTypes.GEM_FORGE_CONTAINER.get(), id);
-        this.active = active;
+        this.forgeData = forgeData;
         this.forgeInventory = inventory;
         this.world = playerInventory.player.world;
         this.addSlot(new GemSlot(inventory, 0, 44, 53));
@@ -72,6 +74,8 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
         for(int k = 0; k < 9; ++k) {
             this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
+
+        this.trackIntArray(forgeData);
     }
 
     public boolean canInteractWith(PlayerEntity playerIn) {
@@ -118,6 +122,21 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
     @OnlyIn(Dist.CLIENT)
     public int getSize() {
         return 10;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean isForgeActive() {
+        return this.forgeData.get(0) == 1;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean isRecipeValid() {
+        return this.forgeData.get(1) == 1;
+    }
+
+
+    public void setForgeActive(boolean active) {
+        this.forgeData.set(0, active ? 1 : 0);
     }
 
     @Override

@@ -43,6 +43,7 @@ import org.infernalstudios.miningmaster.init.MMItems;
 import org.infernalstudios.miningmaster.init.MMLootModifiers;
 import org.infernalstudios.miningmaster.init.MMRecipes;
 import org.infernalstudios.miningmaster.init.MMTileEntityTypes;
+import org.infernalstudios.miningmaster.network.MMNetworkHandler;
 
 
 @Mod(MiningMaster.MOD_ID)
@@ -80,6 +81,8 @@ public class MiningMaster {
     private void commonSetup(final FMLCommonSetupEvent event) {
         RandomNetherGemOreFeature.calculateEnabledOres();
         RandomGemOreFeature.calculateEnabledOres();
+
+        event.enqueueWork(MMNetworkHandler::register);
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
