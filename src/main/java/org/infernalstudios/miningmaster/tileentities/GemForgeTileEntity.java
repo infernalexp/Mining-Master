@@ -34,6 +34,8 @@ import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.items.ItemStackHandler;
@@ -41,6 +43,7 @@ import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.blocks.GemForgeBlock;
 import org.infernalstudios.miningmaster.containers.GemForgeContainer;
 import org.infernalstudios.miningmaster.init.MMRecipes;
+import org.infernalstudios.miningmaster.init.MMSounds;
 import org.infernalstudios.miningmaster.init.MMTags;
 import org.infernalstudios.miningmaster.init.MMTileEntityTypes;
 import org.infernalstudios.miningmaster.recipes.ForgingRecipe;
@@ -48,7 +51,7 @@ import org.infernalstudios.miningmaster.recipes.ForgingRecipe;
 import javax.annotation.Nullable;
 
 public class GemForgeTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IRecipeHolder, IRecipeHelperPopulator {
-    private final int FORGE_TIME_TOTAL = 150;
+    private final int FORGE_TIME_TOTAL = 300;
 
     @Nullable
     protected ITextComponent customName;
@@ -83,6 +86,9 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
             switch(index) {
                 case 0:
                     GemForgeTileEntity.this.forgeActive = k == 1;
+                    if (!GemForgeTileEntity.this.world.isRemote()) {
+                        GemForgeTileEntity.this.world.playSound(null, GemForgeTileEntity.this.pos, MMSounds.GEM_FORGE_COOK.get(), SoundCategory.BLOCKS, 1.0F, GemForgeTileEntity.this.world.getRandom().nextFloat() * 0.4F + 1.0F);
+                    }
                     break;
                 case 1:
                     GemForgeTileEntity.this.recipeValid = k == 1;
@@ -223,6 +229,10 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
             }
 
             this.forgeActive = false;
+
+            if (!GemForgeTileEntity.this.world.isRemote()) {
+                GemForgeTileEntity.this.world.playSound(null, GemForgeTileEntity.this.pos, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundCategory.BLOCKS, 1.0F, GemForgeTileEntity.this.world.getRandom().nextFloat() * 0.8F + 0.25F);
+            }
         }
     }
 

@@ -42,6 +42,7 @@ import org.infernalstudios.miningmaster.init.MMEnchantments;
 import org.infernalstudios.miningmaster.init.MMItems;
 import org.infernalstudios.miningmaster.init.MMLootModifiers;
 import org.infernalstudios.miningmaster.init.MMRecipes;
+import org.infernalstudios.miningmaster.init.MMSounds;
 import org.infernalstudios.miningmaster.init.MMTileEntityTypes;
 import org.infernalstudios.miningmaster.network.MMNetworkHandler;
 
@@ -65,6 +66,7 @@ public class MiningMaster {
         MMLootModifiers.register(modEventBus);
         MMContainerTypes.register(modEventBus);
         MMTileEntityTypes.register(modEventBus);
+        MMSounds.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onItemAttributeModifierCalculate);
