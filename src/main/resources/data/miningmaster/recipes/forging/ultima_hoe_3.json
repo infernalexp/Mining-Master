@@ -1,0 +1,27 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    }
+  ],
+  "catalyst": {
+    "item": "miningmaster:lucky_citrine_hoe"
+  },
+  "result": {
+    "item": "miningmaster:ultima_hoe"
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:efficiency",
+      "lvl": 6
+    },
+    {
+      "enchantment": "minecraft:fortune",
+      "lvl": 3
+    }
+  ]
+}

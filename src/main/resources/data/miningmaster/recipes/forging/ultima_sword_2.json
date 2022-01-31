@@ -8,6 +8,9 @@
       "item": "miningmaster:ice_sapphire"
     },
     {
+      "item": "miningmaster:ice_sapphire"
+    },
+    {
       "item": "miningmaster:spirit_garnet"
     },
     {
@@ -34,7 +37,7 @@
     },
     {
       "enchantment": "minecraft:looting",
-      "lvl": 2
+      "lvl": 3
     },
     {
       "enchantment": "miningmaster:leeching",

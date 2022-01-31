@@ -32,7 +32,7 @@
   "enchantments": [
     {
       "enchantment": "minecraft:efficiency",
-      "lvl": 4
+      "lvl": 5
     },
     {
       "enchantment": "minecraft:fortune",

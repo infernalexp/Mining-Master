@@ -1,0 +1,26 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:spirit_garnet"
+    },
+    {
+      "item": "miningmaster:spirit_garnet"
+    },
+	{
+      "item": "miningmaster:spirit_garnet"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:diamond_pickaxe"
+  },
+  "result": {
+    "item": "miningmaster:spirit_garnet_pickaxe"
+  },
+  "enchantments": [
+    {
+      "enchantment": "miningmaster:leeching",
+      "lvl": 1
+    }
+  ]
+}

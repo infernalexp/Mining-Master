@@ -6,7 +6,11 @@
     },
     {
       "item": "miningmaster:ice_sapphire"
+    },
+    {
+      "item": "miningmaster:ice_sapphire"
     }
+	
   ],
   "catalyst": {
     "item": "minecraft:diamond_sword"

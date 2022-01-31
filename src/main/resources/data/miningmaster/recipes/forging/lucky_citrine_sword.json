@@ -1,0 +1,26 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:lucky_citrine"
+    },
+    {
+      "item": "miningmaster:lucky_citrine"
+    },
+    {
+      "item": "miningmaster:lucky_citrine"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:diamond_sword"
+  },
+  "result": {
+    "item": "miningmaster:lucky_citrine_sword"
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:looting",
+      "lvl": 3
+    }
+  ]
+}

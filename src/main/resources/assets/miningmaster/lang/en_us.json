@@ -37,18 +37,36 @@
 
   "item.miningmaster.fire_ruby_sword": "Fire Ruby Sword",
   "item.miningmaster.ice_sapphire_sword": "Ice Sapphire Sword",
+  "item.miningmaster.spirit_garnet_sword": "Spirit Garnet Sword",
+  "item.miningmaster.power_pyrite_sword": "Power Pyrite Sword",
+  "item.miningmaster.lucky_citrine_sword": "Lucky Citrine Sword",
+  "item.miningmaster.kinetic_opal_sword": "Kinetic Opal Sword",
   "item.miningmaster.ultima_sword": "Ultima Sword",
 
+  "item.miningmaster.fire_ruby_axe": "Fire Ruby Axe",
+  "item.miningmaster.ice_sapphire_axe": "Ice Sapphire Axe",
   "item.miningmaster.spirit_garnet_axe": "Spirit Garnet Axe",
   "item.miningmaster.power_pyrite_axe": "Power Pyrite Axe",
+  "item.miningmaster.haste_peridot_axe": "Haste Peridot Axe",
+  "item.miningmaster.kinetic_opal_axe": "Kinetic Opal Axe",
   "item.miningmaster.ultima_axe": "Ultima Axe",
 
+  "item.miningmaster.fire_ruby_pickaxe": "Fire Ruby Pickaxe",
+  "item.miningmaster.ice_sapphire_pickaxe": "Ice Sapphire Pickaxe",
+  "item.miningmaster.spirit_garnet_pickaxe": "Spirit Garnet Pickaxe",
+  "item.miningmaster.power_pyrite_pickaxe": "Power Pyrite Pickaxe",
   "item.miningmaster.lucky_citrine_pickaxe": "Lucky Citrine Pickaxe",
+  "item.miningmaster.haste_peridot_pickaxe": "Haste Peridot Pickaxe",
+  "item.miningmaster.kinetic_opal_pickaxe": "Kinetic Opal Pickaxe",
   "item.miningmaster.ultima_pickaxe": "Ultima Pickaxe",
 
+  "item.miningmaster.power_pyrite_shovel": "Power Pyrite Shovel",
+  "item.miningmaster.lucky_citrine_shovel": "Lucky Citrine Shovel",
+  "item.miningmaster.haste_peridot_shovel": "Haste Peridot Shovel",
   "item.miningmaster.kinetic_opal_shovel": "Kinetic Opal Shovel",
   "item.miningmaster.ultima_shovel": "Ultima Shovel",
 
+  "item.miningmaster.lucky_citrine_hoe": "Lucky Citrine Hoe",
   "item.miningmaster.haste_peridot_hoe": "Haste Peridot Hoe",
   "item.miningmaster.ultima_hoe": "Ultima Hoe",
 
