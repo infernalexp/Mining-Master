@@ -16,6 +16,8 @@
 
 package org.infernalstudios.miningmaster;
 
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -90,4 +92,13 @@ public class MiningMaster {
     private void clientSetup(final FMLClientSetupEvent event) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> MiningMasterClient::init);
     }
+
+    public static final ItemGroup TAB = new ItemGroup("MiningMasterTab") {
+
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(MMItems.FIRE_RUBY.get());
+        }
+
+    };
 }

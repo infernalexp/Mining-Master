@@ -77,6 +77,10 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
                     return GemForgeTileEntity.this.forgeActive ? 1 : 0;
                 case 1:
                     return GemForgeTileEntity.this.recipeValid ? 1 : 0;
+                case 2:
+                    return GemForgeTileEntity.this.forgeTime;
+                case 3:
+                    return GemForgeTileEntity.this.FORGE_TIME_TOTAL;
                 default:
                     return 0;
             }
@@ -92,11 +96,13 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
                     break;
                 case 1:
                     GemForgeTileEntity.this.recipeValid = k == 1;
+                case 2:
+                    GemForgeTileEntity.this.forgeTime = k;
             }
         }
 
         public int size() {
-            return 2;
+            return 4;
         }
     };;
 

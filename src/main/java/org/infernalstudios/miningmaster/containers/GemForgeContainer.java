@@ -45,7 +45,7 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
     public IIntArray forgeData;
 
     public GemForgeContainer(int id, PlayerInventory playerInventory) {
-        this(id, playerInventory, new ItemStackHandler(10), new IntArray(2));
+        this(id, playerInventory, new ItemStackHandler(10), new IntArray(4));
     }
 
     public GemForgeContainer(int id, PlayerInventory playerInventory, ItemStackHandler inventory, IIntArray forgeData) {
@@ -127,6 +127,16 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
     @OnlyIn(Dist.CLIENT)
     public boolean isForgeActive() {
         return this.forgeData.get(0) == 1;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public int getForgeTimeScaled() {
+        int i = this.forgeData.get(3);
+        if (i == 0) {
+            i = 200;
+        }
+
+        return this.forgeData.get(2) * 10 / i;
     }
 
     @OnlyIn(Dist.CLIENT)
