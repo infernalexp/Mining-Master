@@ -8,6 +8,9 @@
       "item": "miningmaster:lucky_citrine"
     },
     {
+      "item": "miningmaster:lucky_citrine"
+    },
+    {
       "item": "miningmaster:haste_peridot"
     },
     {
@@ -36,7 +39,7 @@
     },
     {
       "enchantment": "minecraft:fortune",
-      "lvl": 2
+      "lvl": 3
     }
   ]
 }

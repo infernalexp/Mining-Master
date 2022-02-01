@@ -6,6 +6,9 @@
     },
     {
       "item": "miningmaster:lucky_citrine"
+    },
+    {
+      "item": "miningmaster:lucky_citrine"
     }
   ],
   "catalyst": {
@@ -21,7 +24,7 @@
     },
     {
       "enchantment": "minecraft:fortune",
-      "lvl": 2
+      "lvl": 3
     }
   ]
 }

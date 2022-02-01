@@ -1,0 +1,20 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:lucky_citrine"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:diamond_shovel"
+  },
+  "result": {
+    "item": "miningmaster:lucky_citrine_shovel"
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:fortune",
+      "lvl": 3
+    }
+  ]
+}

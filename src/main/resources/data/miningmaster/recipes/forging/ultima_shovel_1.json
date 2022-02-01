@@ -11,6 +11,12 @@
       "item": "miningmaster:lucky_citrine"
     },
     {
+      "item": "miningmaster:lucky_citrine"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
       "item": "miningmaster:haste_peridot"
     },
     {
@@ -32,11 +38,11 @@
   "enchantments": [
     {
       "enchantment": "minecraft:efficiency",
-      "lvl": 4
+      "lvl": 5
     },
     {
       "enchantment": "minecraft:fortune",
-      "lvl": 1
+      "lvl": 3
     },
     {
       "enchantment": "miningmaster:smelting",

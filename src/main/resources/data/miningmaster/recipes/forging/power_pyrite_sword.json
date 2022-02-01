@@ -1,0 +1,32 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:power_pyrite"
+    },
+    {
+      "item": "miningmaster:power_pyrite"
+    },
+    {
+      "item": "miningmaster:power_pyrite"
+    },
+	{
+      "item": "miningmaster:power_pyrite"
+    },
+    {
+      "item": "miningmaster:power_pyrite"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:diamond_sword"
+  },
+  "result": {
+    "item": "miningmaster:power_pyrite_sword"
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:sharpness",
+      "lvl": 5
+    }
+  ]
+}

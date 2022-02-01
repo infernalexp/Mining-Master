@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "miningmaster:item/ice_sapphire_axe"
+  }
+}

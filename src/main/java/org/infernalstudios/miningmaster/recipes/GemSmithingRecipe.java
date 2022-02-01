@@ -60,7 +60,7 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
         GEM_ENCHANTMENTS.put(MMItems.DIVE_AQUAMARINE.get(), Arrays.asList(Enchantments.AQUA_AFFINITY, Enchantments.RIPTIDE, MMEnchantments.GRACE.get()));
         GEM_ENCHANTMENTS.put(MMItems.HEART_RHODONITE.get(), Arrays.asList(MMEnchantments.HEARTFELT.get()));
         GEM_ENCHANTMENTS.put(MMItems.POWER_PYRITE.get(), Arrays.asList(Enchantments.SHARPNESS, Enchantments.POWER, Enchantments.IMPALING, MMEnchantments.STONEBREAKER.get()));
-        GEM_ENCHANTMENTS.put(MMItems.KINETIC_OPAL.get(), Arrays.asList(MMEnchantments.RUNNER.get(), MMEnchantments.SMELTING.get(), Enchantments.BLAST_PROTECTION));
+        GEM_ENCHANTMENTS.put(MMItems.KINETIC_OPAL.get(), Arrays.asList(MMEnchantments.RUNNER.get(), MMEnchantments.SMELTING.get(), Enchantments.BLAST_PROTECTION, Enchantments.KNOCKBACK, Enchantments.PUNCH));
         GEM_ENCHANTMENTS.put(MMItems.AIR_MALACHITE.get(), Arrays.asList(Enchantments.FEATHER_FALLING, Enchantments.RESPIRATION, MMEnchantments.FLOATATION.get(), MMEnchantments.KNIGHT_JUMP.get()));
     }
 
