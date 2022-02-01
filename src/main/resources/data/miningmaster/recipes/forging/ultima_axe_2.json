@@ -14,7 +14,16 @@
       "item": "miningmaster:haste_peridot"
     },
     {
-      "item": "miningmaster:lucky_citrine"
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:kinetic_opal"
+    },
+    {
+      "item": "miningmaster:kinetic_opal
     }
   ],
   "catalyst": {
@@ -30,10 +39,10 @@
     },
     {
       "enchantment": "minecraft:efficiency",
-      "lvl": 3
+      "lvl": 5
     },
     {
-      "enchantment": "minecraft:looting",
+      "enchantment": "minecraft:knockback",
       "lvl": 3
     },
     {

@@ -5,9 +5,6 @@
       "item": "miningmaster:spirit_garnet"
     },
     {
-      "item": "miningmaster:spirit_garnet"
-    },
-    {
       "item": "miningmaster:power_pyrite"
     },
     {
@@ -20,11 +17,20 @@
       "item": "miningmaster:haste_peridot"
     },
     {
-      "item": "miningmaster:lucky_citrine"
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:kinetic_opal"
+    },
+    {
+      "item": "miningmaster:kinetic_opal
     }
   ],
   "catalyst": {
-    "item": "minecraft:diamond_sword"
+    "item": "minecraft:diamond_axe"
   },
   "result": {
     "item": "miningmaster:ultima_axe"
@@ -36,10 +42,10 @@
     },
     {
       "enchantment": "minecraft:efficiency",
-      "lvl": 3
+      "lvl": 5
     },
     {
-      "enchantment": "minecraft:looting",
+      "enchantment": "minecraft:knockback",
       "lvl": 3
     },
     {
