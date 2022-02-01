@@ -95,13 +95,11 @@ public class GemForgeScreen extends ContainerScreen<GemForgeContainer> implement
         int i = this.guiLeft;
         int j = this.guiTop;
         this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
-//        if (this.container.isBurning()) {
-//            int k = this.container.getBurnLeftScaled();
-//            this.blit(matrixStack, i + 56, j + 36 + 12 - k, 176, 12 - k, 14, k + 1);
-//        }
-//
-//        int l = this.container.getCookProgressionScaled();
-//        this.blit(matrixStack, i + 79, j + 34, 176, 14, l + 1, 16);
+
+        if (this.container.isForgeActive()) {
+            int k = this.container.getForgeTimeScaled();
+            this.blit(matrixStack, i + 60 + (2 * k), j + 33 + k, 176 + (2 * k),  k, 56 - (4 * k), 36 - (2 * k));
+        }
     }
 
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
