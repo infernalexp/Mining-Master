@@ -140,6 +140,9 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
                     this.forgeActive = false;
                     this.forgeTime = 0;
                 }
+            } else {
+                this.forgeActive = false;
+                this.forgeTime = 0;
             }
 
             if (flag != this.isForging()) {
