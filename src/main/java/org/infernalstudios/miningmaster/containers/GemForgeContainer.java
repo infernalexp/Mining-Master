@@ -136,7 +136,7 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
             i = 200;
         }
 
-        return this.forgeData.get(2) * 10 / i;
+        return this.forgeData.get(2) * 20 / i;
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -98,7 +98,7 @@ public class GemForgeScreen extends ContainerScreen<GemForgeContainer> implement
 
         if (this.container.isForgeActive()) {
             int k = this.container.getForgeTimeScaled();
-            this.blit(matrixStack, i + 60 + (2 * k), j + 33 + k, 176 + (2 * k),  k, 56 - (4 * k), 36 - (2 * k));
+            this.blit(matrixStack, i + 60 + k, Math.min(j + 33 + k, j + 49), 176 + k,  Math.min(k, 16), 56 - (2 * k), Math.max(36 - (2 * k), 3));
         }
     }
 
