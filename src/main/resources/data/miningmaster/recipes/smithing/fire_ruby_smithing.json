@@ -5,5 +5,16 @@
   },
   "gem": {
     "item": "miningmaster:fire_ruby"
-  }
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:fire_aspect"
+    },
+    {
+      "enchantment": "minecraft:flame"
+    },
+    {
+      "enchantment": "minecraft:fire_protection"
+    }
+  ]
 }

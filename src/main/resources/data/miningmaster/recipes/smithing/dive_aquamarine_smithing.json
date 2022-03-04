@@ -5,5 +5,16 @@
   },
   "gem": {
     "item": "miningmaster:dive_aquamarine"
-  }
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:aqua_affinity"
+    },
+    {
+      "enchantment": "minecraft:riptide"
+    },
+    {
+      "enchantment": "miningmaster:grace"
+    }
+  ]
 }

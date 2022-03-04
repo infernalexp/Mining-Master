@@ -5,5 +5,22 @@
   },
   "gem": {
     "item": "miningmaster:kinetic_opal"
-  }
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:blast_protection"
+    },
+    {
+      "enchantment": "minecraft:knockback"
+    },
+    {
+      "enchantment": "minecraft:punch"
+    },
+    {
+      "enchantment": "miningmaster:runner"
+    },
+    {
+      "enchantment": "miningmaster:smelting"
+    }
+  ]
 }

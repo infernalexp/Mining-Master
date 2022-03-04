@@ -16,12 +16,12 @@
 
 package org.infernalstudios.miningmaster.recipes;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -34,45 +34,29 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import org.infernalstudios.miningmaster.init.MMEnchantments;
-import org.infernalstudios.miningmaster.init.MMItems;
 import org.infernalstudios.miningmaster.init.MMRecipes;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInventory> {
-    public static final Map<Item, List<Enchantment>> GEM_ENCHANTMENTS = new HashMap<>();
-
-    static {
-        GEM_ENCHANTMENTS.put(MMItems.FIRE_RUBY.get(), Arrays.asList(Enchantments.FIRE_ASPECT, Enchantments.FLAME, Enchantments.FIRE_PROTECTION));
-        GEM_ENCHANTMENTS.put(MMItems.ICE_SAPPHIRE.get(), Arrays.asList(Enchantments.FROST_WALKER, MMEnchantments.FREEZING.get(), MMEnchantments.SNOWPIERCER.get()));
-        GEM_ENCHANTMENTS.put(MMItems.SPIRIT_GARNET.get(), Arrays.asList(Enchantments.THORNS, Enchantments.LOYALTY, MMEnchantments.LEECHING.get()));
-        GEM_ENCHANTMENTS.put(MMItems.HASTE_PERIDOT.get(), Arrays.asList(Enchantments.EFFICIENCY, Enchantments.LURE, Enchantments.QUICK_CHARGE));
-        GEM_ENCHANTMENTS.put(MMItems.LUCKY_CITRINE.get(), Arrays.asList(Enchantments.FORTUNE, Enchantments.LUCK_OF_THE_SEA, Enchantments.LOOTING));
-        GEM_ENCHANTMENTS.put(MMItems.DIVE_AQUAMARINE.get(), Arrays.asList(Enchantments.AQUA_AFFINITY, Enchantments.RIPTIDE, MMEnchantments.GRACE.get()));
-        GEM_ENCHANTMENTS.put(MMItems.HEART_RHODONITE.get(), Arrays.asList(MMEnchantments.HEARTFELT.get()));
-        GEM_ENCHANTMENTS.put(MMItems.POWER_PYRITE.get(), Arrays.asList(Enchantments.SHARPNESS, Enchantments.POWER, Enchantments.IMPALING, MMEnchantments.STONEBREAKER.get()));
-        GEM_ENCHANTMENTS.put(MMItems.KINETIC_OPAL.get(), Arrays.asList(MMEnchantments.RUNNER.get(), MMEnchantments.SMELTING.get(), Enchantments.BLAST_PROTECTION, Enchantments.KNOCKBACK, Enchantments.PUNCH));
-        GEM_ENCHANTMENTS.put(MMItems.AIR_MALACHITE.get(), Arrays.asList(Enchantments.FEATHER_FALLING, Enchantments.RESPIRATION, MMEnchantments.FLOATATION.get(), MMEnchantments.KNIGHT_JUMP.get()));
-    }
-
     private final Ingredient blacklist;
     private final ItemStack gem;
+    private final NonNullList<Enchantment> enchantments;
     private final ResourceLocation recipeId;
 
-    public GemSmithingRecipe(ResourceLocation recipeId, Ingredient blacklist, ItemStack gem) {
+    public GemSmithingRecipe(ResourceLocation recipeId, Ingredient blacklist, ItemStack gem, NonNullList<Enchantment> enchantments) {
         super(recipeId, blacklist, Ingredient.EMPTY, ItemStack.EMPTY);
         this.recipeId = recipeId;
         this.blacklist = blacklist;
         this.gem = gem;
+        this.enchantments = enchantments;
     }
 
     @Override
@@ -88,12 +72,10 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
             itemstack.setTag(compoundnbt.copy());
         }
 
-        List<Enchantment> gemEnchantments = GEM_ENCHANTMENTS.get(this.gem.getItem());
-
         boolean itemEnchanted = false;
 
         outerLoop:
-        for (Enchantment enchantment : gemEnchantments) {
+        for (Enchantment enchantment : enchantments) {
             if (enchantment.canApply(itemstack) && areEnchantsCompatible(itemstack, enchantment)) {
                 ListNBT nbtList = itemstack.getEnchantmentTagList();
 
@@ -171,12 +153,41 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
 
     public static class GemSmithingRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<GemSmithingRecipe> {
 
+        private static NonNullList<Enchantment> readEnchantments(JsonArray enchantmentArray) {
+            NonNullList<Enchantment> enchantments = NonNullList.create();
+
+            for(int i = 0; i < enchantmentArray.size(); ++i) {
+                Enchantment enchantment = parseEnchantment(JSONUtils.getJsonObject(enchantmentArray.get(i),"enchantment"));
+                enchantments.add(enchantment);
+            }
+
+            return enchantments;
+        }
+
+        private static Enchantment parseEnchantment(JsonObject object) {
+            if (object.isJsonArray()) {
+                throw new JsonSyntaxException("Expected object to be a single Enchantment");
+            }
+            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(JSONUtils.getString(object, "enchantment")));
+
+            if (enchantment == null) {
+                throw new JsonSyntaxException("No valid Enchantment name supplied");
+            }
+
+            return enchantment;
+        }
 
         @Override
         public GemSmithingRecipe read(ResourceLocation recipeId, JsonObject json) {
             Ingredient ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "blacklist"));
             ItemStack gem = GemSmithingRecipe.deserializeItem(JSONUtils.getJsonObject(json, "gem"));
-            return new GemSmithingRecipe(recipeId, ingredient, gem);
+            NonNullList<Enchantment> enchantmentList = readEnchantments(JSONUtils.getJsonArray(json, "enchantments"));
+
+            if (enchantmentList.isEmpty()) {
+                throw new JsonParseException("No enchantments for smithing recipe");
+            }
+
+            return new GemSmithingRecipe(recipeId, ingredient, gem, enchantmentList);
         }
 
         @Nullable
@@ -184,13 +195,29 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
         public GemSmithingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
             Ingredient ingredient = Ingredient.read(buffer);
             ItemStack gem = buffer.readItemStack();
-            return new GemSmithingRecipe(recipeId, ingredient, gem);
+
+            int k = buffer.readVarInt();
+            NonNullList<Enchantment> enchantmentList = NonNullList.create();
+
+            for (int j = 0; j < k; j++) {
+                Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(buffer.readResourceLocation());
+                if (enchantment != null) {
+                    enchantmentList.add(enchantment);
+                }
+            }
+
+            return new GemSmithingRecipe(recipeId, ingredient, gem, enchantmentList);
         }
 
         @Override
         public void write(PacketBuffer buffer, GemSmithingRecipe recipe) {
             recipe.blacklist.write(buffer);
             buffer.writeItemStack(recipe.gem);
+
+            buffer.writeVarInt(recipe.enchantments.size());
+            for(Enchantment enchantment : recipe.enchantments) {
+                buffer.writeResourceLocation(enchantment.getRegistryName());
+            }
         }
     }
 }
