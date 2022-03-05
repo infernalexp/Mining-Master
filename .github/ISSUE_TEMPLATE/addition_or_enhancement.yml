@@ -1,5 +1,5 @@
 name: Addition or Enhancement
-description: Suggest something that would improve Infernal Expansion
+description: Suggest something that would improve Mining Master.
 labels: [ "enhancement" ]
 body:
     -   type: textarea

@@ -1,5 +1,5 @@
 name: Bug Report
-description: Create a bug report to help us improve Infernal Expansion.
+description: Create a bug report to help us improve Mining Master.
 labels: [ "bug" ]
 body:
     -   type: textarea
