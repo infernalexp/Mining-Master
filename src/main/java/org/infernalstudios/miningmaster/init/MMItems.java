@@ -89,7 +89,7 @@ public class MMItems {
     public static final RegistryObject<GemHoeItem> HASTE_PERIDOT_HOE = registerItem("haste_peridot_hoe", () -> new GemHoeItem(MMItemTiers.SUPRA, Ingredient.fromItems(HASTE_PERIDOT.get()), 5, 3.0F, new Item.Properties().group(MiningMaster.TAB), new Pair<>(() -> Enchantments.EFFICIENCY, 5)));
     public static final RegistryObject<GemHoeItem> ULTIMA_HOE = registerItem("ultima_hoe", () -> new GemHoeItem(MMItemTiers.ULTIMA, Ingredient.fromItems(LUCKY_CITRINE.get(), HASTE_PERIDOT.get()), 5, 3.0F, new Item.Properties().group(MiningMaster.TAB), new Pair<>(() -> Enchantments.EFFICIENCY, 6), new Pair<>(() -> Enchantments.FORTUNE, 3)));
 
-    public static final RegistryObject<GemBowItem> AIR_MALACHITE_BOW = registerItem("air_malachite_bow", () -> new GemBowItem(new Item.Properties().group(MiningMaster.TAB), new Pair<>(MMEnchantments.FLOATATION, 5)));
+    public static final RegistryObject<GemBowItem> AIR_MALACHITE_BOW = registerItem("air_malachite_bow", () -> new GemBowItem(new Item.Properties().group(MiningMaster.TAB).maxStackSize(1), new Pair<>(MMEnchantments.FLOATATION, 5)));
 
     // ARMOR
     public static final RegistryObject<GemArmorItem> PARAGON_HELMET = registerItem("paragon_helmet", () -> new GemArmorItem(MMArmorMaterials.PARAGON, Ingredient.fromItems(FIRE_RUBY.get()), EquipmentSlotType.HEAD, new Item.Properties().group(MiningMaster.TAB), new Pair<>(() -> Enchantments.THORNS, 3), new Pair<>(() -> Enchantments.FIRE_PROTECTION, 3), new Pair<>(() -> Enchantments.BLAST_PROTECTION, 3)));
