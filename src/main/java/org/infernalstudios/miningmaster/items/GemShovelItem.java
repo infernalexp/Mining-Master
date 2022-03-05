@@ -39,7 +39,7 @@ public class GemShovelItem extends ShovelItem {
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return this.repairItems.test(repair) || super.getIsRepairable(toRepair, repair);
+        return this.repairItems.test(repair);
     }
 
     @Override

@@ -39,7 +39,7 @@ public class GemAxeItem extends AxeItem {
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return this.repairItems.test(repair) || super.getIsRepairable(toRepair, repair);
+        return this.repairItems.test(repair);
     }
 
     @Override
