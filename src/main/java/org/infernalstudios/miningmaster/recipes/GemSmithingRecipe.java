@@ -17,6 +17,7 @@
 package org.infernalstudios.miningmaster.recipes;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
@@ -157,18 +158,18 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
             NonNullList<Enchantment> enchantments = NonNullList.create();
 
             for(int i = 0; i < enchantmentArray.size(); ++i) {
-                Enchantment enchantment = parseEnchantment(JSONUtils.getJsonObject(enchantmentArray.get(i),"enchantment"));
+                Enchantment enchantment = parseEnchantment(enchantmentArray.get(i));
                 enchantments.add(enchantment);
             }
 
             return enchantments;
         }
 
-        private static Enchantment parseEnchantment(JsonObject object) {
-            if (object.isJsonArray()) {
+        private static Enchantment parseEnchantment(JsonElement element) {
+            if (element.isJsonArray()) {
                 throw new JsonSyntaxException("Expected object to be a single Enchantment");
             }
-            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(JSONUtils.getString(object, "enchantment")));
+            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(JSONUtils.getString(element, "enchantment")));
 
             if (enchantment == null) {
                 throw new JsonSyntaxException("No valid Enchantment name supplied");

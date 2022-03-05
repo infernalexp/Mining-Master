@@ -7,14 +7,8 @@
     "item": "miningmaster:ice_sapphire"
   },
   "enchantments": [
-    {
-      "enchantment": "minecraft:frost_walker"
-    },
-    {
-      "enchantment": "miningmaster:freezing"
-    },
-    {
-      "enchantment": "miningmaster:snowpiercer"
-    }
+    "minecraft:frost_walker",
+    "miningmaster:freezing",
+    "miningmaster:snowpiercer"
   ]
 }

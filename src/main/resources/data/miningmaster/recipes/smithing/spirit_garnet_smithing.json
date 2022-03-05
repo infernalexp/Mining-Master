@@ -7,14 +7,8 @@
     "item": "miningmaster:spirit_garnet"
   },
   "enchantments": [
-    {
-      "enchantment": "minecraft:thorns"
-    },
-    {
-      "enchantment": "minecraft:loyalty"
-    },
-    {
-      "enchantment": "miningmaster:leeching"
-    }
+    "minecraft:thorns",
+    "minecraft:loyalty",
+    "miningmaster:leeching"
   ]
 }

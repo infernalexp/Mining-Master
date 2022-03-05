@@ -137,8 +137,8 @@ public class ForgingRecipe implements IForgingRecipe {
 
             if (gemList.isEmpty()) {
                 throw new JsonParseException("No gems for forging recipe");
-            } else if (gemList.size() > 8) {
-                throw new JsonParseException("Too many gems for forging recipe the max is 8");
+            } else if (gemList.size() > 9) {
+                throw new JsonParseException("Too many gems for forging recipe the max is 9");
             } else {
                 ItemStack result = ForgingRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
                 Ingredient catalyst = Ingredient.deserialize(JSONUtils.getJsonObject(json, "catalyst"));

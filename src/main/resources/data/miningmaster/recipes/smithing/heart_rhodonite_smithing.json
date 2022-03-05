@@ -7,8 +7,6 @@
     "item": "miningmaster:heart_rhodonite"
   },
   "enchantments": [
-    {
-      "enchantment": "miningmaster:heartfelt"
-    }
+    "miningmaster:heartfelt"
   ]
 }

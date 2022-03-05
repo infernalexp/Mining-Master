@@ -7,20 +7,10 @@
     "item": "miningmaster:kinetic_opal"
   },
   "enchantments": [
-    {
-      "enchantment": "minecraft:blast_protection"
-    },
-    {
-      "enchantment": "minecraft:knockback"
-    },
-    {
-      "enchantment": "minecraft:punch"
-    },
-    {
-      "enchantment": "miningmaster:runner"
-    },
-    {
-      "enchantment": "miningmaster:smelting"
-    }
+    "minecraft:blast_protection",
+    "minecraft:knockback",
+    "minecraft:punch",
+    "miningmaster:runner",
+    "miningmaster:smelting"
   ]
 }

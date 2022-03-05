@@ -15,7 +15,7 @@
     }
   ],
   "catalyst": {
-    "item": "minecraft:haste_peridot_shovel"
+    "item": "miningmaster:haste_peridot_shovel"
   },
   "result": {
     "item": "miningmaster:ultima_shovel"

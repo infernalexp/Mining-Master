@@ -7,17 +7,9 @@
     "item": "miningmaster:power_pyrite"
   },
   "enchantments": [
-    {
-      "enchantment": "minecraft:sharpness"
-    },
-    {
-      "enchantment": "minecraft:power"
-    },
-    {
-      "enchantment": "minecraft:impaling"
-    },
-    {
-      "enchantment": "miningmaster:stonebreaker"
-    }
+    "minecraft:sharpness",
+    "minecraft:power",
+    "minecraft:impaling",
+    "miningmaster:stonebreaker"
   ]
 }

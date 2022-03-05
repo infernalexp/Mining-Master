@@ -21,7 +21,7 @@
     }
   ],
   "catalyst": {
-    "item": "minecraft:lucky_citrine_shovel"
+    "item": "miningmaster:lucky_citrine_shovel"
   },
   "result": {
     "item": "miningmaster:ultima_shovel"

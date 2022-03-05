@@ -7,14 +7,8 @@
     "item": "miningmaster:haste_peridot"
   },
   "enchantments": [
-    {
-      "enchantment": "minecraft:efficiency"
-    },
-    {
-      "enchantment": "minecraft:lure"
-    },
-    {
-      "enchantment": "minecraft:quick_charge"
-    }
+    "minecraft:efficiency",
+    "minecraft:lure",
+    "minecraft:quick_charge"
   ]
 }

@@ -7,17 +7,9 @@
     "item": "miningmaster:air_malachite"
   },
   "enchantments": [
-    {
-      "enchantment": "minecraft:feather_falling"
-    },
-    {
-      "enchantment": "minecraft:respiration"
-    },
-    {
-      "enchantment": "miningmaster:floatation"
-    },
-    {
-      "enchantment": "miningmaster:knight_jump"
-    }
+    "minecraft:feather_falling",
+    "minecraft:respiration",
+    "miningmaster:floatation",
+    "miningmaster:knight_jump"
   ]
 }

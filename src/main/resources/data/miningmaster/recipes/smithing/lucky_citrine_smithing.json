@@ -7,14 +7,8 @@
     "item": "miningmaster:lucky_citrine"
   },
   "enchantments": [
-    {
-      "enchantment": "minecraft:fortune"
-    },
-    {
-      "enchantment": "minecraft:luck_of_the_sea"
-    },
-    {
-      "enchantment": "minecraft:looting"
-    }
+    "minecraft:fortune",
+    "minecraft:luck_of_the_sea",
+    "minecraft:looting"
   ]
 }
