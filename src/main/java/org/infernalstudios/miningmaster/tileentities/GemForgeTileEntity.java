@@ -122,23 +122,16 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
         }
 
         if (!this.world.isRemote) {
-            ItemStack itemstack = this.inventory.getStackInSlot(9);
-            if (!itemstack.isEmpty()) {
-                ForgingRecipe recipe = this.world.getRecipeManager().getRecipe(MMRecipes.FORGING_RECIPE_TYPE, this, this.world).orElse(null);
+            ForgingRecipe recipe = this.world.getRecipeManager().getRecipe(MMRecipes.FORGING_RECIPE_TYPE, this, this.world).orElse(null);
+            this.recipeValid = this.canForge(recipe);
 
-                this.recipeValid = this.canForge(recipe);
+            if (this.recipeValid && this.forgeActive) {
+                ++this.forgeTime;
 
-                if (this.canForge(recipe) && this.forgeActive) {
-                    ++this.forgeTime;
-
-                    if (this.forgeTime >= FORGE_TIME_TOTAL) {
-                        this.forgeTime = 0;
-                        this.forge(recipe);
-                        flag1 = true;
-                    }
-                } else {
-                    this.forgeActive = false;
+                if (this.forgeTime >= FORGE_TIME_TOTAL) {
                     this.forgeTime = 0;
+                    this.forge(recipe);
+                    flag1 = true;
                 }
             } else {
                 this.forgeActive = false;

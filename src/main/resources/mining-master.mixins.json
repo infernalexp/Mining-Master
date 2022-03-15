@@ -8,7 +8,11 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "MixinClientRecipeBook",
     "MixinLivingEntity",
-    "MixinPlayerEntity"
+    "MixinPlayerEntity",
+    "MixinRecipeBookCategories",
+    "MixinRecipeBookCategory",
+    "MixinRecipeBookStatus"
   ]
 }

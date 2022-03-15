@@ -18,6 +18,7 @@ package org.infernalstudios.miningmaster.containers;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IRecipeHelperPopulator;
 import net.minecraft.inventory.Inventory;
@@ -36,6 +37,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.infernalstudios.miningmaster.init.MMContainerTypes;
 import org.infernalstudios.miningmaster.init.MMTags;
+import org.infernalstudios.miningmaster.recipes.GemForgeServerRecipePlacer;
 
 import javax.annotation.Nonnull;
 
@@ -78,6 +80,11 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
         this.trackIntArray(forgeData);
     }
 
+    @Override
+    public void func_217056_a(boolean placeAll, IRecipe<?> recipe, ServerPlayerEntity player) {
+        (new GemForgeServerRecipePlacer<>(this)).place(player, (IRecipe<IInventory>) recipe, placeAll);
+    }
+
     public boolean canInteractWith(PlayerEntity playerIn) {
         return true;
     }
@@ -100,8 +107,8 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
     }
 
     public boolean matches(IRecipe<? super IInventory> recipeIn) {
-        Inventory inventory = new Inventory();
-        for(int i = 0; i < 10; i++) {
+        Inventory inventory = new Inventory(10);
+        for(int i = 0; i < inventory.getSizeInventory(); i++) {
             inventory.setInventorySlotContents(i, this.forgeInventory.getStackInSlot(i));
         }
         return recipeIn.matches(inventory, this.world);
@@ -112,7 +119,7 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
     }
 
     public int getWidth() {
-        return 3;
+        return 4;
     }
 
     public int getHeight() {
@@ -144,14 +151,13 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
         return this.forgeData.get(1) == 1;
     }
 
-
     public void setForgeActive(boolean active) {
         this.forgeData.set(0, active ? 1 : 0);
     }
 
     @Override
     public RecipeBookCategory func_241850_m() {
-        return RecipeBookCategory.FURNACE;
+        return RecipeBookCategory.valueOf("GEM_FORGE");
     }
 
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {

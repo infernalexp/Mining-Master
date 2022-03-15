@@ -19,8 +19,6 @@ package org.infernalstudios.miningmaster.client.gui.screen.inventory;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.recipebook.AbstractRecipeBookGui;
-import net.minecraft.client.gui.recipebook.FurnaceRecipeGui;
 import net.minecraft.client.gui.recipebook.IRecipeShownListener;
 import net.minecraft.client.gui.recipebook.RecipeBookGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -37,6 +35,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.infernalstudios.miningmaster.MiningMaster;
+import org.infernalstudios.miningmaster.client.gui.recipebook.GemForgeRecipeGui;
 import org.infernalstudios.miningmaster.containers.GemForgeContainer;
 import org.infernalstudios.miningmaster.network.MMNetworkHandler;
 import org.infernalstudios.miningmaster.network.UpdateGemForgePacket;
@@ -46,11 +45,11 @@ public class GemForgeScreen extends ContainerScreen<GemForgeContainer> implement
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(MiningMaster.MOD_ID + ':' + "textures/gui/container/gem_forge.png");
     private static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation(MiningMaster.MOD_ID + ':' + "textures/gui/recipe_button.png");
     private boolean widthTooNarrowIn;
-    public final AbstractRecipeBookGui recipeGui;
+    public final RecipeBookGui recipeGui;
 
     public GemForgeScreen(GemForgeContainer screenContainer, PlayerInventory inv, ITextComponent name) {
         super(screenContainer, inv, name);
-        this.recipeGui = new FurnaceRecipeGui();
+        this.recipeGui = new GemForgeRecipeGui();
     }
 
     public void init() {

@@ -56,11 +56,6 @@ public class ForgingRecipe implements IForgingRecipe {
         this.result = result;
     }
 
-    @Override
-    public String getGroup() {
-        return "Forging";
-    }
-
     public boolean matches(IInventory inv, World worldIn) {
         boolean catalystMatches = this.catalyst.test(inv.getStackInSlot(9));
 
@@ -96,6 +91,14 @@ public class ForgingRecipe implements IForgingRecipe {
     @Override
     public ItemStack getRecipeOutput() {
         return this.result;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> ingredients = NonNullList.create();
+        ingredients.addAll(this.recipeGems);
+        ingredients.add(this.catalyst);
+        return ingredients;
     }
 
     @Override
