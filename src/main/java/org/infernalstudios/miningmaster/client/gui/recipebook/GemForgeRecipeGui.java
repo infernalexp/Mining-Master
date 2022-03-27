@@ -18,14 +18,10 @@ package org.infernalstudios.miningmaster.client.gui.recipebook;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.IGuiEventListener;
-import net.minecraft.client.gui.IRenderable;
-import net.minecraft.client.gui.recipebook.IRecipeUpdateListener;
 import net.minecraft.client.gui.recipebook.RecipeBookGui;
 import net.minecraft.client.gui.recipebook.RecipeTabToggleWidget;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipePlacer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -39,7 +35,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class GemForgeRecipeGui extends RecipeBookGui implements IRenderable, IGuiEventListener, IRecipeUpdateListener, IRecipePlacer<Ingredient> {
+public class GemForgeRecipeGui extends RecipeBookGui {
     protected static final ResourceLocation RECIPE_BOOK_GEM_FORGE = new ResourceLocation(MiningMaster.MOD_ID, "textures/gui/recipe_book_gem_forge.png");
     private static final ITextComponent translationKeyForgable = new TranslationTextComponent(MiningMaster.MOD_ID + ".gui.recipebook.toggleRecipes.forgable");
 
