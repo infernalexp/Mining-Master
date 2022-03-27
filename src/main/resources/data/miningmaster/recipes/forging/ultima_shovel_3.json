@@ -5,23 +5,17 @@
       "item": "miningmaster:kinetic_opal"
     },
     {
-      "item": "miningmaster:haste_peridot"
+      "item": "miningmaster:lucky_citrine"
     },
     {
-      "item": "miningmaster:haste_peridot"
+      "item": "miningmaster:lucky_citrine"
     },
     {
-      "item": "miningmaster:haste_peridot"
-    },
-    {
-      "item": "miningmaster:haste_peridot"
-    },
-    {
-      "item": "miningmaster:haste_peridot"
+      "item": "miningmaster:lucky_citrine"
     }
   ],
   "catalyst": {
-    "item": "miningmaster:lucky_citrine_shovel"
+    "item": "miningmaster:haste_peridot_shovel"
   },
   "result": {
     "item": "miningmaster:ultima_shovel"

@@ -1,0 +1,50 @@
+{
+  "type": "miningmaster:forging_recipe",
+  "gems": [
+    {
+      "item": "miningmaster:spirit_garnet"
+    },
+    {
+      "item": "miningmaster:power_pyrite"
+    },
+    {
+      "item": "miningmaster:power_pyrite"
+    },
+    {
+      "item": "miningmaster:power_pyrite"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    }
+  ],
+  "catalyst": {
+    "item": "miningmaster:kinetic_opal_axe"
+  },
+  "result": {
+    "item": "miningmaster:ultima_axe"
+  },
+  "enchantments": [
+    {
+      "enchantment": "minecraft:sharpness",
+      "lvl": 5
+    },
+    {
+      "enchantment": "minecraft:efficiency",
+      "lvl": 5
+    },
+    {
+      "enchantment": "minecraft:knockback",
+      "lvl": 3
+    },
+    {
+      "enchantment": "miningmaster:leeching",
+      "lvl": 1
+    }
+  ]
+}

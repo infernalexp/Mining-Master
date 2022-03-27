@@ -2,36 +2,46 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "miningmaster:forging/ultima_shovel_3"
+      "miningmaster:forging/ultima_axe_5"
     ]
   },
   "criteria": {
-    "has_haste_peridot_shovel": {
+    "has_kinetic_opal_axe": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:haste_peridot_shovel"
+            "item": "miningmaster:kinetic_opal_axe"
           }
         ]
       }
     },
-    "has_lucky_citrine": {
+    "has_spirit_garnet": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:lucky_citrine"
+            "item": "miningmaster:spirit_garnet"
           }
         ]
       }
     },
-    "has_kinetic_opal": {
+    "has_power_pyrite": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:kinetic_opal"
+            "item": "miningmaster:power_pyrite"
+          }
+        ]
+      }
+    },
+    "has_haste_peridot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:haste_peridot"
           }
         ]
       }
@@ -39,15 +49,16 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "miningmaster:forging/ultima_shovel_3"
+        "recipe": "miningmaster:forging/ultima_axe_5"
       }
     }
   },
   "requirements": [
       [
-        "has_haste_peridot_shovel",
-        "has_lucky_citrine",
-        "has_kinetic_opal",
+        "has_kinetic_opal_axe",
+        "has_haste_peridot",
+        "has_power_pyrite",
+        "has_spirit_garnet",
         "has_the_recipe"
       ]
   ]
