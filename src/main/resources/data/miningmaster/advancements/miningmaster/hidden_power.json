@@ -1,0 +1,38 @@
+{
+  "parent": "miningmaster:miningmaster/root",
+  "display": {
+    "icon": {
+      "item": "miningmaster:fire_ruby"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.hidden_power.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.hidden_power.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "criteria": {
+    "has_gem": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "miningmaster:gems"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gem"
+    ]
+  ]
+}

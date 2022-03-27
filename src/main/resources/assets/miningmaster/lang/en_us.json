@@ -75,6 +75,21 @@
 
   "miningmaster:container.gem_forge": "Gem Forge",
 
+  "miningmaster.advancements.miningmaster.root.title": "Mining Master",
+  "miningmaster.advancements.miningmaster.root.description": "Mine, find gems, and create powerful tools!",
+  "miningmaster.advancements.miningmaster.bourgeoisie.title": "Bourgeoisie",
+  "miningmaster.advancements.miningmaster.bourgeoisie.description": "Craft one of every gem block",
+  "miningmaster.advancements.miningmaster.geo_dude.title": "Geo-Dude",
+  "miningmaster.advancements.miningmaster.geo_dude.description": "Craft your first gem block",
+  "miningmaster.advancements.miningmaster.hidden_power.title": "Hidden Power",
+  "miningmaster.advancements.miningmaster.hidden_power.description": "Find your first gem",
+  "miningmaster.advancements.miningmaster.infernal_archaeologist.title": "Infernal Archaeologist",
+  "miningmaster.advancements.miningmaster.infernal_archaeologist.description": "Collect one of every Nether gem",
+  "miningmaster.advancements.miningmaster.the_collector.title": "The Collector",
+  "miningmaster.advancements.miningmaster.the_collector.description": "Collect one of every gem",
+  "miningmaster.advancements.miningmaster.top_to_bottom.title": "Top to Bottom",
+  "miningmaster.advancements.miningmaster.top_to_bottom.description": "Collect one of every Overworld gem",
+
   "miningmaster.config.title": "Mining Master Config",
 
   "miningmaster.config.option.fireRubyEnabled": "Fire Ruby Enabled",

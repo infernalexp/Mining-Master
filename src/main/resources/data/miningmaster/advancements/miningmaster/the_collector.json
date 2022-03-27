@@ -1,0 +1,155 @@
+{
+  "parent": "miningmaster:miningmaster/hidden_power",
+  "display": {
+    "icon": {
+      "item": "miningmaster:air_malachite"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.the_collector.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.the_collector.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "criteria": {
+    "miningmaster:fire_ruby": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:fire_ruby"
+          }
+        ]
+      }
+    },
+    "miningmaster:ice_sapphire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:ice_sapphire"
+          }
+        ]
+      }
+    },
+    "miningmaster:spirit_garnet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:spirit_garnet"
+          }
+        ]
+      }
+    },
+    "miningmaster:lucky_citrine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:lucky_citrine"
+          }
+        ]
+      }
+    },
+    "miningmaster:haste_peridot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:haste_peridot"
+          }
+        ]
+      }
+    },
+    "miningmaster:dive_aquamarine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:dive_aquamarine"
+          }
+        ]
+      }
+    },
+    "miningmaster:kinetic_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:kinetic_opal"
+          }
+        ]
+      }
+    },
+    "miningmaster:power_pyrite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:power_pyrite"
+          }
+        ]
+      }
+    },
+    "miningmaster:heart_rhodonite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:heart_rhodonite"
+          }
+        ]
+      }
+    },
+    "miningmaster:air_malachite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:air_malachite"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:fire_ruby"
+    ],
+    [
+      "miningmaster:ice_sapphire"
+    ],
+    [
+      "miningmaster:spirit_garnet"
+    ],
+    [
+      "miningmaster:lucky_citrine"
+    ],
+    [
+      "miningmaster:haste_peridot"
+    ],
+    [
+      "miningmaster:dive_aquamarine"
+    ],
+    [
+      "miningmaster:kinetic_opal"
+    ],
+    [
+      "miningmaster:power_pyrite"
+    ],
+    [
+      "miningmaster:heart_rhodonite"
+    ],
+    [
+      "miningmaster:air_malachite"
+    ]
+  ]
+}

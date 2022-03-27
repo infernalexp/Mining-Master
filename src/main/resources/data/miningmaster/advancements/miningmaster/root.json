@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "miningmaster:mm_tab_icon"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.root.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.root.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "miningmaster:textures/gui/advancements/backgrounds/miningmaster.png"
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ]
+}

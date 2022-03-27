@@ -1,0 +1,64 @@
+{
+  "parent": "miningmaster:miningmaster/hidden_power",
+  "display": {
+    "icon": {
+      "item": "miningmaster:kinetic_opal"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.infernal_archaeologist.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.infernal_archaeologist.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 30
+  },
+  "criteria": {
+    "miningmaster:kinetic_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:kinetic_opal"
+          }
+        ]
+      }
+    },
+    "miningmaster:power_pyrite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:power_pyrite"
+          }
+        ]
+      }
+    },
+    "miningmaster:heart_rhodonite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:heart_rhodonite"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:kinetic_opal"
+    ],
+    [
+      "miningmaster:power_pyrite"
+    ],
+    [
+      "miningmaster:heart_rhodonite"
+    ]
+  ]
+}
