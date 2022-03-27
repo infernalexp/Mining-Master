@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:crafting/shapeless/ice_sapphire"
+    ]
+  },
+  "criteria": {
+    "has_ice_sapphire_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:ice_sapphire_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:crafting/shapeless/ice_sapphire"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ice_sapphire_block",
+      "has_the_recipe"
+    ]
+  ]
+}

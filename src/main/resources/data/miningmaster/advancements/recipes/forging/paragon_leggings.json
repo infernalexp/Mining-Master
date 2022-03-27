@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/paragon_leggings"
+    ]
+  },
+  "criteria": {
+    "has_diamond_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_leggings"
+          }
+        ]
+      }
+    },
+    "has_air_malachite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:air_malachite"
+          }
+        ]
+      }
+    },
+    "has_ice_sapphire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:ice_sapphire"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/paragon_leggings"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_leggings",
+        "has_air_malachite",
+        "has_ice_sapphire",
+        "has_the_recipe"
+      ]
+  ]
+}

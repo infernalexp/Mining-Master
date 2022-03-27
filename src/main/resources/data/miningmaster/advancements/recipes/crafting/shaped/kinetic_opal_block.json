@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:crafting/shaped/kinetic_opal_block"
+    ]
+  },
+  "criteria": {
+    "has_kinetic_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:kinetic_opal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:crafting/shaped/kinetic_opal_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_kinetic_opal",
+      "has_the_recipe"
+    ]
+  ]
+}

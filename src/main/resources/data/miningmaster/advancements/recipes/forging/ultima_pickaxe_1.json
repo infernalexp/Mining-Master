@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/ultima_pickaxe_1"
+    ]
+  },
+  "criteria": {
+    "has_diamond_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_lucky_citrine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:lucky_citrine"
+          }
+        ]
+      }
+    },
+    "has_haste_peridot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:haste_peridot"
+          }
+        ]
+      }
+    },
+    "has_kinetic_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:kinetic_opal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/ultima_pickaxe_1"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_pickaxe",
+        "has_kinetic_opal",
+        "has_lucky_citrine",
+        "has_haste_peridot",
+        "has_the_recipe"
+      ]
+  ]
+}

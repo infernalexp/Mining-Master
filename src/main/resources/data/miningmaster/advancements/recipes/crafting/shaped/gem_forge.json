@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:crafting/shaped/gem_forge"
+    ]
+  },
+  "criteria": {
+    "has_blackstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:blackstone"
+          }
+        ]
+      }
+    },
+    "has_lava_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:lava_bucket"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:crafting/shaped/gem_forge"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blackstone",
+      "has_lava_bucket",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:crafting/shaped/spirit_garnet_block"
+    ]
+  },
+  "criteria": {
+    "has_spirit_garnet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:spirit_garnet"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:crafting/shaped/spirit_garnet_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_spirit_garnet",
+      "has_the_recipe"
+    ]
+  ]
+}

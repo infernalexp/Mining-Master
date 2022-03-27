@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/ultima_sword_2"
+    ]
+  },
+  "criteria": {
+    "has_fire_ruby_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:fire_ruby_sword"
+          }
+        ]
+      }
+    },
+    "has_ice_sapphire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:ice_sapphire"
+          }
+        ]
+      }
+    },
+    "has_lucky_citrine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:lucky_citrine"
+          }
+        ]
+      }
+    },
+    "has_spirit_garnet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:spirit_garnet"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/ultima_sword_2"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_fire_ruby_sword",
+        "has_spirit_garnet",
+        "has_ice_sapphire",
+        "has_lucky_citrine",
+        "has_the_recipe"
+      ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:crafting/shapeless/haste_peridot"
+    ]
+  },
+  "criteria": {
+    "has_haste_peridot_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:haste_peridot_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:crafting/shapeless/haste_peridot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_haste_peridot_block",
+      "has_the_recipe"
+    ]
+  ]
+}

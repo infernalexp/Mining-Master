@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:crafting/shapeless/heart_rhodonite"
+    ]
+  },
+  "criteria": {
+    "has_heart_rhodonite_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:heart_rhodonite_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:crafting/shapeless/heart_rhodonite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heart_rhodonite_block",
+      "has_the_recipe"
+    ]
+  ]
+}

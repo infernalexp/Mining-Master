@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:crafting/shaped/lucky_citrine_block"
+    ]
+  },
+  "criteria": {
+    "has_lucky_citrine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:lucky_citrine"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:crafting/shaped/lucky_citrine_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lucky_citrine",
+      "has_the_recipe"
+    ]
+  ]
+}

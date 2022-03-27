@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:crafting/shapeless/power_pyrite"
+    ]
+  },
+  "criteria": {
+    "has_power_pyrite_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:power_pyrite_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:crafting/shapeless/power_pyrite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_power_pyrite_block",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:crafting/shaped/air_malachite_block"
+    ]
+  },
+  "criteria": {
+    "has_air_malachite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:air_malachite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:crafting/shaped/air_malachite_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_air_malachite",
+      "has_the_recipe"
+    ]
+  ]
+}

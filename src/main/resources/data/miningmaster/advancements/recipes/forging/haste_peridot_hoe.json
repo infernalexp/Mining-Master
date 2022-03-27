@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/haste_peridot_hoe"
+    ]
+  },
+  "criteria": {
+    "has_diamond_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_hoe"
+          }
+        ]
+      }
+    },
+    "has_haste_peridot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:haste_peridot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/haste_peridot_hoe"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_hoe",
+        "has_haste_peridot",
+        "has_the_recipe"
+      ]
+  ]
+}

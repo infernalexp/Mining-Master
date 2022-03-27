@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/ice_sapphire_sword"
+    ]
+  },
+  "criteria": {
+    "has_diamond_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_sword"
+          }
+        ]
+      }
+    },
+    "has_ice_sapphire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:ice_sapphire"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/ice_sapphire_sword"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_sword",
+        "has_ice_sapphire",
+        "has_the_recipe"
+      ]
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/ultima_axe_1"
+    ]
+  },
+  "criteria": {
+    "has_diamond_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_axe"
+          }
+        ]
+      }
+    },
+    "has_power_pyrite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:power_pyrite"
+          }
+        ]
+      }
+    },
+    "has_haste_peridot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:haste_peridot"
+          }
+        ]
+      }
+    },
+    "has_kinetic_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:kinetic_opal"
+          }
+        ]
+      }
+    },
+    "has_spirit_garnet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:spirit_garnet"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/ultima_axe_1"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_axe",
+        "has_spirit_garnet",
+        "has_kinetic_opal",
+        "has_haste_peridot",
+        "has_power_pyrite",
+        "has_the_recipe"
+      ]
+  ]
+}

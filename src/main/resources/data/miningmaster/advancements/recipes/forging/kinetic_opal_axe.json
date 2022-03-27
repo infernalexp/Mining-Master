@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/kinetic_opal_axe"
+    ]
+  },
+  "criteria": {
+    "has_diamond_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_axe"
+          }
+        ]
+      }
+    },
+    "has_kinetic_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:kinetic_opal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/kinetic_opal_axe"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_axe",
+        "has_kinetic_opal",
+        "has_the_recipe"
+      ]
+  ]
+}

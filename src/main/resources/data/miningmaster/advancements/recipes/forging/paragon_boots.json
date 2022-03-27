@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/paragon_boots"
+    ]
+  },
+  "criteria": {
+    "has_diamond_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_boots"
+          }
+        ]
+      }
+    },
+    "has_kinetic_opal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:kinetic_opal"
+          }
+        ]
+      }
+    },
+    "has_ice_sapphire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:ice_sapphire"
+          }
+        ]
+      }
+    },
+    "has_air_malachite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:air_malachite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/paragon_boots"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_boots",
+        "has_kinetic_opal",
+        "has_ice_sapphire",
+        "has_air_malachite",
+        "has_the_recipe"
+      ]
+  ]
+}

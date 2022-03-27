@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/power_pyrite_pickaxe"
+    ]
+  },
+  "criteria": {
+    "has_diamond_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_power_pyrite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:power_pyrite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/power_pyrite_pickaxe"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_pickaxe",
+        "has_power_pyrite",
+        "has_the_recipe"
+      ]
+  ]
+}

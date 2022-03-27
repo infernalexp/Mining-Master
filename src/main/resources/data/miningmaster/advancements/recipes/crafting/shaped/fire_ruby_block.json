@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:crafting/shaped/fire_ruby_block"
+    ]
+  },
+  "criteria": {
+    "has_fire_ruby": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:fire_ruby"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:crafting/shaped/fire_ruby_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_fire_ruby",
+      "has_the_recipe"
+    ]
+  ]
+}

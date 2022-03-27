@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/haste_peridot_axe"
+    ]
+  },
+  "criteria": {
+    "has_diamond_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_axe"
+          }
+        ]
+      }
+    },
+    "has_haste_peridot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:haste_peridot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/haste_peridot_axe"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_axe",
+        "has_haste_peridot",
+        "has_the_recipe"
+      ]
+  ]
+}

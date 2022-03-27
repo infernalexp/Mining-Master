@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/lucky_citrine_hoe"
+    ]
+  },
+  "criteria": {
+    "has_diamond_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_hoe"
+          }
+        ]
+      }
+    },
+    "has_lucky_citrine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:lucky_citrine"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/lucky_citrine_hoe"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_hoe",
+        "has_lucky_citrine",
+        "has_the_recipe"
+      ]
+  ]
+}

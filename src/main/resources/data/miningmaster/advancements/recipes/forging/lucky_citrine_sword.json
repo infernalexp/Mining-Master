@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "miningmaster:forging/lucky_citrine_sword"
+    ]
+  },
+  "criteria": {
+    "has_diamond_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond_sword"
+          }
+        ]
+      }
+    },
+    "has_lucky_citrine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:lucky_citrine"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "miningmaster:forging/lucky_citrine_sword"
+      }
+    }
+  },
+  "requirements": [
+      [
+        "has_diamond_sword",
+        "has_lucky_citrine",
+        "has_the_recipe"
+      ]
+  ]
+}
