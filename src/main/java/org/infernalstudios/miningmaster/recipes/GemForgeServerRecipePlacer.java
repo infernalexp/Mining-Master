@@ -58,7 +58,7 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
     protected void giveToPlayer(int slotIn) {
         ItemStack itemstack = this.recipeBookContainer.getSlot(slotIn).getStack();
         if (!itemstack.isEmpty()) {
-            for(; itemstack.getCount() > 0; this.recipeBookContainer.getSlot(slotIn).decrStackSize(1)) {
+            while (itemstack.getCount() > 0) {
                 int i = this.playerInventory.storeItemStack(itemstack);
                 if (i == -1) {
                     i = this.playerInventory.getFirstEmptyStack();
@@ -66,9 +66,9 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
 
                 ItemStack itemstack1 = itemstack.copy();
                 itemstack1.setCount(1);
-                if (!this.playerInventory.add(i, itemstack1)) {
-                    LOGGER.error("Can't find any space for item in the inventory");
-                }
+                this.playerInventory.add(i, itemstack1);
+                this.recipeBookContainer.getSlot(slotIn).decrStackSize(1);
+                itemstack = this.recipeBookContainer.getSlot(slotIn).getStack();
             }
 
         }
