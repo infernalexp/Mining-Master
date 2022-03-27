@@ -65,8 +65,7 @@ public class GemForgeRecipeGui extends RecipeBookGui implements IRenderable, IGu
 
             if (ingredients.hasNext()) {
                 slot = this.field_201522_g.inventorySlots.get(slotIn);
-            }
-            else {
+            } else {
                 slot = this.field_201522_g.inventorySlots.get(this.field_201522_g.getOutputSlot());
             }
 
@@ -138,7 +137,7 @@ public class GemForgeRecipeGui extends RecipeBookGui implements IRenderable, IGu
                 this.searchBar.render(matrixStack, mouseX, mouseY, partialTicks);
             }
 
-            for(RecipeTabToggleWidget recipetabtogglewidget : this.recipeTabs) {
+            for (RecipeTabToggleWidget recipetabtogglewidget : this.recipeTabs) {
                 recipetabtogglewidget.render(matrixStack, mouseX, mouseY, partialTicks);
             }
 
