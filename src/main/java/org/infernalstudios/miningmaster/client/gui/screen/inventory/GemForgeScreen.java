@@ -42,8 +42,8 @@ import org.infernalstudios.miningmaster.network.UpdateGemForgePacket;
 
 @OnlyIn(Dist.CLIENT)
 public class GemForgeScreen extends ContainerScreen<GemForgeContainer> implements IRecipeShownListener {
-    private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(MiningMaster.MOD_ID + ':' + "textures/gui/container/gem_forge.png");
-    private static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation(MiningMaster.MOD_ID + ':' + "textures/gui/recipe_button.png");
+    private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(MiningMaster.MOD_ID, "textures/gui/container/gem_forge.png");
+    private static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation(MiningMaster.MOD_ID, "textures/gui/recipe_button.png");
     private boolean widthTooNarrowIn;
     public final RecipeBookGui recipeGui;
 

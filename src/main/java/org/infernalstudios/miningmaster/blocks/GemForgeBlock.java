@@ -72,6 +72,7 @@ public class GemForgeBlock extends ContainerBlock {
 
     }
 
+    @SuppressWarnings("deprecation")
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.matchesBlock(newState.getBlock())) {
             TileEntity tileentity = worldIn.getTileEntity(pos);

@@ -141,9 +141,10 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
 
     public static ItemStack deserializeItem(JsonObject object) {
         String s = JSONUtils.getString(object, "item");
-        Item item = Registry.ITEM.getOptional(new ResourceLocation(s)).orElseThrow(() -> {
-            return new JsonSyntaxException("Unknown item '" + s + "'");
-        });
+        Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryCreate(s));
+        if (item == null) {
+            throw new JsonSyntaxException("Unknown item '" + s + "'");
+        }
         if (object.has("data")) {
             throw new JsonParseException("Disallowed data tag found");
         } else {
@@ -169,7 +170,7 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
             if (element.isJsonArray()) {
                 throw new JsonSyntaxException("Expected object to be a single Enchantment");
             }
-            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(JSONUtils.getString(element, "enchantment")));
+            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryCreate(JSONUtils.getString(element, "enchantment")));
 
             if (enchantment == null) {
                 throw new JsonSyntaxException("No valid Enchantment name supplied");

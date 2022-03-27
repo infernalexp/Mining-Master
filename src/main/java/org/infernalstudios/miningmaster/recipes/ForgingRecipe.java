@@ -113,9 +113,10 @@ public class ForgingRecipe implements IForgingRecipe {
 
     public static ItemStack deserializeItem(JsonObject object) {
         String s = JSONUtils.getString(object, "item");
-        Item item = Registry.ITEM.getOptional(new ResourceLocation(s)).orElseThrow(() -> {
-            return new JsonSyntaxException("Unknown item '" + s + "'");
-        });
+        Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryCreate(s));
+        if (item == null) {
+            throw new JsonSyntaxException("Unknown item '" + s + "'");
+        }
         if (object.has("data")) {
             throw new JsonParseException("Disallowed data tag found");
         } else {

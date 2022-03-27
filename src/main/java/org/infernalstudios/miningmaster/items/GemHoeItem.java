@@ -31,6 +31,7 @@ public class GemHoeItem extends HoeItem {
     private final Ingredient repairItems;
     private final Pair<Supplier<Enchantment>, Integer>[] enchantments;
 
+    @SafeVarargs
     public GemHoeItem(IItemTier itemTier, Ingredient repairItems, int attackDamage, float attackSpeed, Properties properties, Pair<Supplier<Enchantment>, Integer>... enchantments) {
         super(itemTier, attackDamage, attackSpeed, properties);
         this.repairItems = repairItems;

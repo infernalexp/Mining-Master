@@ -32,6 +32,7 @@ public class GemArmorItem extends ArmorItem {
     private final Ingredient repairItems;
     private final Pair<Supplier<Enchantment>, Integer>[] enchantments;
 
+    @SafeVarargs
     public GemArmorItem(IArmorMaterial materialIn, Ingredient repairItems, EquipmentSlotType slot, Properties builderIn, Pair<Supplier<Enchantment>, Integer>... enchantments) {
         super(materialIn, slot, builderIn);
         this.repairItems = repairItems;

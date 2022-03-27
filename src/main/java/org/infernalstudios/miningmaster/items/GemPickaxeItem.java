@@ -31,6 +31,7 @@ public class GemPickaxeItem extends PickaxeItem {
     private final Ingredient repairItems;
     private final Pair<Supplier<Enchantment>, Integer>[] enchantments;
 
+    @SafeVarargs
     public GemPickaxeItem(IItemTier tier, Ingredient repairItems, int attackDamageIn, float attackSpeedIn, Properties builder, Pair<Supplier<Enchantment>, Integer>... enchantments) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.repairItems = repairItems;

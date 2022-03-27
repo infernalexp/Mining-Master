@@ -44,6 +44,7 @@ public class ConfigScreen extends Screen {
         super(new TranslationTextComponent(MiningMaster.MOD_ID + ".config.title"));
     }
 
+    @SuppressWarnings("resource")
     @Override
     public void init() {
         optionsRowList = new OptionsRowList(minecraft, width, height, 24, height - 32, 25);

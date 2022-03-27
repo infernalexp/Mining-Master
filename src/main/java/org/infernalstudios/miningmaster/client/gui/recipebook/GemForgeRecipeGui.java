@@ -31,7 +31,7 @@ import java.util.Iterator;
 
 @OnlyIn(Dist.CLIENT)
 public class GemForgeRecipeGui extends RecipeBookGui {
-    private static final ITextComponent translationKeyForgable = new TranslationTextComponent(MiningMaster.MOD_ID + ":" + "gui.recipebook.toggleRecipes.forgable");
+    private static final ITextComponent translationKeyForgable = new TranslationTextComponent(MiningMaster.MOD_ID + ".gui.recipebook.toggleRecipes.forgable");
 
     protected ITextComponent func_230479_g_() {
         return translationKeyForgable;

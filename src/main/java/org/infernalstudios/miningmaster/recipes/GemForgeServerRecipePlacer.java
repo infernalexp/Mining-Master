@@ -43,7 +43,7 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
     protected PlayerInventory playerInventory;
     protected RecipeBookContainer<C> recipeBookContainer;
 
-    public GemForgeServerRecipePlacer(RecipeBookContainer recipeBookContainer) {
+    public GemForgeServerRecipePlacer(RecipeBookContainer<C> recipeBookContainer) {
         this.recipeBookContainer = recipeBookContainer;
     }
 
@@ -171,7 +171,7 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
     }
 
     @Override
-    public void placeRecipe(int width, int height, int outputSlot, IRecipe recipe, Iterator ingredients, int maxAmount) {
+    public void placeRecipe(int width, int height, int outputSlot, IRecipe<?> recipe, Iterator<Integer> ingredients, int maxAmount) {
         int i = width;
         int j = height;
 

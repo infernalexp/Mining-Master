@@ -31,6 +31,7 @@ public class GemAxeItem extends AxeItem {
     private final Ingredient repairItems;
     private final Pair<Supplier<Enchantment>, Integer>[] enchantments;
 
+    @SafeVarargs
     public GemAxeItem(IItemTier tier, Ingredient repairItems, float attackDamageIn, float attackSpeedIn, Properties builder, Pair<Supplier<Enchantment>, Integer>... enchantments) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.repairItems = repairItems;

@@ -31,6 +31,7 @@ public class GemSwordItem extends SwordItem {
     private final Ingredient repairItems;
     private final Pair<Supplier<Enchantment>, Integer>[] enchantments;
 
+    @SafeVarargs
     public GemSwordItem(IItemTier tier, Ingredient repairItems, int attackDamageIn, float attackSpeedIn, Properties builderIn, Pair<Supplier<Enchantment>, Integer>... enchantments) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);
         this.repairItems = repairItems;

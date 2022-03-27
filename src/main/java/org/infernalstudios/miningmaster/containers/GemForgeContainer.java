@@ -80,6 +80,7 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
         this.trackIntArray(forgeData);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void func_217056_a(boolean placeAll, IRecipe<?> recipe, ServerPlayerEntity player) {
         (new GemForgeServerRecipePlacer<>(this)).place(player, (IRecipe<IInventory>) recipe, placeAll);

@@ -28,6 +28,7 @@ import java.util.function.Supplier;
 public class GemBowItem extends BowItem {
     private final Pair<Supplier<Enchantment>, Integer>[] enchantments;
 
+    @SafeVarargs
     public GemBowItem(Properties builder,  Pair<Supplier<Enchantment>, Integer>... enchantments) {
         super(builder);
         this.enchantments = enchantments;
