@@ -97,7 +97,7 @@ public class MiningMaster {
 
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(MMItems.FIRE_RUBY.get());
+            return new ItemStack(MMItems.TAB_ITEM.get());
         }
 
     };

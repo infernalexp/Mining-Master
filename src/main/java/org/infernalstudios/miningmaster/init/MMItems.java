@@ -97,6 +97,9 @@ public class MMItems {
     public static final RegistryObject<GemArmorItem> PARAGON_LEGGINGS = registerItem("paragon_leggings", () -> new GemArmorItem(MMArmorMaterials.PARAGON, Ingredient.fromItems(FIRE_RUBY.get()), EquipmentSlotType.LEGS, new Item.Properties().group(MiningMaster.TAB), new Pair<>(MMEnchantments.KNIGHT_JUMP, 4), new Pair<>(MMEnchantments.SNOWPIERCER, 1)));
     public static final RegistryObject<GemArmorItem> PARAGON_BOOTS = registerItem("paragon_boots", () -> new GemArmorItem(MMArmorMaterials.PARAGON, Ingredient.fromItems(FIRE_RUBY.get()), EquipmentSlotType.FEET, new Item.Properties().group(MiningMaster.TAB), new Pair<>(MMEnchantments.RUNNER, 3), new Pair<>(() -> Enchantments.FEATHER_FALLING, 3), new Pair<>(() -> Enchantments.FROST_WALKER, 2)));
 
+    // ICON
+    public static final RegistryObject<Item> TAB_ITEM = registerItem("mm_tab_icon", () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
         MiningMaster.LOGGER.info("Mining Master: Items Registered!");
