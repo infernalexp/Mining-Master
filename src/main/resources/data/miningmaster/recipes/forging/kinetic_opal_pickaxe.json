@@ -12,10 +12,10 @@
     }
   ],
   "catalyst": {
-    "item": "minecraft:diamond_sword"
+    "item": "minecraft:diamond_pickaxe"
   },
   "result": {
-    "item": "miningmaster:kinetic_opal_sword"
+    "item": "miningmaster:kinetic_opal_pickaxe"
   },
   "enchantments": [
     {
