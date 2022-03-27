@@ -88,6 +88,20 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 }
 
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+processResources {
+    doLast {
+        fileTree(dir: outputs.files.asPath, include: ['**/*.json', '**/*.mcmeta']).each {
+            try {
+                it.text = JsonOutput.toJson(new JsonSlurper().parse(it))
+            } catch (Exception e) {
+                project.logger.error("Failed to minify file '${it.path}'.")
+                throw e
+            }
+        }
+    }
+}
 
 jar {
     manifest {
