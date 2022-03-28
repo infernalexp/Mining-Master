@@ -115,6 +115,9 @@
   "miningmaster.advancements.miningmaster.reduced_to_atoms.title": "Reduced to Atoms",
   "miningmaster.advancements.miningmaster.reduced_to_atoms.description": "Enchant an item with Stonebreaker",
 
+  "miningmaster.advancements.miningmaster.cast_it_into_the_fire.title": "Cast it into the Fire!",
+  "miningmaster.advancements.miningmaster.cast_it_into_the_fire.description": "Craft a Gem Forge",
+
   "miningmaster.config.title": "Mining Master Config",
 
   "miningmaster.config.option.fireRubyEnabled": "Fire Ruby Enabled",

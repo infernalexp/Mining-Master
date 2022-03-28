@@ -1,0 +1,38 @@
+{
+  "parent": "miningmaster:miningmaster/root",
+  "display": {
+    "icon": {
+      "item": "miningmaster:gem_forge"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.cast_it_into_the_fire.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.cast_it_into_the_fire.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "criteria": {
+    "miningmaster:gem_forge": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:gem_forge"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:gem_forge"
+    ]
+  ]
+}
