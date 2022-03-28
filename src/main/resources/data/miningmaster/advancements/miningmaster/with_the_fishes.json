@@ -1,0 +1,42 @@
+{
+  "parent": "miningmaster:miningmaster/untapped_potential",
+  "display": {
+    "icon": {
+      "item": "miningmaster:dive_aquamarine"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.with_the_fishes.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.with_the_fishes.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "criteria": {
+    "miningmaster:grace": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:grace"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:grace"
+    ]
+  ]
+}

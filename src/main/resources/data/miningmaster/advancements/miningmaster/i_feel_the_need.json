@@ -1,0 +1,42 @@
+{
+  "parent": "miningmaster:miningmaster/untapped_potential",
+  "display": {
+    "icon": {
+      "item": "miningmaster:kinetic_opal"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.i_feel_the_need.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.i_feel_the_need.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "criteria": {
+    "miningmaster:runner": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:runner"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:runner"
+    ]
+  ]
+}

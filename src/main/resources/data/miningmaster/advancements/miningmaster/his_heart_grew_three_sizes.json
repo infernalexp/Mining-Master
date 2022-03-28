@@ -1,0 +1,42 @@
+{
+  "parent": "miningmaster:miningmaster/untapped_potential",
+  "display": {
+    "icon": {
+      "item": "miningmaster:heart_rhodonite"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.his_heart_grew_three_sizes.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.his_heart_grew_three_sizes.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "criteria": {
+    "miningmaster:heartfelt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:heartfelt"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:heartfelt"
+    ]
+  ]
+}

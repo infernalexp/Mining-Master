@@ -1,0 +1,42 @@
+{
+  "parent": "miningmaster:miningmaster/untapped_potential",
+  "display": {
+    "icon": {
+      "item": "miningmaster:kinetic_opal"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.easy_bake_oven.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.easy_bake_oven.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "criteria": {
+    "miningmaster:smelting": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:smelting"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:smelting"
+    ]
+  ]
+}

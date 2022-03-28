@@ -1,0 +1,177 @@
+{
+  "parent": "miningmaster:miningmaster/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:enchanted_book"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.untapped_potential.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.untapped_potential.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "criteria": {
+    "miningmaster:floatation": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:floatation"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:freezing": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:freezing"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:grace": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:grace"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:heartfelt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:heartfelt"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:knight_jump": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:knight_jump"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:leeching": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:leeching"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:runner": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:runner"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:smelting": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:smelting"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:snowpiercer": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:snowpiercer"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:stonebreaker": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:stonebreaker"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:floatation",
+      "miningmaster:freezing",
+      "miningmaster:grace",
+      "miningmaster:heartfelt",
+      "miningmaster:knight_jump",
+      "miningmaster:leeching",
+      "miningmaster:runner",
+      "miningmaster:smelting",
+      "miningmaster:snowpiercer",
+      "miningmaster:stonebreaker"
+    ]
+  ]
+}

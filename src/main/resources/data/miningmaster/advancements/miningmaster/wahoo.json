@@ -1,0 +1,42 @@
+{
+  "parent": "miningmaster:miningmaster/untapped_potential",
+  "display": {
+    "icon": {
+      "item": "miningmaster:air_malachite"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.wahoo.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.wahoo.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 10
+  },
+  "criteria": {
+    "miningmaster:knight_jump": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:knight_jump"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:knight_jump"
+    ]
+  ]
+}
