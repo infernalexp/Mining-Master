@@ -1,0 +1,38 @@
+{
+  "parent": "miningmaster:miningmaster/cast_it_into_the_fire",
+  "display": {
+    "icon": {
+      "item": "miningmaster:ultima_pickaxe"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.the_breaking_point.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.the_breaking_point.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 50
+  },
+  "criteria": {
+    "miningmaster:ultima_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:ultima_pickaxe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:ultima_pickaxe"
+    ]
+  ]
+}

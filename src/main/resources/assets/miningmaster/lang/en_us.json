@@ -118,6 +118,17 @@
   "miningmaster.advancements.miningmaster.cast_it_into_the_fire.title": "Cast it into the Fire!",
   "miningmaster.advancements.miningmaster.cast_it_into_the_fire.description": "Craft a Gem Forge",
 
+  "miningmaster.advancements.miningmaster.a_sword_of_ice_and_fire.title": "A Sword of Ice and Fire",
+  "miningmaster.advancements.miningmaster.a_sword_of_ice_and_fire.description": "Forge the Ultima Sword",
+  "miningmaster.advancements.miningmaster.blood_siphon.title": "Blood Siphon",
+  "miningmaster.advancements.miningmaster.blood_siphon.description": "Forge the Ultima Axe",
+  "miningmaster.advancements.miningmaster.the_breaking_point.title": "The Breaking Point",
+  "miningmaster.advancements.miningmaster.the_breaking_point.description": "Forge the Ultima Pickaxe",
+  "miningmaster.advancements.miningmaster.glass_cannon.title": "Glass Cannon",
+  "miningmaster.advancements.miningmaster.glass_cannon.description": "Forge the Ultima Shovel",
+  "miningmaster.advancements.miningmaster.whoever_threw_that.title": "Whoever Threw That...",
+  "miningmaster.advancements.miningmaster.whoever_threw_that.description": "Forge the Ultima Hoe",
+
   "miningmaster.config.title": "Mining Master Config",
 
   "miningmaster.config.option.fireRubyEnabled": "Fire Ruby Enabled",

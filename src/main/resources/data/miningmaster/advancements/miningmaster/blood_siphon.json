@@ -1,0 +1,38 @@
+{
+  "parent": "miningmaster:miningmaster/cast_it_into_the_fire",
+  "display": {
+    "icon": {
+      "item": "miningmaster:ultima_axe"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.blood_siphon.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.blood_siphon.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 50
+  },
+  "criteria": {
+    "miningmaster:ultima_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:ultima_axe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:ultima_axe"
+    ]
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "parent": "miningmaster:miningmaster/root",
+  "parent": "miningmaster:miningmaster/hidden_power",
   "display": {
     "icon": {
       "item": "minecraft:enchanted_book"
