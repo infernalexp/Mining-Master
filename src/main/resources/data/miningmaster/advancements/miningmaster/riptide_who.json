@@ -1,0 +1,57 @@
+{
+  "parent": "miningmaster:miningmaster/with_the_fishes",
+  "display": {
+    "icon": {
+      "item": "minecraft:trident"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.riptide_who.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.riptide_who.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "criteria": {
+    "has_enchants": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "equipment": {
+                "chest": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:grace"
+                    }
+                  ]
+                },
+                "feet": {
+                  "enchantments": [
+                    {
+                      "enchantment": "minecraft:depth_strider"
+                    }
+                  ]
+                }
+              }
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_enchants"
+    ]
+  ]
+}

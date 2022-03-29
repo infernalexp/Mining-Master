@@ -129,6 +129,24 @@
   "miningmaster.advancements.miningmaster.whoever_threw_that.title": "Whoever Threw That...",
   "miningmaster.advancements.miningmaster.whoever_threw_that.description": "Forge the Ultima Hoe",
 
+  "miningmaster.advancements.miningmaster.chaos_is_power.title": "Chaos is Power",
+  "miningmaster.advancements.miningmaster.chaos_is_power.description": "Forge your first Paragon Armor piece",
+  "miningmaster.advancements.miningmaster.the_ultimate_lifeform.title": "The Ultimate Lifeform",
+  "miningmaster.advancements.miningmaster.the_ultimate_lifeform.description": "Forge all Paragon Armor pieces",
+
+  "miningmaster.advancements.miningmaster.all_systems_full_power.title": "All Systems, Full Power!",
+  "miningmaster.advancements.miningmaster.all_systems_full_power.description": "Equip Knight Jump, Runner, and Heartfelt at the same time",
+  "miningmaster.advancements.miningmaster.hard_times.title": "Hard Times",
+  "miningmaster.advancements.miningmaster.hard_times.description": "Equip Frost Walker, Runner, and Snowpiercer at the same time",
+  "miningmaster.advancements.miningmaster.its_no_use.title": "It's No Use!",
+  "miningmaster.advancements.miningmaster.its_no_use.description": "Max out the Floatation enchantment on a bow",
+  "miningmaster.advancements.miningmaster.power_enriched_by_the_heart.title": "Power Enriched by the Heart",
+  "miningmaster.advancements.miningmaster.power_enriched_by_the_heart.description": "Equip all armor pieces with Heartfelt at the same time",
+  "miningmaster.advancements.miningmaster.riptide_who.title": "Riptide Who?",
+  "miningmaster.advancements.miningmaster.riptide_who.description": "Equip Grace and Depth Strider at the same time",
+  "miningmaster.advancements.miningmaster.sonic_speed.title": "Sonic Speed!",
+  "miningmaster.advancements.miningmaster.sonic_speed.description": "Max out the Runner enchantment on a pair of boots",
+
   "miningmaster.config.title": "Mining Master Config",
 
   "miningmaster.config.option.fireRubyEnabled": "Fire Ruby Enabled",

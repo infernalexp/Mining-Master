@@ -1,4 +1,8 @@
 {
+  "itemGroup.MiningMasterTab": "Mining Master",
+
+  "miningmaster.gui.recipebook.toggleRecipes.forgable": "Showing Forgable",
+
   "block.miningmaster.fire_ruby_ore": "火焰红宝石矿石",
   "block.miningmaster.ice_sapphire_ore": "寒冰蓝宝石矿石",
   "block.miningmaster.spirit_garnet_ore": "灵魂石榴石矿石",
@@ -22,6 +26,7 @@
   "block.miningmaster.air_malachite_block": "浮空孔雀石块",
   "block.miningmaster.malacore": "绿铜石核心",
   "block.miningmaster.malacrust": "绿铜石外壳",
+  "block.miningmaster.gem_forge": "Gem Forge",
 
   "item.miningmaster.fire_ruby": "火焰红宝石",
   "item.miningmaster.ice_sapphire": "寒冰蓝宝石",
@@ -33,6 +38,155 @@
   "item.miningmaster.power_pyrite": "力量黄铁矿",
   "item.miningmaster.kinetic_opal": "动能猫眼石",
   "item.miningmaster.air_malachite": "浮空孔雀石",
+
+  "item.miningmaster.fire_ruby_sword": "Fire Ruby Sword",
+  "item.miningmaster.ice_sapphire_sword": "Ice Sapphire Sword",
+  "item.miningmaster.spirit_garnet_sword": "Spirit Garnet Sword",
+  "item.miningmaster.power_pyrite_sword": "Power Pyrite Sword",
+  "item.miningmaster.lucky_citrine_sword": "Lucky Citrine Sword",
+  "item.miningmaster.kinetic_opal_sword": "Kinetic Opal Sword",
+  "item.miningmaster.ultima_sword": "Ultima Sword",
+
+  "item.miningmaster.spirit_garnet_axe": "Spirit Garnet Axe",
+  "item.miningmaster.power_pyrite_axe": "Power Pyrite Axe",
+  "item.miningmaster.haste_peridot_axe": "Haste Peridot Axe",
+  "item.miningmaster.kinetic_opal_axe": "Kinetic Opal Axe",
+  "item.miningmaster.ultima_axe": "Ultima Axe",
+
+  "item.miningmaster.power_pyrite_pickaxe": "Power Pyrite Pickaxe",
+  "item.miningmaster.lucky_citrine_pickaxe": "Lucky Citrine Pickaxe",
+  "item.miningmaster.haste_peridot_pickaxe": "Haste Peridot Pickaxe",
+  "item.miningmaster.kinetic_opal_pickaxe": "Kinetic Opal Pickaxe",
+  "item.miningmaster.ultima_pickaxe": "Ultima Pickaxe",
+
+  "item.miningmaster.haste_peridot_shovel": "Haste Peridot Shovel",
+  "item.miningmaster.kinetic_opal_shovel": "Kinetic Opal Shovel",
+  "item.miningmaster.ultima_shovel": "Ultima Shovel",
+
+  "item.miningmaster.haste_peridot_hoe": "Haste Peridot Hoe",
+  "item.miningmaster.ultima_hoe": "Ultima Hoe",
+
+  "item.miningmaster.air_malachite_bow": "Air Malachite Bow",
+
+  "item.miningmaster.paragon_helmet": "Paragon Helmet",
+  "item.miningmaster.paragon_chestplate": "Paragon Chestplate",
+  "item.miningmaster.paragon_leggings": "Paragon Leggings",
+  "item.miningmaster.paragon_boots": "Paragon Boots",
+
+  "miningmaster:container.gem_forge": "Gem Forge",
+
+  "miningmaster.advancements.miningmaster.root.title": "Mining Master",
+  "miningmaster.advancements.miningmaster.root.description": "Mine, find gems, and create powerful tools!",
+
+  "miningmaster.advancements.miningmaster.geo_dude.title": "Geo-Dude",
+  "miningmaster.advancements.miningmaster.geo_dude.description": "Craft your first gem block",
+  "miningmaster.advancements.miningmaster.bourgeoisie.title": "Bourgeoisie",
+  "miningmaster.advancements.miningmaster.bourgeoisie.description": "Craft one of every gem block",
+
+  "miningmaster.advancements.miningmaster.hidden_power.title": "Hidden Power",
+  "miningmaster.advancements.miningmaster.hidden_power.description": "Find your first gem",
+  "miningmaster.advancements.miningmaster.top_to_bottom.title": "Top to Bottom",
+  "miningmaster.advancements.miningmaster.top_to_bottom.description": "Collect one of every Overworld gem",
+  "miningmaster.advancements.miningmaster.infernal_archaeologist.title": "Infernal Archaeologist",
+  "miningmaster.advancements.miningmaster.infernal_archaeologist.description": "Collect one of every Nether gem",
+  "miningmaster.advancements.miningmaster.the_collector.title": "The Collector",
+  "miningmaster.advancements.miningmaster.the_collector.description": "Collect one of every gem",
+
+  "miningmaster.advancements.miningmaster.untapped_potential.title": "Untapped Potential",
+  "miningmaster.advancements.miningmaster.untapped_potential.description": "Get your first Mining Master enchantment",
+  "miningmaster.advancements.miningmaster.leaf_on_the_wind.title": "Leaf on the Wind",
+  "miningmaster.advancements.miningmaster.leaf_on_the_wind.description": "Enchant an item with Floatation",
+  "miningmaster.advancements.miningmaster.cold_as_ice.title": "Cold as Ice",
+  "miningmaster.advancements.miningmaster.cold_as_ice.description": "Enchant an item with Freezing",
+  "miningmaster.advancements.miningmaster.with_the_fishes.title": "With the Fishes",
+  "miningmaster.advancements.miningmaster.with_the_fishes.description": "Enchant an item with Grace",
+  "miningmaster.advancements.miningmaster.his_heart_grew_three_sizes.title": "His Heart Grew Three Sizes",
+  "miningmaster.advancements.miningmaster.his_heart_grew_three_sizes.description": "Enchant an item with Heartfelt",
+  "miningmaster.advancements.miningmaster.wahoo.title": "Wahoo!",
+  "miningmaster.advancements.miningmaster.wahoo.description": "Enchant an item with Knight Jump",
+  "miningmaster.advancements.miningmaster.vampiric.title": "Vampiric",
+  "miningmaster.advancements.miningmaster.vampiric.description": "Enchant an item with Leeching",
+  "miningmaster.advancements.miningmaster.i_feel_the_need.title": "I Feel the Need",
+  "miningmaster.advancements.miningmaster.i_feel_the_need.description": "Enchant an item with Runner",
+  "miningmaster.advancements.miningmaster.easy_bake_oven.title": "Easy Bake Oven",
+  "miningmaster.advancements.miningmaster.easy_bake_oven.description": "Enchant an item with Smelting",
+  "miningmaster.advancements.miningmaster.im_a_giraffe.title": "I'm a Giraffe!",
+  "miningmaster.advancements.miningmaster.im_a_giraffe.description": "Enchant an item with Snowpiercer",
+  "miningmaster.advancements.miningmaster.reduced_to_atoms.title": "Reduced to Atoms",
+  "miningmaster.advancements.miningmaster.reduced_to_atoms.description": "Enchant an item with Stonebreaker",
+
+  "miningmaster.advancements.miningmaster.cast_it_into_the_fire.title": "Cast it into the Fire!",
+  "miningmaster.advancements.miningmaster.cast_it_into_the_fire.description": "Craft a Gem Forge",
+
+  "miningmaster.advancements.miningmaster.a_sword_of_ice_and_fire.title": "A Sword of Ice and Fire",
+  "miningmaster.advancements.miningmaster.a_sword_of_ice_and_fire.description": "Forge the Ultima Sword",
+  "miningmaster.advancements.miningmaster.blood_siphon.title": "Blood Siphon",
+  "miningmaster.advancements.miningmaster.blood_siphon.description": "Forge the Ultima Axe",
+  "miningmaster.advancements.miningmaster.the_breaking_point.title": "The Breaking Point",
+  "miningmaster.advancements.miningmaster.the_breaking_point.description": "Forge the Ultima Pickaxe",
+  "miningmaster.advancements.miningmaster.glass_cannon.title": "Glass Cannon",
+  "miningmaster.advancements.miningmaster.glass_cannon.description": "Forge the Ultima Shovel",
+  "miningmaster.advancements.miningmaster.whoever_threw_that.title": "Whoever Threw That...",
+  "miningmaster.advancements.miningmaster.whoever_threw_that.description": "Forge the Ultima Hoe",
+
+  "miningmaster.advancements.miningmaster.chaos_is_power.title": "Chaos is Power",
+  "miningmaster.advancements.miningmaster.chaos_is_power.description": "Forge your first Paragon Armor piece",
+  "miningmaster.advancements.miningmaster.the_ultimate_lifeform.title": "The Ultimate Lifeform",
+  "miningmaster.advancements.miningmaster.the_ultimate_lifeform.description": "Forge all Paragon Armor pieces",
+
+  "miningmaster.advancements.miningmaster.all_systems_full_power.title": "All Systems, Full Power!",
+  "miningmaster.advancements.miningmaster.all_systems_full_power.description": "Equip Knight Jump, Runner, and Heartfelt at the same time",
+  "miningmaster.advancements.miningmaster.hard_times.title": "Hard Times",
+  "miningmaster.advancements.miningmaster.hard_times.description": "Equip Frost Walker, Runner, and Snowpiercer at the same time",
+  "miningmaster.advancements.miningmaster.its_no_use.title": "It's No Use!",
+  "miningmaster.advancements.miningmaster.its_no_use.description": "Max out the Floatation enchantment on a bow",
+  "miningmaster.advancements.miningmaster.power_enriched_by_the_heart.title": "Power Enriched by the Heart",
+  "miningmaster.advancements.miningmaster.power_enriched_by_the_heart.description": "Equip all armor pieces with Heartfelt at the same time",
+  "miningmaster.advancements.miningmaster.riptide_who.title": "Riptide Who?",
+  "miningmaster.advancements.miningmaster.riptide_who.description": "Equip Grace and Depth Strider at the same time",
+  "miningmaster.advancements.miningmaster.sonic_speed.title": "Sonic Speed!",
+  "miningmaster.advancements.miningmaster.sonic_speed.description": "Max out the Runner enchantment on a pair of boots",
+
+  "miningmaster.config.title": "Mining Master Config",
+
+  "miningmaster.config.option.fireRubyEnabled": "Fire Ruby Enabled",
+  "miningmaster.config.tooltip.fireRubyEnabled": "Determines if Fire Ruby will generate.",
+
+  "miningmaster.config.option.iceSapphireEnabled": "Ice Sapphire Enabled",
+  "miningmaster.config.tooltip.iceSapphireEnabled": "Determines if Ice Sapphire will generate.",
+
+  "miningmaster.config.option.spiritGarnetEnabled": "Spirit Garnet Enabled",
+  "miningmaster.config.tooltip.spiritGarnetEnabled": "Determines if Spirit Garnet will generate.",
+
+  "miningmaster.config.option.hastePeridotEnabled": "Haste Peridot Enabled",
+  "miningmaster.config.tooltip.hastePeridotEnabled": "Determines if Haste Peridot will generate.",
+
+  "miningmaster.config.option.luckyCitrineEnabled": "Lucky Citrine Enabled",
+  "miningmaster.config.tooltip.luckyCitrineEnabled": "Determines if Lucky Citrine will generate.",
+
+  "miningmaster.config.option.diveAquamarineEnabled": "Dive Aquamarine Enabled",
+  "miningmaster.config.tooltip.diveAquamarineEnabled": "Determines if Dive Aquamarine will generate.",
+
+  "miningmaster.config.option.heartRhodoniteEnabled": "Heart Rhodonite Enabled",
+  "miningmaster.config.tooltip.heartRhodoniteEnabled": "Determines if Heart Rhodonite will generate.",
+
+  "miningmaster.config.option.powerPyriteEnabled": "Power Pyrite Enabled",
+  "miningmaster.config.tooltip.powerPyriteEnabled": "Determines if Power Pyrite will generate.",
+
+  "miningmaster.config.option.kineticOpalEnabled": "Kinetic Opal Enabled",
+  "miningmaster.config.tooltip.kineticOpalEnabled": "Determines if Kinetic Opal will generate.",
+
+  "miningmaster.config.option.airMalachiteEnabled": "Air Malachite Enabled",
+  "miningmaster.config.tooltip.airMalachiteEnabled": "Determines if Air Malachite will generate.",
+
+  "miningmaster.config.option.commonGemsPerChunk": "Common Gem Spawns Per Chunk",
+  "miningmaster.config.tooltip.commonGemsPerChunk": "Determines how many times common gems will attempt to spawn per chunk in their native biomes. REQUIRES RESTART.",
+
+  "miningmaster.config.option.rareGemsPerChunk": "Rare Gem Spawns Per Chunk",
+  "miningmaster.config.tooltip.rareGemsPerChunk": "Determines how many times rare gems will attempt to spawn per chunk in their native biomes. REQUIRES RESTART.",
+
+  "miningmaster.config.option.randomGemsPerChunk": "Random Gem Spawns Per Chunk",
+  "miningmaster.config.tooltip.randomGemsPerChunk": "Determines how many times a random gem ore will attempt to spawn per chunk. REQUIRES RESTART.",
 
   "enchantment.miningmaster.freezing": "霜冻",
   "enchantment.miningmaster.freezing.desc": "击中时造成减速效果。会对火属性实体造成额外伤害。",
@@ -53,5 +207,26 @@
   "enchantment.miningmaster.snowpiercer": "冰雪无阻",
   "enchantment.miningmaster.snowpiercer.desc": "穿着时赋予玩家在雪/冰上时的速度效果。",
   "enchantment.miningmaster.grace": "水之恩惠",
-  "enchantment.miningmaster.grace.desc": "使用户在入水时拥有“海豚的恩惠”效果，代价是效果激活时耐久度下降。需要玩家返回陆地充能。"
+  "enchantment.miningmaster.grace.desc": "使用户在入水时拥有“海豚的恩惠”效果，代价是效果激活时耐久度下降。需要玩家返回陆地充能。",
+
+  "tetra.improvement.enchantment/miningmaster_floatation.name": "Floatation",
+  "tetra.improvement.enchantment/miningmaster_floatation.description": "Applies levitation to enemies on hit.",
+  "tetra.improvement.enchantment/miningmaster_freezing.name": "Freezing",
+  "tetra.improvement.enchantment/miningmaster_freezing.description": "Inflicts Slowness on hit. Also deals extra damage to fire-based entities.",
+  "tetra.improvement.enchantment/miningmaster_grace.name": "Grace",
+  "tetra.improvement.enchantment/miningmaster_grace.description": "Gives the user a burst of Dolphin's Grace when entering water, at the cost of durability decay while the effect is active. Requires the user to return to land to recharge.",
+  "tetra.improvement.enchantment/miningmaster_heartfelt.name": "Heartfelt",
+  "tetra.improvement.enchantment/miningmaster_heartfelt.description": "Gives the user an increase to their max health.",
+  "tetra.improvement.enchantment/miningmaster_knight_jump.name": "Knight Jump",
+  "tetra.improvement.enchantment/miningmaster_knight_jump.description": "Gives the user extra mid-air jumps.",
+  "tetra.improvement.enchantment/miningmaster_leeching.name": "Leeching",
+  "tetra.improvement.enchantment/miningmaster_leeching.description": "Heals the user for a portion of damage dealt on critical strikes.",
+  "tetra.improvement.enchantment/miningmaster_runner.name": "Runner",
+  "tetra.improvement.enchantment/miningmaster_runner.description": "Gives the user a boost to their base speed. Boots take durability damage when sprinting.",
+  "tetra.improvement.enchantment/miningmaster_smelting.name": "Smelting",
+  "tetra.improvement.enchantment/miningmaster_smelting.description": "Causes blocks to drop the smelted version of their usual drops.",
+  "tetra.improvement.enchantment/miningmaster_snowpiercer.name": "Snowpiercer",
+  "tetra.improvement.enchantment/miningmaster_snowpiercer.description": "Grants the user the Speed effect when on snow or ice.",
+  "tetra.improvement.enchantment/miningmaster_stonebreaker.name": "Stonebreaker",
+  "tetra.improvement.enchantment/miningmaster_stonebreaker.description": "Causes certain stones and Netherrack to not drop when mined."
 }

@@ -1,0 +1,71 @@
+{
+  "parent": "miningmaster:miningmaster/cast_it_into_the_fire",
+  "display": {
+    "icon": {
+      "item": "miningmaster:paragon_helmet"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.chaos_is_power.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.chaos_is_power.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 50
+  },
+  "criteria": {
+    "miningmaster:paragon_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:paragon_helmet"
+          }
+        ]
+      }
+    },
+    "miningmaster:paragon_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:paragon_chestplate"
+          }
+        ]
+      }
+    },
+    "miningmaster:paragon_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:paragon_leggings"
+          }
+        ]
+      }
+    },
+    "miningmaster:paragon_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "miningmaster:paragon_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "miningmaster:paragon_helmet",
+      "miningmaster:paragon_chestplate",
+      "miningmaster:paragon_leggings",
+      "miningmaster:paragon_boots"
+    ]
+  ]
+}

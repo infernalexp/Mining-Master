@@ -1,0 +1,71 @@
+{
+  "parent": "miningmaster:miningmaster/his_heart_grew_three_sizes",
+  "display": {
+    "icon": {
+      "item": "miningmaster:heart_rhodonite"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.power_enriched_by_the_heart.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.power_enriched_by_the_heart.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "criteria": {
+    "has_heartfelt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "equipment": {
+                "head": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:heartfelt"
+                    }
+                  ]
+                },
+                "chest": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:heartfelt"
+                    }
+                  ]
+                },
+                "legs": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:heartfelt"
+                    }
+                  ]
+                },
+                "feet": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:heartfelt"
+                    }
+                  ]
+                }
+              }
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heartfelt"
+    ]
+  ]
+}

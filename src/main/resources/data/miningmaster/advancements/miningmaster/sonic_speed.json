@@ -1,0 +1,45 @@
+{
+  "parent": "miningmaster:miningmaster/i_feel_the_need",
+  "display": {
+    "icon": {
+      "item": "miningmaster:paragon_boots"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.sonic_speed.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.sonic_speed.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "criteria": {
+    "max_runner": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:runner",
+                "levels": {
+                  "min": 3
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "max_runner"
+    ]
+  ]
+}

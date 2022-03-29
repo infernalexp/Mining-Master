@@ -1,0 +1,151 @@
+{
+  "parent": "miningmaster:miningmaster/wahoo",
+  "display": {
+    "icon": {
+      "item": "miningmaster:paragon_chestplate"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.all_systems_full_power.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.all_systems_full_power.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "criteria": {
+    "has_enchants": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "equipment": {
+                "legs": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:knight_jump"
+                    }
+                  ]
+                },
+                "feet": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:runner"
+                    }
+                  ]
+                }
+              }
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "has_heartfelt_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "equipment": {
+                "head": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:heartfelt"
+                    }
+                  ]
+                }
+              }
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "has_heartfelt_chest": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "equipment": {
+                "chest": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:heartfelt"
+                    }
+                  ]
+                }
+              }
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "has_heartfelt_legs": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "equipment": {
+                "legs": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:heartfelt"
+                    }
+                  ]
+                }
+              }
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    },
+    "has_heartfelt_feet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "equipment": {
+                "feet": {
+                  "enchantments": [
+                    {
+                      "enchantment": "miningmaster:heartfelt"
+                    }
+                  ]
+                }
+              }
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_enchants"
+    ],
+    [
+      "has_heartfelt_head",
+      "has_heartfelt_chest",
+      "has_heartfelt_legs",
+      "has_heartfelt_feet"
+    ]
+  ]
+}

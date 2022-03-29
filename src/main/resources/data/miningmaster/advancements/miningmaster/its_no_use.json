@@ -1,0 +1,45 @@
+{
+  "parent": "miningmaster:miningmaster/leaf_on_the_wind",
+  "display": {
+    "icon": {
+      "item": "miningmaster:air_malachite_bow"
+    },
+    "title": {
+      "translate": "miningmaster.advancements.miningmaster.its_no_use.title"
+    },
+    "description": {
+      "translate": "miningmaster.advancements.miningmaster.its_no_use.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "criteria": {
+    "max_floatation": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "enchantment": "miningmaster:floatation",
+                "levels": {
+                  "min": 3
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "max_floatation"
+    ]
+  ]
+}
