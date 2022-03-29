@@ -20,4 +20,6 @@ public interface LivingEntityAccess {
     void setGraceRecharged(boolean isGraceRecharged);
 
     boolean getGraceRecharged();
+
+    void useKnightJump();
 }

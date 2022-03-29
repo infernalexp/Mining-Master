@@ -34,6 +34,7 @@ import org.infernalstudios.miningmaster.client.MiningMasterClient;
 import org.infernalstudios.miningmaster.config.MiningMasterConfig;
 import org.infernalstudios.miningmaster.enchantments.GraceEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
+import org.infernalstudios.miningmaster.enchantments.KnightJumpEnchantment;
 import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
 import org.infernalstudios.miningmaster.enchantments.SnowpiercerEnchantment;
 import org.infernalstudios.miningmaster.gen.features.RandomGemOreFeature;
@@ -77,6 +78,7 @@ public class MiningMaster {
         MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemUnequip);
         MinecraftForge.EVENT_BUS.addListener(SnowpiercerEnchantment::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(GraceEnchantment::onLivingUpdate);
+        MinecraftForge.EVENT_BUS.addListener(KnightJumpEnchantment::onClientTick);
 
         // Registering Configs
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, MiningMasterConfig.CONFIG_SPEC);

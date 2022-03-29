@@ -38,43 +38,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity extends Entity implements LivingEntityAccess {
-    @Shadow private int jumpTicks;
-
     @Shadow protected abstract void jump();
 
     @Shadow public abstract ItemStack getItemStackFromSlot(EquipmentSlotType slotIn);
 
     private int knightJumpsUsed = 0;
-    private boolean hasJumped = false;
-    private int ticksSinceJump = 0;
 
     @Unique
     private static final DataParameter<Boolean> GRACE_RECHARGED = EntityDataManager.createKey(LivingEntity.class, DataSerializers.BOOLEAN);
 
+    @Inject(method = "livingTick", at = @At(value = "HEAD"))
+    private void MM_countTicksFalling(CallbackInfo ci) {
+        if (this.onGround) {
+            this.knightJumpsUsed = 0;
+        }
+    }
 
     public MixinLivingEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
     }
 
-    @Inject(method = "jump", at = @At(value = "HEAD"))
-    private void MM_setHasJumped(CallbackInfo ci) {
-        ticksSinceJump = 0;
-        this.hasJumped = true;
-    }
-
-    @Inject(method = "livingTick", at = @At(value = "HEAD"))
-    private void MM_countTicksFalling(CallbackInfo ci) {
-        if (this.onGround) {
-            this.ticksSinceJump = 0;
-            this.hasJumped = false;
-            this.knightJumpsUsed = 0;
-        } else {
-            this.ticksSinceJump++;
-        }
-    }
-
-    @Inject(method = "livingTick", at = @At(target = "Lnet/minecraft/entity/LivingEntity;getFluidJumpHeight()D", value = "INVOKE", shift = At.Shift.AFTER))
-    private void MM_knightJump(CallbackInfo ci) {
+    public void useKnightJump() {
         if (!this.onGround) {
             boolean hasKnightJump = false;
             int level = 0;
@@ -90,10 +74,9 @@ public abstract class MixinLivingEntity extends Entity implements LivingEntityAc
                 }
             }
 
-            if (this.knightJumpsUsed < level && hasKnightJump && (!this.hasJumped || ticksSinceJump >= 5)) {
+            if (hasKnightJump && this.knightJumpsUsed < level) {
                 this.knightJumpsUsed++;
                 this.jump();
-                this.jumpTicks = 10;
             }
         }
     }
