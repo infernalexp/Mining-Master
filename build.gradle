@@ -78,6 +78,9 @@ mixin {
 
 repositories {
     maven { url = 'https://repo.spongepowered.org/maven/' }
+    maven { url = 'https://dvs1.progwml6.com/files/maven/' }
+    maven { url = 'https://modmaven.dev' }
+    maven { url = 'https://www.cursemaven.com' }
 
     jcenter()
     mavenCentral()
@@ -86,6 +89,10 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${config.MINECRAFT_VERSION}-${config.FORGE_VERSION}"
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
+    implementation fg.deobf("curse.maven:tetra-289712:${config.TETRA_FILE}")
+    implementation fg.deobf("curse.maven:mutil-351914:${config.MUTIL_FILE}")
+    compileOnly fg.deobf("mezz.jei:jei-${config.MINECRAFT_VERSION}:${config.JEI_VERSION}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${config.MINECRAFT_VERSION}:${config.JEI_VERSION}")
 }
 
 import groovy.json.JsonOutput

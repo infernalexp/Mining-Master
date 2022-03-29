@@ -139,6 +139,11 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
         return IRecipeType.SMITHING;
     }
 
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
+
     public static ItemStack deserializeItem(JsonObject object) {
         String s = JSONUtils.getString(object, "item");
         Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryCreate(s));

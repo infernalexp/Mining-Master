@@ -73,6 +73,16 @@ public class ForgingRecipe implements IForgingRecipe {
         return catalystMatches && i == this.recipeGems.size() && net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.recipeGems) != null;
     }
 
+    public ItemStack getDefaultedOutput() {
+        ItemStack itemstack = this.result.copy();
+        
+        for (Pair<Enchantment, Integer> enchantment : this.enchantments) {
+            itemstack.addEnchantment(enchantment.getFirst(), enchantment.getSecond());
+        }
+        
+        return itemstack;
+    }
+
     @Override
     public ItemStack getCraftingResult(IInventory inv) {
         ItemStack itemstack = this.result.copy();
