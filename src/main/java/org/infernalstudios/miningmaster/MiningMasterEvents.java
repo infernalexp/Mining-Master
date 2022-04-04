@@ -64,7 +64,7 @@ public class MiningMasterEvents {
             if (MiningMasterConfig.CONFIG.iceSapphireEnabled.get()) {
                 event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_ICE_SAPPHIRE_NATIVE);
             }
-        } else if (biomeCategory == Biome.Category.EXTREME_HILLS) {
+        } else if (biome == Biomes.SUNFLOWER_PLAINS || biome == Biomes.FLOWER_FOREST) {
             if (MiningMasterConfig.CONFIG.spiritGarnetEnabled.get()) {
                 event.getGeneration().withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, MMConfiguredFeatures.ORE_SPIRIT_GARNET_NATIVE);
             }
