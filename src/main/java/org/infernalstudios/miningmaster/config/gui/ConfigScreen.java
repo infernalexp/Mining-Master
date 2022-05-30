@@ -130,9 +130,9 @@ public class ConfigScreen extends Screen {
                 )
         );
 
-        addRenderableWidget(optionsRowList);
+        addWidget(optionsRowList);
 
-        addRenderableWidget(new Button((width - 200) / 2, height - 26, 200, 20, new TranslatableComponent("gui.done"), button -> onClose()));
+        addWidget(new Button((width - 200) / 2, height - 26, 200, 20, new TranslatableComponent("gui.done"), button -> onClose()));
     }
 
     @Override
