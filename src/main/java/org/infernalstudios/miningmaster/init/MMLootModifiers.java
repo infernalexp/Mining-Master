@@ -17,19 +17,19 @@
 package org.infernalstudios.miningmaster.init;
 
 import com.google.gson.JsonObject;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.conditions.ILootCondition;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.infernalstudios.miningmaster.MiningMaster;
 
 import javax.annotation.Nonnull;
@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class MMLootModifiers {
-    public static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, MiningMaster.MOD_ID);
+    public static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.LOOT_MODIFIER_SERIALIZERS, MiningMaster.MOD_ID);
 
     public static final RegistryObject<GlobalLootModifierSerializer<SmeltingEnchantmentLootModifier>> SMELTING_ENCHANTMENT_LOOT_MODIFIER = LOOT_MODIFIERS.register("smelting_enchantment_loot_modifier", SmeltingEnchantmentLootSerializer::new);
     public static final RegistryObject<GlobalLootModifierSerializer<StonebreakerEnchantmentLootModifier>> STONEBREAKER_ENCHANTMENT_LOOT_MODIFIER = LOOT_MODIFIERS.register("stonebreaker_enchantment_loot_modifier", StonebreakerEnchantmentLootSerializer::new);
@@ -49,7 +49,7 @@ public class MMLootModifiers {
          *
          * @param conditionsIn the ILootConditions that need to be matched before the loot is modified.
          */
-        protected SmeltingEnchantmentLootModifier(ILootCondition[] conditionsIn) {
+        protected SmeltingEnchantmentLootModifier(LootItemCondition[] conditionsIn) {
             super(conditionsIn);
         }
 
@@ -57,9 +57,9 @@ public class MMLootModifiers {
         @Override
         protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
             for (ItemStack item : generatedLoot) {
-                Optional<FurnaceRecipe> optional = context.getWorld().getRecipeManager().getRecipe(IRecipeType.SMELTING, new Inventory(item), context.getWorld());
+                Optional<SmeltingRecipe> optional = context.getLevel().getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SimpleContainer(item), context.getLevel());
                 if (optional.isPresent()) {
-                    ItemStack itemstack = optional.get().getRecipeOutput();
+                    ItemStack itemstack = optional.get().getResultItem();
                     if (!itemstack.isEmpty()) {
                         ItemStack itemstack1 = itemstack.copy();
                         itemstack1.setCount(item.getCount() * itemstack.getCount()); //Forge: Support smelting returning multiple
@@ -75,7 +75,7 @@ public class MMLootModifiers {
     private static class SmeltingEnchantmentLootSerializer extends GlobalLootModifierSerializer<SmeltingEnchantmentLootModifier> {
 
         @Override
-        public SmeltingEnchantmentLootModifier read(ResourceLocation location, JsonObject object, ILootCondition[] conditionsIn) {
+        public SmeltingEnchantmentLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] conditionsIn) {
             return new SmeltingEnchantmentLootModifier(conditionsIn);
         }
 
@@ -92,14 +92,14 @@ public class MMLootModifiers {
          *
          * @param conditionsIn the ILootConditions that need to be matched before the loot is modified.
          */
-        protected StonebreakerEnchantmentLootModifier(ILootCondition[] conditionsIn) {
+        protected StonebreakerEnchantmentLootModifier(LootItemCondition[] conditionsIn) {
             super(conditionsIn);
         }
 
         @Nonnull
         @Override
         protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-            generatedLoot.removeIf(item -> item.getItem().isIn(MMTags.Items.STONEBREAKER_ITEMS));
+            generatedLoot.removeIf(item -> item.is(MMTags.Items.STONEBREAKER_ITEMS));
             return generatedLoot;
         }
     }
@@ -107,7 +107,7 @@ public class MMLootModifiers {
     private static class StonebreakerEnchantmentLootSerializer extends GlobalLootModifierSerializer<StonebreakerEnchantmentLootModifier> {
 
         @Override
-        public StonebreakerEnchantmentLootModifier read(ResourceLocation location, JsonObject object, ILootCondition[] conditionsIn) {
+        public StonebreakerEnchantmentLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] conditionsIn) {
             return new StonebreakerEnchantmentLootModifier(conditionsIn);
         }
 

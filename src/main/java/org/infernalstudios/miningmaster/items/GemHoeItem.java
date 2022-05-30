@@ -17,13 +17,13 @@
 package org.infernalstudios.miningmaster.items;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.function.Supplier;
 
@@ -32,24 +32,24 @@ public class GemHoeItem extends HoeItem {
     private final Pair<Supplier<Enchantment>, Integer>[] enchantments;
 
     @SafeVarargs
-    public GemHoeItem(IItemTier itemTier, Ingredient repairItems, int attackDamage, float attackSpeed, Properties properties, Pair<Supplier<Enchantment>, Integer>... enchantments) {
+    public GemHoeItem(Tier itemTier, Ingredient repairItems, int attackDamage, float attackSpeed, Properties properties, Pair<Supplier<Enchantment>, Integer>... enchantments) {
         super(itemTier, attackDamage, attackSpeed, properties);
         this.repairItems = repairItems;
         this.enchantments = enchantments;
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
         return this.repairItems.test(repair);
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (isInGroup(group)) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        if (allowdedIn(group)) {
             ItemStack itemStack = new ItemStack(this);
 
             for (Pair<Supplier<Enchantment>, Integer> enchantmentPair : enchantments) {
-                itemStack.addEnchantment(enchantmentPair.getFirst().get(), enchantmentPair.getSecond());
+                itemStack.enchant(enchantmentPair.getFirst().get(), enchantmentPair.getSecond());
             }
 
             items.add(itemStack);

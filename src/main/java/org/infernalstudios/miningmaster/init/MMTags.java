@@ -16,42 +16,32 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import org.infernalstudios.miningmaster.MiningMaster;
 
 public class MMTags {
 
-    public static class EntityTypes {
-        public static final ITag.INamedTag<EntityType<?>> FIRE_ENTITIES = tag("fire_entities");
-
-        private static ITag.INamedTag<EntityType<?>> tag(String name) {
-            return EntityTypeTags.createOptional(new ResourceLocation(MiningMaster.MOD_ID, name));
-        }
-    }
-
     public static class Items {
-        public static final ITag.INamedTag<Item> GEM_ENCHANTING_BLACKLIST = tag("gem_enchanting_blacklist");
-        public static final ITag.INamedTag<Item> STONEBREAKER_ITEMS = tag("stonebreaker_items");
-        public static final ITag.INamedTag<Item> GEMS = tag("gems");
-        public static final ITag.INamedTag<Item> CATALYSTS = tag("catalysts");
+        public static final TagKey<Item> GEM_ENCHANTING_BLACKLIST = tag("gem_enchanting_blacklist");
+        public static final TagKey<Item> STONEBREAKER_ITEMS = tag("stonebreaker_items");
+        public static final TagKey<Item> GEMS = tag("gems");
+        public static final TagKey<Item> CATALYSTS = tag("catalysts");
 
-        private static ITag.INamedTag<Item> tag(String name) {
-            return ItemTags.createOptional(new ResourceLocation(MiningMaster.MOD_ID, name));
+        private static TagKey<Item> tag(String name) {
+            return ItemTags.create(new ResourceLocation(MiningMaster.MOD_ID, name));
         }
     }
 
     public static class Blocks {
-        public static final ITag.INamedTag<Block> SNOWPIERCER_BLOCKS = tag("snowpiercer_blocks");
+        public static final TagKey<Block> SNOWPIERCER_BLOCKS = tag("snowpiercer_blocks");
 
-        private static ITag.INamedTag<Block> tag(String name) {
-            return BlockTags.createOptional(new ResourceLocation(MiningMaster.MOD_ID, name));
+        private static TagKey<Block> tag(String name) {
+            return BlockTags.create(new ResourceLocation(MiningMaster.MOD_ID, name));
         }
     }
 

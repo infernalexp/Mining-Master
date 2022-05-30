@@ -16,11 +16,11 @@
 
 package org.infernalstudios.miningmaster.network;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.simple.SimpleChannel;
 import org.infernalstudios.miningmaster.MiningMaster;
 
 public class MMNetworkHandler {
@@ -38,7 +38,7 @@ public class MMNetworkHandler {
         INSTANCE.messageBuilder(UpdateGemForgePacket.class, index++).encoder(UpdateGemForgePacket::encode).decoder(UpdateGemForgePacket::decode).consumer(UpdateGemForgePacket::handle).add();
     }
 
-    public static <MSG> void sendToPlayer(MSG message, ServerPlayerEntity player) {
+    public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
 

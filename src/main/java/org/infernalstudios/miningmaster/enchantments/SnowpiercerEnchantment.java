@@ -16,15 +16,15 @@
 
 package org.infernalstudios.miningmaster.enchantments;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
@@ -32,17 +32,17 @@ import org.infernalstudios.miningmaster.init.MMTags;
 
 public class SnowpiercerEnchantment extends Enchantment {
 
-    public SnowpiercerEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
-        super(rarityIn, EnchantmentType.ARMOR_LEGS, slots);
+    public SnowpiercerEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
+        super(rarityIn, EnchantmentCategory.ARMOR_LEGS, slots);
     }
 
     @Override
-    public int getMinEnchantability(int enchantmentLevel) {
+    public int getMinCost(int enchantmentLevel) {
         return 20;
     }
 
     @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
+    public int getMaxCost(int enchantmentLevel) {
         return 50;
     }
 
@@ -52,8 +52,8 @@ public class SnowpiercerEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canApply(ItemStack stack) {
-        return this.type.canEnchantItem(stack.getItem());
+    public boolean canEnchant(ItemStack stack) {
+        return this.category.canEnchant(stack.getItem());
     }
 
     @Override
@@ -62,12 +62,12 @@ public class SnowpiercerEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return false;
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return false;
     }
 
@@ -80,17 +80,17 @@ public class SnowpiercerEnchantment extends Enchantment {
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
 
-        if (!livingEntity.world.getBlockState(livingEntity.getPosition().down()).getBlock().isIn(MMTags.Blocks.SNOWPIERCER_BLOCKS) && !livingEntity.world.getBlockState(livingEntity.getPosition()).getBlock().isIn(MMTags.Blocks.SNOWPIERCER_BLOCKS)) {
+        if (!livingEntity.level.getBlockState(livingEntity.blockPosition().below()).is(MMTags.Blocks.SNOWPIERCER_BLOCKS) && !livingEntity.level.getBlockState(livingEntity.blockPosition()).is(MMTags.Blocks.SNOWPIERCER_BLOCKS)) {
             return;
         }
 
-        ItemStack stack = livingEntity.getItemStackFromSlot(EquipmentSlotType.LEGS);
-        ListNBT nbtList = stack.getEnchantmentTagList();
+        ItemStack stack = livingEntity.getItemBySlot(EquipmentSlot.LEGS);
+        ListTag nbtList = stack.getEnchantmentTags();
 
         for (int i = 0; i < nbtList.size(); i++) {
-            CompoundNBT idTag = nbtList.getCompound(i);
+            CompoundTag idTag = nbtList.getCompound(i);
             if (idTag.getString("id").equals(MMEnchantments.SNOWPIERCER.getId().toString())) {
-                livingEntity.addPotionEffect(new EffectInstance(Effects.SPEED, 20, 1));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 1));
             }
         }
     }

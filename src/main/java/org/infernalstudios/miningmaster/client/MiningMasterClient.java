@@ -16,31 +16,54 @@
 
 package org.infernalstudios.miningmaster.client;
 
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.ExtensionPoint;
+import net.minecraft.client.RecipeBookCategories;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.client.ConfigGuiHandler;
+import net.minecraftforge.client.RecipeBookRegistry;
 import net.minecraftforge.fml.ModLoadingContext;
 import org.infernalstudios.miningmaster.client.gui.screen.inventory.GemForgeScreen;
 import org.infernalstudios.miningmaster.config.gui.ConfigScreen;
 import org.infernalstudios.miningmaster.init.MMContainerTypes;
 import org.infernalstudios.miningmaster.init.MMItems;
+import org.infernalstudios.miningmaster.init.MMRecipes;
+
+import java.util.List;
 
 public class MiningMasterClient {
+    private static RecipeBookCategories GEM_FORGE;
+
     public static void init() {
         // Registering Config GUI Extension Point
-        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> (mc, screen) -> new ConfigScreen());
+        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () -> new ConfigGuiHandler.ConfigGuiFactory(((minecraft, screen) -> new ConfigScreen())));
 
-        ItemModelsProperties.registerProperty(MMItems.AIR_MALACHITE_BOW.get(), new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity) -> {
+        ItemProperties.register(MMItems.AIR_MALACHITE_BOW.get(), new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity, entityId) -> {
             if (livingEntity == null) {
                 return 0.0F;
             } else {
-                return livingEntity.getActiveItemStack() != itemStack ? 0.0F : (float) (itemStack.getUseDuration() - livingEntity.getItemInUseCount()) / 20.0F;
+                return livingEntity.getUseItem() != itemStack ? 0.0F : (float) (itemStack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / 20.0F;
             }
         });
 
-        ItemModelsProperties.registerProperty(MMItems.AIR_MALACHITE_BOW.get(), new ResourceLocation("pulling"), (itemStack, clientWorld, livingEntity) -> livingEntity != null && livingEntity.isHandActive() && livingEntity.getActiveItemStack() == itemStack ? 1.0F : 0.0F);
+        ItemProperties.register(MMItems.AIR_MALACHITE_BOW.get(), new ResourceLocation("pulling"), (itemStack, clientWorld, livingEntity, entityId) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F);
 
-        ScreenManager.registerFactory(MMContainerTypes.GEM_FORGE_CONTAINER.get(), GemForgeScreen::new);
+        MenuScreens.register(MMContainerTypes.GEM_FORGE_CONTAINER.get(), GemForgeScreen::new);
+
+        GEM_FORGE = RecipeBookCategories.create("GEM_FORGE", new ItemStack(MMItems.FIRE_RUBY.get()));
+        RecipeBookRegistry.addCategoriesToType(MMRecipes.GEM_FORGE, List.of(GEM_FORGE));
+        RecipeBookRegistry.addCategoriesFinder(MMRecipes.FORGING_RECIPE_TYPE, MiningMasterClient::getForgingCategory);
+    }
+
+    private static RecipeBookCategories getForgingCategory(Recipe<?> recipe) {
+        RecipeType<?> recipeType = recipe.getType();
+        if (recipeType.equals(MMRecipes.FORGING_RECIPE_TYPE)) {
+            return GEM_FORGE;
+        } else {
+            return RecipeBookCategories.UNKNOWN;
+        }
     }
 }

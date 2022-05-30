@@ -1,14 +1,6 @@
 package org.infernalstudios.miningmaster.client.integration.jei;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-
-import org.infernalstudios.miningmaster.MiningMaster;
-import org.infernalstudios.miningmaster.init.MMBlocks;
-import org.infernalstudios.miningmaster.init.MMRecipes;
-
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IAdvancedRegistration;
@@ -18,9 +10,15 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import org.infernalstudios.miningmaster.MiningMaster;
+import org.infernalstudios.miningmaster.init.MMBlocks;
+import org.infernalstudios.miningmaster.init.MMRecipes;
+
+import java.util.Collection;
+import java.util.List;
 
 @JeiPlugin
 public class MiningMasterJEIPlugin implements IModPlugin {
@@ -39,8 +37,8 @@ public class MiningMasterJEIPlugin implements IModPlugin {
     @SuppressWarnings("resource")
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        Collection<IRecipe<?>> recipes = Minecraft.getInstance().world.getRecipeManager().getRecipes();
-        List<IRecipe<?>> gemForgingRecipes = recipes.stream()
+        Collection<Recipe<?>> recipes = Minecraft.getInstance().level.getRecipeManager().getRecipes();
+        List<Recipe<?>> gemForgingRecipes = recipes.stream()
             .filter(recipe -> recipe.getType() == MMRecipes.FORGING_RECIPE_TYPE)
             .collect(ImmutableList.toImmutableList());
         registration.addRecipes(gemForgingRecipes, GemForgeRecipeCategory.UID);

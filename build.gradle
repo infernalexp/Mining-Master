@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle',           name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle',           name: 'ForgeGradle', version: '5.1+', changing: true
         classpath group: 'org.spongepowered',                   name: 'mixingradle', version: '0.7-SNAPSHOT'
         classpath group: 'gradle.plugin.com.modrinth.minotaur', name: 'Minotaur',    version: '1.2.1'
         classpath group: 'gradle.plugin.com.matthewprenger',    name: 'CurseGradle', version: '1.4.0'
@@ -26,7 +26,7 @@ version = config.VERSION
 group = "${config.GROUP}.${config.ARTIFACT}"
 archivesBaseName = "${config.ARCHIVES_BASE_NAME}-${config.MINECRAFT_VERSION}"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
     mappings channel: config.MAPPINGS_CHANNEL, version: config.MAPPINGS_VERSION

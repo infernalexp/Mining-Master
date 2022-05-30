@@ -16,95 +16,110 @@
 
 package org.infernalstudios.miningmaster.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import org.infernalstudios.miningmaster.init.MMTileEntityTypes;
 import org.infernalstudios.miningmaster.tileentities.GemForgeTileEntity;
 
-public class GemForgeBlock extends ContainerBlock {
+import javax.annotation.Nullable;
+
+public class GemForgeBlock extends BaseEntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public GemForgeBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn.isRemote) {
-            return ActionResultType.SUCCESS;
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+        if (worldIn.isClientSide) {
+            return InteractionResult.SUCCESS;
         } else {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            BlockEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof GemForgeTileEntity) {
-                player.openContainer((GemForgeTileEntity)tileentity);
+                player.openMenu((GemForgeTileEntity)tileentity);
             }
 
-            return ActionResultType.CONSUME;
+            return InteractionResult.CONSUME;
         }
     }
 
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-        if (stack.hasDisplayName()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+        if (stack.hasCustomHoverName()) {
+            BlockEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof GemForgeTileEntity) {
-                ((GemForgeTileEntity)tileentity).setCustomName(stack.getDisplayName());
+                ((GemForgeTileEntity)tileentity).setCustomName(stack.getHoverName());
             }
         }
 
     }
 
     @SuppressWarnings("deprecation")
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (!state.matchesBlock(newState.getBlock())) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof GemForgeTileEntity) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (GemForgeTileEntity)tileentity);
-                worldIn.updateComparatorOutputLevel(pos, this);
+                Containers.dropContents(worldIn, pos, (GemForgeTileEntity)tileentity);
+                worldIn.updateNeighbourForOutputSignal(pos, this);
             }
 
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
+            super.onRemove(state, worldIn, pos, newState, isMoving);
         }
     }
 
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return new GemForgeTileEntity();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new GemForgeTileEntity(pos, state);
     }
 
     @Override
-    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-        return state.get(LIT) ? 14 : 0;
+    public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
+        return state.getValue(LIT) ? 14 : 0;
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(LIT, FACING);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        if (!level.isClientSide) {
+            return createTickerHelper(blockEntityType, MMTileEntityTypes.GEM_FORGE_TILE_ENTITY.get(), GemForgeTileEntity::tickForge);
+        } else {
+            return super.getTicker(level, state, blockEntityType);
+        }
     }
 }

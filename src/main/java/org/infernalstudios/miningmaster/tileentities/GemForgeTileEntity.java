@@ -17,27 +17,27 @@
 package org.infernalstudios.miningmaster.tileentities;
 
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IRecipeHelperPopulator;
-import net.minecraft.inventory.IRecipeHolder;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.RecipeItemHelper;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.LockableTileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.RecipeHolder;
+import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.ItemStackHandler;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.blocks.GemForgeBlock;
@@ -50,16 +50,16 @@ import org.infernalstudios.miningmaster.recipes.ForgingRecipe;
 
 import javax.annotation.Nullable;
 
-public class GemForgeTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity, IRecipeHolder, IRecipeHelperPopulator {
-    private final int FORGE_TIME_TOTAL = 300;
+public class GemForgeTileEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
+    private static final int FORGE_TIME_TOTAL = 300;
 
     @Nullable
-    protected ITextComponent customName;
+    protected Component customName;
     private final ItemStackHandler inventory = new ItemStackHandler(10){
         @Override
         protected void onContentsChanged(int slot) {
             super.onContentsChanged(slot);
-            markDirty();
+            setChanged();
         }
     };
 
@@ -70,7 +70,7 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
     private boolean recipeValid;
 
     // I know this is sloppy, but Containers can only track Int Arrays
-    protected final IIntArray forgeData = new IIntArray() {
+    protected final ContainerData forgeData = new ContainerData() {
         public int get(int index) {
             switch(index) {
                 case 0:
@@ -90,8 +90,8 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
             switch(index) {
                 case 0:
                     GemForgeTileEntity.this.forgeActive = k == 1;
-                    if (!GemForgeTileEntity.this.world.isRemote()) {
-                        GemForgeTileEntity.this.world.playSound(null, GemForgeTileEntity.this.pos, MMSounds.GEM_FORGE_COOK.get(), SoundCategory.BLOCKS, 1.0F, GemForgeTileEntity.this.world.getRandom().nextFloat() * 0.4F + 1.0F);
+                    if (!GemForgeTileEntity.this.level.isClientSide()) {
+                        GemForgeTileEntity.this.level.playSound(null, GemForgeTileEntity.this.worldPosition, MMSounds.GEM_FORGE_COOK.get(), SoundSource.BLOCKS, 1.0F, GemForgeTileEntity.this.level.getRandom().nextFloat() * 0.4F + 1.0F);
                     }
                     break;
                 case 1:
@@ -101,7 +101,7 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
             }
         }
 
-        public int size() {
+        public int getCount() {
             return 4;
         }
     };;
@@ -110,42 +110,42 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
     private static final int[] SLOTS_DOWN = new int[]{9};
     private static final int[] SLOTS_HORIZONTAL = new int[]{9};
 
-    public GemForgeTileEntity() {
-        super(MMTileEntityTypes.GEM_FORGE_TILE_ENTITY.get());
+    public GemForgeTileEntity(BlockPos pos, BlockState state) {
+        super(MMTileEntityTypes.GEM_FORGE_TILE_ENTITY.get(), pos, state);
     }
 
-    public void tick() {
-        boolean flag = this.isForging();
+    public static void tickForge(Level level, BlockPos pos, BlockState state, GemForgeTileEntity gemForge) {
+        boolean flag = gemForge.isForging();
         boolean flag1 = false;
-        if (this.isForging()) {
-            ++this.forgeTime;
+        if (gemForge.isForging()) {
+            ++gemForge.forgeTime;
         }
 
-        if (!this.world.isRemote) {
-            ForgingRecipe recipe = this.world.getRecipeManager().getRecipe(MMRecipes.FORGING_RECIPE_TYPE, this, this.world).orElse(null);
-            this.recipeValid = this.canForge(recipe);
+        if (!level.isClientSide) {
+            ForgingRecipe recipe = level.getRecipeManager().getRecipeFor(MMRecipes.FORGING_RECIPE_TYPE, gemForge, level).orElse(null);
+            gemForge.recipeValid = gemForge.canForge(recipe);
 
-            if (this.recipeValid && this.forgeActive) {
-                ++this.forgeTime;
+            if (gemForge.recipeValid && gemForge.forgeActive) {
+                ++gemForge.forgeTime;
 
-                if (this.forgeTime >= FORGE_TIME_TOTAL) {
-                    this.forgeTime = 0;
-                    this.forge(recipe);
+                if (gemForge.forgeTime >= FORGE_TIME_TOTAL) {
+                    gemForge.forgeTime = 0;
+                    gemForge.forge(recipe);
                     flag1 = true;
                 }
             } else {
-                this.forgeActive = false;
-                this.forgeTime = 0;
+                gemForge.forgeActive = false;
+                gemForge.forgeTime = 0;
             }
 
-            if (flag != this.isForging()) {
+            if (flag != gemForge.isForging()) {
                 flag1 = true;
-                this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(GemForgeBlock.LIT, this.isForging()), 3);
+                level.setBlock(pos, state.setValue(GemForgeBlock.LIT, gemForge.isForging()), 3);
             }
         }
 
         if (flag1) {
-            this.markDirty();
+            gemForge.setChanged();
         }
     }
 
@@ -153,62 +153,55 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
         return this.forgeTime > 0;
     }
 
-    @Nullable
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 3, this.getUpdateTag());
-    }
-
-    public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
-    }
-
-    public void setCustomName(ITextComponent name) {
+    @Override
+    public void setCustomName(Component name) {
         this.customName = name;
     }
 
-    public void read(BlockState state, CompoundNBT nbt) {
-        super.read(state, nbt);
+    @Override
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         inventory.deserializeNBT(nbt.getCompound("inv"));
-        CompoundNBT compoundnbt = nbt.getCompound("RecipesUsed");
+        CompoundTag compoundnbt = nbt.getCompound("RecipesUsed");
 
         this.forgeActive = nbt.getBoolean("ForgeActive");
         this.recipeValid = nbt.getBoolean("RecipeValid");
 
-        for(String s : compoundnbt.keySet()) {
+        for(String s : compoundnbt.getAllKeys()) {
             this.recipes.put(new ResourceLocation(s), compoundnbt.getInt(s));
         }
 
     }
 
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    @Override
+    public void saveAdditional(CompoundTag compound) {
+        super.saveAdditional(compound);
         compound.put("inv", inventory.serializeNBT());
-        CompoundNBT compoundnbt = new CompoundNBT();
+        CompoundTag compoundnbt = new CompoundTag();
         this.recipes.forEach((recipeId, craftedAmount) -> {
             compoundnbt.putInt(recipeId.toString(), craftedAmount);
         });
         compound.put("RecipesUsed", compoundnbt);
         compound.putBoolean("ForgeActive", this.forgeActive);
         compound.putBoolean("RecipeValid", this.recipeValid);
-        return compound;
     }
 
-    protected Container createMenu(int id, PlayerInventory inv) {
+    protected AbstractContainerMenu createMenu(int id, Inventory inv) {
         return new GemForgeContainer(id, inv, this.inventory, this.forgeData);
     }
 
-    public ITextComponent getDisplayName() {
-        return this.customName != null ? this.customName : new TranslationTextComponent(MiningMaster.MOD_ID + ':' + "container.gem_forge");
+    public Component getDisplayName() {
+        return this.customName != null ? this.customName : new TranslatableComponent(MiningMaster.MOD_ID + ':' + "container.gem_forge");
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
+    protected Component getDefaultName() {
         return null;
     }
 
     protected boolean canForge(@Nullable ForgingRecipe recipeIn) {
         if (recipeIn != null) {
-            ItemStack result = recipeIn.getCraftingResult(this);
+            ItemStack result = recipeIn.assemble(this);
 
             return !result.isEmpty();
         } else {
@@ -218,22 +211,22 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
 
     private void forge(@Nullable ForgingRecipe recipe) {
         if (recipe != null && this.canForge(recipe)) {
-            ItemStack result = recipe.getCraftingResult(this);
+            ItemStack result = recipe.assemble(this);
 
             this.inventory.setStackInSlot(9, result.copy());
 
-            if (!this.world.isRemote) {
+            if (!this.level.isClientSide) {
                 this.setRecipeUsed(recipe);
             }
 
             for(int i = 0; i < 9; ++i) {
-                this.decrStackSize(i, 1);
+                this.removeItem(i, 1);
             }
 
             this.forgeActive = false;
 
-            if (!GemForgeTileEntity.this.world.isRemote()) {
-                GemForgeTileEntity.this.world.playSound(null, GemForgeTileEntity.this.pos, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundCategory.BLOCKS, 1.0F, GemForgeTileEntity.this.world.getRandom().nextFloat() * 0.8F + 0.25F);
+            if (!GemForgeTileEntity.this.level.isClientSide()) {
+                GemForgeTileEntity.this.level.playSound(null, GemForgeTileEntity.this.worldPosition, SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.BLOCKS, 1.0F, GemForgeTileEntity.this.level.getRandom().nextFloat() * 0.8F + 0.25F);
             }
         }
     }
@@ -248,19 +241,19 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
     }
 
     @Override
-    public int getInventoryStackLimit() {
+    public int getMaxStackSize() {
         return 1;
     }
 
-    public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
-        return this.isItemValidForSlot(index, itemStackIn);
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStackIn, @Nullable Direction direction) {
+        return this.canPlaceItem(index, itemStackIn);
     }
 
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
-        return !stack.getItem().isIn(MMTags.Items.GEMS) && !stack.getItem().isIn(MMTags.Items.CATALYSTS);
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+        return !stack.is(MMTags.Items.GEMS) && !stack.is(MMTags.Items.CATALYSTS);
     }
 
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return this.inventory.getSlots();
     }
 
@@ -275,58 +268,58 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
     }
 
     // Returns the stack in the given slot.
-    public ItemStack getStackInSlot(int index) {
+    public ItemStack getItem(int index) {
         return this.inventory.getStackInSlot(index);
     }
 
     // Removes up to a specified number of items from an inventory slot and returns them in a new stack.
-    public ItemStack decrStackSize(int index, int count) {
+    public ItemStack removeItem(int index, int count) {
         return !this.inventory.getStackInSlot(index).isEmpty() && count > 0 ? this.inventory.getStackInSlot(index).split(count) : ItemStack.EMPTY;
     }
 
     // Removes a stack from the given slot and returns it.
-    public ItemStack removeStackFromSlot(int index) {
+    public ItemStack removeItemNoUpdate(int index) {
         ItemStack itemStack = this.inventory.getStackInSlot(index);
         this.inventory.setStackInSlot(index, ItemStack.EMPTY);
         return itemStack;
     }
 
     // Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
-    public void setInventorySlotContents(int index, ItemStack stack) {
+    public void setItem(int index, ItemStack stack) {
         this.inventory.setStackInSlot(index, stack);
-        if (stack.getCount() > this.getInventoryStackLimit()) {
-            stack.setCount(this.getInventoryStackLimit());
+        if (stack.getCount() > this.getMaxStackSize()) {
+            stack.setCount(this.getMaxStackSize());
         }
-        this.markDirty();
+        this.setChanged();
     }
 
-    public boolean isUsableByPlayer(PlayerEntity player) {
-        if (this.world.getTileEntity(this.pos) != this) {
+    public boolean stillValid(Player player) {
+        if (this.level.getBlockEntity(this.worldPosition) != this) {
             System.out.println(false);
             return false;
         } else {
             System.out.println(true);
-            return player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+            return player.distanceToSqr((double)this.worldPosition.getX() + 0.5D, (double)this.worldPosition.getY() + 0.5D, (double)this.worldPosition.getZ() + 0.5D) <= 64.0D;
         }
     }
 
-    public boolean isItemValidForSlot(int index, ItemStack stack) {
-        if (this.getStackInSlot(index).getCount() != 0) {
+    public boolean canPlaceItem(int index, ItemStack stack) {
+        if (this.getItem(index).getCount() != 0) {
             return false;
         } else if (index < 9) {
-            return stack.getItem().isIn(MMTags.Items.GEMS);
+            return stack.is(MMTags.Items.GEMS);
         } else {
-            return stack.getItem().isIn(MMTags.Items.CATALYSTS);
+            return stack.is(MMTags.Items.CATALYSTS);
         }
     }
 
-    public void clear() {
+    public void clearContent() {
         for(int i = 0; i < 10; i++) {
             this.inventory.setStackInSlot(i, ItemStack.EMPTY);
         }
     }
 
-    public void setRecipeUsed(@Nullable IRecipe<?> recipe) {
+    public void setRecipeUsed(@Nullable Recipe<?> recipe) {
         if (recipe != null) {
             ResourceLocation resourcelocation = recipe.getId();
             this.recipes.addTo(resourcelocation, 1);
@@ -334,11 +327,11 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
     }
 
     @Nullable
-    public IRecipe<?> getRecipeUsed() {
+    public Recipe<?> getRecipeUsed() {
         return null;
     }
 
-    public void fillStackedContents(RecipeItemHelper helper) {
+    public void fillStackedContents(StackedContents helper) {
         for(int i = 0; i < 10; i++) {
             helper.accountStack(this.inventory.getStackInSlot(i));
         }
@@ -349,7 +342,7 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
 
     @Override
     public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable Direction facing) {
-        if (!this.removed && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (!this.remove && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (facing == Direction.UP)
                 return handlers[0].cast();
             else if (facing == Direction.DOWN)
@@ -361,7 +354,7 @@ public class GemForgeTileEntity extends LockableTileEntity implements ISidedInve
     }
 
     @Override
-    protected void invalidateCaps() {
+    public void invalidateCaps() {
         super.invalidateCaps();
         for (int x = 0; x < handlers.length; x++)
             handlers[x].invalidate();

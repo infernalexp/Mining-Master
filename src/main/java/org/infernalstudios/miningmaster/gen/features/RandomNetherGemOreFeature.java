@@ -17,11 +17,11 @@
 package org.infernalstudios.miningmaster.gen.features;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import org.infernalstudios.miningmaster.config.MiningMasterConfig;
 import org.infernalstudios.miningmaster.gen.features.config.RandomNetherGemOreFeatureConfig;
 import org.infernalstudios.miningmaster.init.MMBlocks;
@@ -41,21 +41,25 @@ public class RandomNetherGemOreFeature extends Feature<RandomNetherGemOreFeature
 
         // Adds all enabled ores to the list, double copies for common to give them double chance of being chosen
         if (MiningMasterConfig.CONFIG.powerPyriteEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.POWER_PYRITE_ORE.get().getDefaultState());
-            weightedOreStatesEnabled.add(MMBlocks.POWER_PYRITE_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.POWER_PYRITE_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.POWER_PYRITE_ORE.get().defaultBlockState());
         }
 
         if (MiningMasterConfig.CONFIG.kineticOpalEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.KINETIC_OPAL_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.KINETIC_OPAL_ORE.get().defaultBlockState());
         }
 
         if (MiningMasterConfig.CONFIG.heartRhodoniteEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.HEART_RHODONITE_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.HEART_RHODONITE_ORE.get().defaultBlockState());
         }
     }
 
     @Override
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, RandomNetherGemOreFeatureConfig config) {
+    public boolean place(FeaturePlaceContext<RandomNetherGemOreFeatureConfig> context) {
+        Random rand = context.random();
+        BlockPos pos = context.origin();
+        WorldGenLevel level = context.level();
+        RandomNetherGemOreFeatureConfig config = context.config();
 
         if (weightedOreStatesEnabled.isEmpty()) {
             return false;
@@ -63,8 +67,8 @@ public class RandomNetherGemOreFeature extends Feature<RandomNetherGemOreFeature
 
         BlockState blockState = weightedOreStatesEnabled.get(rand.nextInt(weightedOreStatesEnabled.size()));
 
-        if (config.target.test(reader.getBlockState(pos), rand)) {
-            reader.setBlockState(pos, blockState, 2);
+        if (config.target.test(level.getBlockState(pos), rand)) {
+            level.setBlock(pos, blockState, 2);
         }
 
         return true;

@@ -16,16 +16,16 @@
 
 package org.infernalstudios.miningmaster.enchantments;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.infernalstudios.miningmaster.access.LivingEntityAccess;
@@ -35,17 +35,17 @@ import java.util.Random;
 
 public class GraceEnchantment extends Enchantment {
 
-    public GraceEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
-        super(rarityIn, EnchantmentType.ARMOR_CHEST, slots);
+    public GraceEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
+        super(rarityIn, EnchantmentCategory.ARMOR_CHEST, slots);
     }
 
     @Override
-    public int getMinEnchantability(int enchantmentLevel) {
+    public int getMinCost(int enchantmentLevel) {
         return 20;
     }
 
     @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
+    public int getMaxCost(int enchantmentLevel) {
         return 50;
     }
 
@@ -55,13 +55,13 @@ public class GraceEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return false;
     }
 
     @Override
-    public boolean canApply(ItemStack stack) {
-        return this.type.canEnchantItem(stack.getItem());
+    public boolean canEnchant(ItemStack stack) {
+        return this.category.canEnchant(stack.getItem());
     }
 
     @Override
@@ -70,7 +70,7 @@ public class GraceEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return false;
     }
 
@@ -82,28 +82,28 @@ public class GraceEnchantment extends Enchantment {
     @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
-        PlayerEntity playerEntity = null;
+        Player playerEntity = null;
 
-        if (livingEntity instanceof PlayerEntity) {
-            playerEntity = (PlayerEntity) livingEntity;
+        if (livingEntity instanceof Player) {
+            playerEntity = (Player) livingEntity;
         }
 
         Random rand = new Random();
 
-        ItemStack stack = livingEntity.getItemStackFromSlot(EquipmentSlotType.CHEST);
-        ListNBT nbtList = stack.getEnchantmentTagList();
+        ItemStack stack = livingEntity.getItemBySlot(EquipmentSlot.CHEST);
+        ListTag nbtList = stack.getEnchantmentTags();
 
         if (livingEntity.isInWater()) {
             for (int i = 0; i < nbtList.size(); i++) {
-                CompoundNBT idTag = nbtList.getCompound(i);
+                CompoundTag idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.GRACE.getId().toString())) {
-                    if (livingEntity.isPotionActive(Effects.DOLPHINS_GRACE) && playerEntity != null && !playerEntity.isCreative() && rand.nextInt(100) == 0) {
-                        stack.damageItem(1, livingEntity, (onBroken) -> {
-                            onBroken.sendBreakAnimation(EquipmentSlotType.CHEST);
+                    if (livingEntity.hasEffect(MobEffects.DOLPHINS_GRACE) && playerEntity != null && !playerEntity.isCreative() && rand.nextInt(100) == 0) {
+                        stack.hurtAndBreak(1, livingEntity, (onBroken) -> {
+                            onBroken.broadcastBreakEvent(EquipmentSlot.CHEST);
                         });
                     }
                     if (((LivingEntityAccess) livingEntity).getGraceRecharged()) {
-                        livingEntity.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 120 * idTag.getInt("lvl")));
+                        livingEntity.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 120 * idTag.getInt("lvl")));
                         ((LivingEntityAccess) livingEntity).setGraceRecharged(false);
                     }
                 }

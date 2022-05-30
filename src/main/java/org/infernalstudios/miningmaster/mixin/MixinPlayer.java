@@ -16,18 +16,19 @@
 
 package org.infernalstudios.miningmaster.mixin;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
-import org.infernalstudios.miningmaster.init.MMTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,19 +36,19 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Mixin(PlayerEntity.class)
-public abstract class MixinPlayerEntity {
+@Mixin(Player.class)
+public abstract class MixinPlayer {
 
-    @Shadow public abstract void livingTick();
+    @Shadow public abstract void aiStep();
 
-    @Inject(method = "attackTargetEntityWithCurrentItem", at = @At(target = "Lnet/minecraft/entity/Entity;attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z", value = "INVOKE_ASSIGN"), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void MM_calculateLeechingHeal(Entity targetEntity, CallbackInfo ci, float f, float f1, float f2, boolean flag, boolean flag1, float i, boolean flag2, net.minecraftforge.event.entity.player.CriticalHitEvent hitResult, boolean flag3, double d0, float f4, boolean flag4, int j, Vector3d vector3d, boolean flag5) {
+    @Inject(method = "attack", at = @At(target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z", value = "INVOKE_ASSIGN"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    private void MM_calculateLeechingHeal(Entity targetEntity, CallbackInfo ci, float f, float f1, float f2, boolean flag, boolean flag1, float i, boolean flag2, CriticalHitEvent hitResult, boolean flag3, double d0, float f4, boolean flag4, int j, Vec3 vec3, boolean flag5) {
         if (flag5) {
-            ItemStack itemStack = ((PlayerEntity) (Object) this).getHeldItemMainhand();
-            ListNBT nbtList = itemStack.getEnchantmentTagList();
+            ItemStack itemStack = ((Player) (Object) this).getMainHandItem();
+            ListTag nbtList = itemStack.getEnchantmentTags();
 
             for (int k = 0; k < nbtList.size(); k++) {
-                CompoundNBT idTag = nbtList.getCompound(k);
+                CompoundTag idTag = nbtList.getCompound(k);
 
                 if (idTag.getString("id").equals(MMEnchantments.LEECHING.getId().toString())) {
                     applyLeechingEffects(idTag.getInt("lvl"), f);
@@ -61,15 +62,15 @@ public abstract class MixinPlayerEntity {
     private void applyFreezingEffects(Entity targetEntity, int level, float damageAmount) {
         if (targetEntity instanceof LivingEntity) {
             LivingEntity livingTarget = (LivingEntity) targetEntity;
-            livingTarget.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 60, level));
+            livingTarget.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, level));
         }
 
-        if (targetEntity.getType().isContained(MMTags.EntityTypes.FIRE_ENTITIES)) {
-            targetEntity.attackEntityFrom(DamageSource.causePlayerDamage((PlayerEntity) (Object) this),damageAmount * 0.3F * level);
+        if (targetEntity.getType().is(EntityTypeTags.FREEZE_HURTS_EXTRA_TYPES)) {
+            targetEntity.hurt(DamageSource.playerAttack((Player) (Object) this),damageAmount * 0.3F * level);
         }
     }
 
     private void applyLeechingEffects(int level, float damageAmount) {
-        ((PlayerEntity) (Object) this).heal(damageAmount * 0.25F * level);
+        ((Player) (Object) this).heal(damageAmount * 0.25F * level);
     }
 }

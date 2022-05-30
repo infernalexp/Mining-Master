@@ -16,16 +16,16 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.blocks.GemForgeBlock;
 import org.infernalstudios.miningmaster.blocks.GemOreBlock;
@@ -36,16 +36,16 @@ public class MMBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MiningMaster.MOD_ID);
 
     // ORES
-    public static final RegistryObject<Block> FIRE_RUBY_ORE = registerBlockWithDefaultItem("fire_ruby_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> ICE_SAPPHIRE_ORE = registerBlockWithDefaultItem("ice_sapphire_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> SPIRIT_GARNET_ORE = registerBlockWithDefaultItem("spirit_garnet_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> HASTE_PERIDOT_ORE = registerBlockWithDefaultItem("haste_peridot_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> LUCKY_CITRINE_ORE = registerBlockWithDefaultItem("lucky_citrine_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> DIVE_AQUAMARINE_ORE = registerBlockWithDefaultItem("dive_aquamarine_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> HEART_RHODONITE_ORE = registerBlockWithDefaultItem("heart_rhodonite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> POWER_PYRITE_ORE = registerBlockWithDefaultItem("power_pyrite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> KINETIC_OPAL_ORE = registerBlockWithDefaultItem("kinetic_opal_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> AIR_MALACHITE_ORE = registerBlockWithDefaultItem("air_malachite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> FIRE_RUBY_ORE = registerBlockWithDefaultItem("fire_ruby_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> ICE_SAPPHIRE_ORE = registerBlockWithDefaultItem("ice_sapphire_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> SPIRIT_GARNET_ORE = registerBlockWithDefaultItem("spirit_garnet_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> HASTE_PERIDOT_ORE = registerBlockWithDefaultItem("haste_peridot_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> LUCKY_CITRINE_ORE = registerBlockWithDefaultItem("lucky_citrine_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> DIVE_AQUAMARINE_ORE = registerBlockWithDefaultItem("dive_aquamarine_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> HEART_RHODONITE_ORE = registerBlockWithDefaultItem("heart_rhodonite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> POWER_PYRITE_ORE = registerBlockWithDefaultItem("power_pyrite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> KINETIC_OPAL_ORE = registerBlockWithDefaultItem("kinetic_opal_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> AIR_MALACHITE_ORE = registerBlockWithDefaultItem("air_malachite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
 
     // GEM BLOCKS
     public static final RegistryObject<Block> FIRE_RUBY_BLOCK = registerBlockWithDefaultItem("fire_ruby_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
@@ -61,28 +61,28 @@ public class MMBlocks {
 
     //MISC BLOCKS
     public static final RegistryObject<Block> MALACORE = registerBlockWithDefaultItem("malacore", () -> new Block(getProperties(Blocks.END_STONE)));
-    public static final RegistryObject<Block> MALACRUST = registerBlockWithDefaultItem("malacrust", () -> new Block(getProperties(Blocks.END_STONE).hardnessAndResistance(22.5F)));
+    public static final RegistryObject<Block> MALACRUST = registerBlockWithDefaultItem("malacrust", () -> new Block(getProperties(Blocks.END_STONE).strength(22.5F)));
     public static final RegistryObject<Block> GEM_FORGE = registerBlockWithDefaultItem("gem_forge", () -> new GemForgeBlock(getProperties(Blocks.FURNACE)));
 
-    public static AbstractBlock.Properties getProperties(Material materialIn, float hardnessAndResistanceIn) {
+    public static BlockBehaviour.Properties getProperties(Material materialIn, float hardnessAndResistanceIn) {
         return getProperties(materialIn, hardnessAndResistanceIn, hardnessAndResistanceIn);
     }
 
-    public static AbstractBlock.Properties getProperties(Material materialIn, float hardnessIn, float resistanceIn) {
-        return AbstractBlock.Properties.create(materialIn).hardnessAndResistance(hardnessIn, resistanceIn);
+    public static BlockBehaviour.Properties getProperties(Material materialIn, float hardnessIn, float resistanceIn) {
+        return BlockBehaviour.Properties.of(materialIn).strength(hardnessIn, resistanceIn);
     }
 
-    public static AbstractBlock.Properties getProperties(Material materialIn) {
-        return AbstractBlock.Properties.create(materialIn).zeroHardnessAndResistance();
+    public static BlockBehaviour.Properties getProperties(Material materialIn) {
+        return BlockBehaviour.Properties.of(materialIn).instabreak();
     }
 
-    public static AbstractBlock.Properties getProperties(Block block) {
-        return AbstractBlock.Properties.from(block);
+    public static BlockBehaviour.Properties getProperties(Block block) {
+        return BlockBehaviour.Properties.copy(block);
     }
 
     public static <T extends Block> RegistryObject<T> registerBlockWithDefaultItem(String name, Supplier<? extends T> blockSupplier) {
         RegistryObject<T> block = BLOCKS.register(name, blockSupplier);
-        MMItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(MiningMaster.TAB)));
+        MMItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(MiningMaster.TAB)));
         return block;
     }
 

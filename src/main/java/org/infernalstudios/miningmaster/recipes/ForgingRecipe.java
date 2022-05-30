@@ -21,20 +21,19 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.infernalstudios.miningmaster.init.MMRecipes;
@@ -56,14 +55,14 @@ public class ForgingRecipe implements IForgingRecipe {
         this.result = result;
     }
 
-    public boolean matches(IInventory inv, World worldIn) {
-        boolean catalystMatches = this.catalyst.test(inv.getStackInSlot(9));
+    public boolean matches(Container inv, Level worldIn) {
+        boolean catalystMatches = this.catalyst.test(inv.getItem(9));
 
         java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
         int i = 0;
 
         for(int j = 0; j < 9; ++j) {
-            ItemStack itemstack = inv.getStackInSlot(j);
+            ItemStack itemstack = inv.getItem(j);
             if (!itemstack.isEmpty()) {
                 ++i;
                 inputs.add(itemstack);
@@ -77,29 +76,29 @@ public class ForgingRecipe implements IForgingRecipe {
         ItemStack itemstack = this.result.copy();
         
         for (Pair<Enchantment, Integer> enchantment : this.enchantments) {
-            itemstack.addEnchantment(enchantment.getFirst(), enchantment.getSecond());
+            itemstack.enchant(enchantment.getFirst(), enchantment.getSecond());
         }
         
         return itemstack;
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory inv) {
+    public ItemStack assemble(Container inv) {
         ItemStack itemstack = this.result.copy();
-        CompoundNBT compoundnbt = inv.getStackInSlot(0).getTag();
+        CompoundTag compoundnbt = inv.getItem(0).getTag();
         if (compoundnbt != null) {
             itemstack.setTag(compoundnbt.copy());
         }
 
         for (Pair<Enchantment, Integer> enchantment : this.enchantments) {
-            itemstack.addEnchantment(enchantment.getFirst(), enchantment.getSecond());
+            itemstack.enchant(enchantment.getFirst(), enchantment.getSecond());
         }
 
         return itemstack;
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return this.result;
     }
 
@@ -117,45 +116,45 @@ public class ForgingRecipe implements IForgingRecipe {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return MMRecipes.FORGING_RECIPE.get();
     }
 
     public static ItemStack deserializeItem(JsonObject object) {
-        String s = JSONUtils.getString(object, "item");
-        Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryCreate(s));
+        String s = GsonHelper.getAsString(object, "item");
+        Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(s));
         if (item == null) {
             throw new JsonSyntaxException("Unknown item '" + s + "'");
         }
         if (object.has("data")) {
             throw new JsonParseException("Disallowed data tag found");
         } else {
-            int i = JSONUtils.getInt(object, "count", 1);
+            int i = GsonHelper.getAsInt(object, "count", 1);
             return net.minecraftforge.common.crafting.CraftingHelper.getItemStack(object, true);
         }
     }
 
-    public static class ForgingRecipeType implements IRecipeType<ForgingRecipe> {
+    public static class ForgingRecipeType implements RecipeType<ForgingRecipe> {
         @Override
         public String toString() {
             return ForgingRecipe.TYPE_ID.toString();
         }
     }
 
-    public static class ForgingRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ForgingRecipe> {
+    public static class ForgingRecipeSerializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ForgingRecipe> {
 
         @Override
-        public ForgingRecipe read(ResourceLocation recipeId, JsonObject json) {
-            NonNullList<Ingredient> gemList = readIngredients(JSONUtils.getJsonArray(json, "gems"));
-            NonNullList<Pair<Enchantment,Integer>> enchantmentList = readEnchantments(JSONUtils.getJsonArray(json, "enchantments"));
+        public ForgingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+            NonNullList<Ingredient> gemList = readIngredients(GsonHelper.getAsJsonArray(json, "gems"));
+            NonNullList<Pair<Enchantment,Integer>> enchantmentList = readEnchantments(GsonHelper.getAsJsonArray(json, "enchantments"));
 
             if (gemList.isEmpty()) {
                 throw new JsonParseException("No gems for forging recipe");
             } else if (gemList.size() > 9) {
                 throw new JsonParseException("Too many gems for forging recipe the max is 9");
             } else {
-                ItemStack result = ForgingRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-                Ingredient catalyst = Ingredient.deserialize(JSONUtils.getJsonObject(json, "catalyst"));
+                ItemStack result = ForgingRecipe.deserializeItem(GsonHelper.getAsJsonObject(json, "result"));
+                Ingredient catalyst = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "catalyst"));
 
                 return new ForgingRecipe(recipeId, catalyst, gemList, enchantmentList, result);
             }
@@ -165,8 +164,8 @@ public class ForgingRecipe implements IForgingRecipe {
             NonNullList<Ingredient> nonnulllist = NonNullList.create();
 
             for(int i = 0; i < ingredientArray.size(); ++i) {
-                Ingredient ingredient = Ingredient.deserialize(ingredientArray.get(i));
-                if (!ingredient.hasNoMatchingItems()) {
+                Ingredient ingredient = Ingredient.fromJson(ingredientArray.get(i));
+                if (!ingredient.isEmpty()) {
                     nonnulllist.add(ingredient);
                 }
             }
@@ -178,8 +177,8 @@ public class ForgingRecipe implements IForgingRecipe {
             NonNullList<Pair<Enchantment,Integer>> enchantments = NonNullList.create();
 
             for(int i = 0; i < enchantmentArray.size(); ++i) {
-                Enchantment enchantment = parseEnchantment(JSONUtils.getJsonObject(enchantmentArray.get(i),"enchantment"));
-                int lvl = parseEnchantmentLevel(JSONUtils.getJsonObject(enchantmentArray.get(i), "lvl"));
+                Enchantment enchantment = parseEnchantment(GsonHelper.convertToJsonObject(enchantmentArray.get(i),"enchantment"));
+                int lvl = parseEnchantmentLevel(GsonHelper.convertToJsonObject(enchantmentArray.get(i), "lvl"));
 
                 enchantments.add(new Pair<>(enchantment, lvl));
             }
@@ -191,7 +190,7 @@ public class ForgingRecipe implements IForgingRecipe {
             if (object.isJsonArray()) {
                 throw new JsonSyntaxException("Expected object to be a single Enchantment");
             }
-            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(JSONUtils.getString(object, "enchantment")));
+            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(GsonHelper.getAsString(object, "enchantment")));
 
             if (enchantment == null) {
                 throw new JsonSyntaxException("No valid Enchantment name supplied");
@@ -204,18 +203,18 @@ public class ForgingRecipe implements IForgingRecipe {
             if (object.isJsonArray()) {
                 throw new JsonSyntaxException("Expected object to be a single integer");
             }
-            return JSONUtils.getInt(object, "lvl");
+            return GsonHelper.getAsInt(object, "lvl");
         }
 
         @Nullable
         @Override
-        public ForgingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-            Ingredient catalyst = Ingredient.read(buffer);
+        public ForgingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+            Ingredient catalyst = Ingredient.fromNetwork(buffer);
             int i = buffer.readVarInt();
             NonNullList<Ingredient> gemList = NonNullList.withSize(i, Ingredient.EMPTY);
 
             for(int j = 0; j < gemList.size(); j++) {
-                gemList.set(j, Ingredient.read(buffer));
+                gemList.set(j, Ingredient.fromNetwork(buffer));
             }
 
             int k = buffer.readVarInt();
@@ -228,17 +227,17 @@ public class ForgingRecipe implements IForgingRecipe {
                 }
             }
 
-            ItemStack result = buffer.readItemStack();
+            ItemStack result = buffer.readItem();
             return new ForgingRecipe(recipeId, catalyst, gemList, enchantmentList, result);
         }
 
         @Override
-        public void write(PacketBuffer buffer, ForgingRecipe recipe) {
-            recipe.catalyst.write(buffer);
+        public void toNetwork(FriendlyByteBuf buffer, ForgingRecipe recipe) {
+            recipe.catalyst.toNetwork(buffer);
             buffer.writeVarInt(recipe.recipeGems.size());
 
             for(Ingredient ingredient : recipe.recipeGems) {
-                ingredient.write(buffer);
+                ingredient.toNetwork(buffer);
             }
 
             buffer.writeVarInt(recipe.enchantments.size());
@@ -247,7 +246,7 @@ public class ForgingRecipe implements IForgingRecipe {
                 buffer.writeVarInt(enchantment.getSecond());
             }
 
-            buffer.writeItemStack(recipe.result);
+            buffer.writeItem(recipe.result);
         }
     }
 }

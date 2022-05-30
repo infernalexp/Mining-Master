@@ -21,24 +21,23 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.SmithingRecipe;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.UpgradeRecipe;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.infernalstudios.miningmaster.init.MMRecipes;
@@ -46,7 +45,7 @@ import org.infernalstudios.miningmaster.init.MMRecipes;
 import javax.annotation.Nullable;
 import java.util.Map;
 
-public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInventory> {
+public class GemSmithingRecipe extends UpgradeRecipe implements Recipe<Container> {
     private final Ingredient blacklist;
     private final ItemStack gem;
     private final NonNullList<Enchantment> enchantments;
@@ -61,14 +60,14 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
     }
 
     @Override
-    public boolean matches(IInventory inv, World worldIn) {
-        return !this.blacklist.test(inv.getStackInSlot(0)) && this.gem.isItemEqual(inv.getStackInSlot(1)) && getCraftingResult(inv) != null;
+    public boolean matches(Container inv, Level worldIn) {
+        return !this.blacklist.test(inv.getItem(0)) && this.gem.sameItem(inv.getItem(1)) && assemble(inv) != null;
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory inv) {
-        ItemStack itemstack = inv.getStackInSlot(0).copy();
-        CompoundNBT compoundnbt = inv.getStackInSlot(0).getTag();
+    public ItemStack assemble(Container inv) {
+        ItemStack itemstack = inv.getItem(0).copy();
+        CompoundTag compoundnbt = inv.getItem(0).getTag();
         if (compoundnbt != null) {
             itemstack.setTag(compoundnbt.copy());
         }
@@ -77,11 +76,11 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
 
         outerLoop:
         for (Enchantment enchantment : enchantments) {
-            if (enchantment.canApply(itemstack) && areEnchantsCompatible(itemstack, enchantment)) {
-                ListNBT nbtList = itemstack.getEnchantmentTagList();
+            if (enchantment.canEnchant(itemstack) && areEnchantsCompatible(itemstack, enchantment)) {
+                ListTag nbtList = itemstack.getEnchantmentTags();
 
                 for (int i = 0; i < nbtList.size(); i++) {
-                    CompoundNBT idTag = nbtList.getCompound(i);
+                    CompoundTag idTag = nbtList.getCompound(i);
 
                     if (idTag.getString("id").equals(enchantment.getRegistryName().toString())) {
                         int targetLevel = idTag.getInt("lvl") + 1;
@@ -90,13 +89,13 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
                         }
                         itemEnchanted = true;
                         nbtList.remove(i);
-                        itemstack.addEnchantment(enchantment, targetLevel);
+                        itemstack.enchant(enchantment, targetLevel);
                         break outerLoop;
                     }
                 }
 
                 itemEnchanted = true;
-                itemstack.addEnchantment(enchantment, 1);
+                itemstack.enchant(enchantment, 1);
                 break;
             }
         }
@@ -115,12 +114,12 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
     }
 
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return width * height >= 2;
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return ItemStack.EMPTY;
     }
 
@@ -130,35 +129,35 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return MMRecipes.GEM_SMITHING_RECIPE.get();
     }
 
     @Override
-    public IRecipeType<?> getType() {
-        return IRecipeType.SMITHING;
+    public RecipeType<?> getType() {
+        return RecipeType.SMITHING;
     }
 
     @Override
-    public boolean isDynamic() {
+    public boolean isSpecial() {
         return true;
     }
 
     public static ItemStack deserializeItem(JsonObject object) {
-        String s = JSONUtils.getString(object, "item");
-        Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryCreate(s));
+        String s = GsonHelper.getAsString(object, "item");
+        Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(s));
         if (item == null) {
             throw new JsonSyntaxException("Unknown item '" + s + "'");
         }
         if (object.has("data")) {
             throw new JsonParseException("Disallowed data tag found");
         } else {
-            int i = JSONUtils.getInt(object, "count", 1);
+            int i = GsonHelper.getAsInt(object, "count", 1);
             return net.minecraftforge.common.crafting.CraftingHelper.getItemStack(object, true);
         }
     }
 
-    public static class GemSmithingRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<GemSmithingRecipe> {
+    public static class GemSmithingRecipeSerializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<GemSmithingRecipe> {
 
         private static NonNullList<Enchantment> readEnchantments(JsonArray enchantmentArray) {
             NonNullList<Enchantment> enchantments = NonNullList.create();
@@ -175,7 +174,7 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
             if (element.isJsonArray()) {
                 throw new JsonSyntaxException("Expected object to be a single Enchantment");
             }
-            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryCreate(JSONUtils.getString(element, "enchantment")));
+            Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(ResourceLocation.tryParse(GsonHelper.convertToString(element, "enchantment")));
 
             if (enchantment == null) {
                 throw new JsonSyntaxException("No valid Enchantment name supplied");
@@ -185,10 +184,10 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
         }
 
         @Override
-        public GemSmithingRecipe read(ResourceLocation recipeId, JsonObject json) {
-            Ingredient ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "blacklist"));
-            ItemStack gem = GemSmithingRecipe.deserializeItem(JSONUtils.getJsonObject(json, "gem"));
-            NonNullList<Enchantment> enchantmentList = readEnchantments(JSONUtils.getJsonArray(json, "enchantments"));
+        public GemSmithingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+            Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "blacklist"));
+            ItemStack gem = GemSmithingRecipe.deserializeItem(GsonHelper.getAsJsonObject(json, "gem"));
+            NonNullList<Enchantment> enchantmentList = readEnchantments(GsonHelper.getAsJsonArray(json, "enchantments"));
 
             if (enchantmentList.isEmpty()) {
                 throw new JsonParseException("No enchantments for smithing recipe");
@@ -199,9 +198,9 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
 
         @Nullable
         @Override
-        public GemSmithingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-            Ingredient ingredient = Ingredient.read(buffer);
-            ItemStack gem = buffer.readItemStack();
+        public GemSmithingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+            Ingredient ingredient = Ingredient.fromNetwork(buffer);
+            ItemStack gem = buffer.readItem();
 
             int k = buffer.readVarInt();
             NonNullList<Enchantment> enchantmentList = NonNullList.create();
@@ -217,9 +216,9 @@ public class GemSmithingRecipe extends SmithingRecipe implements IRecipe<IInvent
         }
 
         @Override
-        public void write(PacketBuffer buffer, GemSmithingRecipe recipe) {
-            recipe.blacklist.write(buffer);
-            buffer.writeItemStack(recipe.gem);
+        public void toNetwork(FriendlyByteBuf buffer, GemSmithingRecipe recipe) {
+            recipe.blacklist.toNetwork(buffer);
+            buffer.writeItem(recipe.gem);
 
             buffer.writeVarInt(recipe.enchantments.size());
             for(Enchantment enchantment : recipe.enchantments) {

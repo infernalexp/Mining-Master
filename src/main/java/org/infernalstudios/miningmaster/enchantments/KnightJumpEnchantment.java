@@ -17,28 +17,28 @@
 package org.infernalstudios.miningmaster.enchantments;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.infernalstudios.miningmaster.access.LivingEntityAccess;
 
 public class KnightJumpEnchantment extends Enchantment {
-    @SuppressWarnings("resource")
-    private static final Minecraft mc = Minecraft.getInstance();
-
     private static boolean jumpPrevPressed = false;
 
 
-    public KnightJumpEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
-        super(rarityIn, EnchantmentType.ARMOR_LEGS, slots);
+    public KnightJumpEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
+        super(rarityIn, EnchantmentCategory.ARMOR_LEGS, slots);
     }
 
+    @SuppressWarnings("resource")
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
-        if (mc.gameSettings.keyBindJump.isKeyDown()) {
+        Minecraft mc = Minecraft.getInstance();
+
+        if (mc.options.keyJump.isDown()) {
             if (!jumpPrevPressed) {
                 ((LivingEntityAccess) mc.player).useKnightJump();
             }
@@ -49,12 +49,12 @@ public class KnightJumpEnchantment extends Enchantment {
     }
 
     @Override
-    public int getMinEnchantability(int enchantmentLevel) {
+    public int getMinCost(int enchantmentLevel) {
         return 20;
     }
 
     @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
+    public int getMaxCost(int enchantmentLevel) {
         return 50;
     }
 
@@ -64,8 +64,8 @@ public class KnightJumpEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canApply(ItemStack stack) {
-        return this.type.canEnchantItem(stack.getItem());
+    public boolean canEnchant(ItemStack stack) {
+        return this.category.canEnchant(stack.getItem());
     }
 
     @Override
@@ -74,12 +74,12 @@ public class KnightJumpEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return false;
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return false;
     }
 

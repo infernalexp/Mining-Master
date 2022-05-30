@@ -16,12 +16,12 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.enchantments.FloatationEnchantment;
 import org.infernalstudios.miningmaster.enchantments.FreezingEnchantment;
@@ -37,16 +37,16 @@ import org.infernalstudios.miningmaster.enchantments.StonebreakerEnchantment;
 public class MMEnchantments {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MiningMaster.MOD_ID);
 
-    public static final RegistryObject<Enchantment> FREEZING = ENCHANTMENTS.register("freezing", () -> new FreezingEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
-    public static final RegistryObject<Enchantment> LEECHING = ENCHANTMENTS.register("leeching", () -> new LeechingEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
-    public static final RegistryObject<Enchantment> SMELTING = ENCHANTMENTS.register("smelting", () -> new SmeltingEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
-    public static final RegistryObject<Enchantment> STONEBREAKER = ENCHANTMENTS.register("stonebreaker", () -> new StonebreakerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
-    public static final RegistryObject<Enchantment> RUNNER = ENCHANTMENTS.register("runner", () -> new RunnerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.FEET));
-    public static final RegistryObject<Enchantment> HEARTFELT = ENCHANTMENTS.register("heartfelt", () -> new HeartfeltEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET));
-    public static final RegistryObject<Enchantment> FLOATATION = ENCHANTMENTS.register("floatation", () -> new FloatationEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.MAINHAND));
-    public static final RegistryObject<Enchantment> KNIGHT_JUMP = ENCHANTMENTS.register("knight_jump", () -> new KnightJumpEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.LEGS));
-    public static final RegistryObject<Enchantment> SNOWPIERCER = ENCHANTMENTS.register("snowpiercer", () -> new SnowpiercerEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.LEGS));
-    public static final RegistryObject<Enchantment> GRACE = ENCHANTMENTS.register("grace", () -> new GraceEnchantment(Enchantment.Rarity.RARE, EquipmentSlotType.CHEST));
+    public static final RegistryObject<Enchantment> FREEZING = ENCHANTMENTS.register("freezing", () -> new FreezingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND));
+    public static final RegistryObject<Enchantment> LEECHING = ENCHANTMENTS.register("leeching", () -> new LeechingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND));
+    public static final RegistryObject<Enchantment> SMELTING = ENCHANTMENTS.register("smelting", () -> new SmeltingEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND));
+    public static final RegistryObject<Enchantment> STONEBREAKER = ENCHANTMENTS.register("stonebreaker", () -> new StonebreakerEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND));
+    public static final RegistryObject<Enchantment> RUNNER = ENCHANTMENTS.register("runner", () -> new RunnerEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.FEET));
+    public static final RegistryObject<Enchantment> HEARTFELT = ENCHANTMENTS.register("heartfelt", () -> new HeartfeltEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET));
+    public static final RegistryObject<Enchantment> FLOATATION = ENCHANTMENTS.register("floatation", () -> new FloatationEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.MAINHAND));
+    public static final RegistryObject<Enchantment> KNIGHT_JUMP = ENCHANTMENTS.register("knight_jump", () -> new KnightJumpEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.LEGS));
+    public static final RegistryObject<Enchantment> SNOWPIERCER = ENCHANTMENTS.register("snowpiercer", () -> new SnowpiercerEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.LEGS));
+    public static final RegistryObject<Enchantment> GRACE = ENCHANTMENTS.register("grace", () -> new GraceEnchantment(Enchantment.Rarity.RARE, EquipmentSlot.CHEST));
 
     public static void register(IEventBus eventBus) {
         ENCHANTMENTS.register(eventBus);

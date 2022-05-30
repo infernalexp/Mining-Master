@@ -16,9 +16,9 @@
 
 package org.infernalstudios.miningmaster.network;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.network.NetworkEvent;
 import org.infernalstudios.miningmaster.containers.GemForgeContainer;
 
 import java.util.function.Supplier;
@@ -30,20 +30,20 @@ public class UpdateGemForgePacket {
         this.isActive = isActive;
     }
 
-    public static void encode(UpdateGemForgePacket message, PacketBuffer buffer) {
+    public static void encode(UpdateGemForgePacket message, FriendlyByteBuf buffer) {
         buffer.writeBoolean(message.isActive);
     }
 
-    public static UpdateGemForgePacket decode(PacketBuffer buffer) {
+    public static UpdateGemForgePacket decode(FriendlyByteBuf buffer) {
         return new UpdateGemForgePacket(buffer.readBoolean());
     }
 
     public static void handle(UpdateGemForgePacket message, Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
-            PlayerEntity playerEntity = context.get().getSender();
+            Player playerEntity = context.get().getSender();
 
-            if (playerEntity != null && playerEntity.getServer() != null && playerEntity.openContainer instanceof GemForgeContainer) {
-                ((GemForgeContainer)playerEntity.openContainer).setForgeActive(message.isActive);
+            if (playerEntity != null && playerEntity.getServer() != null && playerEntity.containerMenu instanceof GemForgeContainer) {
+                ((GemForgeContainer)playerEntity.containerMenu).setForgeActive(message.isActive);
             }
         });
 

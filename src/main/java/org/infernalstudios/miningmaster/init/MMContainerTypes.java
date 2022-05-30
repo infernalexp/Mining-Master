@@ -16,19 +16,19 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.containers.GemForgeContainer;
 
 public class MMContainerTypes {
-    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, MiningMaster.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, MiningMaster.MOD_ID);
 
-    public static final RegistryObject<ContainerType<GemForgeContainer>> GEM_FORGE_CONTAINER = CONTAINER_TYPES.register("gem_forge_container", () -> IForgeContainerType.create(((windowId, inv, data) -> new GemForgeContainer(windowId, inv))));
+    public static final RegistryObject<MenuType<GemForgeContainer>> GEM_FORGE_CONTAINER = CONTAINER_TYPES.register("gem_forge_container", () -> IForgeMenuType.create(((windowId, inv, data) -> new GemForgeContainer(windowId, inv))));
 
     public static void register(IEventBus eventBus) {
         CONTAINER_TYPES.register(eventBus);

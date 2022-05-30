@@ -16,22 +16,22 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyValue;
+import net.minecraft.util.LazyLoadedValue;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public enum MMItemTiers implements IItemTier {
-    SUPRA(3, 1851, 9.0F, 3.5F, 15, null),
-    ULTIMA(4, 2341, 10.5F, 4.5F, 20, null);
+public enum MMItemTiers implements Tier {
+    SUPRA(3, 1851, 9.0F, 3.5F, 15, () -> Ingredient.EMPTY),
+    ULTIMA(4, 2341, 10.5F, 4.5F, 20, () -> Ingredient.EMPTY);
 
     private final int harvestLevel;
     private final int maxUses;
     private final float efficiency;
     private final float attackDamage;
     private final int enchantability;
-    private final LazyValue<Ingredient> repairMaterial;
+    private final LazyLoadedValue<Ingredient> repairMaterial;
 
     MMItemTiers(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn) {
         this.harvestLevel = harvestLevelIn;
@@ -39,36 +39,36 @@ public enum MMItemTiers implements IItemTier {
         this.efficiency = efficiencyIn;
         this.attackDamage = attackDamageIn;
         this.enchantability = enchantabilityIn;
-        this.repairMaterial = new LazyValue<>(repairMaterialIn);
+        this.repairMaterial = new LazyLoadedValue<>(repairMaterialIn);
     }
 
     @Override
-    public int getMaxUses() {
+    public int getUses() {
         return this.maxUses;
     }
 
     @Override
-    public float getEfficiency() {
+    public float getSpeed() {
         return this.efficiency;
     }
 
     @Override
-    public float getAttackDamage() {
+    public float getAttackDamageBonus() {
         return this.attackDamage;
     }
 
     @Override
-    public int getHarvestLevel() {
+    public int getLevel() {
         return this.harvestLevel;
     }
 
     @Override
-    public int getEnchantability() {
+    public int getEnchantmentValue() {
         return this.enchantability;
     }
 
     @Override
-    public Ingredient getRepairMaterial() {
-        return this.repairMaterial.getValue();
+    public Ingredient getRepairIngredient() {
+        return this.repairMaterial.get();
     }
 }

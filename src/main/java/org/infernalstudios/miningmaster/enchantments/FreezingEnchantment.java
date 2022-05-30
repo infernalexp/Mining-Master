@@ -16,28 +16,28 @@
 
 package org.infernalstudios.miningmaster.enchantments;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.FireAspectEnchantment;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.BowItem;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.FireAspectEnchantment;
 
 public class FreezingEnchantment extends Enchantment {
-    public FreezingEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
-        super(rarityIn, EnchantmentType.WEAPON, slots);
+    public FreezingEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
+        super(rarityIn, EnchantmentCategory.WEAPON, slots);
     }
 
     @Override
-    public int getMinEnchantability(int enchantmentLevel) {
+    public int getMinCost(int enchantmentLevel) {
         return 20;
     }
 
     @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
+    public int getMaxCost(int enchantmentLevel) {
         return 50;
     }
 
@@ -47,14 +47,14 @@ public class FreezingEnchantment extends Enchantment {
     }
 
     @Override
-    protected boolean canApplyTogether(Enchantment ench) {
+    protected boolean checkCompatibility(Enchantment ench) {
         return !(ench instanceof FireAspectEnchantment);
     }
 
     @Override
-    public boolean canApply(ItemStack stack) {
+    public boolean canEnchant(ItemStack stack) {
         Item stackItem = stack.getItem();
-        return stackItem instanceof AxeItem || stackItem instanceof BowItem || stackItem instanceof CrossbowItem || this.type.canEnchantItem(stackItem);
+        return stackItem instanceof AxeItem || stackItem instanceof BowItem || stackItem instanceof CrossbowItem || this.category.canEnchant(stackItem);
     }
 
     @Override
@@ -63,12 +63,12 @@ public class FreezingEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return false;
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return false;
     }
 

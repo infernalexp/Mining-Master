@@ -16,21 +16,21 @@
 
 package org.infernalstudios.miningmaster.containers;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.IRecipeHelperPopulator;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.RecipeBookContainer;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.RecipeBookCategory;
-import net.minecraft.item.crafting.RecipeItemHelper;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.RecipeBookMenu;
+import net.minecraft.world.inventory.RecipeBookType;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
@@ -41,20 +41,20 @@ import org.infernalstudios.miningmaster.recipes.GemForgeServerRecipePlacer;
 
 import javax.annotation.Nonnull;
 
-public class GemForgeContainer extends RecipeBookContainer<IInventory> {
+public class GemForgeContainer extends RecipeBookMenu<Container> {
     private final ItemStackHandler forgeInventory;
-    protected final World world;
-    public IIntArray forgeData;
+    protected final Level world;
+    public ContainerData forgeData;
 
-    public GemForgeContainer(int id, PlayerInventory playerInventory) {
-        this(id, playerInventory, new ItemStackHandler(10), new IntArray(4));
+    public GemForgeContainer(int id, Inventory playerInventory) {
+        this(id, playerInventory, new ItemStackHandler(10), new SimpleContainerData(4));
     }
 
-    public GemForgeContainer(int id, PlayerInventory playerInventory, ItemStackHandler inventory, IIntArray forgeData) {
+    public GemForgeContainer(int id, Inventory playerInventory, ItemStackHandler inventory, ContainerData forgeData) {
         super(MMContainerTypes.GEM_FORGE_CONTAINER.get(), id);
         this.forgeData = forgeData;
         this.forgeInventory = inventory;
-        this.world = playerInventory.player.world;
+        this.world = playerInventory.player.level;
         this.addSlot(new GemSlot(inventory, 0, 44, 53));
         this.addSlot(new GemSlot(inventory, 1, 44, 35));
         this.addSlot(new GemSlot(inventory, 2, 44, 17));
@@ -77,53 +77,53 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
             this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
 
-        this.trackIntArray(forgeData);
+        this.addDataSlots(forgeData);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public void func_217056_a(boolean placeAll, IRecipe<?> recipe, ServerPlayerEntity player) {
-        (new GemForgeServerRecipePlacer<>(this)).place(player, (IRecipe<IInventory>) recipe, placeAll);
+    public void handlePlacement(boolean placeAll, Recipe<?> recipe, ServerPlayer player) {
+        (new GemForgeServerRecipePlacer<>(this)).place(player, (Recipe<Container>) recipe, placeAll);
     }
 
-    public boolean canInteractWith(PlayerEntity playerIn) {
+    public boolean stillValid(Player playerIn) {
         return true;
     }
 
-    public void updateProgressBar(int id, int data) {
-        super.updateProgressBar(id, data);
-        this.detectAndSendChanges();
+    public void setData(int id, int data) {
+        super.setData(id, data);
+        this.broadcastChanges();
     }
 
-    public void fillStackedContents(RecipeItemHelper itemHelperIn) {
-        if (this.forgeInventory instanceof IRecipeHelperPopulator) {
-            ((IRecipeHelperPopulator)this.forgeInventory).fillStackedContents(itemHelperIn);
+    public void fillCraftSlotsStackedContents(StackedContents itemHelperIn) {
+        if (this.forgeInventory instanceof StackedContentsCompatible) {
+            ((StackedContentsCompatible)this.forgeInventory).fillStackedContents(itemHelperIn);
         }
     }
 
-    public void clear() {
+    public void clearCraftingContent() {
         for(int i = 0; i < 10; i++) {
             this.forgeInventory.setStackInSlot(i, ItemStack.EMPTY);
         }
     }
 
-    public boolean matches(IRecipe<? super IInventory> recipeIn) {
-        Inventory inventory = new Inventory(10);
-        for(int i = 0; i < inventory.getSizeInventory(); i++) {
-            inventory.setInventorySlotContents(i, this.forgeInventory.getStackInSlot(i));
+    public boolean recipeMatches(Recipe<? super Container> recipeIn) {
+        SimpleContainer inventory = new SimpleContainer(10);
+        for(int i = 0; i < inventory.getContainerSize(); i++) {
+            inventory.setItem(i, this.forgeInventory.getStackInSlot(i));
         }
         return recipeIn.matches(inventory, this.world);
     }
 
-    public int getOutputSlot() {
+    public int getResultSlotIndex() {
         return 9;
     }
 
-    public int getWidth() {
+    public int getGridWidth() {
         return 4;
     }
 
-    public int getHeight() {
+    public int getGridHeight() {
         return 3;
     }
 
@@ -157,28 +157,33 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
     }
 
     @Override
-    public RecipeBookCategory func_241850_m() {
-        return RecipeBookCategory.valueOf("GEM_FORGE");
+    public RecipeBookType getRecipeBookType() {
+        return RecipeBookType.valueOf("GEM_FORGE");
     }
 
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    @Override
+    public boolean shouldMoveToInventory(int slot) {
+        return slot != this.getResultSlotIndex();
+    }
+
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
             if (index < 10) {
-                if (!this.mergeItemStack(itemstack1, 10, this.inventorySlots.size(), true)) {
+                if (!this.moveItemStackTo(itemstack1, 10, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, 0, 10, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 0, 10, false)) {
                 return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
         }
 
@@ -193,8 +198,8 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
         /**
          * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
          */
-        public boolean isItemValid(ItemStack stack) {
-            return stack.getItem().isIn(MMTags.Items.GEMS);
+        public boolean mayPlace(ItemStack stack) {
+            return stack.is(MMTags.Items.GEMS);
         }
 
         /**
@@ -202,12 +207,12 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
          * case of armor slots)
          */
         @Override
-        public int getSlotStackLimit() {
+        public int getMaxStackSize() {
             return 1;
         }
 
         @Override
-        public int getItemStackLimit(@Nonnull ItemStack stack) {
+        public int getMaxStackSize(@Nonnull ItemStack stack) {
             return 1;
         }
     }
@@ -220,8 +225,8 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
         /**
          * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
          */
-        public boolean isItemValid(ItemStack stack) {
-            return stack.getItem().isIn(MMTags.Items.CATALYSTS);
+        public boolean mayPlace(ItemStack stack) {
+            return stack.is(MMTags.Items.CATALYSTS);
         }
 
         /**
@@ -229,12 +234,12 @@ public class GemForgeContainer extends RecipeBookContainer<IInventory> {
          * case of armor slots)
          */
         @Override
-        public int getSlotStackLimit() {
+        public int getMaxStackSize() {
             return 1;
         }
 
         @Override
-        public int getItemStackLimit(@Nonnull ItemStack stack) {
+        public int getMaxStackSize(@Nonnull ItemStack stack) {
             return 1;
         }
     }

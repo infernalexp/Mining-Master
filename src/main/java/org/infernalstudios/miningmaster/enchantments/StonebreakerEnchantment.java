@@ -16,25 +16,25 @@
 
 package org.infernalstudios.miningmaster.enchantments;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.SilkTouchEnchantment;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.UntouchingEnchantment;
 
 public class StonebreakerEnchantment extends Enchantment {
 
-    public StonebreakerEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
-        super(rarityIn, EnchantmentType.DIGGER, slots);
+    public StonebreakerEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
+        super(rarityIn, EnchantmentCategory.DIGGER, slots);
     }
 
     @Override
-    public int getMinEnchantability(int enchantmentLevel) {
+    public int getMinCost(int enchantmentLevel) {
         return 20;
     }
 
     @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
+    public int getMaxCost(int enchantmentLevel) {
         return 50;
     }
 
@@ -44,13 +44,13 @@ public class StonebreakerEnchantment extends Enchantment {
     }
 
     @Override
-    protected boolean canApplyTogether(Enchantment ench) {
-        return !(ench instanceof SilkTouchEnchantment || ench instanceof SmeltingEnchantment);
+    protected boolean checkCompatibility(Enchantment ench) {
+        return !(ench instanceof UntouchingEnchantment || ench instanceof SmeltingEnchantment);
     }
 
     @Override
-    public boolean canApply(ItemStack stack) {
-        return this.type.canEnchantItem(stack.getItem());
+    public boolean canEnchant(ItemStack stack) {
+        return this.category.canEnchant(stack.getItem());
     }
 
     @Override
@@ -59,12 +59,12 @@ public class StonebreakerEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return false;
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return false;
     }
 

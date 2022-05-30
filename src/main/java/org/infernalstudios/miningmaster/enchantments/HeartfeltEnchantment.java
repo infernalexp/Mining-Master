@@ -16,17 +16,17 @@
 
 package org.infernalstudios.miningmaster.enchantments;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,17 +37,17 @@ import java.util.UUID;
 
 public class HeartfeltEnchantment extends Enchantment {
 
-    public HeartfeltEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
-        super(rarityIn, EnchantmentType.ARMOR, slots);
+    public HeartfeltEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
+        super(rarityIn, EnchantmentCategory.ARMOR, slots);
     }
 
     @Override
-    public int getMinEnchantability(int enchantmentLevel) {
+    public int getMinCost(int enchantmentLevel) {
         return 20;
     }
 
     @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
+    public int getMaxCost(int enchantmentLevel) {
         return 50;
     }
 
@@ -57,8 +57,8 @@ public class HeartfeltEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canApply(ItemStack stack) {
-        return this.type.canEnchantItem(stack.getItem());
+    public boolean canEnchant(ItemStack stack) {
+        return this.category.canEnchant(stack.getItem());
     }
 
     @Override
@@ -67,12 +67,12 @@ public class HeartfeltEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return false;
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return false;
     }
 
@@ -82,39 +82,39 @@ public class HeartfeltEnchantment extends Enchantment {
     }
 
     @Override
-    public void onUserHurt(LivingEntity user, Entity attacker, int level) {
-        Iterable<ItemStack> equipment = user.getEquipmentAndArmor();
+    public void doPostHurt(LivingEntity user, Entity attacker, int level) {
+        Iterable<ItemStack> equipment = user.getAllSlots();
         for (ItemStack item : equipment) {
-            ListNBT nbtList = item.getEnchantmentTagList();
+            ListTag nbtList = item.getEnchantmentTags();
             for (int i = 0; i < nbtList.size(); i++) {
-                CompoundNBT idTag = nbtList.getCompound(i);
+                CompoundTag idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.HEARTFELT.getId().toString())) {
-                    item.attemptDamageItem(idTag.getInt("lvl"), new Random(), null);
+                    item.hurt(idTag.getInt("lvl"), new Random(), null);
                 }
             }
         }
-        super.onUserHurt(user, attacker, level);
+        super.doPostHurt(user, attacker, level);
     }
 
     @SubscribeEvent
     public static void onItemAttributeModifierCalculate(ItemAttributeModifierEvent event) {
         ItemStack itemStack = event.getItemStack();
-        EquipmentSlotType equipmentSlotType = null;
+        EquipmentSlot equipmentSlotType = null;
         if (itemStack.getItem() instanceof ArmorItem) {
             ArmorItem armorItem = (ArmorItem) itemStack.getItem();
-            equipmentSlotType = armorItem.getEquipmentSlot();
+            equipmentSlotType = armorItem.getSlot();
         }
 
         if (equipmentSlotType != null && event.getSlotType().equals(equipmentSlotType)) {
-            ListNBT nbtList = itemStack.getEnchantmentTagList();
+            ListTag nbtList = itemStack.getEnchantmentTags();
             for (int i = 0; i < nbtList.size(); i++) {
-                CompoundNBT idTag = nbtList.getCompound(i);
+                CompoundTag idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.HEARTFELT.getId().toString())) {
-                    if (equipmentSlotType.equals(EquipmentSlotType.HEAD)) {
+                    if (equipmentSlotType.equals(EquipmentSlot.HEAD)) {
                         event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(UUID.fromString("ccac859c-0311-43d4-b254-572d7846a5be"), "heartfelt", 2.0D * idTag.getInt("lvl"), AttributeModifier.Operation.ADDITION));
-                    } else if (equipmentSlotType.equals(EquipmentSlotType.CHEST)) {
+                    } else if (equipmentSlotType.equals(EquipmentSlot.CHEST)) {
                         event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(UUID.fromString("9dcfe3cf-7d9a-41c4-90de-84ff86b8b7c3"), "heartfelt", 2.0D * idTag.getInt("lvl"), AttributeModifier.Operation.ADDITION));
-                    } else if (equipmentSlotType.equals(EquipmentSlotType.LEGS)) {
+                    } else if (equipmentSlotType.equals(EquipmentSlot.LEGS)) {
                         event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(UUID.fromString("24572f77-4a5c-44a1-b6fa-09fc5da661b8"), "heartfelt", 2.0D * idTag.getInt("lvl"), AttributeModifier.Operation.ADDITION));
                     } else {
                         event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(UUID.fromString("031a1eac-7726-46d6-87d7-cec65a66186b"), "heartfelt", 2.0D * idTag.getInt("lvl"), AttributeModifier.Operation.ADDITION));

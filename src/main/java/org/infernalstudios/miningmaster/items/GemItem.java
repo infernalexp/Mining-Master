@@ -1,12 +1,12 @@
 package org.infernalstudios.miningmaster.items;
 
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import org.infernalstudios.miningmaster.MiningMaster;
 
 import javax.annotation.Nullable;
@@ -14,17 +14,17 @@ import java.util.List;
 
 public class GemItem extends Item {
     public GemItem() {
-        super(new Item.Properties().group(MiningMaster.TAB));
+        super(new Item.Properties().tab(MiningMaster.TAB));
     }
 
 
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         if (Screen.hasShiftDown()) {
-            tooltip.add(new StringTextComponent("\u00A7dCombine with an item in a smithing table to enchant!"));
+            tooltip.add(new TextComponent("\u00A7dCombine with an item in a smithing table to enchant!"));
         } else {
-            tooltip.add(new StringTextComponent("\u00A78Hold Shift for Instructions"));
+            tooltip.add(new TextComponent("\u00A78Hold Shift for Instructions"));
         }
     }
 }

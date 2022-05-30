@@ -16,26 +16,26 @@
 
 package org.infernalstudios.miningmaster.recipes;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import org.infernalstudios.miningmaster.MiningMaster;
 
-public interface IForgingRecipe extends IRecipe<IInventory> {
+public interface IForgingRecipe extends Recipe<Container> {
     ResourceLocation TYPE_ID = new ResourceLocation(MiningMaster.MOD_ID, "forging");
 
     @Override
-    default IRecipeType<?> getType() {
+    default RecipeType<?> getType() {
         return Registry.RECIPE_TYPE.getOptional(TYPE_ID).get();
     }
 
     @Override
-    default boolean canFit(int width, int height) {return true;}
+    default boolean canCraftInDimensions(int width, int height) {return true;}
 
     @Override
-    default boolean isDynamic() {
+    default boolean isSpecial() {
         return false;
     }
 }

@@ -16,17 +16,18 @@
 
 package org.infernalstudios.miningmaster.client.gui.recipebook;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.recipebook.RecipeBookGui;
-import net.minecraft.client.gui.recipebook.RecipeTabToggleWidget;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
+import net.minecraft.client.gui.screens.recipebook.RecipeBookTabButton;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.infernalstudios.miningmaster.MiningMaster;
@@ -35,42 +36,42 @@ import java.util.Iterator;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class GemForgeRecipeGui extends RecipeBookGui {
+public class GemForgeRecipeGui extends RecipeBookComponent {
     protected static final ResourceLocation RECIPE_BOOK_GEM_FORGE = new ResourceLocation(MiningMaster.MOD_ID, "textures/gui/recipe_book_gem_forge.png");
-    private static final ITextComponent translationKeyForgable = new TranslationTextComponent(MiningMaster.MOD_ID + ".gui.recipebook.toggleRecipes.forgable");
+    private static final Component translationKeyForgable = new TranslatableComponent(MiningMaster.MOD_ID + ".gui.recipebook.toggleRecipes.forgable");
 
-    protected ITextComponent func_230479_g_() {
+    protected Component getRecipeFilterName() {
         return translationKeyForgable;
     }
 
-    protected void func_205702_a() {
-        this.toggleRecipesBtn.initTextureValues(152, 41, 28, 18, RECIPE_BOOK_GEM_FORGE);
+    protected void initFilterButtonTextures() {
+        this.filterButton.initTextureValues(152, 41, 28, 18, RECIPE_BOOK_GEM_FORGE);
     }
 
     @Override
-    public void setupGhostRecipe(IRecipe<?> recipe, List<Slot> slots) {
+    public void setupGhostRecipe(Recipe<?> recipe, List<Slot> slots) {
         this.ghostRecipe.setRecipe(recipe);
-        this.placeRecipe(this.field_201522_g.getWidth(), this.field_201522_g.getHeight(), this.field_201522_g.getOutputSlot(), recipe, recipe.getIngredients().iterator(), 0);
+        this.placeRecipe(this.menu.getGridWidth(), this.menu.getGridHeight(), this.menu.getResultSlotIndex(), recipe, recipe.getIngredients().iterator(), 0);
     }
 
     @Override
-    public void setSlotContents(Iterator<Ingredient> ingredients, int slotIn, int maxAmount, int y, int x) {
+    public void addItemToSlot(Iterator<Ingredient> ingredients, int slotIn, int maxAmount, int y, int x) {
         Ingredient ingredient = ingredients.next();
-        if (!ingredient.hasNoMatchingItems()) {
+        if (!ingredient.isEmpty()) {
             Slot slot;
 
             if (ingredients.hasNext()) {
-                slot = this.field_201522_g.inventorySlots.get(slotIn);
+                slot = this.menu.slots.get(slotIn);
             } else {
-                slot = this.field_201522_g.inventorySlots.get(this.field_201522_g.getOutputSlot());
+                slot = this.menu.slots.get(this.menu.getResultSlotIndex());
             }
 
-            this.ghostRecipe.addIngredient(ingredient, slot.xPos, slot.yPos);
+            this.ghostRecipe.addIngredient(ingredient, slot.x, slot.y);
         }
     }
 
     @Override
-    public void placeRecipe(int width, int height, int outputSlot, IRecipe<?> recipe, Iterator<Ingredient> ingredients, int maxAmount) {
+    public void placeRecipe(int width, int height, int outputSlot, Recipe<?> recipe, Iterator<Ingredient> ingredients, int maxAmount) {
         int i = width;
         int j = height;
 
@@ -79,7 +80,7 @@ public class GemForgeRecipeGui extends RecipeBookGui {
         for(int k = 0; k < height; ++k) {
 
             boolean flag = (float)j < (float)height / 2.0F;
-            int l = MathHelper.floor((float)height / 2.0F - (float)j / 2.0F);
+            int l = Mth.floor((float)height / 2.0F - (float)j / 2.0F);
             if (flag && l > k) {
                 k1 += width;
                 ++k;
@@ -91,7 +92,7 @@ public class GemForgeRecipeGui extends RecipeBookGui {
                 }
 
                 flag = (float)i < (float)width / 2.0F;
-                l = MathHelper.floor((float)width / 2.0F - (float)i / 2.0F);
+                l = Mth.floor((float)width / 2.0F - (float)i / 2.0F);
                 int j1 = i;
                 boolean flag1 = i1 < i;
                 if (flag) {
@@ -100,7 +101,7 @@ public class GemForgeRecipeGui extends RecipeBookGui {
                 }
 
                 if (flag1) {
-                    this.setSlotContents(ingredients, k1, maxAmount, k, i1);
+                    this.addItemToSlot(ingredients, k1, maxAmount, k, i1);
                 } else if (j1 == i1) {
                     k1 += width - i1;
                     break;
@@ -113,33 +114,34 @@ public class GemForgeRecipeGui extends RecipeBookGui {
     }
 
     @Override
-    public void func_230477_a_(MatrixStack matrixStack, int xOffset, int yOffset, boolean displayOutputSquare, float time) {
-        super.func_230477_a_(matrixStack, xOffset, yOffset, false, time);
+    public void renderGhostRecipe(PoseStack matrixStack, int xOffset, int yOffset, boolean displayOutputSquare, float time) {
+        super.renderGhostRecipe(matrixStack, xOffset, yOffset, false, time);
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         if (this.isVisible()) {
-            RenderSystem.pushMatrix();
-            RenderSystem.translatef(0.0F, 0.0F, 100.0F);
-            this.mc.getTextureManager().bindTexture(RECIPE_BOOK_GEM_FORGE);
-            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            matrixStack.pushPose();
+            matrixStack.translate(0.0F, 0.0F, 100.0F);
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.setShaderTexture(0, RECIPE_BOOK_GEM_FORGE);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             int i = (this.width - 147) / 2 - this.xOffset;
             int j = (this.height - 166) / 2;
             this.blit(matrixStack, i, j, 1, 1, 147, 166);
-            if (!this.searchBar.isFocused() && this.searchBar.getText().isEmpty()) {
-                drawString(matrixStack, this.mc.fontRenderer, field_241620_l_, i + 25, j + 14, -1);
+            if (!this.searchBox.isFocused() && this.searchBox.getValue().isEmpty()) {
+                drawString(matrixStack, this.minecraft.font, SEARCH_HINT, i + 25, j + 14, -1);
             } else {
-                this.searchBar.render(matrixStack, mouseX, mouseY, partialTicks);
+                this.searchBox.render(matrixStack, mouseX, mouseY, partialTicks);
             }
 
-            for (RecipeTabToggleWidget recipetabtogglewidget : this.recipeTabs) {
+            for (RecipeBookTabButton recipetabtogglewidget : this.tabButtons) {
                 recipetabtogglewidget.render(matrixStack, mouseX, mouseY, partialTicks);
             }
 
-            this.toggleRecipesBtn.render(matrixStack, mouseX, mouseY, partialTicks);
-            this.recipeBookPage.func_238927_a_(matrixStack, i, j, mouseX, mouseY, partialTicks);
-            RenderSystem.popMatrix();
+            this.filterButton.render(matrixStack, mouseX, mouseY, partialTicks);
+            this.recipeBookPage.render(matrixStack, i, j, mouseX, mouseY, partialTicks);
+            matrixStack.popPose();
         }
     }
 }

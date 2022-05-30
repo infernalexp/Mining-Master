@@ -18,13 +18,13 @@ package org.infernalstudios.miningmaster.gen.features.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
-import net.minecraft.world.gen.feature.template.RuleTest;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 
-public class NativeNetherGemOreFeatureConfig implements IFeatureConfig {
+public class NativeNetherGemOreFeatureConfig implements FeatureConfiguration {
     public static final Codec<NativeNetherGemOreFeatureConfig> CODEC = RecordCodecBuilder.create((builder) -> {
         return builder.group(
                 RuleTest.CODEC.fieldOf("target").forGetter((config) -> {return config.target;}),
@@ -40,5 +40,5 @@ public class NativeNetherGemOreFeatureConfig implements IFeatureConfig {
         this.state = state;
     }
 
-    public static final RuleTest NETHERRACK = new BlockMatchRuleTest(Blocks.NETHERRACK);
+    public static final RuleTest NETHERRACK = new BlockMatchTest(Blocks.NETHERRACK);
 }

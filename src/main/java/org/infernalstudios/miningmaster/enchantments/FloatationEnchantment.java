@@ -16,25 +16,25 @@
 
 package org.infernalstudios.miningmaster.enchantments;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class FloatationEnchantment extends Enchantment {
 
-    public FloatationEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
-        super(rarityIn, EnchantmentType.BOW, slots);
+    public FloatationEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
+        super(rarityIn, EnchantmentCategory.BOW, slots);
     }
 
     @Override
-    public boolean canApply(ItemStack stack) {
-        return stack.getItem() instanceof CrossbowItem || this.type.canEnchantItem(stack.getItem());
+    public boolean canEnchant(ItemStack stack) {
+        return stack.getItem() instanceof CrossbowItem || this.category.canEnchant(stack.getItem());
     }
 
     @Override
@@ -43,12 +43,12 @@ public class FloatationEnchantment extends Enchantment {
     }
 
     @Override
-    public int getMinEnchantability(int enchantmentLevel) {
+    public int getMinCost(int enchantmentLevel) {
         return 20;
     }
 
     @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
+    public int getMaxCost(int enchantmentLevel) {
         return 50;
     }
 
@@ -58,12 +58,12 @@ public class FloatationEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return false;
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return false;
     }
 
@@ -73,11 +73,11 @@ public class FloatationEnchantment extends Enchantment {
     }
 
     @Override
-    public void onEntityDamaged(LivingEntity user, Entity target, int level) {
-        super.onEntityDamaged(user, target, level);
+    public void doPostAttack(LivingEntity user, Entity target, int level) {
+        super.doPostAttack(user, target, level);
         if (target instanceof LivingEntity) {
             LivingEntity livingTarget = (LivingEntity) target;
-            livingTarget.addPotionEffect(new EffectInstance(Effects.LEVITATION, 20 * level));
+            livingTarget.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20 * level));
         }
     }
 }

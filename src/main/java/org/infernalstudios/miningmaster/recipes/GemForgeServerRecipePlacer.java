@@ -19,17 +19,17 @@ package org.infernalstudios.miningmaster.recipes;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.RecipeBookContainer;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipePlacer;
-import net.minecraft.item.crafting.RecipeItemHelper;
-import net.minecraft.network.play.server.SPlaceGhostRecipePacket;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.network.protocol.game.ClientboundPlaceGhostRecipePacket;
+import net.minecraft.recipebook.PlaceRecipe;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.inventory.RecipeBookMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,13 +37,13 @@ import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
 
-public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipePlacer<Integer> {
+public class GemForgeServerRecipePlacer<C extends Container> implements PlaceRecipe<Integer> {
     protected static final Logger LOGGER = LogManager.getLogger();
-    protected final RecipeItemHelper recipeItemHelper = new RecipeItemHelper();
-    protected PlayerInventory playerInventory;
-    protected RecipeBookContainer<C> recipeBookContainer;
+    protected final StackedContents recipeItemHelper = new StackedContents();
+    protected Inventory playerInventory;
+    protected RecipeBookMenu<C> recipeBookContainer;
 
-    public GemForgeServerRecipePlacer(RecipeBookContainer<C> recipeBookContainer) {
+    public GemForgeServerRecipePlacer(RecipeBookMenu<C> recipeBookContainer) {
         this.recipeBookContainer = recipeBookContainer;
     }
 
@@ -52,52 +52,52 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
             this.giveToPlayer(i);
         }
 
-        this.recipeBookContainer.clear();
+        this.recipeBookContainer.clearCraftingContent();
     }
 
     protected void giveToPlayer(int slotIn) {
-        ItemStack itemstack = this.recipeBookContainer.getSlot(slotIn).getStack();
+        ItemStack itemstack = this.recipeBookContainer.getSlot(slotIn).getItem();
         if (!itemstack.isEmpty()) {
             while (itemstack.getCount() > 0) {
-                int i = this.playerInventory.storeItemStack(itemstack);
+                int i = this.playerInventory.getSlotWithRemainingSpace(itemstack);
                 if (i == -1) {
-                    i = this.playerInventory.getFirstEmptyStack();
+                    i = this.playerInventory.getFreeSlot();
                 }
 
                 ItemStack itemstack1 = itemstack.copy();
                 itemstack1.setCount(1);
                 this.playerInventory.add(i, itemstack1);
-                this.recipeBookContainer.getSlot(slotIn).decrStackSize(1);
-                itemstack = this.recipeBookContainer.getSlot(slotIn).getStack();
+                this.recipeBookContainer.getSlot(slotIn).remove(1);
+                itemstack = this.recipeBookContainer.getSlot(slotIn).getItem();
             }
 
         }
     }
 
-    public void place(ServerPlayerEntity player, @Nullable IRecipe<C> recipe, boolean placeAll) {
-        if (recipe != null && player.getRecipeBook().isUnlocked(recipe)) {
-            this.playerInventory = player.inventory;
+    public void place(ServerPlayer player, @Nullable Recipe<C> recipe, boolean placeAll) {
+        if (recipe != null && player.getRecipeBook().contains(recipe)) {
+            this.playerInventory = player.getInventory();
             if (this.placeIntoInventory() || player.isCreative()) {
                 this.recipeItemHelper.clear();
-                player.inventory.accountStacks(this.recipeItemHelper);
-                this.recipeBookContainer.fillStackedContents(this.recipeItemHelper);
+                player.getInventory().fillStackedContents(this.recipeItemHelper);
+                this.recipeBookContainer.fillCraftSlotsStackedContents(this.recipeItemHelper);
                 if (this.recipeItemHelper.canCraft(recipe, null)) {
                     this.tryPlaceRecipe(recipe, placeAll);
                 } else {
                     this.clear();
-                    player.connection.sendPacket(new SPlaceGhostRecipePacket(player.openContainer.windowId, recipe));
+                    player.connection.send(new ClientboundPlaceGhostRecipePacket(player.containerMenu.containerId, recipe));
                 }
-                player.inventory.markDirty();
+                player.getInventory().setChanged();
             }
         }
     }
 
-    protected void tryPlaceRecipe(IRecipe<C> recipe, boolean placeAll) {
-        boolean flag = this.recipeBookContainer.matches(recipe);
+    protected void tryPlaceRecipe(Recipe<C> recipe, boolean placeAll) {
+        boolean flag = this.recipeBookContainer.recipeMatches(recipe);
         int i = this.recipeItemHelper.getBiggestCraftableStack(recipe, null);
         if (flag) {
             for (int j = 0; j < 10; ++j) {
-                ItemStack itemstack = this.recipeBookContainer.getSlot(j).getStack();
+                ItemStack itemstack = this.recipeBookContainer.getSlot(j).getItem();
                 if (!itemstack.isEmpty() && Math.min(i, itemstack.getMaxStackSize()) < itemstack.getCount() + 1) {
                     return;
                 }
@@ -110,7 +110,7 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
             int k = j1;
 
             for(int l : intlist) {
-                int i1 = RecipeItemHelper.unpack(l).getMaxStackSize();
+                int i1 = StackedContents.fromStackingIndex(l).getMaxStackSize();
                 if (i1 < k) {
                     k = i1;
                 }
@@ -118,7 +118,7 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
 
             if (this.recipeItemHelper.canCraft(recipe, intlist, k)) {
                 this.clear();
-                this.placeRecipe(this.recipeBookContainer.getWidth(), this.recipeBookContainer.getHeight(), this.recipeBookContainer.getOutputSlot(), recipe, intlist.iterator(), k);
+                this.placeRecipe(this.recipeBookContainer.getGridWidth(), this.recipeBookContainer.getGridHeight(), this.recipeBookContainer.getResultSlotIndex(), recipe, intlist.iterator(), k);
             }
         }
 
@@ -132,8 +132,8 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
             i = 64;
 
             for(int j = 0; j < 10; ++j) {
-                if (j != this.recipeBookContainer.getOutputSlot()) {
-                    ItemStack itemstack = this.recipeBookContainer.getSlot(j).getStack();
+                if (j != this.recipeBookContainer.getResultSlotIndex()) {
+                    ItemStack itemstack = this.recipeBookContainer.getSlot(j).getItem();
                     if (!itemstack.isEmpty() && i > itemstack.getCount()) {
                         i = itemstack.getCount();
                     }
@@ -151,19 +151,19 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
     protected void consumeIngredient(Slot slotToFill, ItemStack ingredientIn) {
         int i = this.playerInventory.findSlotMatchingUnusedItem(ingredientIn);
         if (i != -1) {
-            ItemStack itemstack = this.playerInventory.getStackInSlot(i).copy();
+            ItemStack itemstack = this.playerInventory.getItem(i).copy();
             if (!itemstack.isEmpty()) {
                 if (itemstack.getCount() > 1) {
-                    this.playerInventory.decrStackSize(i, 1);
+                    this.playerInventory.removeItem(i, 1);
                 } else {
-                    this.playerInventory.removeStackFromSlot(i);
+                    this.playerInventory.removeItemNoUpdate(i);
                 }
 
                 itemstack.setCount(1);
-                if (slotToFill.getStack().isEmpty()) {
-                    slotToFill.putStack(itemstack);
+                if (slotToFill.getItem().isEmpty()) {
+                    slotToFill.set(itemstack);
                 } else {
-                    slotToFill.getStack().grow(1);
+                    slotToFill.getItem().grow(1);
                 }
 
             }
@@ -171,7 +171,7 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
     }
 
     @Override
-    public void placeRecipe(int width, int height, int outputSlot, IRecipe<?> recipe, Iterator<Integer> ingredients, int maxAmount) {
+    public void placeRecipe(int width, int height, int outputSlot, Recipe<?> recipe, Iterator<Integer> ingredients, int maxAmount) {
         int i = width;
         int j = height;
 
@@ -180,7 +180,7 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
         for(int k = 0; k < height; ++k) {
 
             boolean flag = (float)j < (float)height / 2.0F;
-            int l = MathHelper.floor((float)height / 2.0F - (float)j / 2.0F);
+            int l = Mth.floor((float)height / 2.0F - (float)j / 2.0F);
             if (flag && l > k) {
                 k1 += width;
                 ++k;
@@ -192,7 +192,7 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
                 }
 
                 flag = (float)i < (float)width / 2.0F;
-                l = MathHelper.floor((float)width / 2.0F - (float)i / 2.0F);
+                l = Mth.floor((float)width / 2.0F - (float)i / 2.0F);
                 int j1 = i;
                 boolean flag1 = i1 < i;
                 if (flag) {
@@ -201,7 +201,7 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
                 }
 
                 if (flag1) {
-                    this.setSlotContents(ingredients, k1, maxAmount, k, i1);
+                    this.addItemToSlot(ingredients, k1, maxAmount, k, i1);
                 } else if (j1 == i1) {
                     k1 += width - i1;
                     break;
@@ -213,14 +213,14 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
     }
 
     @Override
-    public void setSlotContents(Iterator<Integer> ingredients, int slotIn, int maxAmount, int y, int x) {
-        ItemStack itemstack = RecipeItemHelper.unpack(ingredients.next());
+    public void addItemToSlot(Iterator<Integer> ingredients, int slotIn, int maxAmount, int y, int x) {
+        ItemStack itemstack = StackedContents.fromStackingIndex(ingredients.next());
         Slot slot;
 
         if (ingredients.hasNext()) {
-            slot = this.recipeBookContainer.inventorySlots.get(slotIn);
+            slot = this.recipeBookContainer.slots.get(slotIn);
         } else {
-            slot = this.recipeBookContainer.inventorySlots.get(this.recipeBookContainer.getOutputSlot());
+            slot = this.recipeBookContainer.slots.get(this.recipeBookContainer.getResultSlotIndex());
         }
 
         if (!itemstack.isEmpty()) {
@@ -235,12 +235,12 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
         int i = this.getEmptyPlayerSlots();
 
         for(int j = 0; j < 10; j++) {
-                ItemStack itemstack = this.recipeBookContainer.getSlot(j).getStack().copy();
+                ItemStack itemstack = this.recipeBookContainer.getSlot(j).getItem().copy();
                 if (!itemstack.isEmpty()) {
-                    int k = this.playerInventory.storeItemStack(itemstack);
+                    int k = this.playerInventory.getSlotWithRemainingSpace(itemstack);
                     if (k == -1 && list.size() <= i) {
                         for(ItemStack itemstack1 : list) {
-                            if (itemstack1.isItemEqual(itemstack) && itemstack1.getCount() != itemstack1.getMaxStackSize() && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize()) {
+                            if (itemstack1.sameItem(itemstack) && itemstack1.getCount() != itemstack1.getMaxStackSize() && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize()) {
                                 itemstack1.grow(itemstack.getCount());
                                 itemstack.setCount(0);
                                 break;
@@ -266,7 +266,7 @@ public class GemForgeServerRecipePlacer<C extends IInventory> implements IRecipe
     private int getEmptyPlayerSlots() {
         int i = 0;
 
-        for(ItemStack itemstack : this.playerInventory.mainInventory) {
+        for(ItemStack itemstack : this.playerInventory.items) {
             if (itemstack.isEmpty()) {
                 ++i;
             }

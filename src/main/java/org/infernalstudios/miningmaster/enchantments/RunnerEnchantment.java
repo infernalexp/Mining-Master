@@ -16,16 +16,16 @@
 
 package org.infernalstudios.miningmaster.enchantments;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -36,17 +36,17 @@ import java.util.UUID;
 
 public class RunnerEnchantment extends Enchantment {
 
-    public RunnerEnchantment(Rarity rarityIn, EquipmentSlotType... slots) {
-        super(rarityIn, EnchantmentType.ARMOR_FEET, slots);
+    public RunnerEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
+        super(rarityIn, EnchantmentCategory.ARMOR_FEET, slots);
     }
 
     @Override
-    public int getMinEnchantability(int enchantmentLevel) {
+    public int getMinCost(int enchantmentLevel) {
         return 20;
     }
 
     @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
+    public int getMaxCost(int enchantmentLevel) {
         return 50;
     }
 
@@ -56,8 +56,8 @@ public class RunnerEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canApply(ItemStack stack) {
-        return this.type.canEnchantItem(stack.getItem());
+    public boolean canEnchant(ItemStack stack) {
+        return this.category.canEnchant(stack.getItem());
     }
 
     @Override
@@ -66,12 +66,12 @@ public class RunnerEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean canVillagerTrade() {
+    public boolean isTradeable() {
         return false;
     }
 
     @Override
-    public boolean canGenerateInLoot() {
+    public boolean isDiscoverable() {
         return false;
     }
 
@@ -82,11 +82,11 @@ public class RunnerEnchantment extends Enchantment {
 
     @SubscribeEvent
     public static void onItemAttributeModifierCalculate(ItemAttributeModifierEvent event) {
-        if (event.getSlotType().equals(EquipmentSlotType.FEET)) {
+        if (event.getSlotType().equals(EquipmentSlot.FEET)) {
             ItemStack itemStack = event.getItemStack();
-            ListNBT nbtList = itemStack.getEnchantmentTagList();
+            ListTag nbtList = itemStack.getEnchantmentTags();
             for (int i = 0; i < nbtList.size(); i++) {
-                CompoundNBT idTag = nbtList.getCompound(i);
+                CompoundTag idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.RUNNER.getId().toString())) {
                     event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.fromString("047c6331-d618-4cc8-99c0-328e42d33b5e"), "runner", 0.2D * idTag.getInt("lvl"), AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
@@ -97,10 +97,10 @@ public class RunnerEnchantment extends Enchantment {
     @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity livingEntity = event.getEntityLiving();
-        PlayerEntity playerEntity = null;
+        Player playerEntity = null;
 
-        if (livingEntity instanceof PlayerEntity) {
-            playerEntity = (PlayerEntity) livingEntity;
+        if (livingEntity instanceof Player) {
+            playerEntity = (Player) livingEntity;
             if (playerEntity.isCreative()) {
                 return;
             }
@@ -108,15 +108,15 @@ public class RunnerEnchantment extends Enchantment {
         Random rand = new Random();
 
         if (playerEntity != null && playerEntity.isSprinting()) {
-            ItemStack stack = event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET);
-            ListNBT nbtList = stack.getEnchantmentTagList();
+            ItemStack stack = event.getEntityLiving().getItemBySlot(EquipmentSlot.FEET);
+            ListTag nbtList = stack.getEnchantmentTags();
 
             for (int i = 0; i < nbtList.size(); i++) {
-                CompoundNBT idTag = nbtList.getCompound(i);
+                CompoundTag idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.RUNNER.getId().toString())) {
                     if (rand.nextInt(100) == 0) {
-                        stack.damageItem(1, livingEntity, (onBroken) -> {
-                            onBroken.sendBreakAnimation(EquipmentSlotType.FEET);
+                        stack.hurtAndBreak(1, livingEntity, (onBroken) -> {
+                            onBroken.broadcastBreakEvent(EquipmentSlot.FEET);
                         });
                     }
                 }

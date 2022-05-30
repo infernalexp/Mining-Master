@@ -16,17 +16,17 @@
 
 package org.infernalstudios.miningmaster.mixin;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.world.World;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.infernalstudios.miningmaster.access.LivingEntityAccess;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,23 +38,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity extends Entity implements LivingEntityAccess {
-    @Shadow protected abstract void jump();
+    @Shadow protected abstract void jumpFromGround();
 
-    @Shadow public abstract ItemStack getItemStackFromSlot(EquipmentSlotType slotIn);
+    @Shadow public abstract ItemStack getItemBySlot(EquipmentSlot slotIn);
 
     private int knightJumpsUsed = 0;
 
     @Unique
-    private static final DataParameter<Boolean> GRACE_RECHARGED = EntityDataManager.createKey(LivingEntity.class, DataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> GRACE_RECHARGED = SynchedEntityData.defineId(LivingEntity.class, EntityDataSerializers.BOOLEAN);
 
-    @Inject(method = "livingTick", at = @At(value = "HEAD"))
+    @Inject(method = "aiStep", at = @At(value = "HEAD"))
     private void MM_countTicksFalling(CallbackInfo ci) {
         if (this.onGround) {
             this.knightJumpsUsed = 0;
         }
     }
 
-    public MixinLivingEntity(EntityType<?> entityTypeIn, World worldIn) {
+    public MixinLivingEntity(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
     }
 
@@ -63,11 +63,11 @@ public abstract class MixinLivingEntity extends Entity implements LivingEntityAc
             boolean hasKnightJump = false;
             int level = 0;
 
-            ItemStack stack = this.getItemStackFromSlot(EquipmentSlotType.LEGS);
-            ListNBT nbtList = stack.getEnchantmentTagList();
+            ItemStack stack = this.getItemBySlot(EquipmentSlot.LEGS);
+            ListTag nbtList = stack.getEnchantmentTags();
 
             for (int i = 0; i < nbtList.size(); i++) {
-                CompoundNBT idTag = nbtList.getCompound(i);
+                CompoundTag idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.KNIGHT_JUMP.getId().toString())) {
                     hasKnightJump = true;
                     level = idTag.getInt("lvl");
@@ -76,33 +76,33 @@ public abstract class MixinLivingEntity extends Entity implements LivingEntityAc
 
             if (hasKnightJump && this.knightJumpsUsed < level) {
                 this.knightJumpsUsed++;
-                this.jump();
+                this.jumpFromGround();
             }
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "registerData")
+    @Inject(at = @At("RETURN"), method = "defineSynchedData")
     private void MM_registerData(CallbackInfo ci) {
-        ((LivingEntity) (Object) this).getDataManager().register(GRACE_RECHARGED, true);
+        ((LivingEntity) (Object) this).getEntityData().define(GRACE_RECHARGED, true);
     }
 
-    @Inject(at = @At("RETURN"), method = "writeAdditional")
-    private void MM_writeAdditionalData(CompoundNBT compound, CallbackInfo ci) {
-        compound.putBoolean("GraceRecharged", ((LivingEntity) (Object) this).getDataManager().get(GRACE_RECHARGED));
+    @Inject(at = @At("RETURN"), method = "addAdditionalSaveData")
+    private void MM_writeAdditionalData(CompoundTag compound, CallbackInfo ci) {
+        compound.putBoolean("GraceRecharged", ((LivingEntity) (Object) this).getEntityData().get(GRACE_RECHARGED));
     }
 
-    @Inject(at = @At("RETURN"), method = "readAdditional")
-    private void MM_readAdditionalData(CompoundNBT compound, CallbackInfo ci) {
+    @Inject(at = @At("RETURN"), method = "readAdditionalSaveData")
+    private void MM_readAdditionalData(CompoundTag compound, CallbackInfo ci) {
         setGraceRecharged(compound.getBoolean("GraceRecharged"));
     }
 
     @Override
     public void setGraceRecharged(boolean isGraceRecharged) {
-        ((LivingEntity) (Object) this).getDataManager().set(GRACE_RECHARGED, isGraceRecharged);
+        ((LivingEntity) (Object) this).getEntityData().set(GRACE_RECHARGED, isGraceRecharged);
     }
 
     @Override
     public boolean getGraceRecharged() {
-        return ((LivingEntity) (Object) this).getDataManager().get(GRACE_RECHARGED);
+        return ((LivingEntity) (Object) this).getEntityData().get(GRACE_RECHARGED);
     }
 }

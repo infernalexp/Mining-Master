@@ -17,11 +17,11 @@
 package org.infernalstudios.miningmaster.gen.features;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import org.infernalstudios.miningmaster.config.MiningMasterConfig;
 import org.infernalstudios.miningmaster.gen.features.config.RandomGemOreFeatureConfig;
 import org.infernalstudios.miningmaster.init.MMBlocks;
@@ -41,36 +41,40 @@ public class RandomGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
 
         // Adds all enabled ores to the list, double copies for common to give them double chance of being chosen
         if (MiningMasterConfig.CONFIG.fireRubyEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.FIRE_RUBY_ORE.get().getDefaultState());
-            weightedOreStatesEnabled.add(MMBlocks.FIRE_RUBY_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.FIRE_RUBY_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.FIRE_RUBY_ORE.get().defaultBlockState());
         }
 
         if (MiningMasterConfig.CONFIG.iceSapphireEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.ICE_SAPPHIRE_ORE.get().getDefaultState());
-            weightedOreStatesEnabled.add(MMBlocks.ICE_SAPPHIRE_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.ICE_SAPPHIRE_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.ICE_SAPPHIRE_ORE.get().defaultBlockState());
         }
 
         if (MiningMasterConfig.CONFIG.spiritGarnetEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.SPIRIT_GARNET_ORE.get().getDefaultState());
-            weightedOreStatesEnabled.add(MMBlocks.SPIRIT_GARNET_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.SPIRIT_GARNET_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.SPIRIT_GARNET_ORE.get().defaultBlockState());
         }
 
         if (MiningMasterConfig.CONFIG.diveAquamarineEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.DIVE_AQUAMARINE_ORE.get().getDefaultState());
-            weightedOreStatesEnabled.add(MMBlocks.DIVE_AQUAMARINE_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.DIVE_AQUAMARINE_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.DIVE_AQUAMARINE_ORE.get().defaultBlockState());
         }
 
         if (MiningMasterConfig.CONFIG.hastePeridotEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.HASTE_PERIDOT_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.HASTE_PERIDOT_ORE.get().defaultBlockState());
         }
 
         if (MiningMasterConfig.CONFIG.luckyCitrineEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.LUCKY_CITRINE_ORE.get().getDefaultState());
+            weightedOreStatesEnabled.add(MMBlocks.LUCKY_CITRINE_ORE.get().defaultBlockState());
         }
     }
 
     @Override
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, RandomGemOreFeatureConfig config) {
+    public boolean place(FeaturePlaceContext<RandomGemOreFeatureConfig> context) {
+        Random rand = context.random();
+        BlockPos pos = context.origin();
+        WorldGenLevel level = context.level();
+        RandomGemOreFeatureConfig config = context.config();
 
         if (weightedOreStatesEnabled.size() == 0) {
             return false;
@@ -78,8 +82,8 @@ public class RandomGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
 
         BlockState blockState = weightedOreStatesEnabled.get(rand.nextInt(weightedOreStatesEnabled.size()));
 
-        if (config.target.test(reader.getBlockState(pos), rand)) {
-            reader.setBlockState(pos, blockState, 2);
+        if (config.target.test(level.getBlockState(pos), rand)) {
+            level.setBlock(pos, blockState, 2);
         }
 
         return true;

@@ -16,18 +16,18 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyValue;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.LazyLoadedValue;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.infernalstudios.miningmaster.MiningMaster;
 
 import java.util.function.Supplier;
 
-public enum MMArmorMaterials implements IArmorMaterial {
-    PARAGON("paragon", 40, new int[]{3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4.0F, 0.1F, null);
+public enum MMArmorMaterials implements ArmorMaterial {
+    PARAGON("paragon", 40, new int[]{3, 6, 8, 3}, 20, SoundEvents.ARMOR_EQUIP_DIAMOND, 4.0F, 0.1F, () -> Ingredient.EMPTY);
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
     private final String name;
@@ -37,7 +37,7 @@ public enum MMArmorMaterials implements IArmorMaterial {
     private final SoundEvent soundEvent;
     private final float toughness;
     private final float knockbackResistance;
-    private final LazyValue<Ingredient> repairMaterial;
+    private final LazyLoadedValue<Ingredient> repairMaterial;
 
     MMArmorMaterials(String name, int maxDamageFactor, int[] damageReductionAmountArray, int enchantability, SoundEvent soundEvent, float toughness, float knockbackResistance, Supplier<Ingredient> repairMaterial) {
         this.name = name;
@@ -47,32 +47,32 @@ public enum MMArmorMaterials implements IArmorMaterial {
         this.soundEvent = soundEvent;
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
-        this.repairMaterial = new LazyValue<>(repairMaterial);
+        this.repairMaterial = new LazyLoadedValue<>(repairMaterial);
     }
 
     @Override
-    public int getDurability(EquipmentSlotType slotIn) {
+    public int getDurabilityForSlot(EquipmentSlot slotIn) {
         return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * this.maxDamageFactor;
     }
 
     @Override
-    public int getDamageReductionAmount(EquipmentSlotType slotIn) {
+    public int getDefenseForSlot(EquipmentSlot slotIn) {
         return this.damageReductionAmountArray[slotIn.getIndex()];
     }
 
     @Override
-    public int getEnchantability() {
+    public int getEnchantmentValue() {
         return this.enchantability;
     }
 
     @Override
-    public SoundEvent getSoundEvent() {
+    public SoundEvent getEquipSound() {
         return this.soundEvent;
     }
 
     @Override
-    public Ingredient getRepairMaterial() {
-        return this.repairMaterial.getValue();
+    public Ingredient getRepairIngredient() {
+        return this.repairMaterial.get();
     }
 
     @Override

@@ -16,10 +16,10 @@
 
 package org.infernalstudios.miningmaster.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
 
@@ -30,8 +30,8 @@ public class GemOreBlock extends Block {
     }
 
     @Override
-    public int getExpDrop(BlockState state, net.minecraft.world.IWorldReader reader, BlockPos pos, int fortune, int silktouch) {
+    public int getExpDrop(BlockState state, net.minecraft.world.level.LevelReader reader, BlockPos pos, int fortune, int silktouch) {
         Random rand = new Random();
-        return silktouch == 0 ? MathHelper.nextInt(rand, 5, 10) : 0;
+        return silktouch == 0 ? Mth.nextInt(rand, 5, 10) : 0;
     }
 }

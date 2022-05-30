@@ -16,10 +16,10 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.gen.features.MalachiteMeteoriteFeature;
 import org.infernalstudios.miningmaster.gen.features.NativeGemOreFeature;
@@ -45,7 +45,7 @@ public class MMFeatures {
 
     public static final Feature<MalachiteMeteoriteFeatureConfig> MALACHITE_METEORITE_FEATURE = registerFeature("malachite_meteorite_feature", new MalachiteMeteoriteFeature(MalachiteMeteoriteFeatureConfig.CODEC));
 
-    public static <C extends IFeatureConfig, F extends Feature<C>> F registerFeature(String registryName, F feature) {
+    public static <C extends FeatureConfiguration, F extends Feature<C>> F registerFeature(String registryName, F feature) {
         ResourceLocation resourceLocation = new ResourceLocation(MiningMaster.MOD_ID, registryName);
 
         if (Registry.FEATURE.keySet().contains(resourceLocation))

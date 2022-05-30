@@ -19,11 +19,11 @@ package org.infernalstudios.miningmaster.gen.features.config;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.template.RuleTest;
-import net.minecraft.world.gen.feature.template.TagMatchRuleTest;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
-public class RandomGemOreFeatureConfig implements IFeatureConfig {
+public class RandomGemOreFeatureConfig implements FeatureConfiguration {
     public static final Codec<RandomGemOreFeatureConfig> CODEC = RecordCodecBuilder.create((builder) -> {
         return builder.group(
                         RuleTest.CODEC.fieldOf("target").forGetter((config) -> {return config.target;}))
@@ -36,5 +36,5 @@ public class RandomGemOreFeatureConfig implements IFeatureConfig {
         this.target = target;
     }
 
-    public static final RuleTest BASE_STONE_OVERWORLD = new TagMatchRuleTest(BlockTags.BASE_STONE_OVERWORLD);
+    public static final RuleTest BASE_STONE_OVERWORLD = new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD);
 }

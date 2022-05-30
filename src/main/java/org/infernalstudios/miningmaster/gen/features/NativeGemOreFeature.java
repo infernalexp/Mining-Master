@@ -17,10 +17,10 @@
 package org.infernalstudios.miningmaster.gen.features;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import org.infernalstudios.miningmaster.gen.features.config.NativeGemOreFeatureConfig;
 
 import java.util.Random;
@@ -32,9 +32,14 @@ public class NativeGemOreFeature extends Feature<NativeGemOreFeatureConfig> {
     }
 
     @Override
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NativeGemOreFeatureConfig config) {
-            if (config.target.test(reader.getBlockState(pos), rand)) {
-                reader.setBlockState(pos, config.state, 2);
+    public boolean place(FeaturePlaceContext<NativeGemOreFeatureConfig> context) {
+        Random rand = context.random();
+        BlockPos pos = context.origin();
+        WorldGenLevel level = context.level();
+        NativeGemOreFeatureConfig config = context.config();
+
+            if (config.target.test(level.getBlockState(pos), rand)) {
+                level.setBlock(pos, config.state, 2);
             }
 
         return true;
