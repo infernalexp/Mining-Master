@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:diamond_chestplate"
+            "items": [
+              "minecraft:diamond_chestplate"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:dive_aquamarine"
+            "items": [
+              "miningmaster:dive_aquamarine"
+            ]
           }
         ]
       }
@@ -31,7 +35,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:heart_rhodonite"
+            "items": [
+              "miningmaster:heart_rhodonite"
+            ]
           }
         ]
       }

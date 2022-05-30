@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:haste_peridot_pickaxe"
+            "items": [
+              "miningmaster:haste_peridot_pickaxe"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:lucky_citrine"
+            "items": [
+              "miningmaster:lucky_citrine"
+            ]
           }
         ]
       }
@@ -31,7 +35,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:kinetic_opal"
+            "items": [
+              "miningmaster:kinetic_opal"
+            ]
           }
         ]
       }

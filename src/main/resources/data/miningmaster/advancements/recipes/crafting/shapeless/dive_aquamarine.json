@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:dive_aquamarine_block"
+            "items": [
+              "miningmaster:dive_aquamarine_block"
+            ]
           }
         ]
       }

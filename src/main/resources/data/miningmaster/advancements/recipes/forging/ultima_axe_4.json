@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:haste_peridot_axe"
+            "items": [
+              "miningmaster:haste_peridot_axe"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:spirit_garnet"
+            "items": [
+              "miningmaster:spirit_garnet"
+            ]
           }
         ]
       }
@@ -31,7 +35,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:power_pyrite"
+            "items": [
+              "miningmaster:power_pyrite"
+            ]
           }
         ]
       }
@@ -41,7 +47,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:kinetic_opal"
+            "items": [
+              "miningmaster:kinetic_opal"
+            ]
           }
         ]
       }

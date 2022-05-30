@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:diamond_shovel"
+            "items": [
+              "minecraft:diamond_shovel"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:kinetic_opal"
+            "items": [
+              "miningmaster:kinetic_opal"
+            ]
           }
         ]
       }

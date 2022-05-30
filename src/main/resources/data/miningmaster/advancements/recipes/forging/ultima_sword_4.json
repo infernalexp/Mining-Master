@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:spirit_garnet_sword"
+            "items": [
+              "miningmaster:spirit_garnet_sword"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:fire_ruby"
+            "items": [
+              "miningmaster:fire_ruby"
+            ]
           }
         ]
       }
@@ -31,7 +35,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:lucky_citrine"
+            "items": [
+              "miningmaster:lucky_citrine"
+            ]
           }
         ]
       }
@@ -41,7 +47,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:ice_sapphire"
+            "items": [
+              "miningmaster:ice_sapphire"
+            ]
           }
         ]
       }

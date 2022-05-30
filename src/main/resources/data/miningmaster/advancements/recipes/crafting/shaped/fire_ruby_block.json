@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:fire_ruby"
+            "items": [
+              "miningmaster:fire_ruby"
+            ]
           }
         ]
       }

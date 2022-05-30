@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:air_malachite_block"
+            "items": [
+              "miningmaster:air_malachite_block"
+            ]
           }
         ]
       }

@@ -24,7 +24,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:ultima_hoe"
+            "items": [
+              "miningmaster:ultima_hoe"
+            ]
           }
         ]
       }

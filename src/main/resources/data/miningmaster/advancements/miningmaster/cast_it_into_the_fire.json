@@ -24,7 +24,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:gem_forge"
+            "items": [
+              "miningmaster:gem_forge"
+            ]
           }
         ]
       }

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:diamond_boots"
+            "items": [
+              "minecraft:diamond_boots"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:kinetic_opal"
+            "items": [
+              "miningmaster:kinetic_opal"
+            ]
           }
         ]
       }
@@ -31,7 +35,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:ice_sapphire"
+            "items": [
+              "miningmaster:ice_sapphire"
+            ]
           }
         ]
       }
@@ -41,7 +47,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:air_malachite"
+            "items": [
+              "miningmaster:air_malachite"
+            ]
           }
         ]
       }

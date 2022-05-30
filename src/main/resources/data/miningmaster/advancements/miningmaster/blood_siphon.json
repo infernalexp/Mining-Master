@@ -24,7 +24,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:ultima_axe"
+            "items":  [
+              "miningmaster:ultima_axe"
+              ]
           }
         ]
       }

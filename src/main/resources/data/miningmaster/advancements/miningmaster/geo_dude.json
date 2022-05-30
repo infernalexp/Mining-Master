@@ -24,7 +24,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:fire_ruby_block"
+            "items": [
+              "miningmaster:fire_ruby_block"
+            ]
           }
         ]
       }
@@ -34,7 +36,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:ice_sapphire_block"
+            "items": [
+              "miningmaster:ice_sapphire_block"
+            ]
           }
         ]
       }
@@ -44,7 +48,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:spirit_garnet_block"
+            "items": [
+              "miningmaster:spirit_garnet_block"
+            ]
           }
         ]
       }
@@ -54,7 +60,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:lucky_citrine_block"
+            "items": [
+              "miningmaster:lucky_citrine_block"
+            ]
           }
         ]
       }
@@ -64,7 +72,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:haste_peridot_block"
+            "items": [
+              "miningmaster:haste_peridot_block"
+            ]
           }
         ]
       }
@@ -74,7 +84,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:dive_aquamarine_block"
+            "items": [
+              "miningmaster:dive_aquamarine_block"
+            ]
           }
         ]
       }
@@ -84,7 +96,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:kinetic_opal_block"
+            "items": [
+              "miningmaster:kinetic_opal_block"
+            ]
           }
         ]
       }
@@ -94,7 +108,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:power_pyrite_block"
+            "items": [
+              "miningmaster:power_pyrite_block"
+            ]
           }
         ]
       }
@@ -104,7 +120,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:heart_rhodonite_block"
+            "items": [
+              "miningmaster:heart_rhodonite_block"
+            ]
           }
         ]
       }
@@ -114,7 +132,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:air_malachite_block"
+            "items": [
+              "miningmaster:air_malachite_block"
+            ]
           }
         ]
       }

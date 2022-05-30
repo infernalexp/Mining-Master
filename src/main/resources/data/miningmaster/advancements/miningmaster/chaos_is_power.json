@@ -24,7 +24,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:paragon_helmet"
+            "items": [
+              "miningmaster:paragon_helmet"
+            ]
           }
         ]
       }
@@ -34,7 +36,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:paragon_chestplate"
+            "items": [
+              "miningmaster:paragon_chestplate"
+            ]
           }
         ]
       }
@@ -44,7 +48,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:paragon_leggings"
+            "items": [
+              "miningmaster:paragon_leggings"
+            ]
           }
         ]
       }
@@ -54,7 +60,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:paragon_boots"
+            "items": [
+              "miningmaster:paragon_boots"
+            ]
           }
         ]
       }

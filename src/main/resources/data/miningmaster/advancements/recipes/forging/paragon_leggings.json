@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:diamond_leggings"
+            "items": [
+              "minecraft:diamond_leggings"
+            ]
           }
         ]
       }
@@ -21,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:air_malachite"
+            "items": [
+              "miningmaster:air_malachite"
+            ]
           }
         ]
       }
@@ -31,7 +35,9 @@
       "conditions": {
         "items": [
           {
-            "item": "miningmaster:ice_sapphire"
+            "items": [
+              "miningmaster:ice_sapphire"
+            ]
           }
         ]
       }
