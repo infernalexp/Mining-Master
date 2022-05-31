@@ -101,6 +101,14 @@ public class MiningMasterEvents {
             if (MiningMasterConfig.CONFIG.kineticOpalEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_KINETIC_OPAL_NATIVE);
             }
+        } else if (biome == Biomes.LUSH_CAVES) {
+            if (MiningMasterConfig.CONFIG.spiritGarnetEnabled.get()) {
+                event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_SPIRIT_GARNET_NATIVE);
+            }
+        } else if (biome == Biomes.DRIPSTONE_CAVES) {
+            if (MiningMasterConfig.CONFIG.diveAquamarineEnabled.get()) {
+                event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_DIVE_AQUAMARINE_NATIVE);
+            }
         }
 
         // OVERWORLD RANDOM ORES
