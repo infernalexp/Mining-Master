@@ -16,6 +16,13 @@
   "block.miningmaster.kinetic_opal_ore": "Kinetic Opal Ore",
   "block.miningmaster.air_malachite_ore": "Air Malachite Ore",
 
+  "block.miningmaster.deepslate_fire_ruby_ore": "Deepslate Fire Ruby Ore",
+  "block.miningmaster.deepslate_ice_sapphire_ore": "Deepslate Ice Sapphire Ore",
+  "block.miningmaster.deepslate_spirit_garnet_ore": "Deepslate Spirit Garnet Ore",
+  "block.miningmaster.deepslate_haste_peridot_ore": "Deepslate Haste Peridot Ore",
+  "block.miningmaster.deepslate_lucky_citrine_ore": "Deepslate Lucky Citrine Ore",
+  "block.miningmaster.deepslate_dive_aquamarine_ore": "Deepslate Dive Aquamarine Ore",
+
   "block.miningmaster.fire_ruby_block": "Block of Fire Ruby",
   "block.miningmaster.ice_sapphire_block": "Block of Ice Sapphire",
   "block.miningmaster.spirit_garnet_block": "Block of Spirit Garnet",

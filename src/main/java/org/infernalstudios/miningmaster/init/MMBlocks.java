@@ -42,10 +42,18 @@ public class MMBlocks {
     public static final RegistryObject<Block> HASTE_PERIDOT_ORE = registerBlockWithDefaultItem("haste_peridot_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
     public static final RegistryObject<Block> LUCKY_CITRINE_ORE = registerBlockWithDefaultItem("lucky_citrine_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
     public static final RegistryObject<Block> DIVE_AQUAMARINE_ORE = registerBlockWithDefaultItem("dive_aquamarine_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
-    public static final RegistryObject<Block> HEART_RHODONITE_ORE = registerBlockWithDefaultItem("heart_rhodonite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
-    public static final RegistryObject<Block> POWER_PYRITE_ORE = registerBlockWithDefaultItem("power_pyrite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
-    public static final RegistryObject<Block> KINETIC_OPAL_ORE = registerBlockWithDefaultItem("kinetic_opal_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
-    public static final RegistryObject<Block> AIR_MALACHITE_ORE = registerBlockWithDefaultItem("air_malachite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+
+    public static final RegistryObject<Block> DEEPSLATE_FIRE_RUBY_ORE = registerBlockWithDefaultItem("deepslate_fire_ruby_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_ICE_SAPPHIRE_ORE = registerBlockWithDefaultItem("deepslate_ice_sapphire_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_SPIRIT_GARNET_ORE = registerBlockWithDefaultItem("deepslate_spirit_garnet_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_HASTE_PERIDOT_ORE = registerBlockWithDefaultItem("deepslate_haste_peridot_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_LUCKY_CITRINE_ORE = registerBlockWithDefaultItem("deepslate_lucky_citrine_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_DIVE_AQUAMARINE_ORE = registerBlockWithDefaultItem("deepslate_dive_aquamarine_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
+
+    public static final RegistryObject<Block> HEART_RHODONITE_ORE = registerBlockWithDefaultItem("heart_rhodonite_ore", () -> new GemOreBlock(getProperties(Blocks.NETHER_GOLD_ORE)));
+    public static final RegistryObject<Block> POWER_PYRITE_ORE = registerBlockWithDefaultItem("power_pyrite_ore", () -> new GemOreBlock(getProperties(Blocks.NETHER_GOLD_ORE)));
+    public static final RegistryObject<Block> KINETIC_OPAL_ORE = registerBlockWithDefaultItem("kinetic_opal_ore", () -> new GemOreBlock(getProperties(Blocks.NETHER_GOLD_ORE)));
+    public static final RegistryObject<Block> AIR_MALACHITE_ORE = registerBlockWithDefaultItem("air_malachite_ore", () -> new GemOreBlock(getProperties(Blocks.NETHER_GOLD_ORE)));
 
     // GEM BLOCKS
     public static final RegistryObject<Block> FIRE_RUBY_BLOCK = registerBlockWithDefaultItem("fire_ruby_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
@@ -61,7 +69,7 @@ public class MMBlocks {
 
     //MISC BLOCKS
     public static final RegistryObject<Block> MALACORE = registerBlockWithDefaultItem("malacore", () -> new Block(getProperties(Blocks.END_STONE)));
-    public static final RegistryObject<Block> MALACRUST = registerBlockWithDefaultItem("malacrust", () -> new Block(getProperties(Blocks.END_STONE).strength(22.5F)));
+    public static final RegistryObject<Block> MALACRUST = registerBlockWithDefaultItem("malacrust", () -> new Block(getProperties(Blocks.DEEPSLATE).strength(22.5F)));
     public static final RegistryObject<Block> GEM_FORGE = registerBlockWithDefaultItem("gem_forge", () -> new GemForgeBlock(getProperties(Blocks.FURNACE)));
 
     public static BlockBehaviour.Properties getProperties(Material materialIn, float hardnessAndResistanceIn) {
