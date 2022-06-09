@@ -7,6 +7,9 @@
     "minecraft:andesite",
     "minecraft:granite",
     "minecraft:gravel",
+    "minecraft:grass_block",
+    "minecraft:dirt",
+    "minecraft:coarse_dirt",
     "minecraft:netherrack"
   ]
 }
