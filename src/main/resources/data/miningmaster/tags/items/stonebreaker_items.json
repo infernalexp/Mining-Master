@@ -10,6 +10,8 @@
     "minecraft:grass_block",
     "minecraft:dirt",
     "minecraft:coarse_dirt",
-    "minecraft:netherrack"
+    "minecraft:netherrack",
+    "minecraft:deepslate",
+    "minecraft:cobbled_deepslate"
   ]
 }
