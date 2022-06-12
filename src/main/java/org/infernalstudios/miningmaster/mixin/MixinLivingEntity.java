@@ -21,6 +21,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -64,6 +65,11 @@ public abstract class MixinLivingEntity extends Entity implements LivingEntityAc
             int level = 0;
 
             ItemStack stack = this.getItemStackFromSlot(EquipmentSlotType.LEGS);
+
+            if (stack.isItemEqual(Items.AIR.getDefaultInstance())) {
+                return;
+            }
+
             ListNBT nbtList = stack.getEnchantmentTagList();
 
             for (int i = 0; i < nbtList.size(); i++) {
