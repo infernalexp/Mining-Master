@@ -66,10 +66,10 @@ public class MiningMaster {
         MMItems.register(modEventBus);
         MMEnchantments.register(modEventBus);
         MMRecipes.register(modEventBus);
-        MMLootModifiers.register(modEventBus);
         MMContainerTypes.register(modEventBus);
         MMTileEntityTypes.register(modEventBus);
         MMSounds.register(modEventBus);
+        MMLootModifiers.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onItemAttributeModifierCalculate);

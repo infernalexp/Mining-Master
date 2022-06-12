@@ -26,6 +26,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.infernalstudios.miningmaster.access.LivingEntityAccess;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
@@ -64,6 +65,9 @@ public abstract class MixinLivingEntity extends Entity implements LivingEntityAc
             int level = 0;
 
             ItemStack stack = this.getItemBySlot(EquipmentSlot.LEGS);
+            if (stack.is(Items.AIR)) {
+                return;
+            }
             ListTag nbtList = stack.getEnchantmentTags();
 
             for (int i = 0; i < nbtList.size(); i++) {
