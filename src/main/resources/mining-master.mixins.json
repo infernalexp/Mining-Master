@@ -9,6 +9,7 @@
   },
   "mixins": [
     "MixinLivingEntity",
-    "MixinPlayer"
+    "MixinPlayer",
+    "MixinPowderSnowBlock"
   ]
 }
