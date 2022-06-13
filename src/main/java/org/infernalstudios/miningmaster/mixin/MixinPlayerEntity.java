@@ -20,6 +20,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.EffectInstance;
@@ -41,7 +42,7 @@ public abstract class MixinPlayerEntity {
     @Shadow public abstract void livingTick();
 
     @Inject(method = "attackTargetEntityWithCurrentItem", at = @At(target = "Lnet/minecraft/entity/Entity;attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z", value = "INVOKE_ASSIGN"), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void MM_calculateLeechingHeal(Entity targetEntity, CallbackInfo ci, float f, float f1, float f2, boolean flag, boolean flag1, float i, boolean flag2, net.minecraftforge.event.entity.player.CriticalHitEvent hitResult, boolean flag3, double d0, float f4, boolean flag4, int j, Vector3d vector3d, boolean flag5) {
+    private void MM_calculateEnchantEffects(Entity targetEntity, CallbackInfo ci, float f, float f1, float f2, boolean flag, boolean flag1, float i, boolean flag2, net.minecraftforge.event.entity.player.CriticalHitEvent hitResult, boolean flag3, double d0, float f4, boolean flag4, int j, Vector3d vector3d, boolean flag5) {
         if (flag5) {
             ItemStack itemStack = ((PlayerEntity) (Object) this).getHeldItemMainhand();
             ListNBT nbtList = itemStack.getEnchantmentTagList();
@@ -51,7 +52,7 @@ public abstract class MixinPlayerEntity {
 
                 if (idTag.getString("id").equals(MMEnchantments.LEECHING.getId().toString())) {
                     applyLeechingEffects(idTag.getInt("lvl"), f);
-                } else if (idTag.getString("id").equals(MMEnchantments.FREEZING.getId().toString())) {
+                } else if (idTag.getString("id").equals(MMEnchantments.FREEZING.getId().toString()) && !(itemStack.isItemEqual(Items.BOW.getDefaultInstance()) || itemStack.isItemEqual(Items.CROSSBOW.getDefaultInstance()))) {
                     applyFreezingEffects(targetEntity, idTag.getInt("lvl"), f);
                 }
             }
