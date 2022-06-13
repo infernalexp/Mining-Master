@@ -24,11 +24,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
 public class RandomGemOreFeatureConfig implements FeatureConfiguration {
-    public static final Codec<RandomGemOreFeatureConfig> CODEC = RecordCodecBuilder.create((builder) -> {
-        return builder.group(
-                        RuleTest.CODEC.fieldOf("target").forGetter((config) -> {return config.target;}))
-                .apply(builder, RandomGemOreFeatureConfig::new);
-    });
+    public static final Codec<RandomGemOreFeatureConfig> CODEC = RecordCodecBuilder.create((builder) -> builder.group(
+                    RuleTest.CODEC.fieldOf("target").forGetter((config) -> config.target))
+            .apply(builder, RandomGemOreFeatureConfig::new));
 
     public final RuleTest target;
 
@@ -36,5 +34,6 @@ public class RandomGemOreFeatureConfig implements FeatureConfiguration {
         this.target = target;
     }
 
-    public static final RuleTest BASE_STONE_OVERWORLD = new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD);
+    public static final RuleTest STONE_ORE_REPLACEABLES = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
+    public static final RuleTest DEEPSLATE_ORE_REPLACEABLES = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 }

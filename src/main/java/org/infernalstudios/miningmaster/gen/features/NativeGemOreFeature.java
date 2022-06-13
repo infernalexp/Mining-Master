@@ -38,9 +38,11 @@ public class NativeGemOreFeature extends Feature<NativeGemOreFeatureConfig> {
         WorldGenLevel level = context.level();
         NativeGemOreFeatureConfig config = context.config();
 
-            if (config.target.test(level.getBlockState(pos), rand)) {
-                level.setBlock(pos, config.state, 2);
+        for (NativeGemOreFeatureConfig.TargetBlockState ruleTest : config.targetStates) {
+            if (ruleTest.target.test(level.getBlockState(pos), rand)) {
+                level.setBlock(pos, ruleTest.state, 2);
             }
+        }
 
         return true;
     }

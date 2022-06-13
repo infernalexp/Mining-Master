@@ -114,6 +114,7 @@ public class MiningMasterEvents {
         // OVERWORLD RANDOM ORES
         if (!(biomeCategory == Biome.BiomeCategory.NETHER || biomeCategory == Biome.BiomeCategory.THEEND)) {
             event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_GEM_RANDOM);
+            event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_GEM_DEEPSLATE_RANDOM);
         }
 
         // NETHER RANDOM ORES

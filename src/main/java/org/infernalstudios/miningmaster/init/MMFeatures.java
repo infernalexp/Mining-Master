@@ -24,6 +24,7 @@ import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.gen.features.MalachiteMeteoriteFeature;
 import org.infernalstudios.miningmaster.gen.features.NativeGemOreFeature;
 import org.infernalstudios.miningmaster.gen.features.NativeNetherGemOreFeature;
+import org.infernalstudios.miningmaster.gen.features.RandomDeepslateGemOreFeature;
 import org.infernalstudios.miningmaster.gen.features.RandomGemOreFeature;
 import org.infernalstudios.miningmaster.gen.features.RandomNetherGemOreFeature;
 import org.infernalstudios.miningmaster.gen.features.config.MalachiteMeteoriteFeatureConfig;
@@ -40,6 +41,7 @@ public class MMFeatures {
 
     public static final Feature<NativeGemOreFeatureConfig> NATIVE_GEM_ORE_FEATURE = registerFeature("native_gem_ore_feature", new NativeGemOreFeature(NativeGemOreFeatureConfig.CODEC));
     public static final Feature<RandomGemOreFeatureConfig> RANDOM_GEM_ORE_FEATURE = registerFeature("random_gem_ore_feature", new RandomGemOreFeature(RandomGemOreFeatureConfig.CODEC));
+    public static final Feature<RandomGemOreFeatureConfig> RANDOM_GEM_ORE_DEEPSLATE_FEATURE = registerFeature("random_gem_ore_deepslate_feature", new RandomDeepslateGemOreFeature(RandomGemOreFeatureConfig.CODEC));
     public static final Feature<NativeNetherGemOreFeatureConfig> NATIVE_NETHER_GEM_ORE_FEATURE = registerFeature("native_nether_gem_ore_feature", new NativeNetherGemOreFeature(NativeNetherGemOreFeatureConfig.CODEC));
     public static final Feature<RandomNetherGemOreFeatureConfig> RANDOM_NETHER_GEM_ORE_FEATURE = registerFeature("random_nether_gem_ore_feature", new RandomNetherGemOreFeature(RandomNetherGemOreFeatureConfig.CODEC));
 
