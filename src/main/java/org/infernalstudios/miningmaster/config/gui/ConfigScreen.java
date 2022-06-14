@@ -105,28 +105,22 @@ public class ConfigScreen extends Screen {
                 MiningMasterConfig.CONFIG.commonGemsPerChunk.get(), MiningMasterConfig.CONFIG.commonGemsPerChunk::set
                 )
         );
-/*
 
         // Rare Gem Spawns
-        optionsRowList.addBig(new OptionInstance<Integer>(MiningMaster.MOD_ID + ".config.option.rareGemsPerChunk", 0, 100, 1,
-                settings -> MiningMasterConfig.CONFIG.rareGemsPerChunk.get().doubleValue(), (settings, value) -> MiningMasterConfig.CONFIG.rareGemsPerChunk.set(value.intValue()),
-                (settings, option) -> Component.translatable("options.generic_value", option.getCaption(), // getBaseMessageTranslation() is protected by default, use an access transformer to be able to use it
-                        Component.literal(Double.toString((double) Math.round(option.get(settings) * 100) / 100))),
-                (minecraft) -> Minecraft.getInstance().font.split(
-                        Component.translatable(MiningMaster.MOD_ID + ".config.tooltip.rareGemsPerChunk"), 200)
+        optionsRowList.addBig(new OptionInstance<>(MiningMaster.MOD_ID + ".config.option.rareGemsPerChunk",
+                OptionInstance.cachedConstantTooltip(Component.translatable(MiningMaster.MOD_ID + ".config.tooltip.rareGemsPerChunk")),
+                Options::genericValueLabel, new OptionInstance.IntRange(0, 100),
+                MiningMasterConfig.CONFIG.rareGemsPerChunk.get(), MiningMasterConfig.CONFIG.rareGemsPerChunk::set
                 )
         );
 
         // Random Gem Spawns
-        optionsRowList.addBig(new OptionInstance<Integer>(MiningMaster.MOD_ID + ".config.option.randomGemsPerChunk", 0, 100, 1,
-                settings -> MiningMasterConfig.CONFIG.randomGemsPerChunk.get().doubleValue(), (settings, value) -> MiningMasterConfig.CONFIG.randomGemsPerChunk.set(value.intValue()),
-                (settings, option) -> Component.translatable("options.generic_value", option.getCaption(), // getBaseMessageTranslation() is protected by default, use an access transformer to be able to use it
-                        Component.literal(Double.toString((double) Math.round(option.get(settings) * 100) / 100))),
-                (minecraft) -> Minecraft.getInstance().font.split(
-                        Component.translatable(MiningMaster.MOD_ID + ".config.tooltip.randomGemsPerChunk"), 200)
+        optionsRowList.addBig(new OptionInstance<>(MiningMaster.MOD_ID + ".config.option.randomGemsPerChunk",
+                OptionInstance.cachedConstantTooltip(Component.translatable(MiningMaster.MOD_ID + ".config.tooltip.randomGemsPerChunk")),
+                Options::genericValueLabel, new OptionInstance.IntRange(0, 100),
+                MiningMasterConfig.CONFIG.randomGemsPerChunk.get(), MiningMasterConfig.CONFIG.randomGemsPerChunk::set
                 )
         );
-*/
 
         addWidget(optionsRowList);
 
