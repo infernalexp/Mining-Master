@@ -18,10 +18,10 @@ package org.infernalstudios.miningmaster.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Random;
 
 public class GemOreBlock extends Block {
 
@@ -30,8 +30,9 @@ public class GemOreBlock extends Block {
     }
 
     @Override
-    public int getExpDrop(BlockState state, net.minecraft.world.level.LevelReader reader, BlockPos pos, int fortune, int silktouch) {
-        Random rand = new Random();
+    public int getExpDrop(BlockState state, LevelReader reader, RandomSource rand,BlockPos pos, int fortune, int silktouch) {
         return silktouch == 0 ? Mth.nextInt(rand, 5, 10) : 0;
     }
+
+
 }

@@ -47,7 +47,7 @@ public class GemBowItem extends BowItem {
 
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        if (allowdedIn(group)) {
+        if (allowedIn(group)) {
             ItemStack itemStack = new ItemStack(this);
 
             for (Pair<Supplier<Enchantment>, Integer> enchantmentPair : enchantments) {

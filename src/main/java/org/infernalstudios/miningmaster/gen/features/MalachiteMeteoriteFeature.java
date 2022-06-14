@@ -20,6 +20,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,8 +29,6 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.phys.Vec3;
 import org.infernalstudios.miningmaster.gen.features.config.MalachiteMeteoriteFeatureConfig;
 import org.infernalstudios.miningmaster.init.MMBlocks;
-
-import java.util.Random;
 
 import static java.lang.Math.sqrt;
 
@@ -41,7 +40,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
 
     @Override
     public boolean place(FeaturePlaceContext<MalachiteMeteoriteFeatureConfig> context) {
-        Random rand = context.random();
+        RandomSource rand = context.random();
         BlockPos pos = context.origin();
         WorldGenLevel level = context.level();
         MalachiteMeteoriteFeatureConfig config = context.config();
@@ -78,7 +77,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
         return false;
     }
 
-    private void generateIsland(WorldGenLevel world, Random rand, BlockPos pos, float islandRadius) {
+    private void generateIsland(WorldGenLevel world, RandomSource rand, BlockPos pos, float islandRadius) {
         for (int i = 0; islandRadius > 0.5F; --i) {
             for (int j = Mth.floor(-islandRadius); j <= Mth.ceil(islandRadius); ++j) {
                 for (int k = Mth.floor(-islandRadius); k <= Mth.ceil(islandRadius); ++k) {
@@ -92,7 +91,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
         }
     }
 
-    private void generateMeteorite(WorldGenLevel world, Random rand, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
+    private void generateMeteorite(WorldGenLevel world, RandomSource rand, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
         Vec3 meteoritePos = new Vec3(pos.getX(), pos.getY() + meteoriteOffset, pos.getZ());
 
         int airCoreSize = Math.max(2, (int) meteoriteRadius / 2);
@@ -124,7 +123,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
         }
     }
 
-    private void generateImpactCrater(WorldGenLevel world, Random rand, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
+    private void generateImpactCrater(WorldGenLevel world, RandomSource rand, BlockPos pos, double meteoriteOffset, double meteoriteRadius) {
         double craterRadius = meteoriteRadius + 3;
         Vec3 craterPos = new Vec3(pos.getX(), pos.getY() + (craterRadius - (meteoriteRadius + meteoriteOffset) + 1), pos.getZ());
 
@@ -146,7 +145,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
         }
     }
 
-    private void scatterCrust(WorldGenLevel world, Random rand, BlockPos pos, double craterRadius, float islandRadius) {
+    private void scatterCrust(WorldGenLevel world, RandomSource rand, BlockPos pos, double craterRadius, float islandRadius) {
         int numberOfChunks = rand.nextInt((int) islandRadius * 15) + (int) islandRadius * 8;
         for (int i = 0; i < numberOfChunks; i++) {
             double r = (rand.nextInt((int) (islandRadius - craterRadius + 1)) + craterRadius) * sqrt(rand.nextDouble());

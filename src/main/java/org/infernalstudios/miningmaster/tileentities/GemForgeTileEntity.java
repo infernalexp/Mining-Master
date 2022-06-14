@@ -21,7 +21,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -191,7 +190,7 @@ public class GemForgeTileEntity extends BaseContainerBlockEntity implements Worl
     }
 
     public Component getDisplayName() {
-        return this.customName != null ? this.customName : new TranslatableComponent(MiningMaster.MOD_ID + ':' + "container.gem_forge");
+        return this.customName != null ? this.customName : Component.translatable(MiningMaster.MOD_ID + ':' + "container.gem_forge");
     }
 
     @Override

@@ -27,7 +27,6 @@ import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
@@ -41,6 +40,7 @@ import org.infernalstudios.miningmaster.client.gui.recipebook.GemForgeRecipeGui;
 import org.infernalstudios.miningmaster.containers.GemForgeContainer;
 import org.infernalstudios.miningmaster.network.MMNetworkHandler;
 import org.infernalstudios.miningmaster.network.UpdateGemForgePacket;
+
 
 @OnlyIn(Dist.CLIENT)
 public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> implements RecipeUpdateListener {
@@ -175,7 +175,7 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
         private final int yOffset;
 
         protected Button(int x, int y, GemForgeScreen screen) {
-            super(x, y, 20, 20, TextComponent.EMPTY);
+            super(x, y, 20, 20, Component.empty());
             this.screen = screen;
             this.xOffset = x;
             this.yOffset = y;

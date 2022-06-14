@@ -35,7 +35,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.infernalstudios.miningmaster.init.MMRecipes;
 
 import javax.annotation.Nullable;
@@ -141,7 +140,7 @@ public class ForgingRecipe implements IForgingRecipe {
         }
     }
 
-    public static class ForgingRecipeSerializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ForgingRecipe> {
+    public static class ForgingRecipeSerializer implements RecipeSerializer<ForgingRecipe> {
 
         @Override
         public ForgingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
@@ -242,7 +241,7 @@ public class ForgingRecipe implements IForgingRecipe {
 
             buffer.writeVarInt(recipe.enchantments.size());
             for(Pair<Enchantment,Integer> enchantment : recipe.enchantments) {
-                buffer.writeResourceLocation(enchantment.getFirst().getRegistryName());
+                buffer.writeResourceLocation(ForgeRegistries.ENCHANTMENTS.getKey(enchantment.getFirst()));
                 buffer.writeVarInt(enchantment.getSecond());
             }
 

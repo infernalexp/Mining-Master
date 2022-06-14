@@ -17,6 +17,7 @@
 package org.infernalstudios.miningmaster.init;
 
 import com.google.gson.JsonObject;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -33,7 +34,6 @@ import net.minecraftforge.registries.RegistryObject;
 import org.infernalstudios.miningmaster.MiningMaster;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Optional;
 
 public class MMLootModifiers {
@@ -55,7 +55,7 @@ public class MMLootModifiers {
 
         @Nonnull
         @Override
-        protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+        protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
             for (ItemStack item : generatedLoot) {
                 Optional<SmeltingRecipe> optional = context.getLevel().getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SimpleContainer(item), context.getLevel());
                 if (optional.isPresent()) {
@@ -98,7 +98,7 @@ public class MMLootModifiers {
 
         @Nonnull
         @Override
-        protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+        protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
             generatedLoot.removeIf(item -> item.is(MMTags.Items.STONEBREAKER_ITEMS));
             return generatedLoot;
         }

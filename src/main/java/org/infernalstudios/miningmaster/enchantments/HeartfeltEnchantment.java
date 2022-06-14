@@ -32,7 +32,6 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
 
-import java.util.Random;
 import java.util.UUID;
 
 public class HeartfeltEnchantment extends Enchantment {
@@ -89,7 +88,7 @@ public class HeartfeltEnchantment extends Enchantment {
             for (int i = 0; i < nbtList.size(); i++) {
                 CompoundTag idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.HEARTFELT.getId().toString())) {
-                    item.hurt(idTag.getInt("lvl"), new Random(), null);
+                    item.hurt(idTag.getInt("lvl"), user.getRandom(), null);
                 }
             }
         }

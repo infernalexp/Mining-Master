@@ -16,10 +16,10 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.gen.features.MalachiteMeteoriteFeature;
 import org.infernalstudios.miningmaster.gen.features.NativeGemOreFeature;
@@ -33,11 +33,11 @@ import org.infernalstudios.miningmaster.gen.features.config.NativeNetherGemOreFe
 import org.infernalstudios.miningmaster.gen.features.config.RandomGemOreFeatureConfig;
 import org.infernalstudios.miningmaster.gen.features.config.RandomNetherGemOreFeatureConfig;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MMFeatures {
-    public static List<Feature<?>> features = new ArrayList<>();
+    public static Map<ResourceLocation, Feature<?>> features = new HashMap<>();
 
     public static final Feature<NativeGemOreFeatureConfig> NATIVE_GEM_ORE_FEATURE = registerFeature("native_gem_ore_feature", new NativeGemOreFeature(NativeGemOreFeatureConfig.CODEC));
     public static final Feature<RandomGemOreFeatureConfig> RANDOM_GEM_ORE_FEATURE = registerFeature("random_gem_ore_feature", new RandomGemOreFeature(RandomGemOreFeatureConfig.CODEC));
@@ -50,11 +50,10 @@ public class MMFeatures {
     public static <C extends FeatureConfiguration, F extends Feature<C>> F registerFeature(String registryName, F feature) {
         ResourceLocation resourceLocation = new ResourceLocation(MiningMaster.MOD_ID, registryName);
 
-        if (Registry.FEATURE.keySet().contains(resourceLocation))
+        if (ForgeRegistries.FEATURES.getKeys().contains(resourceLocation))
             throw new IllegalStateException("Feature ID: \"" + resourceLocation.toString() + "\" is already in the registry!");
 
-        feature.setRegistryName(resourceLocation);
-        features.add(feature);
+        features.put(resourceLocation, feature);
 
         return feature;
     }

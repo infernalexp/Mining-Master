@@ -22,7 +22,6 @@ import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookTabButton;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.Slot;
@@ -38,7 +37,7 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class GemForgeRecipeGui extends RecipeBookComponent {
     protected static final ResourceLocation RECIPE_BOOK_GEM_FORGE = new ResourceLocation(MiningMaster.MOD_ID, "textures/gui/recipe_book_gem_forge.png");
-    private static final Component translationKeyForgable = new TranslatableComponent(MiningMaster.MOD_ID + ".gui.recipebook.toggleRecipes.forgable");
+    private static final Component translationKeyForgable = Component.translatable(MiningMaster.MOD_ID + ".gui.recipebook.toggleRecipes.forgable");
 
     protected Component getRecipeFilterName() {
         return translationKeyForgable;

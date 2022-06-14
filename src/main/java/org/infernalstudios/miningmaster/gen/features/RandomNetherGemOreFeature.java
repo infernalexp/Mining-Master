@@ -18,6 +18,7 @@ package org.infernalstudios.miningmaster.gen.features;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -27,7 +28,6 @@ import org.infernalstudios.miningmaster.gen.features.config.RandomNetherGemOreFe
 import org.infernalstudios.miningmaster.init.MMBlocks;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class RandomNetherGemOreFeature extends Feature<RandomNetherGemOreFeatureConfig> {
     static ArrayList<BlockState> weightedOreStatesEnabled = new ArrayList<>(4);
@@ -56,7 +56,7 @@ public class RandomNetherGemOreFeature extends Feature<RandomNetherGemOreFeature
 
     @Override
     public boolean place(FeaturePlaceContext<RandomNetherGemOreFeatureConfig> context) {
-        Random rand = context.random();
+        RandomSource rand = context.random();
         BlockPos pos = context.origin();
         WorldGenLevel level = context.level();
         RandomNetherGemOreFeatureConfig config = context.config();

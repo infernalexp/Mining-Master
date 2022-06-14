@@ -39,7 +39,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.infernalstudios.miningmaster.init.MMRecipes;
 
 import javax.annotation.Nullable;
@@ -82,7 +81,7 @@ public class GemSmithingRecipe extends UpgradeRecipe implements Recipe<Container
                 for (int i = 0; i < nbtList.size(); i++) {
                     CompoundTag idTag = nbtList.getCompound(i);
 
-                    if (idTag.getString("id").equals(enchantment.getRegistryName().toString())) {
+                    if (idTag.getString("id").equals(ForgeRegistries.ENCHANTMENTS.getKey(enchantment).toString())) {
                         int targetLevel = idTag.getInt("lvl") + 1;
                         if (targetLevel > enchantment.getMaxLevel()) {
                             break outerLoop;
@@ -157,7 +156,7 @@ public class GemSmithingRecipe extends UpgradeRecipe implements Recipe<Container
         }
     }
 
-    public static class GemSmithingRecipeSerializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<GemSmithingRecipe> {
+    public static class GemSmithingRecipeSerializer implements RecipeSerializer<GemSmithingRecipe> {
 
         private static NonNullList<Enchantment> readEnchantments(JsonArray enchantmentArray) {
             NonNullList<Enchantment> enchantments = NonNullList.create();
@@ -222,7 +221,7 @@ public class GemSmithingRecipe extends UpgradeRecipe implements Recipe<Container
 
             buffer.writeVarInt(recipe.enchantments.size());
             for(Enchantment enchantment : recipe.enchantments) {
-                buffer.writeResourceLocation(enchantment.getRegistryName());
+                buffer.writeResourceLocation(ForgeRegistries.ENCHANTMENTS.getKey(enchantment));
             }
         }
     }

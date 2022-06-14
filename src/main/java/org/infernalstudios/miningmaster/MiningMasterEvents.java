@@ -16,40 +16,25 @@
 
 package org.infernalstudios.miningmaster;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.infernalstudios.miningmaster.config.MiningMasterConfig;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import org.infernalstudios.miningmaster.init.MMFeatures;
-import org.infernalstudios.miningmaster.init.MMPlacedFeatures;
 import org.infernalstudios.miningmaster.init.MMRecipes;
 import org.infernalstudios.miningmaster.recipes.ForgingRecipe;
 
 @Mod.EventBusSubscriber(modid = MiningMaster.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MiningMasterEvents {
 
-    // Register the custom ore features
+    // Register the custom ore features and recipe types
     @SubscribeEvent
-    public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
-        MMFeatures.features.forEach(feature -> event.getRegistry().register(feature));
+    public static void registerFeaturesAndRecipeTypes(RegisterEvent event) {
+        event.register(ForgeRegistries.Keys.FEATURES, helper -> MMFeatures.features.forEach(helper::register));
+        event.register(ForgeRegistries.Keys.RECIPE_TYPES, helper -> helper.register(ForgingRecipe.TYPE_ID, MMRecipes.FORGING_RECIPE_TYPE));
     }
 
-    // Register the custom recipe type
-    @SubscribeEvent
-    public static void registerRecipeTypes(RegistryEvent.Register<RecipeSerializer<?>> event) {
-        Registry.register(Registry.RECIPE_TYPE, ForgingRecipe.TYPE_ID, MMRecipes.FORGING_RECIPE_TYPE);
-    }
-
+/*
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onBiomeLoad(BiomeLoadingEvent event) {
         if (event.getCategory() == null) {
@@ -129,4 +114,5 @@ public class MiningMasterEvents {
             }
         }
     }
+    */
 }

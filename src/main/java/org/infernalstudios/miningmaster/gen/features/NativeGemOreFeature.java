@@ -18,12 +18,11 @@ package org.infernalstudios.miningmaster.gen.features;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import org.infernalstudios.miningmaster.gen.features.config.NativeGemOreFeatureConfig;
-
-import java.util.Random;
 
 public class NativeGemOreFeature extends Feature<NativeGemOreFeatureConfig> {
 
@@ -33,7 +32,7 @@ public class NativeGemOreFeature extends Feature<NativeGemOreFeatureConfig> {
 
     @Override
     public boolean place(FeaturePlaceContext<NativeGemOreFeatureConfig> context) {
-        Random rand = context.random();
+        RandomSource rand = context.random();
         BlockPos pos = context.origin();
         WorldGenLevel level = context.level();
         NativeGemOreFeatureConfig config = context.config();

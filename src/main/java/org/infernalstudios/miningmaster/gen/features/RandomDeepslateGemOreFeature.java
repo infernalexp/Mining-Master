@@ -18,6 +18,7 @@ package org.infernalstudios.miningmaster.gen.features;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -27,7 +28,6 @@ import org.infernalstudios.miningmaster.gen.features.config.RandomGemOreFeatureC
 import org.infernalstudios.miningmaster.init.MMBlocks;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class RandomDeepslateGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
     static ArrayList<BlockState> weightedOreStatesEnabled = new ArrayList<>(10);
@@ -71,7 +71,7 @@ public class RandomDeepslateGemOreFeature extends Feature<RandomGemOreFeatureCon
 
     @Override
     public boolean place(FeaturePlaceContext<RandomGemOreFeatureConfig> context) {
-        Random rand = context.random();
+        RandomSource rand = context.random();
         BlockPos pos = context.origin();
         WorldGenLevel level = context.level();
         RandomGemOreFeatureConfig config = context.config();
