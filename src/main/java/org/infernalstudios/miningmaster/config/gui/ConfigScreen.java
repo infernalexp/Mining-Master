@@ -29,8 +29,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.config.MiningMasterConfig;
-import org.infernalstudios.miningmaster.gen.features.RandomGemOreFeature;
-import org.infernalstudios.miningmaster.gen.features.RandomNetherGemOreFeature;
+import org.infernalstudios.miningmaster.world.features.RandomGemOreFeature;
+import org.infernalstudios.miningmaster.world.features.RandomNetherGemOreFeature;
 
 import java.util.List;
 

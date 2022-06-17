@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Infernal Studios
+ * Copyright 2021 Infernal Studios
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.infernalstudios.miningmaster.gen.features.config;
+package org.infernalstudios.miningmaster.world.features.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

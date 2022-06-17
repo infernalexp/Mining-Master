@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.infernalstudios.miningmaster.gen.features;
+package org.infernalstudios.miningmaster.world.features;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import org.infernalstudios.miningmaster.config.MiningMasterConfig;
-import org.infernalstudios.miningmaster.gen.features.config.RandomGemOreFeatureConfig;
+import org.infernalstudios.miningmaster.world.features.config.RandomGemOreFeatureConfig;
 import org.infernalstudios.miningmaster.init.MMBlocks;
 
 import java.util.ArrayList;

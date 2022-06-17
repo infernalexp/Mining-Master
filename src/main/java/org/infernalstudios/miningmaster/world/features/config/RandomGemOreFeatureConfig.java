@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Infernal Studios
+ * Copyright 2021 Infernal Studios
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,26 @@
  * limitations under the License.
  */
 
-package org.infernalstudios.miningmaster.gen.features.config;
+package org.infernalstudios.miningmaster.world.features.config;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
-public class RandomNetherGemOreFeatureConfig implements FeatureConfiguration {
-    public static final Codec<RandomNetherGemOreFeatureConfig> CODEC = RecordCodecBuilder.create((builder) -> {
-        return builder.group(
-                        RuleTest.CODEC.fieldOf("target").forGetter((config) -> {return config.target;}))
-                .apply(builder, RandomNetherGemOreFeatureConfig::new);
-    });
+public class RandomGemOreFeatureConfig implements FeatureConfiguration {
+    public static final Codec<RandomGemOreFeatureConfig> CODEC = RecordCodecBuilder.create((builder) -> builder.group(
+                    RuleTest.CODEC.fieldOf("target").forGetter((config) -> config.target))
+            .apply(builder, RandomGemOreFeatureConfig::new));
 
     public final RuleTest target;
 
-    public RandomNetherGemOreFeatureConfig(RuleTest target) {
+    public RandomGemOreFeatureConfig(RuleTest target) {
         this.target = target;
     }
 
-    public static final RuleTest NETHERRACK = new BlockMatchTest(Blocks.NETHERRACK);
+    public static final RuleTest STONE_ORE_REPLACEABLES = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
+    public static final RuleTest DEEPSLATE_ORE_REPLACEABLES = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 }

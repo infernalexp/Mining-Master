@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Infernal Studios
+ * Copyright 2021 Infernal Studios
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.infernalstudios.miningmaster.gen.features;
+package org.infernalstudios.miningmaster.world.features;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import org.infernalstudios.miningmaster.gen.features.config.NativeGemOreFeatureConfig;
+import org.infernalstudios.miningmaster.world.features.config.NativeGemOreFeatureConfig;
 
 public class NativeGemOreFeature extends Feature<NativeGemOreFeatureConfig> {
 

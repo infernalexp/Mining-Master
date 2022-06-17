@@ -27,11 +27,11 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import org.infernalstudios.miningmaster.MiningMaster;
-import org.infernalstudios.miningmaster.gen.features.config.MalachiteMeteoriteFeatureConfig;
-import org.infernalstudios.miningmaster.gen.features.config.NativeGemOreFeatureConfig;
-import org.infernalstudios.miningmaster.gen.features.config.NativeNetherGemOreFeatureConfig;
-import org.infernalstudios.miningmaster.gen.features.config.RandomGemOreFeatureConfig;
-import org.infernalstudios.miningmaster.gen.features.config.RandomNetherGemOreFeatureConfig;
+import org.infernalstudios.miningmaster.world.features.config.MalachiteMeteoriteFeatureConfig;
+import org.infernalstudios.miningmaster.world.features.config.NativeGemOreFeatureConfig;
+import org.infernalstudios.miningmaster.world.features.config.NativeNetherGemOreFeatureConfig;
+import org.infernalstudios.miningmaster.world.features.config.RandomGemOreFeatureConfig;
+import org.infernalstudios.miningmaster.world.features.config.RandomNetherGemOreFeatureConfig;
 
 import java.util.List;
 
