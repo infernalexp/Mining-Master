@@ -73,7 +73,7 @@ public class MiningMasterEvents {
             if (MiningMasterConfig.CONFIG.iceSapphireEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_ICE_SAPPHIRE_NATIVE);
             }
-        } else if (biomeCategory == Biome.BiomeCategory.EXTREME_HILLS) {
+        } else if (biome == Biomes.SUNFLOWER_PLAINS || biome == Biomes.FLOWER_FOREST || biome == Biomes.LUSH_CAVES) {
             if (MiningMasterConfig.CONFIG.spiritGarnetEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_SPIRIT_GARNET_NATIVE);
             }
@@ -85,7 +85,7 @@ public class MiningMasterEvents {
             if (MiningMasterConfig.CONFIG.luckyCitrineEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_LUCKY_CITRINE_NATIVE);
             }
-        } else if (biomeCategory == Biome.BiomeCategory.OCEAN) {
+        } else if (biomeCategory == Biome.BiomeCategory.OCEAN || biome == Biomes.DRIPSTONE_CAVES) {
             if (MiningMasterConfig.CONFIG.diveAquamarineEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_DIVE_AQUAMARINE_NATIVE);
             }
@@ -100,14 +100,6 @@ public class MiningMasterEvents {
         } else if (biome == Biomes.BASALT_DELTAS) {
             if (MiningMasterConfig.CONFIG.kineticOpalEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_KINETIC_OPAL_NATIVE);
-            }
-        } else if (biome == Biomes.LUSH_CAVES) {
-            if (MiningMasterConfig.CONFIG.spiritGarnetEnabled.get()) {
-                event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_SPIRIT_GARNET_NATIVE);
-            }
-        } else if (biome == Biomes.DRIPSTONE_CAVES) {
-            if (MiningMasterConfig.CONFIG.diveAquamarineEnabled.get()) {
-                event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_DIVE_AQUAMARINE_NATIVE);
             }
         }
 
