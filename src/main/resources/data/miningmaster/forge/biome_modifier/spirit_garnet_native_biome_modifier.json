@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "minecraft:sunflower_plains",
+    "minecraft:flower_forest",
+    "minecraft:lush_caves"
+  ],
+  "features": "miningmaster:ore_spirit_garnet_native",
+  "step": "underground_ores"
+}

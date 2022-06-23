@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:soul_sand_valley",
+  "features": "miningmaster:ore_heart_rhodonite_native",
+  "step": "underground_ores"
+}

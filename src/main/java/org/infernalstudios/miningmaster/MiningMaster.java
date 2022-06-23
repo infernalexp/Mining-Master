@@ -39,7 +39,6 @@ import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.KnightJumpEnchantment;
 import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
 import org.infernalstudios.miningmaster.enchantments.SnowpiercerEnchantment;
-import org.infernalstudios.miningmaster.init.MMBiomeModifiers;
 import org.infernalstudios.miningmaster.world.features.RandomGemOreFeature;
 import org.infernalstudios.miningmaster.world.features.RandomNetherGemOreFeature;
 import org.infernalstudios.miningmaster.init.MMBlocks;
@@ -73,7 +72,6 @@ public class MiningMaster {
         MMTileEntityTypes.register(modEventBus);
         MMSounds.register(modEventBus);
         MMLootModifiers.register(modEventBus);
-        MMBiomeModifiers.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onItemAttributeModifierCalculate);

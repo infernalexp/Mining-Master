@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#forge:is_cold_overworld",
+  "features": "miningmaster:ore_ice_sapphire_native",
+  "step": "underground_ores"
+}

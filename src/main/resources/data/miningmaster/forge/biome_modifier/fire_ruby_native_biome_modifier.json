@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:desert",
+  "features": "miningmaster:ore_fire_ruby_native",
+  "step": "underground_ores"
+}
