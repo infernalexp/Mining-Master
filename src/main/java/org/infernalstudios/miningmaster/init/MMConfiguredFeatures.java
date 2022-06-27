@@ -16,16 +16,14 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import net.minecraft.core.Holder;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.world.features.config.MalachiteMeteoriteFeatureConfig;
 import org.infernalstudios.miningmaster.world.features.config.NativeGemOreFeatureConfig;
@@ -36,6 +34,9 @@ import org.infernalstudios.miningmaster.world.features.config.RandomNetherGemOre
 import java.util.List;
 
 public class MMConfiguredFeatures {
+
+    public static final DeferredRegister<ConfiguredFeature<?,?>> CONFIGURED_FEATURES = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, MiningMaster.MOD_ID);
+
     public static final RuleTest STONE_ORE_REPLACEABLES = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
     public static final RuleTest DEEPSLATE_ORE_REPLACEABLES = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 
@@ -46,33 +47,25 @@ public class MMConfiguredFeatures {
     public static final List<NativeGemOreFeatureConfig.TargetBlockState> ORE_HASTE_PERIDOT_TARGET_LIST = List.of(NativeGemOreFeatureConfig.target(STONE_ORE_REPLACEABLES, MMBlocks.HASTE_PERIDOT_ORE.get().defaultBlockState()), NativeGemOreFeatureConfig.target(DEEPSLATE_ORE_REPLACEABLES, MMBlocks.DEEPSLATE_HASTE_PERIDOT_ORE.get().defaultBlockState()));
     public static final List<NativeGemOreFeatureConfig.TargetBlockState> ORE_LUCKY_CITRINE_TARGET_LIST = List.of(NativeGemOreFeatureConfig.target(STONE_ORE_REPLACEABLES, MMBlocks.LUCKY_CITRINE_ORE.get().defaultBlockState()), NativeGemOreFeatureConfig.target(DEEPSLATE_ORE_REPLACEABLES, MMBlocks.DEEPSLATE_LUCKY_CITRINE_ORE.get().defaultBlockState()));
 
-    public static Holder<ConfiguredFeature<?, ?>> ORE_GEM_RANDOM = registerConfiguredFeature("ore_gem_random", MMFeatures.RANDOM_GEM_ORE_FEATURE, new RandomGemOreFeatureConfig(RandomGemOreFeatureConfig.STONE_ORE_REPLACEABLES));
-    public static Holder<ConfiguredFeature<?, ?>> ORE_GEM_DEEPSLATE_RANDOM = registerConfiguredFeature("ore_gem_deepslate_random", MMFeatures.RANDOM_GEM_ORE_DEEPSLATE_FEATURE, new RandomGemOreFeatureConfig(RandomGemOreFeatureConfig.DEEPSLATE_ORE_REPLACEABLES));
-    public static Holder<ConfiguredFeature<?, ?>> ORE_NETHER_GEM_RANDOM = registerConfiguredFeature("ore_nether_gem_random", MMFeatures.RANDOM_NETHER_GEM_ORE_FEATURE, new RandomNetherGemOreFeatureConfig(RandomNetherGemOreFeatureConfig.NETHERRACK));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_GEM_RANDOM = CONFIGURED_FEATURES.register("ore_gem_random", () -> new ConfiguredFeature<>(MMFeatures.RANDOM_GEM_ORE_FEATURE.get(), new RandomGemOreFeatureConfig(RandomGemOreFeatureConfig.STONE_ORE_REPLACEABLES)));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_GEM_DEEPSLATE_RANDOM = CONFIGURED_FEATURES.register("ore_gem_deepslate_random", () -> new ConfiguredFeature<>(MMFeatures.RANDOM_GEM_ORE_DEEPSLATE_FEATURE.get(), new RandomGemOreFeatureConfig(RandomGemOreFeatureConfig.DEEPSLATE_ORE_REPLACEABLES)));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_NETHER_GEM_RANDOM = CONFIGURED_FEATURES.register("ore_nether_gem_random", () -> new ConfiguredFeature<>(MMFeatures.RANDOM_NETHER_GEM_ORE_FEATURE.get(), new RandomNetherGemOreFeatureConfig(RandomNetherGemOreFeatureConfig.NETHERRACK)));
 
-    public static Holder<ConfiguredFeature<?, ?>> ORE_FIRE_RUBY_NATIVE = registerConfiguredFeature("ore_fire_ruby_native", MMFeatures.NATIVE_GEM_ORE_FEATURE, new NativeGemOreFeatureConfig(ORE_FIRE_RUBY_TARGET_LIST));
-    public static Holder<ConfiguredFeature<?, ?>> ORE_ICE_SAPPHIRE_NATIVE = registerConfiguredFeature("ore_ice_sapphire_native", MMFeatures.NATIVE_GEM_ORE_FEATURE, new NativeGemOreFeatureConfig(ORE_ICE_SAPPHIRE_TARGET_LIST));
-    public static Holder<ConfiguredFeature<?, ?>> ORE_SPIRIT_GARNET_NATIVE = registerConfiguredFeature("ore_spirit_garnet_native", MMFeatures.NATIVE_GEM_ORE_FEATURE, new NativeGemOreFeatureConfig(ORE_SPIRIT_GARNET_TARGET_LIST));
-    public static Holder<ConfiguredFeature<?, ?>> ORE_DIVE_AQUAMARINE_NATIVE = registerConfiguredFeature("ore_dive_aquamarine_native", MMFeatures.NATIVE_GEM_ORE_FEATURE, new NativeGemOreFeatureConfig(ORE_DIVE_AQUAMARINE_TARGET_LIST));
-    public static Holder<ConfiguredFeature<?, ?>> ORE_HASTE_PERIDOT_NATIVE = registerConfiguredFeature("ore_haste_peridot_native", MMFeatures.NATIVE_GEM_ORE_FEATURE, new NativeGemOreFeatureConfig(ORE_HASTE_PERIDOT_TARGET_LIST));
-    public static Holder<ConfiguredFeature<?, ?>> ORE_LUCKY_CITRINE_NATIVE = registerConfiguredFeature("ore_lucky_citrine_native", MMFeatures.NATIVE_GEM_ORE_FEATURE, new NativeGemOreFeatureConfig(ORE_LUCKY_CITRINE_TARGET_LIST));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_FIRE_RUBY_NATIVE = CONFIGURED_FEATURES.register("ore_fire_ruby_native", () -> new ConfiguredFeature<>(MMFeatures.NATIVE_GEM_ORE_FEATURE.get(), new NativeGemOreFeatureConfig(ORE_FIRE_RUBY_TARGET_LIST)));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_ICE_SAPPHIRE_NATIVE = CONFIGURED_FEATURES.register("ore_ice_sapphire_native", () -> new ConfiguredFeature<>(MMFeatures.NATIVE_GEM_ORE_FEATURE.get(), new NativeGemOreFeatureConfig(ORE_ICE_SAPPHIRE_TARGET_LIST)));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_SPIRIT_GARNET_NATIVE = CONFIGURED_FEATURES.register("ore_spirit_garnet_native", () -> new ConfiguredFeature<>(MMFeatures.NATIVE_GEM_ORE_FEATURE.get(), new NativeGemOreFeatureConfig(ORE_SPIRIT_GARNET_TARGET_LIST)));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_DIVE_AQUAMARINE_NATIVE = CONFIGURED_FEATURES.register("ore_dive_aquamarine_native", () -> new ConfiguredFeature<>(MMFeatures.NATIVE_GEM_ORE_FEATURE.get(), new NativeGemOreFeatureConfig(ORE_DIVE_AQUAMARINE_TARGET_LIST)));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_HASTE_PERIDOT_NATIVE = CONFIGURED_FEATURES.register("ore_haste_peridot_native", () -> new ConfiguredFeature<>(MMFeatures.NATIVE_GEM_ORE_FEATURE.get(), new NativeGemOreFeatureConfig(ORE_HASTE_PERIDOT_TARGET_LIST)));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_LUCKY_CITRINE_NATIVE = CONFIGURED_FEATURES.register("ore_lucky_citrine_native", () -> new ConfiguredFeature<>(MMFeatures.NATIVE_GEM_ORE_FEATURE.get(), new NativeGemOreFeatureConfig(ORE_LUCKY_CITRINE_TARGET_LIST)));
 
-    public static Holder<ConfiguredFeature<?, ?>> ORE_POWER_PYRITE_NATIVE = registerConfiguredFeature("ore_power_pyrite_native", MMFeatures.NATIVE_NETHER_GEM_ORE_FEATURE, new NativeNetherGemOreFeatureConfig(NativeNetherGemOreFeatureConfig.NETHERRACK, MMBlocks.POWER_PYRITE_ORE.get().defaultBlockState()));
-    public static Holder<ConfiguredFeature<?, ?>> ORE_HEART_RHODONITE_NATIVE = registerConfiguredFeature("ore_heart_rhodonite_native", MMFeatures.NATIVE_NETHER_GEM_ORE_FEATURE, new NativeNetherGemOreFeatureConfig(NativeNetherGemOreFeatureConfig.NETHERRACK, MMBlocks.HEART_RHODONITE_ORE.get().defaultBlockState()));
-    public static Holder<ConfiguredFeature<?, ?>> ORE_KINETIC_OPAL_NATIVE = registerConfiguredFeature("ore_kinetic_opal_native", MMFeatures.NATIVE_NETHER_GEM_ORE_FEATURE, new NativeNetherGemOreFeatureConfig(NativeNetherGemOreFeatureConfig.NETHERRACK, MMBlocks.KINETIC_OPAL_ORE.get().defaultBlockState()));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_POWER_PYRITE_NATIVE = CONFIGURED_FEATURES.register("ore_power_pyrite_native", () -> new ConfiguredFeature<>(MMFeatures.NATIVE_NETHER_GEM_ORE_FEATURE.get(), new NativeNetherGemOreFeatureConfig(NativeNetherGemOreFeatureConfig.NETHERRACK, MMBlocks.POWER_PYRITE_ORE.get().defaultBlockState())));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_HEART_RHODONITE_NATIVE = CONFIGURED_FEATURES.register("ore_heart_rhodonite_native", () -> new ConfiguredFeature<>(MMFeatures.NATIVE_NETHER_GEM_ORE_FEATURE.get(), new NativeNetherGemOreFeatureConfig(NativeNetherGemOreFeatureConfig.NETHERRACK, MMBlocks.HEART_RHODONITE_ORE.get().defaultBlockState())));
+    public static RegistryObject<ConfiguredFeature<?, ?>> ORE_KINETIC_OPAL_NATIVE = CONFIGURED_FEATURES.register("ore_kinetic_opal_native", () -> new ConfiguredFeature<>(MMFeatures.NATIVE_NETHER_GEM_ORE_FEATURE.get(), new NativeNetherGemOreFeatureConfig(NativeNetherGemOreFeatureConfig.NETHERRACK, MMBlocks.KINETIC_OPAL_ORE.get().defaultBlockState())));
 
-    public static Holder<ConfiguredFeature<?, ?>> MALACHITE_METEORITE = registerConfiguredFeature("malachite_meteorite", MMFeatures.MALACHITE_METEORITE_FEATURE, new MalachiteMeteoriteFeatureConfig(15, 24, 1));
+    public static RegistryObject<ConfiguredFeature<?, ?>> MALACHITE_METEORITE = CONFIGURED_FEATURES.register("malachite_meteorite", () -> new ConfiguredFeature<>(MMFeatures.MALACHITE_METEORITE_FEATURE.get(), new MalachiteMeteoriteFeatureConfig(15, 24, 1)));
 
-    private static Holder<ConfiguredFeature<?, ?>> registerConfiguredFeature(String name, Feature<NoneFeatureConfiguration> feature) {
-        return registerConfiguredFeature(name, feature, FeatureConfiguration.NONE);
-    }
-
-    private static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<ConfiguredFeature<?, ?>> registerConfiguredFeature(String name, F feature, FC featureConfiguration) {
-        ResourceLocation resourceLocation = new ResourceLocation(MiningMaster.MOD_ID, name);
-
-        if (BuiltinRegistries.CONFIGURED_FEATURE.keySet().contains(resourceLocation))
-            throw new IllegalStateException("Configured Feature ID: \"" + resourceLocation + "\" is already in the registry!");
-
-        return BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, resourceLocation, new ConfiguredFeature<>(feature, featureConfiguration));
+    public static void register(IEventBus eventBus) {
+        CONFIGURED_FEATURES.register(eventBus);
+        MiningMaster.LOGGER.info("Mining Master: Configured Features Registered!");
     }
 }

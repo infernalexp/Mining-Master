@@ -16,10 +16,11 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.world.features.MalachiteMeteoriteFeature;
 import org.infernalstudios.miningmaster.world.features.NativeGemOreFeature;
@@ -33,28 +34,21 @@ import org.infernalstudios.miningmaster.world.features.config.NativeNetherGemOre
 import org.infernalstudios.miningmaster.world.features.config.RandomGemOreFeatureConfig;
 import org.infernalstudios.miningmaster.world.features.config.RandomNetherGemOreFeatureConfig;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MMFeatures {
-    public static Map<ResourceLocation, Feature<?>> features = new HashMap<>();
 
-    public static final Feature<NativeGemOreFeatureConfig> NATIVE_GEM_ORE_FEATURE = registerFeature("native_gem_ore_feature", new NativeGemOreFeature(NativeGemOreFeatureConfig.CODEC));
-    public static final Feature<RandomGemOreFeatureConfig> RANDOM_GEM_ORE_FEATURE = registerFeature("random_gem_ore_feature", new RandomGemOreFeature(RandomGemOreFeatureConfig.CODEC));
-    public static final Feature<RandomGemOreFeatureConfig> RANDOM_GEM_ORE_DEEPSLATE_FEATURE = registerFeature("random_gem_ore_deepslate_feature", new RandomDeepslateGemOreFeature(RandomGemOreFeatureConfig.CODEC));
-    public static final Feature<NativeNetherGemOreFeatureConfig> NATIVE_NETHER_GEM_ORE_FEATURE = registerFeature("native_nether_gem_ore_feature", new NativeNetherGemOreFeature(NativeNetherGemOreFeatureConfig.CODEC));
-    public static final Feature<RandomNetherGemOreFeatureConfig> RANDOM_NETHER_GEM_ORE_FEATURE = registerFeature("random_nether_gem_ore_feature", new RandomNetherGemOreFeature(RandomNetherGemOreFeatureConfig.CODEC));
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MiningMaster.MOD_ID);
 
-    public static final Feature<MalachiteMeteoriteFeatureConfig> MALACHITE_METEORITE_FEATURE = registerFeature("malachite_meteorite_feature", new MalachiteMeteoriteFeature(MalachiteMeteoriteFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<NativeGemOreFeatureConfig>> NATIVE_GEM_ORE_FEATURE = FEATURES.register("native_gem_ore_feature", () -> new NativeGemOreFeature(NativeGemOreFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<RandomGemOreFeatureConfig>> RANDOM_GEM_ORE_FEATURE = FEATURES.register("random_gem_ore_feature", () -> new RandomGemOreFeature(RandomGemOreFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<RandomGemOreFeatureConfig>> RANDOM_GEM_ORE_DEEPSLATE_FEATURE = FEATURES.register("random_gem_ore_deepslate_feature", () -> new RandomDeepslateGemOreFeature(RandomGemOreFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<NativeNetherGemOreFeatureConfig>> NATIVE_NETHER_GEM_ORE_FEATURE = FEATURES.register("native_nether_gem_ore_feature", () -> new NativeNetherGemOreFeature(NativeNetherGemOreFeatureConfig.CODEC));
+    public static final RegistryObject<Feature<RandomNetherGemOreFeatureConfig>> RANDOM_NETHER_GEM_ORE_FEATURE = FEATURES.register("random_nether_gem_ore_feature", () -> new RandomNetherGemOreFeature(RandomNetherGemOreFeatureConfig.CODEC));
 
-    public static <C extends FeatureConfiguration, F extends Feature<C>> F registerFeature(String registryName, F feature) {
-        ResourceLocation resourceLocation = new ResourceLocation(MiningMaster.MOD_ID, registryName);
+    public static final RegistryObject<Feature<MalachiteMeteoriteFeatureConfig>> MALACHITE_METEORITE_FEATURE = FEATURES.register("malachite_meteorite_feature", () -> new MalachiteMeteoriteFeature(MalachiteMeteoriteFeatureConfig.CODEC));
 
-        if (ForgeRegistries.FEATURES.getKeys().contains(resourceLocation))
-            throw new IllegalStateException("Feature ID: \"" + resourceLocation.toString() + "\" is already in the registry!");
-
-        features.put(resourceLocation, feature);
-
-        return feature;
+    public static void register(IEventBus eventBus) {
+        FEATURES.register(eventBus);
+        MiningMaster.LOGGER.info("Mining Master: Features Registered!");
     }
+
 }
