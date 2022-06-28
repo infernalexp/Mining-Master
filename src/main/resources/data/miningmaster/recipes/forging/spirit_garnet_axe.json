@@ -12,10 +12,10 @@
     }
   ],
   "catalyst": {
-    "item": "minecraft:diamond_pickaxe"
+    "item": "minecraft:diamond_axe"
   },
   "result": {
-    "item": "miningmaster:spirit_garnet_pickaxe"
+    "item": "miningmaster:spirit_garnet_axe"
   },
   "enchantments": [
     {
