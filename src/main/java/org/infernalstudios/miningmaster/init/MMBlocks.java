@@ -43,9 +43,9 @@ public class MMBlocks {
     public static final RegistryObject<Block> LUCKY_CITRINE_ORE = registerBlockWithDefaultItem("lucky_citrine_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
     public static final RegistryObject<Block> DIVE_AQUAMARINE_ORE = registerBlockWithDefaultItem("dive_aquamarine_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
     public static final RegistryObject<Block> HEART_RHODONITE_ORE = registerBlockWithDefaultItem("heart_rhodonite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> POWER_PYRITE_ORE = registerBlockWithDefaultItem("power_pyrite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> KINETIC_OPAL_ORE = registerBlockWithDefaultItem("kinetic_opal_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
-    public static final RegistryObject<Block> AIR_MALACHITE_ORE = registerBlockWithDefaultItem("air_malachite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> POWER_PYRITE_ORE = registerBlockWithDefaultItem("power_pyrite_ore", () -> new GemOreBlock(getProperties(Blocks.NETHER_GOLD_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> KINETIC_OPAL_ORE = registerBlockWithDefaultItem("kinetic_opal_ore", () -> new GemOreBlock(getProperties(Blocks.NETHER_GOLD_ORE).harvestLevel(2)));
+    public static final RegistryObject<Block> AIR_MALACHITE_ORE = registerBlockWithDefaultItem("air_malachite_ore", () -> new GemOreBlock(getProperties(Blocks.NETHER_GOLD_ORE).harvestLevel(2)));
 
     // GEM BLOCKS
     public static final RegistryObject<Block> FIRE_RUBY_BLOCK = registerBlockWithDefaultItem("fire_ruby_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
