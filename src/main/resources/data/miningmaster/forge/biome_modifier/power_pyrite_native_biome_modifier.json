@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "minecraft:nether_wastes",
-  "features": "miningmaster:ore_power_pyrite_native",
+  "features": "miningmaster:ore_power_pyrite",
   "step": "underground_ores"
 }

@@ -22,27 +22,31 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import org.infernalstudios.miningmaster.world.features.config.NativeGemOreFeatureConfig;
+import org.infernalstudios.miningmaster.world.features.config.GemOreFeatureConfig;
 
-public class NativeGemOreFeature extends Feature<NativeGemOreFeatureConfig> {
+public class GemOreFeature extends Feature<GemOreFeatureConfig> {
 
-    public NativeGemOreFeature(Codec<NativeGemOreFeatureConfig> codec) {
+    public GemOreFeature(Codec<GemOreFeatureConfig> codec) {
         super(codec);
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<NativeGemOreFeatureConfig> context) {
+    public boolean place(FeaturePlaceContext<GemOreFeatureConfig> context) {
         RandomSource rand = context.random();
         BlockPos pos = context.origin();
         WorldGenLevel level = context.level();
-        NativeGemOreFeatureConfig config = context.config();
+        GemOreFeatureConfig config = context.config();
 
-        for (NativeGemOreFeatureConfig.TargetBlockState ruleTest : config.targetStates) {
+        for (GemOreFeatureConfig.TargetWeightedState ruleTest : config.targetStates) {
             if (ruleTest.target.test(level.getBlockState(pos), rand)) {
-                level.setBlock(pos, ruleTest.state, 2);
+                if (ruleTest.states.isEmpty()) {
+                    return false;
+                }
+                level.setBlock(pos, ruleTest.states.get(rand.nextInt(ruleTest.states.size())), 2);
             }
         }
 
         return true;
     }
 }
+

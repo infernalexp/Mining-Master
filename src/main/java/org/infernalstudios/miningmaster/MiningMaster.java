@@ -26,27 +26,21 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.infernalstudios.miningmaster.client.MiningMasterClient;
-import org.infernalstudios.miningmaster.config.MiningMasterConfig;
 import org.infernalstudios.miningmaster.enchantments.GraceEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.KnightJumpEnchantment;
 import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
 import org.infernalstudios.miningmaster.enchantments.SnowpiercerEnchantment;
-import org.infernalstudios.miningmaster.init.MMConfiguredFeatures;
-import org.infernalstudios.miningmaster.init.MMFeatures;
-import org.infernalstudios.miningmaster.init.MMPlacedFeatures;
-import org.infernalstudios.miningmaster.world.features.RandomGemOreFeature;
-import org.infernalstudios.miningmaster.world.features.RandomNetherGemOreFeature;
 import org.infernalstudios.miningmaster.init.MMBlocks;
 import org.infernalstudios.miningmaster.init.MMContainerTypes;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
+import org.infernalstudios.miningmaster.init.MMFeatures;
 import org.infernalstudios.miningmaster.init.MMItems;
 import org.infernalstudios.miningmaster.init.MMLootModifiers;
 import org.infernalstudios.miningmaster.init.MMRecipes;
@@ -76,8 +70,6 @@ public class MiningMaster {
         MMSounds.register(modEventBus);
         MMLootModifiers.register(modEventBus);
         MMFeatures.register(modEventBus);
-        MMConfiguredFeatures.register(modEventBus);
-        MMPlacedFeatures.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onItemAttributeModifierCalculate);
@@ -88,14 +80,9 @@ public class MiningMaster {
         MinecraftForge.EVENT_BUS.addListener(GraceEnchantment::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(KnightJumpEnchantment::onClientTick);
 
-        // Registering Configs
-        modLoadingContext.registerConfig(ModConfig.Type.COMMON, MiningMasterConfig.CONFIG_SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        RandomNetherGemOreFeature.calculateEnabledOres();
-        RandomGemOreFeature.calculateEnabledOres();
-
         event.enqueueWork(MMNetworkHandler::register);
     }
 

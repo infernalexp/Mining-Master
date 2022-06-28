@@ -5,6 +5,6 @@
     "minecraft:flower_forest",
     "minecraft:lush_caves"
   ],
-  "features": "miningmaster:ore_spirit_garnet_native",
+  "features": "miningmaster:ore_spirit_garnet",
   "step": "underground_ores"
 }

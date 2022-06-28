@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#minecraft:is_jungle",
-  "features": "miningmaster:ore_haste_peridot_native",
+  "features": "miningmaster:ore_haste_peridot",
   "step": "underground_ores"
 }

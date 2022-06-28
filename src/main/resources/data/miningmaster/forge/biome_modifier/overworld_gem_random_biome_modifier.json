@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#minecraft:is_overworld",
-  "features": "miningmaster:ore_gem_deepslate_random",
+  "features": "miningmaster:ore_gem_random_overworld",
   "step": "underground_ores"
 }

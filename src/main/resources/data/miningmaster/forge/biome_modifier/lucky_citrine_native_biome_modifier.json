@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#minecraft:is_badlands",
-  "features": "miningmaster:ore_lucky_citrine_native",
+  "features": "miningmaster:ore_lucky_citrine",
   "step": "underground_ores"
 }
