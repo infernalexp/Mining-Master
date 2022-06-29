@@ -21,11 +21,8 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.client.RecipeBookRegistry;
-import net.minecraftforge.fml.ModLoadingContext;
 import org.infernalstudios.miningmaster.client.gui.screen.inventory.GemForgeScreen;
-import org.infernalstudios.miningmaster.config.gui.ConfigScreen;
 import org.infernalstudios.miningmaster.init.MMContainerTypes;
 import org.infernalstudios.miningmaster.init.MMItems;
 import org.infernalstudios.miningmaster.init.MMRecipes;
@@ -36,9 +33,6 @@ public class MiningMasterClient {
     private static RecipeBookCategories GEM_FORGE;
 
     public static void init() {
-        // Registering Config GUI Extension Point
-        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () -> new ConfigGuiHandler.ConfigGuiFactory(((minecraft, screen) -> new ConfigScreen())));
-
         MenuScreens.register(MMContainerTypes.GEM_FORGE_CONTAINER.get(), GemForgeScreen::new);
 
         GEM_FORGE = RecipeBookCategories.create("GEM_FORGE", new ItemStack(MMItems.FIRE_RUBY.get()));

@@ -20,7 +20,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
-import org.infernalstudios.miningmaster.init.MMFeatures;
 import org.infernalstudios.miningmaster.init.MMRecipes;
 import org.infernalstudios.miningmaster.recipes.ForgingRecipe;
 
@@ -30,7 +29,6 @@ public class MiningMasterEvents {
     // Register the custom ore features and recipe types
     @SubscribeEvent
     public static void registerFeaturesAndRecipeTypes(RegisterEvent event) {
-        event.register(ForgeRegistries.Keys.FEATURES, helper -> MMFeatures.features.forEach(helper::register));
         event.register(ForgeRegistries.Keys.RECIPE_TYPES, helper -> helper.register(ForgingRecipe.TYPE_ID, MMRecipes.FORGING_RECIPE_TYPE));
     }
 

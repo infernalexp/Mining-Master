@@ -1,0 +1,122 @@
+{
+  "config": {
+    "discard_chance_on_air_exposure": 0,
+    "targets": [
+      {
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:stone_ore_replaceables"
+        },
+        "states": [
+          {
+            "state": {
+              "Name": "miningmaster:fire_ruby_ore"
+            },
+            "weight": 2
+          },
+          {
+            "state": {
+              "Name": "miningmaster:ice_sapphire_ore"
+            },
+            "weight": 2
+          },
+          {
+            "state": {
+              "Name": "miningmaster:spirit_garnet_ore"
+            },
+            "weight": 2
+          },
+          {
+            "state": {
+              "Name": "miningmaster:dive_aquamarine_ore"
+            },
+            "weight": 2
+          },
+          {
+            "state": {
+              "Name": "miningmaster:haste_peridot_ore"
+            },
+            "weight": 1
+          },
+          {
+            "state": {
+              "Name": "miningmaster:lucky_citrine_ore"
+            },
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        },
+        "states": [
+          {
+            "state": {
+              "Name": "miningmaster:deepslate_fire_ruby_ore"
+            },
+            "weight": 2
+          },
+          {
+            "state": {
+              "Name": "miningmaster:deepslate_ice_sapphire_ore"
+            },
+            "weight": 2
+          },
+          {
+            "state": {
+              "Name": "miningmaster:deepslate_spirit_garnet_ore"
+            },
+            "weight": 2
+          },
+          {
+            "state": {
+              "Name": "miningmaster:deepslate_dive_aquamarine_ore"
+            },
+            "weight": 2
+          },
+          {
+            "state": {
+              "Name": "miningmaster:deepslate_haste_peridot_ore"
+            },
+            "weight": 1
+          },
+          {
+            "state": {
+              "Name": "miningmaster:deepslate_lucky_citrine_ore"
+            },
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:base_stone_nether"
+        },
+        "states": [
+          {
+            "state": {
+              "Name": "miningmaster:power_pyrite_ore"
+            },
+            "weight": 2
+          },
+          {
+            "state": {
+              "Name": "miningmaster:kinetic_opal_ore"
+            },
+            "weight": 1
+          },
+          {
+            "state": {
+              "Name": "miningmaster:heart_rhodonite_ore"
+            },
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "type": "miningmaster:ore_gem_feature"
+}
