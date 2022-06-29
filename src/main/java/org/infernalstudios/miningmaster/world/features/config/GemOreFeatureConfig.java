@@ -25,20 +25,11 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GemOreFeatureConfig implements FeatureConfiguration {
+public record GemOreFeatureConfig(List<TargetWeightedState> targetStates, float discardChanceOnAirExposure) implements FeatureConfiguration {
     public static final Codec<GemOreFeatureConfig> CODEC = RecordCodecBuilder.create((builder) -> builder.group(
-            Codec.list(TargetWeightedState.CODEC).fieldOf("targets").forGetter((config) -> config.targetStates),
-            Codec.floatRange(0.0F, 1.0F).fieldOf("discard_chance_on_air_exposure").forGetter((config) -> config.discardChanceOnAirExposure))
+                Codec.list(TargetWeightedState.CODEC).fieldOf("targets").forGetter(GemOreFeatureConfig::targetStates),
+                Codec.floatRange(0.0F, 1.0F).fieldOf("discard_chance_on_air_exposure").forGetter(GemOreFeatureConfig::discardChanceOnAirExposure))
             .apply(builder, GemOreFeatureConfig::new));
-
-    public final List<TargetWeightedState> targetStates;
-    public final float discardChanceOnAirExposure;
-
-
-    public GemOreFeatureConfig(List<TargetWeightedState> targets, float discardChanceOnAirExposure) {
-        this.targetStates = targets;
-        this.discardChanceOnAirExposure = discardChanceOnAirExposure;
-    }
 
     public static class TargetWeightedState {
         public static final Codec<TargetWeightedState> CODEC = RecordCodecBuilder.create((builder) -> builder.group(
@@ -64,19 +55,11 @@ public class GemOreFeatureConfig implements FeatureConfiguration {
         }
     }
 
-    public static class WeightedState {
+    public record WeightedState(BlockState state, int weight) {
         public static final Codec<WeightedState> CODEC = RecordCodecBuilder.create((builder) -> builder.group(
-                BlockState.CODEC.fieldOf("state").forGetter((config) -> config.state),
-                Codec.intRange(0, 100).optionalFieldOf("weight", 1).forGetter((config) -> config.weight))
+                    BlockState.CODEC.fieldOf("state").forGetter(WeightedState::state),
+                    Codec.intRange(0, 100).optionalFieldOf("weight", 1).forGetter(WeightedState::weight))
                 .apply(builder, WeightedState::new));
-
-        public final BlockState state;
-        public final int weight;
-
-        WeightedState(BlockState state, int weight) {
-            this.state = state;
-            this.weight = weight;
-        }
     }
 
 }

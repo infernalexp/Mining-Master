@@ -37,7 +37,7 @@ public class GemOreFeature extends Feature<GemOreFeatureConfig> {
         WorldGenLevel level = context.level();
         GemOreFeatureConfig config = context.config();
 
-        for (GemOreFeatureConfig.TargetWeightedState ruleTest : config.targetStates) {
+        for (GemOreFeatureConfig.TargetWeightedState ruleTest : config.targetStates()) {
             if (ruleTest.target.test(level.getBlockState(pos), rand)) {
                 if (ruleTest.states.isEmpty()) {
                     return false;

@@ -45,7 +45,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
         WorldGenLevel level = context.level();
         MalachiteMeteoriteFeatureConfig config = context.config();
 
-        if (rand.nextInt(100) < config.chanceToGenerate) {
+        if (rand.nextInt(100) < config.chanceToGenerate()) {
             BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos(pos.getX(), 0, pos.getZ());
 
             boolean flag = true;
@@ -61,7 +61,7 @@ public class MalachiteMeteoriteFeature extends Feature<MalachiteMeteoriteFeature
             }
 
             if (flag) {
-                float islandRadius = (float) (rand.nextInt(config.maxRadius - config.minRadius) + config.minRadius);
+                float islandRadius = (float) (rand.nextInt(config.maxRadius() - config.minRadius()) + config.minRadius());
 
                 double meteoriteRadius = islandRadius / (rand.nextInt(2) + 2) + rand.nextInt(3) + 0.5;
                 double meteoriteOffset = rand.nextInt( 2 * (int) meteoriteRadius / 3) - (meteoriteRadius / 3);
