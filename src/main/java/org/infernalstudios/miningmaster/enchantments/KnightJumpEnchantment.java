@@ -25,6 +25,8 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.infernalstudios.miningmaster.access.LivingEntityAccess;
 
+import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+
 public class KnightJumpEnchantment extends Enchantment {
     private static boolean jumpPrevPressed = false;
 

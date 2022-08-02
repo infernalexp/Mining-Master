@@ -36,6 +36,8 @@ import net.minecraft.world.level.Level;
 
 import java.util.function.Supplier;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class GemBowItem extends BowItem {
     private final Pair<Supplier<Enchantment>, Integer>[] enchantments;
 

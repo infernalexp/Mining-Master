@@ -33,6 +33,8 @@ import org.infernalstudios.miningmaster.init.MMEnchantments;
 
 import java.util.Random;
 
+import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+
 public class GraceEnchantment extends Enchantment {
 
     public GraceEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
@@ -80,8 +82,8 @@ public class GraceEnchantment extends Enchantment {
     }
 
     @SubscribeEvent
-    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity livingEntity = event.getEntityLiving();
+    public static void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity livingEntity = event.getEntity();
         Player playerEntity = null;
 
         if (livingEntity instanceof Player) {

@@ -16,14 +16,13 @@
 
 package org.infernalstudios.miningmaster;
 
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -31,12 +30,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.infernalstudios.miningmaster.client.MiningMasterClient;
+import org.infernalstudios.miningmaster.client.gui.screen.inventory.GemForgeScreen;
 import org.infernalstudios.miningmaster.enchantments.GraceEnchantment;
 import org.infernalstudios.miningmaster.enchantments.HeartfeltEnchantment;
 import org.infernalstudios.miningmaster.enchantments.KnightJumpEnchantment;
 import org.infernalstudios.miningmaster.enchantments.RunnerEnchantment;
 import org.infernalstudios.miningmaster.enchantments.SnowpiercerEnchantment;
+import org.infernalstudios.miningmaster.events.MiningMasterClientEvents;
+import org.infernalstudios.miningmaster.events.MiningMasterEvents;
 import org.infernalstudios.miningmaster.init.MMBlocks;
 import org.infernalstudios.miningmaster.init.MMContainerTypes;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
@@ -72,6 +73,7 @@ public class MiningMaster {
         MMFeatures.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
+        MinecraftForge.EVENT_BUS.register(new MiningMasterClientEvents());
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onItemAttributeModifierCalculate);
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemAttributeModifierCalculate);
@@ -87,7 +89,6 @@ public class MiningMaster {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> MiningMasterClient::init);
         event.enqueueWork(() -> {
             ItemProperties.register(MMItems.AIR_MALACHITE_BOW.get(), new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity, entityId) -> {
                 if (livingEntity == null) {
@@ -98,6 +99,8 @@ public class MiningMaster {
             });
 
             ItemProperties.register(MMItems.AIR_MALACHITE_BOW.get(), new ResourceLocation("pulling"), (itemStack, clientWorld, livingEntity, entityId) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F);
+
+            MenuScreens.register(MMContainerTypes.GEM_FORGE_CONTAINER.get(), GemForgeScreen::new);
         });
     }
 

@@ -30,6 +30,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
 import org.infernalstudios.miningmaster.init.MMTags;
 
+import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+
 public class SnowpiercerEnchantment extends Enchantment {
 
     public SnowpiercerEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
@@ -77,8 +79,8 @@ public class SnowpiercerEnchantment extends Enchantment {
     }
 
     @SubscribeEvent
-    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity livingEntity = event.getEntityLiving();
+    public static void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity livingEntity = event.getEntity();
 
         if (!livingEntity.level.getBlockState(livingEntity.blockPosition().below()).is(MMTags.Blocks.SNOWPIERCER_BLOCKS) && !livingEntity.level.getBlockState(livingEntity.blockPosition()).is(MMTags.Blocks.SNOWPIERCER_BLOCKS)) {
             return;

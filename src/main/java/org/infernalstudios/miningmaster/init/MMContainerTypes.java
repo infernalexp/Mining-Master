@@ -26,7 +26,7 @@ import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.containers.GemForgeContainer;
 
 public class MMContainerTypes {
-    public static final DeferredRegister<MenuType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, MiningMaster.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MiningMaster.MOD_ID);
 
     public static final RegistryObject<MenuType<GemForgeContainer>> GEM_FORGE_CONTAINER = CONTAINER_TYPES.register("gem_forge_container", () -> IForgeMenuType.create(((windowId, inv, data) -> new GemForgeContainer(windowId, inv))));
 

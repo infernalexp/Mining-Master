@@ -34,6 +34,8 @@ import org.infernalstudios.miningmaster.init.MMEnchantments;
 import java.util.Random;
 import java.util.UUID;
 
+import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+
 public class RunnerEnchantment extends Enchantment {
 
     public RunnerEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
@@ -95,8 +97,8 @@ public class RunnerEnchantment extends Enchantment {
     }
 
     @SubscribeEvent
-    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity livingEntity = event.getEntityLiving();
+    public static void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity livingEntity = event.getEntity();
         Player playerEntity = null;
 
         if (livingEntity instanceof Player) {
@@ -108,7 +110,7 @@ public class RunnerEnchantment extends Enchantment {
         Random rand = new Random();
 
         if (playerEntity != null && playerEntity.isSprinting()) {
-            ItemStack stack = event.getEntityLiving().getItemBySlot(EquipmentSlot.FEET);
+            ItemStack stack = event.getEntity().getItemBySlot(EquipmentSlot.FEET);
             ListTag nbtList = stack.getEnchantmentTags();
 
             for (int i = 0; i < nbtList.size(); i++) {

@@ -14,30 +14,31 @@
  * limitations under the License.
  */
 
-package org.infernalstudios.miningmaster.client;
+package org.infernalstudios.miningmaster.events;
 
 import net.minecraft.client.RecipeBookCategories;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.client.RecipeBookRegistry;
-import org.infernalstudios.miningmaster.client.gui.screen.inventory.GemForgeScreen;
-import org.infernalstudios.miningmaster.init.MMContainerTypes;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.init.MMItems;
 import org.infernalstudios.miningmaster.init.MMRecipes;
 
 import java.util.List;
 
-public class MiningMasterClient {
+@Mod.EventBusSubscriber(modid = MiningMaster.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+public class MiningMasterClientEvents {
     private static RecipeBookCategories GEM_FORGE;
 
-    public static void init() {
-        MenuScreens.register(MMContainerTypes.GEM_FORGE_CONTAINER.get(), GemForgeScreen::new);
-
+    @SubscribeEvent
+    public static void registerRecipeBookCategories(RegisterRecipeBookCategoriesEvent event) {
         GEM_FORGE = RecipeBookCategories.create("GEM_FORGE", new ItemStack(MMItems.FIRE_RUBY.get()));
-        RecipeBookRegistry.addCategoriesToType(MMRecipes.GEM_FORGE, List.of(GEM_FORGE));
-        RecipeBookRegistry.addCategoriesFinder(MMRecipes.FORGING_RECIPE_TYPE, MiningMasterClient::getForgingCategory);
+        event.registerBookCategories(MMRecipes.GEM_FORGE, List.of(GEM_FORGE));
+        event.registerRecipeCategoryFinder(MMRecipes.FORGING_RECIPE_TYPE, MiningMasterClientEvents::getForgingCategory);
     }
 
     private static RecipeBookCategories getForgingCategory(Recipe<?> recipe) {
@@ -48,4 +49,5 @@ public class MiningMasterClient {
             return RecipeBookCategories.UNKNOWN;
         }
     }
+
 }

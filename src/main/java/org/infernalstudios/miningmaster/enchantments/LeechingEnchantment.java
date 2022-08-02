@@ -22,6 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
+import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+
 public class LeechingEnchantment extends Enchantment {
     public LeechingEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
         super(rarityIn, EnchantmentCategory.WEAPON, slots);

@@ -25,7 +25,7 @@ import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.tileentities.GemForgeTileEntity;
 
 public class MMTileEntityTypes {
-    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, MiningMaster.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MiningMaster.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<GemForgeTileEntity>> GEM_FORGE_TILE_ENTITY = TILE_ENTITY_TYPES.register("gem_forge_tile_entity", () -> BlockEntityType.Builder.of(GemForgeTileEntity::new, MMBlocks.GEM_FORGE.get()).build(null));
 

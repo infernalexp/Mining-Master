@@ -22,6 +22,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.UntouchingEnchantment;
 
+import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+
 public class StonebreakerEnchantment extends Enchantment {
 
     public StonebreakerEnchantment(Rarity rarityIn, EquipmentSlot... slots) {

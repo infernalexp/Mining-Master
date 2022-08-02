@@ -26,6 +26,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.FireAspectEnchantment;
 
+import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+
 public class FreezingEnchantment extends Enchantment {
     public FreezingEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
         super(rarityIn, EnchantmentCategory.WEAPON, slots);

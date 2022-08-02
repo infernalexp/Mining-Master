@@ -21,6 +21,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
+import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+
 public class SmeltingEnchantment extends Enchantment {
     public SmeltingEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
         super(rarityIn, EnchantmentCategory.DIGGER, slots);

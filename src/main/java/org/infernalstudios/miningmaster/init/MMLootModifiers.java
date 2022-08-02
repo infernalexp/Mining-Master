@@ -16,16 +16,16 @@
 
 package org.infernalstudios.miningmaster.init;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -37,12 +37,13 @@ import javax.annotation.Nonnull;
 import java.util.Optional;
 
 public class MMLootModifiers {
-    public static final DeferredRegister<GlobalLootModifierSerializer<?>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.LOOT_MODIFIER_SERIALIZERS, MiningMaster.MOD_ID);
+    public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MiningMaster.MOD_ID);
 
-    public static final RegistryObject<GlobalLootModifierSerializer<SmeltingEnchantmentLootModifier>> SMELTING_ENCHANTMENT_LOOT_MODIFIER = LOOT_MODIFIERS.register("smelting_enchantment_loot_modifier", SmeltingEnchantmentLootSerializer::new);
-    public static final RegistryObject<GlobalLootModifierSerializer<StonebreakerEnchantmentLootModifier>> STONEBREAKER_ENCHANTMENT_LOOT_MODIFIER = LOOT_MODIFIERS.register("stonebreaker_enchantment_loot_modifier", StonebreakerEnchantmentLootSerializer::new);
+    public static final RegistryObject<Codec<SmeltingEnchantmentLootModifier>> SMELTING_ENCHANTMENT_LOOT_MODIFIER = LOOT_MODIFIERS.register("smelting_enchantment_loot_modifier", () -> SmeltingEnchantmentLootModifier.CODEC);
+    public static final RegistryObject<Codec<StonebreakerEnchantmentLootModifier>> STONEBREAKER_ENCHANTMENT_LOOT_MODIFIER = LOOT_MODIFIERS.register("stonebreaker_enchantment_loot_modifier", () -> StonebreakerEnchantmentLootModifier.CODEC);
 
     private static class SmeltingEnchantmentLootModifier extends LootModifier {
+        public static final Codec<SmeltingEnchantmentLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, SmeltingEnchantmentLootModifier::new));
 
         /**
          * Constructs a LootModifier.
@@ -70,22 +71,16 @@ public class MMLootModifiers {
             }
             return generatedLoot;
         }
-    }
 
-    private static class SmeltingEnchantmentLootSerializer extends GlobalLootModifierSerializer<SmeltingEnchantmentLootModifier> {
 
         @Override
-        public SmeltingEnchantmentLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] conditionsIn) {
-            return new SmeltingEnchantmentLootModifier(conditionsIn);
-        }
-
-        @Override
-        public JsonObject write(SmeltingEnchantmentLootModifier instance) {
-            return null;
+        public Codec<? extends IGlobalLootModifier> codec() {
+            return CODEC;
         }
     }
 
     private static class StonebreakerEnchantmentLootModifier extends LootModifier {
+        public static final Codec<StonebreakerEnchantmentLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, StonebreakerEnchantmentLootModifier::new));
 
         /**
          * Constructs a LootModifier.
@@ -102,18 +97,10 @@ public class MMLootModifiers {
             generatedLoot.removeIf(item -> item.is(MMTags.Items.STONEBREAKER_ITEMS));
             return generatedLoot;
         }
-    }
-
-    private static class StonebreakerEnchantmentLootSerializer extends GlobalLootModifierSerializer<StonebreakerEnchantmentLootModifier> {
 
         @Override
-        public StonebreakerEnchantmentLootModifier read(ResourceLocation location, JsonObject object, LootItemCondition[] conditionsIn) {
-            return new StonebreakerEnchantmentLootModifier(conditionsIn);
-        }
-
-        @Override
-        public JsonObject write(StonebreakerEnchantmentLootModifier instance) {
-            return null;
+        public Codec<? extends IGlobalLootModifier> codec() {
+            return CODEC;
         }
     }
 

@@ -34,6 +34,8 @@ import org.infernalstudios.miningmaster.init.MMEnchantments;
 
 import java.util.UUID;
 
+import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+
 public class HeartfeltEnchantment extends Enchantment {
 
     public HeartfeltEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
@@ -124,8 +126,8 @@ public class HeartfeltEnchantment extends Enchantment {
     }
 
     @SubscribeEvent
-    public static void onItemUnequip(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity livingEntity = event.getEntityLiving();
+    public static void onItemUnequip(LivingEvent.LivingTickEvent event) {
+        LivingEntity livingEntity = event.getEntity();
         if (livingEntity.getHealth() > livingEntity.getMaxHealth()) {
             livingEntity.setHealth(livingEntity.getMaxHealth());
         }

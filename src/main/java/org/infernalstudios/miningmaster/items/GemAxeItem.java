@@ -27,6 +27,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.function.Supplier;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class GemAxeItem extends AxeItem {
     private final Ingredient repairItems;
     private final Pair<Supplier<Enchantment>, Integer>[] enchantments;
