@@ -89,11 +89,12 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${config.MINECRAFT_VERSION}-${config.FORGE_VERSION}"
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
+    compileOnly(fg.deobf("mezz.jei:jei-${config.MINECRAFT_VERSION}-common-api:${config.JEI_VERSION}"))
+    compileOnly(fg.deobf("mezz.jei:jei-${config.MINECRAFT_VERSION}-forge-api:${config.JEI_VERSION}"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-${config.MINECRAFT_VERSION}-forge:${config.JEI_VERSION}"))
     // Commented out for now as 1.19 versions don't exist
     //implementation fg.deobf("curse.maven:tetra-289712:${config.TETRA_FILE}")
     //implementation fg.deobf("curse.maven:mutil-351914:${config.MUTIL_FILE}")
-    //compileOnly fg.deobf("mezz.jei:jei-${config.MINECRAFT_VERSION}:${config.JEI_VERSION}:api")
-    //runtimeOnly fg.deobf("mezz.jei:jei-${config.MINECRAFT_VERSION}:${config.JEI_VERSION}")
 }
 
 import groovy.json.JsonOutput
