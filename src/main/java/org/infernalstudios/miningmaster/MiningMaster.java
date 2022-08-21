@@ -21,8 +21,10 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -73,7 +75,7 @@ public class MiningMaster {
         MMFeatures.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(new MiningMasterEvents());
-        MinecraftForge.EVENT_BUS.register(new MiningMasterClientEvents());
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> MinecraftForge.EVENT_BUS.register(new MiningMasterClientEvents()));
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onItemAttributeModifierCalculate);
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemAttributeModifierCalculate);
