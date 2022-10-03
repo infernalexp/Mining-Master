@@ -43,12 +43,9 @@ body:
             label: Mod Version
             description: The version of the mod you were using when the bug occured
             options:
-                - "2.1.0"
-                - "2.0.0"
-                - "1.1.2"
-                - "1.1.1"
-                - "1.1.0"
-                - "1.0.0"
+                - "3.0.7"
+                - "3.0.6"
+                - "3.0.5"
         validations:
             required: true
     -   type: dropdown
@@ -56,12 +53,9 @@ body:
             label: Minecraft Version
             description: The version of Minecraft you were using when the bug occured
             options:
+                - "1.19.2"
+                - "1.18.2"
                 - "1.16.5"
-                - "1.16.4"
-                - "1.16.3"
-                - "1.16.2"
-                - "1.16.1"
-                - "1.16"
         validations:
             required: true
     -   type: input
@@ -85,4 +79,4 @@ body:
             required: false
     -   type: markdown
         attributes:
-            value: "Thank you for taking the time to fill out this bug report and to help improve Mining Master"
+            value: "Thank you for taking the time to fill out this bug report and to help improve Mining Master!"
