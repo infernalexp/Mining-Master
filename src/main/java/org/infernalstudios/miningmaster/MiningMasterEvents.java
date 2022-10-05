@@ -93,7 +93,7 @@ public class MiningMasterEvents {
             if (MiningMasterConfig.CONFIG.heartRhodoniteEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_HEART_RHODONITE_NATIVE);
             }
-        } else if (biome == Biomes.NETHER_WASTES) {
+        } else if (biome == Biomes.CRIMSON_FOREST) {
             if (MiningMasterConfig.CONFIG.powerPyriteEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_POWER_PYRITE_NATIVE);
             }

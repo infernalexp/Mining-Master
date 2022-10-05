@@ -101,17 +101,17 @@ public class MiningMasterConfig {
         commonGemsPerChunk = builder
                 .comment("Determines how many times common gems will attempt to spawn per chunk in their native biomes. REQUIRES RESTART.")
                 .translation(MiningMaster.MOD_ID + ".config.tooltip.commonGemsPerChunk")
-                .defineInRange("commonGemsPerChunk", 6, 0, 100);
+                .defineInRange("commonGemsPerChunk", 3, 0, 100);
 
         rareGemsPerChunk = builder
                 .comment("Determines how many times rare gems will attempt to spawn per chunk in their native biomes. REQUIRES RESTART.")
                 .translation(MiningMaster.MOD_ID + ".config.tooltip.rareGemsPerChunk")
-                .defineInRange("rareGemsPerChunk", 3, 0, 100);
+                .defineInRange("rareGemsPerChunk", 2, 0, 100);
 
         randomGemsPerChunk = builder
                 .comment("Determines how many times a random gem ore will attempt to spawn per chunk. REQUIRES RESTART.")
                 .translation(MiningMaster.MOD_ID + ".config.tooltip.randomGemsPerChunk")
-                .defineInRange("randomGemsPerChunk", 3, 0, 100);
+                .defineInRange("randomGemsPerChunk", 1, 0, 100);
 
     }
 }
