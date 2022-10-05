@@ -2,29 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "miningmaster:forging/ultima_axe_4"
+      "miningmaster:forging/ultima_axe_5"
     ]
   },
   "criteria": {
-    "has_haste_peridot_axe": {
+    "has_kinetic_opal_axe": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "miningmaster:haste_peridot_axe"
-            ]
-          }
-        ]
-      }
-    },
-    "has_spirit_garnet": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "miningmaster:spirit_garnet"
+              "miningmaster:kinetic_opal_axe"
             ]
           }
         ]
@@ -42,13 +30,13 @@
         ]
       }
     },
-    "has_kinetic_opal": {
+    "has_haste_peridot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "miningmaster:kinetic_opal"
+              "miningmaster:haste_peridot"
             ]
           }
         ]
@@ -57,16 +45,15 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "miningmaster:forging/ultima_axe_4"
+        "recipe": "miningmaster:forging/ultima_axe_5"
       }
     }
   },
   "requirements": [
       [
-        "has_haste_peridot_axe",
-        "has_kinetic_opal",
+        "has_kinetic_opal_axe",
+        "has_haste_peridot",
         "has_power_pyrite",
-        "has_spirit_garnet",
         "has_the_recipe"
       ]
   ]
