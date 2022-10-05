@@ -1,0 +1,14 @@
+{
+  "type": "miningmaster:gem_smithing_recipe",
+  "blacklist": {
+    "tag": "miningmaster:gem_enchanting_blacklist"
+  },
+  "gem": {
+    "item": "miningmaster:divine_beryl"
+  },
+  "enchantments": [
+    "minecraft:smite",
+    "minecraft:channeling",
+    "minecraft:piercing"
+  ]
+}

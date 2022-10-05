@@ -47,6 +47,9 @@ public class MMItems {
     public static final RegistryObject<Item> HASTE_PERIDOT = registerItem("haste_peridot", GemItem::new);
     public static final RegistryObject<Item> LUCKY_CITRINE = registerItem("lucky_citrine", GemItem::new);
     public static final RegistryObject<Item> DIVE_AQUAMARINE = registerItem("dive_aquamarine", GemItem::new);
+    public static final RegistryObject<Item> DIVINE_BERYL = registerItem("divine_beryl", GemItem::new);
+    public static final RegistryObject<Item> SPIDER_KUNZITE = registerItem("spider_kunzite", GemItem::new);
+    public static final RegistryObject<Item> UNBREAKING_IOLITE = registerItem("unbreaking_iolite", GemItem::new);
     public static final RegistryObject<Item> HEART_RHODONITE = registerItem("heart_rhodonite", GemItem::new);
     public static final RegistryObject<Item> POWER_PYRITE = registerItem("power_pyrite", GemItem::new);
     public static final RegistryObject<Item> KINETIC_OPAL = registerItem("kinetic_opal", GemItem::new);
@@ -65,9 +68,9 @@ public class MMItems {
     public static final RegistryObject<GemAxeItem> KINETIC_OPAL_AXE = registerItem("kinetic_opal_axe", () -> new GemAxeItem(MMItemTiers.SUPRA, Ingredient.of(KINETIC_OPAL.get()), 5, -3.0F, new Item.Properties().tab(MiningMaster.TAB), new Pair<>(() -> Enchantments.KNOCKBACK, 3)));
     public static final RegistryObject<GemAxeItem> ULTIMA_AXE = registerItem("ultima_axe", () -> new GemAxeItem(MMItemTiers.ULTIMA, Ingredient.of(SPIRIT_GARNET.get(), POWER_PYRITE.get(), KINETIC_OPAL.get(), HASTE_PERIDOT.get()), 5, -3.0F, new Item.Properties().tab(MiningMaster.TAB), new Pair<>(() -> Enchantments.SHARPNESS, 5), new Pair<>(() -> MMEnchantments.LEECHING.get(), 1), new Pair<>(() -> Enchantments.BLOCK_EFFICIENCY, 5), new Pair<>(() -> Enchantments.KNOCKBACK, 3)));
 
-    public static final RegistryObject<GemPickaxeItem> HASTE_PERIDOT_PICKAXE = registerItem("haste_peridot_pickaxe", () -> new GemPickaxeItem(MMItemTiers.SUPRA, Ingredient.of(LUCKY_CITRINE.get()), 1, -2.8F, new Item.Properties().tab(MiningMaster.TAB), new Pair<>(() -> Enchantments.BLOCK_EFFICIENCY, 5)));
+    public static final RegistryObject<GemPickaxeItem> HASTE_PERIDOT_PICKAXE = registerItem("haste_peridot_pickaxe", () -> new GemPickaxeItem(MMItemTiers.SUPRA, Ingredient.of(LUCKY_CITRINE.get()), 1, -2.8F, new Item.Properties().tab(MiningMaster.TAB), new Pair<>(() -> Enchantments.BLOCK_EFFICIENCY, 6)));
     public static final RegistryObject<GemPickaxeItem> LUCKY_CITRINE_PICKAXE = registerItem("lucky_citrine_pickaxe", () -> new GemPickaxeItem(MMItemTiers.SUPRA, Ingredient.of(LUCKY_CITRINE.get()), 1, -2.8F, new Item.Properties().tab(MiningMaster.TAB), new Pair<>(() -> Enchantments.BLOCK_FORTUNE, 3)));
-    public static final RegistryObject<GemPickaxeItem> ULTIMA_PICKAXE = registerItem("ultima_pickaxe", () -> new GemPickaxeItem(MMItemTiers.ULTIMA, Ingredient.of(KINETIC_OPAL.get(), LUCKY_CITRINE.get(), HASTE_PERIDOT.get()), 1, -2.8F, new Item.Properties().tab(MiningMaster.TAB), new Pair<>(() -> Enchantments.BLOCK_EFFICIENCY, 4), new Pair<>(() -> Enchantments.BLOCK_FORTUNE, 3), new Pair<>(MMEnchantments.SMELTING, 1)));
+    public static final RegistryObject<GemPickaxeItem> ULTIMA_PICKAXE = registerItem("ultima_pickaxe", () -> new GemPickaxeItem(MMItemTiers.ULTIMA, Ingredient.of(KINETIC_OPAL.get(), LUCKY_CITRINE.get(), HASTE_PERIDOT.get()), 1, -2.8F, new Item.Properties().tab(MiningMaster.TAB), new Pair<>(() -> Enchantments.BLOCK_EFFICIENCY, 6), new Pair<>(() -> Enchantments.BLOCK_FORTUNE, 3), new Pair<>(MMEnchantments.SMELTING, 1)));
 
     public static final RegistryObject<GemBowItem> AIR_MALACHITE_BOW = registerItem("air_malachite_bow", () -> new GemBowItem(new Item.Properties().tab(MiningMaster.TAB).stacksTo(1), new Pair<>(MMEnchantments.FLOATATION, 5)));
 
