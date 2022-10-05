@@ -61,6 +61,6 @@ public abstract class MixinPlayer {
     }
 
     private void applyLeechingEffects(int level, float damageAmount) {
-        ((Player) (Object) this).heal(damageAmount * 0.25F * level);
+        ((Player) (Object) this).heal(damageAmount * 0.075F * level);
     }
 }

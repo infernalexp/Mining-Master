@@ -9,6 +9,7 @@
   "enchantments": [
     "minecraft:efficiency",
     "minecraft:lure",
-    "minecraft:quick_charge"
+    "minecraft:quick_charge",
+    "miningmaster:runner"
   ]
 }

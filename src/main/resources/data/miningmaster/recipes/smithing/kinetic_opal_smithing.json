@@ -9,8 +9,6 @@
   "enchantments": [
     "minecraft:blast_protection",
     "minecraft:knockback",
-    "minecraft:punch",
-    "miningmaster:runner",
-    "miningmaster:smelting"
+    "minecraft:punch"
   ]
 }

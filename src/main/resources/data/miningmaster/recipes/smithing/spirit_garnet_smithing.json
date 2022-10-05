@@ -9,6 +9,7 @@
   "enchantments": [
     "minecraft:thorns",
     "minecraft:loyalty",
+    "minecraft:multishot",
     "miningmaster:leeching"
   ]
 }

@@ -79,7 +79,7 @@ public class FloatationEnchantment extends Enchantment {
         super.doPostAttack(user, target, level);
         if (target instanceof LivingEntity) {
             LivingEntity livingTarget = (LivingEntity) target;
-            livingTarget.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20 * level));
+            livingTarget.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 4 * level));
         }
     }
 }
