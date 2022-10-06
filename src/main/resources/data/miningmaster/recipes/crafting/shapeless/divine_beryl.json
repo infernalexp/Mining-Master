@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "miningmaster:divine_beryl_block"
+    }
+  ],
+  "result": {
+    "item": "miningmaster:divine_beryl",
+    "count": 4
+  }
+}

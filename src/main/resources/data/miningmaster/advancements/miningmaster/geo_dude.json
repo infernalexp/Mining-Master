@@ -91,13 +91,37 @@
         ]
       }
     },
-    "miningmaster:kinetic_opal_block": {
+    "miningmaster:divine_beryl_block": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "miningmaster:kinetic_opal_block"
+              "miningmaster:divine_beryl_block"
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:spider_kunzite_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "miningmaster:spider_kunzite_block"
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:unbreaking_iolite_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "miningmaster:unbreaking_iolite_block"
             ]
           }
         ]
@@ -148,6 +172,9 @@
       "miningmaster:lucky_citrine_block",
       "miningmaster:haste_peridot_block",
       "miningmaster:dive_aquamarine_block",
+      "miningmaster:divine_beryl_block",
+      "miningmaster:spider_kunzite_block",
+      "miningmaster:unbreaking_iolite_block",
       "miningmaster:kinetic_opal_block",
       "miningmaster:power_pyrite_block",
       "miningmaster:heart_rhodonite_block",

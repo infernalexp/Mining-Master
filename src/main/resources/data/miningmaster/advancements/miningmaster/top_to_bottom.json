@@ -90,6 +90,42 @@
           }
         ]
       }
+    },
+    "miningmaster:divine_beryl": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "miningmaster:divine_beryl"
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:spider_kunzite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "miningmaster:spider_kunzite"
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:unbreaking_iolite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "miningmaster:unbreaking_iolite"
+            ]
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -110,6 +146,15 @@
     ],
     [
       "miningmaster:dive_aquamarine"
+    ],
+    [
+      "miningmaster:divine_beryl"
+    ],
+    [
+      "miningmaster:spider_kunzite"
+    ],
+    [
+      "miningmaster:unbreaking_iolite"
     ]
   ]
 }

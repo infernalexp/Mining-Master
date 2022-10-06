@@ -55,17 +55,31 @@ public class RandomGemOreFeature extends Feature<RandomGemOreFeatureConfig> {
             weightedOreStatesEnabled.add(MMBlocks.SPIRIT_GARNET_ORE.get().defaultBlockState());
         }
 
-        if (MiningMasterConfig.CONFIG.diveAquamarineEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.DIVE_AQUAMARINE_ORE.get().defaultBlockState());
-            weightedOreStatesEnabled.add(MMBlocks.DIVE_AQUAMARINE_ORE.get().defaultBlockState());
-        }
-
         if (MiningMasterConfig.CONFIG.hastePeridotEnabled.get()) {
             weightedOreStatesEnabled.add(MMBlocks.HASTE_PERIDOT_ORE.get().defaultBlockState());
         }
 
         if (MiningMasterConfig.CONFIG.luckyCitrineEnabled.get()) {
             weightedOreStatesEnabled.add(MMBlocks.LUCKY_CITRINE_ORE.get().defaultBlockState());
+        }
+
+        if (MiningMasterConfig.CONFIG.diveAquamarineEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.DIVE_AQUAMARINE_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.DIVE_AQUAMARINE_ORE.get().defaultBlockState());
+        }
+
+        if (MiningMasterConfig.CONFIG.divineBerylEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.DIVINE_BERYL_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.DIVINE_BERYL_ORE.get().defaultBlockState());
+        }
+
+        if (MiningMasterConfig.CONFIG.spiderKunziteEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.SPIDER_KUNZITE_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.SPIDER_KUNZITE_ORE.get().defaultBlockState());
+        }
+
+        if (MiningMasterConfig.CONFIG.unbreakingIoliteEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.UNBREAKING_IOLITE_ORE.get().defaultBlockState());
         }
     }
 

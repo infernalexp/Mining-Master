@@ -69,34 +69,57 @@ public class MiningMasterEvents {
             if (MiningMasterConfig.CONFIG.fireRubyEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_FIRE_RUBY_NATIVE);
             }
+
         } else if (biomeCategory == Biome.BiomeCategory.ICY) {
             if (MiningMasterConfig.CONFIG.iceSapphireEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_ICE_SAPPHIRE_NATIVE);
             }
+
         } else if (biome == Biomes.SUNFLOWER_PLAINS || biome == Biomes.FLOWER_FOREST || biome == Biomes.LUSH_CAVES) {
             if (MiningMasterConfig.CONFIG.spiritGarnetEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_SPIRIT_GARNET_NATIVE);
             }
+
         } else if (biomeCategory == Biome.BiomeCategory.JUNGLE) {
             if (MiningMasterConfig.CONFIG.hastePeridotEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_HASTE_PERIDOT_NATIVE);
             }
+
         } else if (biomeCategory == Biome.BiomeCategory.MESA) {
             if (MiningMasterConfig.CONFIG.luckyCitrineEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_LUCKY_CITRINE_NATIVE);
             }
+
         } else if (biomeCategory == Biome.BiomeCategory.OCEAN || biome == Biomes.DRIPSTONE_CAVES) {
             if (MiningMasterConfig.CONFIG.diveAquamarineEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_DIVE_AQUAMARINE_NATIVE);
             }
+
+        } else if (biomeCategory == Biome.BiomeCategory.SWAMP|| biome == Biomes.DARK_FOREST) {
+            if (MiningMasterConfig.CONFIG.divineBerylEnabled.get()) {
+                event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_DIVINE_BERYL_NATIVE);
+            }
+
+        } else if (biomeCategory == Biome.BiomeCategory.FOREST) {
+            if (MiningMasterConfig.CONFIG.spiderKunziteEnabled.get()) {
+                event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_SPIDER_KUNZITE_NATIVE);
+            }
+
+        } else if (biomeCategory == Biome.BiomeCategory.MUSHROOM) {
+            if (MiningMasterConfig.CONFIG.unbreakingIoliteEnabled.get()) {
+                event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_UNBREAKING_IOLITE_NATIVE);
+            }
+
         } else if (biome == Biomes.SOUL_SAND_VALLEY) {
             if (MiningMasterConfig.CONFIG.heartRhodoniteEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_HEART_RHODONITE_NATIVE);
             }
+
         } else if (biome == Biomes.CRIMSON_FOREST) {
             if (MiningMasterConfig.CONFIG.powerPyriteEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_POWER_PYRITE_NATIVE);
             }
+
         } else if (biome == Biomes.BASALT_DELTAS) {
             if (MiningMasterConfig.CONFIG.kineticOpalEnabled.get()) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MMPlacedFeatures.ORE_KINETIC_OPAL_NATIVE);
