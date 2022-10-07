@@ -2,41 +2,29 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "miningmaster:forging/ultima_shovel_2"
+      "miningmaster:forging/unbreaking_iolite_pickaxe"
     ]
   },
   "criteria": {
-    "has_kinetic_opal_shovel": {
+    "has_diamond_pickaxe": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "miningmaster:kinetic_opal_shovel"
+              "minecraft:diamond_pickaxe"
             ]
           }
         ]
       }
     },
-    "has_haste_peridot": {
+    "has_unbreaking_iolite": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "miningmaster:haste_peridot"
-            ]
-          }
-        ]
-      }
-    },
-    "has_lucky_citrine": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "miningmaster:lucky_citrine"
+              "miningmaster:unbreaking_iolite"
             ]
           }
         ]
@@ -45,15 +33,14 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "miningmaster:forging/ultima_shovel_2"
+        "recipe": "miningmaster:forging/unbreaking_iolite_pickaxe"
       }
     }
   },
   "requirements": [
       [
-        "has_kinetic_opal_shovel",
-        "has_haste_peridot",
-        "has_lucky_citrine",
+        "has_diamond_pickaxe",
+        "has_unbreaking_iolite",
         "has_the_recipe"
       ]
   ]
