@@ -18,13 +18,9 @@
     "item": "miningmaster:kinetic_opal_pickaxe"
   },
   "enchantments": [
-    {
-      "enchantment": "miningmaster:smelting",
-      "lvl": 1
-    },
 	{
       "enchantment": "minecraft:knockback",
-      "lvl": 1
+      "lvl": 3
     }
   ]
 }

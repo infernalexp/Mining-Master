@@ -9,6 +9,7 @@
   "enchantments": [
     "minecraft:fortune",
     "minecraft:luck_of_the_sea",
-    "minecraft:looting"
+    "minecraft:looting",
+    "minecraft:projectile_protection"
   ]
 }

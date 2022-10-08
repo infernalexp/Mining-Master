@@ -9,6 +9,7 @@
   "enchantments": [
     "minecraft:fire_aspect",
     "minecraft:flame",
-    "minecraft:fire_protection"
+    "minecraft:fire_protection",
+    "miningmaster:smelting"
   ]
 }

@@ -20,7 +20,7 @@
   "enchantments": [
     {
       "enchantment": "minecraft:looting",
-      "lvl": 3
+      "lvl": 4
     }
   ]
 }

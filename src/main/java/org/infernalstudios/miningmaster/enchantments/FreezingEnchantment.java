@@ -22,6 +22,7 @@ import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.ArrowFireEnchantment;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.FireAspectEnchantment;
@@ -43,12 +44,12 @@ public class FreezingEnchantment extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 3;
+        return 2;
     }
 
     @Override
     protected boolean checkCompatibility(Enchantment ench) {
-        return !(ench instanceof FireAspectEnchantment);
+        return !(ench instanceof FireAspectEnchantment || ench instanceof ArrowFireEnchantment);
     }
 
     @Override
