@@ -30,6 +30,18 @@
         ]
       }
     },
+    "has_unbreaking_iolite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "miningmaster:unbreaking_iolite"
+            ]
+          }
+        ]
+      }
+    },
     "has_haste_peridot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -42,13 +54,13 @@
         ]
       }
     },
-    "has_kinetic_opal": {
+    "has_fire_ruby": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "miningmaster:kinetic_opal"
+              "miningmaster:fire_ruby"
             ]
           }
         ]
@@ -64,9 +76,10 @@
   "requirements": [
       [
         "has_diamond_pickaxe",
-        "has_kinetic_opal",
+        "has_fire_ruby",
         "has_lucky_citrine",
         "has_haste_peridot",
+        "has_unbreaking_iolite",
         "has_the_recipe"
       ]
   ]

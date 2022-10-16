@@ -37,6 +37,9 @@ public class MiningMasterConfig {
     public final ForgeConfigSpec.BooleanValue hastePeridotEnabled;
     public final ForgeConfigSpec.BooleanValue luckyCitrineEnabled;
     public final ForgeConfigSpec.BooleanValue diveAquamarineEnabled;
+    public final ForgeConfigSpec.BooleanValue divineBerylEnabled;
+    public final ForgeConfigSpec.BooleanValue spiderKunziteEnabled;
+    public final ForgeConfigSpec.BooleanValue unbreakingIoliteEnabled;
     public final ForgeConfigSpec.BooleanValue heartRhodoniteEnabled;
     public final ForgeConfigSpec.BooleanValue powerPyriteEnabled;
     public final ForgeConfigSpec.BooleanValue kineticOpalEnabled;
@@ -77,6 +80,21 @@ public class MiningMasterConfig {
                 .comment("Determines if Dive Aquamarine will generate.")
                 .translation(MiningMaster.MOD_ID + ".config.tooltip.diveAquamarineEnabled")
                 .define("diveAquamarineEnabled", true);
+
+        divineBerylEnabled = builder
+                .comment("Determines if Divine Beryl will generate.")
+                .translation(MiningMaster.MOD_ID + ".config.tooltip.divineBerylEnabled")
+                .define("divineBerylEnabled", true);
+
+        spiderKunziteEnabled = builder
+                .comment("Determines if Spider Kunzite will generate.")
+                .translation(MiningMaster.MOD_ID + ".config.tooltip.spiderKunziteEnabled")
+                .define("spiderKunziteEnabled", true);
+
+        unbreakingIoliteEnabled = builder
+                .comment("Determines if Unbreaking Iolite will generate.")
+                .translation(MiningMaster.MOD_ID + ".config.tooltip.unbreakingIoliteEnabled")
+                .define("unbreakingIoliteEnabled", true);
 
         heartRhodoniteEnabled = builder
                 .comment("Determines if Heart Rhodonite will generate.")

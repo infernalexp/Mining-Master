@@ -91,6 +91,42 @@
         ]
       }
     },
+    "miningmaster:divine_beryl_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "miningmaster:divine_beryl_block"
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:spider_kunzite_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "miningmaster:spider_kunzite_block"
+            ]
+          }
+        ]
+      }
+    },
+    "miningmaster:unbreaking_iolite_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "miningmaster:unbreaking_iolite_block"
+            ]
+          }
+        ]
+      }
+    },
     "miningmaster:kinetic_opal_block": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -158,6 +194,15 @@
     ],
     [
       "miningmaster:dive_aquamarine_block"
+    ],
+    [
+      "miningmaster:divine_beryl_block"
+    ],
+    [
+      "miningmaster:spider_kunzite_block"
+    ],
+    [
+      "miningmaster:unbreaking_iolite_block"
     ],
     [
       "miningmaster:kinetic_opal_block"

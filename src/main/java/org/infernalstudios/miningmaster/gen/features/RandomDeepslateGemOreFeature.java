@@ -55,11 +55,6 @@ public class RandomDeepslateGemOreFeature extends Feature<RandomGemOreFeatureCon
             weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_SPIRIT_GARNET_ORE.get().defaultBlockState());
         }
 
-        if (MiningMasterConfig.CONFIG.diveAquamarineEnabled.get()) {
-            weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_DIVE_AQUAMARINE_ORE.get().defaultBlockState());
-            weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_DIVE_AQUAMARINE_ORE.get().defaultBlockState());
-        }
-
         if (MiningMasterConfig.CONFIG.hastePeridotEnabled.get()) {
             weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_HASTE_PERIDOT_ORE.get().defaultBlockState());
         }
@@ -67,6 +62,26 @@ public class RandomDeepslateGemOreFeature extends Feature<RandomGemOreFeatureCon
         if (MiningMasterConfig.CONFIG.luckyCitrineEnabled.get()) {
             weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_LUCKY_CITRINE_ORE.get().defaultBlockState());
         }
+
+        if (MiningMasterConfig.CONFIG.diveAquamarineEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_DIVE_AQUAMARINE_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_DIVE_AQUAMARINE_ORE.get().defaultBlockState());
+        }
+
+        if (MiningMasterConfig.CONFIG.divineBerylEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_DIVINE_BERYL_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_DIVINE_BERYL_ORE.get().defaultBlockState());
+        }
+
+        if (MiningMasterConfig.CONFIG.spiderKunziteEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_SPIDER_KUNZITE_ORE.get().defaultBlockState());
+            weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_SPIDER_KUNZITE_ORE.get().defaultBlockState());
+        }
+
+        if (MiningMasterConfig.CONFIG.unbreakingIoliteEnabled.get()) {
+            weightedOreStatesEnabled.add(MMBlocks.DEEPSLATE_UNBREAKING_IOLITE_ORE.get().defaultBlockState());
+        }
+
     }
 
     @Override

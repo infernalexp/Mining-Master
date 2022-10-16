@@ -42,6 +42,10 @@ public class MMBlocks {
     public static final RegistryObject<Block> HASTE_PERIDOT_ORE = registerBlockWithDefaultItem("haste_peridot_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
     public static final RegistryObject<Block> LUCKY_CITRINE_ORE = registerBlockWithDefaultItem("lucky_citrine_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
     public static final RegistryObject<Block> DIVE_AQUAMARINE_ORE = registerBlockWithDefaultItem("dive_aquamarine_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> DIVINE_BERYL_ORE = registerBlockWithDefaultItem("divine_beryl_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> SPIDER_KUNZITE_ORE = registerBlockWithDefaultItem("spider_kunzite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+    public static final RegistryObject<Block> UNBREAKING_IOLITE_ORE = registerBlockWithDefaultItem("unbreaking_iolite_ore", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_ORE)));
+
 
     public static final RegistryObject<Block> DEEPSLATE_FIRE_RUBY_ORE = registerBlockWithDefaultItem("deepslate_fire_ruby_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_ICE_SAPPHIRE_ORE = registerBlockWithDefaultItem("deepslate_ice_sapphire_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
@@ -49,6 +53,9 @@ public class MMBlocks {
     public static final RegistryObject<Block> DEEPSLATE_HASTE_PERIDOT_ORE = registerBlockWithDefaultItem("deepslate_haste_peridot_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_LUCKY_CITRINE_ORE = registerBlockWithDefaultItem("deepslate_lucky_citrine_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
     public static final RegistryObject<Block> DEEPSLATE_DIVE_AQUAMARINE_ORE = registerBlockWithDefaultItem("deepslate_dive_aquamarine_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_DIVINE_BERYL_ORE = registerBlockWithDefaultItem("deepslate_divine_beryl_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_SPIDER_KUNZITE_ORE = registerBlockWithDefaultItem("deepslate_spider_kunzite_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
+    public static final RegistryObject<Block> DEEPSLATE_UNBREAKING_IOLITE_ORE = registerBlockWithDefaultItem("deepslate_unbreaking_iolite_ore", () -> new GemOreBlock(getProperties(Blocks.DEEPSLATE_DIAMOND_ORE)));
 
     public static final RegistryObject<Block> HEART_RHODONITE_ORE = registerBlockWithDefaultItem("heart_rhodonite_ore", () -> new GemOreBlock(getProperties(Blocks.NETHER_GOLD_ORE)));
     public static final RegistryObject<Block> POWER_PYRITE_ORE = registerBlockWithDefaultItem("power_pyrite_ore", () -> new GemOreBlock(getProperties(Blocks.NETHER_GOLD_ORE)));
@@ -62,6 +69,9 @@ public class MMBlocks {
     public static final RegistryObject<Block> HASTE_PERIDOT_BLOCK = registerBlockWithDefaultItem("haste_peridot_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> LUCKY_CITRINE_BLOCK = registerBlockWithDefaultItem("lucky_citrine_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> DIVE_AQUAMARINE_BLOCK = registerBlockWithDefaultItem("dive_aquamarine_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> DIVINE_BERYL_BLOCK = registerBlockWithDefaultItem("divine_beryl_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> SPIDER_KUNZITE_BLOCK = registerBlockWithDefaultItem("spider_kunzite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> UNBREAKING_IOLITE_BLOCK = registerBlockWithDefaultItem("unbreaking_iolite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> HEART_RHODONITE_BLOCK = registerBlockWithDefaultItem("heart_rhodonite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> POWER_PYRITE_BLOCK = registerBlockWithDefaultItem("power_pyrite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> KINETIC_OPAL_BLOCK = registerBlockWithDefaultItem("kinetic_opal_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
