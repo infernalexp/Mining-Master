@@ -36,7 +36,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.infernalstudios.miningmaster.init.MMContainerTypes;
-import org.infernalstudios.miningmaster.init.MMTags;
 import org.infernalstudios.miningmaster.recipes.GemForgeServerRecipePlacer;
 
 import javax.annotation.Nonnull;
@@ -199,7 +198,7 @@ public class GemForgeContainer extends RecipeBookMenu<Container> {
          * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
          */
         public boolean mayPlace(ItemStack stack) {
-            return stack.is(MMTags.Items.GEMS);
+            return true;
         }
 
         /**
@@ -226,7 +225,7 @@ public class GemForgeContainer extends RecipeBookMenu<Container> {
          * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
          */
         public boolean mayPlace(ItemStack stack) {
-            return stack.is(MMTags.Items.CATALYSTS);
+            return true;
         }
 
         /**
