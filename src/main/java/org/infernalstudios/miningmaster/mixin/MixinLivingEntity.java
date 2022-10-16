@@ -30,6 +30,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.infernalstudios.miningmaster.access.LivingEntityAccess;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
+import org.infernalstudios.miningmaster.network.DamageKnightJumpPacket;
+import org.infernalstudios.miningmaster.network.MMNetworkHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -81,9 +83,7 @@ public abstract class MixinLivingEntity extends Entity implements LivingEntityAc
             if (hasKnightJump && this.knightJumpsUsed < level) {
                 this.knightJumpsUsed++;
 
-                stack.hurtAndBreak(1, livingEntity, (onBroken) -> {
-                    onBroken.broadcastBreakEvent(EquipmentSlot.LEGS);
-                });
+                MMNetworkHandler.sendToServer(new DamageKnightJumpPacket(1));
 
                 this.jumpFromGround();
             }
