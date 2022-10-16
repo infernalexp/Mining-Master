@@ -36,6 +36,7 @@ public class MMNetworkHandler {
 
     public static synchronized void register() {
         INSTANCE.messageBuilder(UpdateGemForgePacket.class, index++).encoder(UpdateGemForgePacket::encode).decoder(UpdateGemForgePacket::decode).consumer(UpdateGemForgePacket::handle).add();
+        INSTANCE.messageBuilder(DamageKnightJumpPacket.class, index++).encoder(DamageKnightJumpPacket::encode).decoder(DamageKnightJumpPacket::decode).consumer(DamageKnightJumpPacket::handle).add();
     }
 
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
