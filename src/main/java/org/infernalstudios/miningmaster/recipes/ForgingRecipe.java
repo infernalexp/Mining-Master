@@ -146,15 +146,24 @@ public class ForgingRecipe implements IForgingRecipe {
         @Override
         public ForgingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             NonNullList<Ingredient> gemList = readIngredients(GsonHelper.getAsJsonArray(json, "gems"));
-            NonNullList<Pair<Enchantment,Integer>> enchantmentList = readEnchantments(GsonHelper.getAsJsonArray(json, "enchantments"));
+            NonNullList<Pair<Enchantment,Integer>> enchantmentList = NonNullList.create();
+
+            if (json.has("enchantments")) {
+                   enchantmentList = readEnchantments(GsonHelper.getAsJsonArray(json, "enchantments"));
+            }
 
             if (gemList.isEmpty()) {
                 throw new JsonParseException("No gems for forging recipe");
             } else if (gemList.size() > 9) {
                 throw new JsonParseException("Too many gems for forging recipe the max is 9");
             } else {
+                Ingredient catalyst = Ingredient.EMPTY;
+
                 ItemStack result = ForgingRecipe.deserializeItem(GsonHelper.getAsJsonObject(json, "result"));
-                Ingredient catalyst = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "catalyst"));
+
+                if (json.has("catalyst")) {
+                    catalyst = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "catalyst"));
+                }
 
                 return new ForgingRecipe(recipeId, catalyst, gemList, enchantmentList, result);
             }
