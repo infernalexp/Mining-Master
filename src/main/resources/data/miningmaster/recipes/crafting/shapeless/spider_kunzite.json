@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "miningmaster:spider_kunzite_block"
+    }
+  ],
+  "result": {
+    "item": "miningmaster:spider_kunzite",
+    "count": 4
+  }
+}

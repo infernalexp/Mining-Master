@@ -18,18 +18,6 @@
         ]
       }
     },
-    "has_spirit_garnet": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "miningmaster:spirit_garnet"
-            ]
-          }
-        ]
-      }
-    },
     "has_haste_peridot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -66,7 +54,6 @@
         "has_power_pyrite_axe",
         "has_kinetic_opal",
         "has_haste_peridot",
-        "has_spirit_garnet",
         "has_the_recipe"
       ]
   ]

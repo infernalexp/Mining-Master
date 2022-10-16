@@ -2,16 +2,19 @@
   "type": "miningmaster:forging_recipe",
   "gems": [
     {
-      "item": "miningmaster:lucky_citrine"
+      "item": "miningmaster:unbreaking_iolite"
     },
     {
       "item": "miningmaster:lucky_citrine"
     },
     {
+      "item": "miningmaster:fire_ruby"
+    },
+    {
       "item": "miningmaster:lucky_citrine"
     },
     {
-      "item": "miningmaster:kinetic_opal"
+      "item": "miningmaster:unbreaking_iolite"
     }
   ],
   "catalyst": {
@@ -23,10 +26,14 @@
   "enchantments": [
     {
       "enchantment": "minecraft:efficiency",
-      "lvl": 5
+      "lvl": 6
     },
     {
       "enchantment": "minecraft:fortune",
+      "lvl": 3
+    },
+    {
+      "enchantment": "minecraft:unbreaking",
       "lvl": 3
     },
     {

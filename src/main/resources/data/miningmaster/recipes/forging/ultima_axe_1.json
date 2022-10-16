@@ -2,9 +2,6 @@
   "type": "miningmaster:forging_recipe",
   "gems": [
     {
-      "item": "miningmaster:spirit_garnet"
-    },
-    {
       "item": "miningmaster:power_pyrite"
     },
     {
@@ -47,10 +44,6 @@
     {
       "enchantment": "minecraft:knockback",
       "lvl": 3
-    },
-    {
-      "enchantment": "miningmaster:leeching",
-      "lvl": 1
     }
   ]
 }
