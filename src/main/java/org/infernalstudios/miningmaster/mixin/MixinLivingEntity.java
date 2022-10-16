@@ -80,6 +80,11 @@ public abstract class MixinLivingEntity extends Entity implements LivingEntityAc
 
             if (hasKnightJump && this.knightJumpsUsed < level) {
                 this.knightJumpsUsed++;
+
+                stack.hurtAndBreak(1, livingEntity, (onBroken) -> {
+                    onBroken.broadcastBreakEvent(EquipmentSlot.LEGS);
+                });
+
                 this.jumpFromGround();
             }
         }
