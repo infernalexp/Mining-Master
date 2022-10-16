@@ -42,13 +42,13 @@
         ]
       }
     },
-    "has_haste_peridot_block": {
+    "has_haste_peridot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "miningmaster:haste_peridot_block"
+              "miningmaster:haste_peridot"
             ]
           }
         ]
@@ -78,7 +78,7 @@
         "has_diamond_pickaxe",
         "has_fire_ruby",
         "has_lucky_citrine",
-        "has_haste_peridot_block",
+        "has_haste_peridot",
         "has_unbreaking_iolite",
         "has_the_recipe"
       ]

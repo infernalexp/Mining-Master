@@ -84,17 +84,17 @@ public class MiningMasterConfig {
         divineBerylEnabled = builder
                 .comment("Determines if Divine Beryl will generate.")
                 .translation(MiningMaster.MOD_ID + ".config.tooltip.divineBerylEnabled")
-                .define("diveAquamarineEnabled", true);
+                .define("divineBerylEnabled", true);
 
         spiderKunziteEnabled = builder
                 .comment("Determines if Spider Kunzite will generate.")
                 .translation(MiningMaster.MOD_ID + ".config.tooltip.spiderKunziteEnabled")
-                .define("diveAquamarineEnabled", true);
+                .define("spiderKunziteEnabled", true);
 
         unbreakingIoliteEnabled = builder
                 .comment("Determines if Unbreaking Iolite will generate.")
                 .translation(MiningMaster.MOD_ID + ".config.tooltip.unbreakingIoliteEnabled")
-                .define("diveAquamarineEnabled", true);
+                .define("unbreakingIoliteEnabled", true);
 
         heartRhodoniteEnabled = builder
                 .comment("Determines if Heart Rhodonite will generate.")

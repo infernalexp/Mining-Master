@@ -135,10 +135,6 @@
   "miningmaster.advancements.miningmaster.blood_siphon.description": "Forge the Ultima Axe",
   "miningmaster.advancements.miningmaster.the_breaking_point.title": "The Breaking Point",
   "miningmaster.advancements.miningmaster.the_breaking_point.description": "Forge the Ultima Pickaxe",
-  "miningmaster.advancements.miningmaster.glass_cannon.title": "Glass Cannon",
-  "miningmaster.advancements.miningmaster.glass_cannon.description": "Forge the Ultima Shovel",
-  "miningmaster.advancements.miningmaster.whoever_threw_that.title": "Whoever Threw That...",
-  "miningmaster.advancements.miningmaster.whoever_threw_that.description": "Forge the Ultima Hoe",
 
   "miningmaster.advancements.miningmaster.chaos_is_power.title": "Chaos is Power",
   "miningmaster.advancements.miningmaster.chaos_is_power.description": "Forge your first Paragon Armor piece",
@@ -178,6 +174,15 @@
   "miningmaster.config.option.diveAquamarineEnabled": "Dive Aquamarine Enabled",
   "miningmaster.config.tooltip.diveAquamarineEnabled": "Determines if Dive Aquamarine will generate.",
 
+  "miningmaster.config.option.divineBerylEnabled": "Dive Aquamarine Enabled",
+  "miningmaster.config.tooltip.divineBerylEnabled": "Determines if Divine Beryl will generate.",
+
+  "miningmaster.config.option.spiderKunziteEnabled": "Spider Kunzite Enabled",
+  "miningmaster.config.tooltip.spiderKunziteEnabled": "Determines if Spider Kunzite will generate.",
+
+  "miningmaster.config.option.unbreakingIoliteEnabled": "Unbreaking Iolite Enabled",
+  "miningmaster.config.tooltip.unbreakingIoliteEnabled": "Determines if Unbreaking Iolite will generate.",
+
   "miningmaster.config.option.heartRhodoniteEnabled": "Heart Rhodonite Enabled",
   "miningmaster.config.tooltip.heartRhodoniteEnabled": "Determines if Heart Rhodonite will generate.",
 
@@ -199,45 +204,65 @@
   "miningmaster.config.option.randomGemsPerChunk": "Random Gem Spawns Per Chunk",
   "miningmaster.config.tooltip.randomGemsPerChunk": "Determines how many times a random gem ore will attempt to spawn per chunk. REQUIRES RESTART.",
 
+
   "enchantment.miningmaster.freezing": "Freezing",
   "enchantment.miningmaster.freezing.desc": "Inflicts Slowness on hit. Also deals extra damage to fire-based entities.",
+
   "enchantment.miningmaster.leeching": "Leeching",
   "enchantment.miningmaster.leeching.desc": "Heals the user for a portion of damage dealt on critical strikes.",
+
   "enchantment.miningmaster.smelting": "Smelting",
   "enchantment.miningmaster.smelting.desc": "Causes blocks to drop the smelted version of their usual drops.",
+
   "enchantment.miningmaster.stonebreaker": "Stonebreaker",
   "enchantment.miningmaster.stonebreaker.desc": "Causes certain stones and Netherrack to not drop when mined.",
+
   "enchantment.miningmaster.runner": "Runner",
   "enchantment.miningmaster.runner.desc": "Gives the user a boost to their base speed. Boots take durability damage when sprinting.",
+
   "enchantment.miningmaster.heartfelt": "Heartfelt",
   "enchantment.miningmaster.heartfelt.desc": "Gives the user an increase to their max health.",
+
   "enchantment.miningmaster.floatation": "Floatation",
   "enchantment.miningmaster.floatation.desc": "Applies levitation to enemies on hit.",
+
   "enchantment.miningmaster.knight_jump": "Knight Jump",
   "enchantment.miningmaster.knight_jump.desc": "Gives the user extra mid-air jumps.",
+
   "enchantment.miningmaster.snowpiercer": "Snowpiercer",
   "enchantment.miningmaster.snowpiercer.desc": "Grants the user the Speed effect when on snow or ice.",
+
   "enchantment.miningmaster.grace": "Grace",
   "enchantment.miningmaster.grace.desc": "Gives the user a burst of Dolphin's Grace when entering water, at the cost of durability decay while the effect is active. Requires the user to return to land to recharge.",
 
+
   "tetra.improvement.enchantment/miningmaster_floatation.name": "Floatation",
   "tetra.improvement.enchantment/miningmaster_floatation.description": "Applies levitation to enemies on hit.",
+
   "tetra.improvement.enchantment/miningmaster_freezing.name": "Freezing",
   "tetra.improvement.enchantment/miningmaster_freezing.description": "Inflicts Slowness on hit. Also deals extra damage to fire-based entities.",
+
   "tetra.improvement.enchantment/miningmaster_grace.name": "Grace",
   "tetra.improvement.enchantment/miningmaster_grace.description": "Gives the user a burst of Dolphin's Grace when entering water, at the cost of durability decay while the effect is active. Requires the user to return to land to recharge.",
+
   "tetra.improvement.enchantment/miningmaster_heartfelt.name": "Heartfelt",
   "tetra.improvement.enchantment/miningmaster_heartfelt.description": "Gives the user an increase to their max health.",
+
   "tetra.improvement.enchantment/miningmaster_knight_jump.name": "Knight Jump",
   "tetra.improvement.enchantment/miningmaster_knight_jump.description": "Gives the user extra mid-air jumps.",
+
   "tetra.improvement.enchantment/miningmaster_leeching.name": "Leeching",
   "tetra.improvement.enchantment/miningmaster_leeching.description": "Heals the user for a portion of damage dealt on critical strikes.",
+
   "tetra.improvement.enchantment/miningmaster_runner.name": "Runner",
   "tetra.improvement.enchantment/miningmaster_runner.description": "Gives the user a boost to their base speed. Boots take durability damage when sprinting.",
+
   "tetra.improvement.enchantment/miningmaster_smelting.name": "Smelting",
   "tetra.improvement.enchantment/miningmaster_smelting.description": "Causes blocks to drop the smelted version of their usual drops.",
+
   "tetra.improvement.enchantment/miningmaster_snowpiercer.name": "Snowpiercer",
   "tetra.improvement.enchantment/miningmaster_snowpiercer.description": "Grants the user the Speed effect when on snow or ice.",
+
   "tetra.improvement.enchantment/miningmaster_stonebreaker.name": "Stonebreaker",
   "tetra.improvement.enchantment/miningmaster_stonebreaker.description": "Causes certain stones and Netherrack to not drop when mined."
 }

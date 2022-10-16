@@ -2,25 +2,25 @@
   "type": "miningmaster:forging_recipe",
   "gems": [
     {
+      "item": "miningmaster:unbreaking_iolite"
+    },
+    {
       "item": "miningmaster:haste_peridot"
     },
     {
       "item": "miningmaster:haste_peridot"
-    },
-    {
-      "item": "miningmaster:haste_peridot"
-    },
-    {
-      "item": "miningmaster:unbreaking_iolite"
-    },
-    {
-      "item": "miningmaster:unbreaking_iolite"
-    },
-    {
-      "item": "miningmaster:unbreaking_iolite"
     },
     {
       "item": "miningmaster:fire_ruby"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:unbreaking_iolite"
     }
   ],
   "catalyst": {

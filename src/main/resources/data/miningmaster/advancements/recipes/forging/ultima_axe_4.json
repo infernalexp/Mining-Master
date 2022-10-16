@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "miningmaster:forging/ultima_axe_5"
+      "miningmaster:forging/ultima_axe_4"
     ]
   },
   "criteria": {
@@ -45,7 +45,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "miningmaster:forging/ultima_axe_5"
+        "recipe": "miningmaster:forging/ultima_axe_4"
       }
     }
   },

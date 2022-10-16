@@ -69,9 +69,9 @@ public class MMBlocks {
     public static final RegistryObject<Block> HASTE_PERIDOT_BLOCK = registerBlockWithDefaultItem("haste_peridot_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> LUCKY_CITRINE_BLOCK = registerBlockWithDefaultItem("lucky_citrine_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> DIVE_AQUAMARINE_BLOCK = registerBlockWithDefaultItem("dive_aquamarine_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
-    public static final RegistryObject<Block> DIVINE_BERYL_BLOCK = registerBlockWithDefaultItem("divine_beryl_block", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_BLOCK)));
-    public static final RegistryObject<Block> SPIDER_KUNZITE_BLOCK = registerBlockWithDefaultItem("spider_kunzite_block", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_BLOCK)));
-    public static final RegistryObject<Block> UNBREAKING_IOLITE_BLOCK = registerBlockWithDefaultItem("unbreaking_iolite_block", () -> new GemOreBlock(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> DIVINE_BERYL_BLOCK = registerBlockWithDefaultItem("divine_beryl_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> SPIDER_KUNZITE_BLOCK = registerBlockWithDefaultItem("spider_kunzite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryObject<Block> UNBREAKING_IOLITE_BLOCK = registerBlockWithDefaultItem("unbreaking_iolite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> HEART_RHODONITE_BLOCK = registerBlockWithDefaultItem("heart_rhodonite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> POWER_PYRITE_BLOCK = registerBlockWithDefaultItem("power_pyrite_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));
     public static final RegistryObject<Block> KINETIC_OPAL_BLOCK = registerBlockWithDefaultItem("kinetic_opal_block", () -> new Block(getProperties(Blocks.DIAMOND_BLOCK)));

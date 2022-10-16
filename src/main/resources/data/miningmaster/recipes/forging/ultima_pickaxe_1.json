@@ -2,28 +2,31 @@
   "type": "miningmaster:forging_recipe",
   "gems": [
     {
-      "item": "miningmaster:lucky_citrine"
-    },
-    {
-      "item": "miningmaster:lucky_citrine"
-    },
-    {
-      "item": "miningmaster:lucky_citrine"
-    },
-    {
-      "item": "miningmaster:haste_peridot_block"
-    },
-    {
       "item": "miningmaster:unbreaking_iolite"
     },
     {
-      "item": "miningmaster:unbreaking_iolite"
+      "item": "miningmaster:lucky_citrine"
     },
     {
-      "item": "miningmaster:unbreaking_iolite"
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
     },
     {
       "item": "miningmaster:fire_ruby"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:haste_peridot"
+    },
+    {
+      "item": "miningmaster:lucky_citrine"
+    },
+    {
+      "item": "miningmaster:unbreaking_iolite"
     }
   ],
   "catalyst": {
