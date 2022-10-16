@@ -29,10 +29,8 @@ import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.items.GemArmorItem;
 import org.infernalstudios.miningmaster.items.GemAxeItem;
 import org.infernalstudios.miningmaster.items.GemBowItem;
-import org.infernalstudios.miningmaster.items.GemHoeItem;
 import org.infernalstudios.miningmaster.items.GemItem;
 import org.infernalstudios.miningmaster.items.GemPickaxeItem;
-import org.infernalstudios.miningmaster.items.GemShovelItem;
 import org.infernalstudios.miningmaster.items.GemSwordItem;
 
 import java.util.function.Supplier;
@@ -73,7 +71,7 @@ public class MMItems {
     public static final RegistryObject<GemPickaxeItem> UNBREAKING_IOLITE_PICKAXE = registerItem("unbreaking_iolite_pickaxe", () -> new GemPickaxeItem(MMItemTiers.SUPRA, Ingredient.of(UNBREAKING_IOLITE.get()), 1, -2.8F, new Item.Properties().tab(MiningMaster.TAB), new Pair<>(() -> Enchantments.UNBREAKING, 4)));
     public static final RegistryObject<GemPickaxeItem> ULTIMA_PICKAXE = registerItem("ultima_pickaxe", () -> new GemPickaxeItem(MMItemTiers.ULTIMA, Ingredient.of(KINETIC_OPAL.get(), LUCKY_CITRINE.get(), HASTE_PERIDOT.get(), UNBREAKING_IOLITE.get()), 1, -2.8F, new Item.Properties().tab(MiningMaster.TAB), new Pair<>(() -> Enchantments.BLOCK_EFFICIENCY, 6), new Pair<>(() -> Enchantments.BLOCK_FORTUNE, 3), new Pair<>(() -> Enchantments.UNBREAKING, 3), new Pair<>(MMEnchantments.SMELTING, 1)));
 
-    public static final RegistryObject<GemBowItem> AIR_MALACHITE_BOW = registerItem("air_malachite_bow", () -> new GemBowItem(new Item.Properties().tab(MiningMaster.TAB).stacksTo(1), new Pair<>(MMEnchantments.FLOATATION, 5)));
+    public static final RegistryObject<GemBowItem> AIR_MALACHITE_BOW = registerItem("air_malachite_bow", () -> new GemBowItem(new Item.Properties().tab(MiningMaster.TAB).durability(753), new Pair<>(MMEnchantments.FLOATATION, 5)));
 
     // ARMOR
     public static final RegistryObject<GemArmorItem> PARAGON_HELMET = registerItem("paragon_helmet", () -> new GemArmorItem(MMArmorMaterials.PARAGON, Ingredient.of(FIRE_RUBY.get(), KINETIC_OPAL.get(), SPIRIT_GARNET.get()), EquipmentSlot.HEAD, new Item.Properties().tab(MiningMaster.TAB), new Pair<>(() -> Enchantments.THORNS, 3), new Pair<>(() -> Enchantments.FIRE_PROTECTION, 3), new Pair<>(() -> Enchantments.BLAST_PROTECTION, 3)));
