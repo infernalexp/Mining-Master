@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "minecraft:nether_wastes",
+  "biomes": "minecraft:crimson_forest",
   "features": "miningmaster:ore_power_pyrite",
   "step": "underground_ores"
 }

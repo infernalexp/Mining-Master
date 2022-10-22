@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#miningmaster:divine_beryl_biomes",
+  "features": "miningmaster:ore_divine_beryl",
+  "step": "underground_ores"
+}

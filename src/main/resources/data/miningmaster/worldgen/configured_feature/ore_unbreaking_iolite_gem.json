@@ -1,0 +1,34 @@
+{
+  "config": {
+    "discard_chance_on_air_exposure": 0,
+    "targets": [
+      {
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:stone_ore_replaceables"
+        },
+        "states": [
+          {
+            "state": {
+              "Name": "miningmaster:unbreaking_iolite_ore"
+            }
+          }
+        ]
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        },
+        "states": [
+          {
+            "state": {
+              "Name": "miningmaster:deepslate_unbreaking_iolite_ore"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "type": "miningmaster:ore_gem_feature"
+}

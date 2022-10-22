@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#miningmaster:unbreaking_iolite_biomes",
+  "features": "miningmaster:ore_unbreaking_iolite",
+  "step": "underground_ores"
+}
