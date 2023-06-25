@@ -49,7 +49,7 @@ public class MixinAbstractArrow {
         }
     }
 
-    @Inject(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;isCritArrow()Z"))
+    @Inject(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;doPostHurtEffects(Lnet/minecraft/world/entity/LivingEntity;)V"))
     private void MM_dealArrowEnchants(EntityHitResult hitResult, CallbackInfo ci) {
         if (this.freezingLevel > 0) {
             if (hitResult.getEntity() instanceof LivingEntity livingEntity) {
