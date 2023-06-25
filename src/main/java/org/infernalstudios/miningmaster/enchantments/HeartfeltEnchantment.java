@@ -18,7 +18,6 @@ package org.infernalstudios.miningmaster.enchantments;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -28,6 +27,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
@@ -81,8 +81,11 @@ public class HeartfeltEnchantment extends Enchantment {
         return false;
     }
 
-    @Override
-    public void doPostHurt(LivingEntity user, Entity attacker, int level) {
+
+    @SubscribeEvent
+    public static void onLivingDamage(LivingDamageEvent event) {
+        LivingEntity user = event.getEntity();
+
         Iterable<ItemStack> equipment = user.getAllSlots();
         for (ItemStack item : equipment) {
             ListTag nbtList = item.getEnchantmentTags();
@@ -93,7 +96,6 @@ public class HeartfeltEnchantment extends Enchantment {
                 }
             }
         }
-        super.doPostHurt(user, attacker, level);
     }
 
     @SubscribeEvent

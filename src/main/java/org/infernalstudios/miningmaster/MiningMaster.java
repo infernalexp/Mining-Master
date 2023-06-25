@@ -78,6 +78,7 @@ public class MiningMaster {
         MinecraftForge.EVENT_BUS.addListener(RunnerEnchantment::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemAttributeModifierCalculate);
         MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onItemUnequip);
+        MinecraftForge.EVENT_BUS.addListener(HeartfeltEnchantment::onLivingDamage);
         MinecraftForge.EVENT_BUS.addListener(SnowpiercerEnchantment::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(GraceEnchantment::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(KnightJumpEnchantment::onClientTick);
