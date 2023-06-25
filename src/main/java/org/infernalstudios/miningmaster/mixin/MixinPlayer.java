@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(Player.class)
 public abstract class MixinPlayer {
 
-    @Inject(method = "attack", at = @At(target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z", value = "INVOKE_ASSIGN"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = "attack", at = @At(target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z", value = "INVOKE_ASSIGN", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void MM_calculateEnchantEffects(Entity targetEntity, CallbackInfo ci, float f, float f1, float f2, boolean flag, boolean flag1, float i, boolean flag2, CriticalHitEvent hitResult, boolean flag3, double d0, float f4, boolean flag4, int j, Vec3 vec3, boolean flag5) {
         if (flag5) {
             ItemStack itemStack = ((Player) (Object) this).getMainHandItem();
