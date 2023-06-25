@@ -16,6 +16,8 @@
 
 package org.infernalstudios.miningmaster.mixin;
 
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -31,20 +33,33 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractArrow.class)
 public class MixinAbstractArrow {
     private int freezingLevel = 0;
+    private int floatingLevel = 0;
 
     @Inject(method = "<init>(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;)V", at = @At("RETURN"))
-    private void MM_setFreezingOnCreation(EntityType entityType, LivingEntity shooter, Level level, CallbackInfo ci) {
+    private void MM_setEnchantsOnCreation(EntityType entityType, LivingEntity shooter, Level level, CallbackInfo ci) {
         int freezing = EnchantmentHelper.getEnchantmentLevel(MMEnchantments.FREEZING.get(), shooter);
+        int floating = EnchantmentHelper.getEnchantmentLevel(MMEnchantments.FLOATATION.get(), shooter);
+
         if (freezing > 0) {
             this.freezingLevel = freezing;
+        }
+
+        if (floating > 0) {
+            this.floatingLevel = floating;
         }
     }
 
     @Inject(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;isCritArrow()Z"))
-    private void MM_dealArrowFreezing(EntityHitResult hitResult, CallbackInfo ci) {
+    private void MM_dealArrowEnchants(EntityHitResult hitResult, CallbackInfo ci) {
         if (this.freezingLevel > 0) {
             if (hitResult.getEntity() instanceof LivingEntity livingEntity) {
                 livingEntity.setTicksFrozen(livingEntity.getTicksFrozen() + livingEntity.getTicksRequiredToFreeze() + 120 * this.freezingLevel);
+            }
+        }
+
+        if (this.floatingLevel > 0) {
+            if (hitResult.getEntity() instanceof LivingEntity livingEntity) {
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 4 * this.floatingLevel));
             }
         }
     }
