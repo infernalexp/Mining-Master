@@ -221,7 +221,7 @@
   "enchantment.miningmaster.runner.desc": "Gives the user a boost to their base speed. Boots take durability damage when sprinting.",
 
   "enchantment.miningmaster.heartfelt": "Heartfelt",
-  "enchantment.miningmaster.heartfelt.desc": "Gives the user an increase to their max health.",
+  "enchantment.miningmaster.heartfelt.desc": "Gives the user an increase to their max health at the cost of increased durability damage.",
 
   "enchantment.miningmaster.floatation": "Floatation",
   "enchantment.miningmaster.floatation.desc": "Applies levitation to enemies on hit.",
