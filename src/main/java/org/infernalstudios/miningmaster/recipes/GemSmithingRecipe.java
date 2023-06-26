@@ -79,7 +79,7 @@ public class GemSmithingRecipe extends UpgradeRecipe implements Recipe<Container
 
         outerLoop:
         for (Enchantment enchantment : enchantments) {
-            if (enchantment.canEnchant(itemstack) && areEnchantsCompatible(itemstack, enchantment)) {
+            if (itemstack.canApplyAtEnchantingTable(enchantment) && areEnchantsCompatible(itemstack, enchantment)) {
                 ListTag nbtList = itemstack.getEnchantmentTags();
 
                 for (int i = 0; i < nbtList.size(); i++) {
