@@ -30,6 +30,7 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -68,6 +69,9 @@ public class GemSmithingRecipe extends UpgradeRecipe implements Recipe<Container
     public ItemStack assemble(Container inv) {
         ItemStack itemstack = inv.getItem(0).copy();
         CompoundTag compoundnbt = inv.getItem(0).getTag();
+
+        if (itemstack.is(Items.AIR)) return null;
+
         if (compoundnbt != null) {
             itemstack.setTag(compoundnbt.copy());
         }
