@@ -84,7 +84,7 @@ public class HeartfeltEnchantment extends Enchantment {
 
     @SubscribeEvent
     public static void onLivingDamage(LivingDamageEvent event) {
-        LivingEntity user = event.getEntity();
+        LivingEntity user = event.getEntityLiving();
 
         Iterable<ItemStack> equipment = user.getAllSlots();
         for (ItemStack item : equipment) {
