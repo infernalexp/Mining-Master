@@ -53,7 +53,7 @@ public class MixinAbstractArrow {
     private void MM_dealArrowEnchants(EntityHitResult hitResult, CallbackInfo ci) {
         if (this.freezingLevel > 0) {
             if (hitResult.getEntity() instanceof LivingEntity livingEntity && !livingEntity.level.isClientSide()) {
-                livingEntity.setTicksFrozen(livingEntity.getTicksFrozen() + livingEntity.getTicksRequiredToFreeze() + 120 * this.freezingLevel);
+                livingEntity.setTicksFrozen(Math.max(livingEntity.getTicksFrozen(), livingEntity.getTicksRequiredToFreeze() + 120 * this.freezingLevel));
             }
         }
 
