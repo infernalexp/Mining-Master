@@ -97,13 +97,11 @@ public class GraceEnchantment extends Enchantment {
             for (int i = 0; i < nbtList.size(); i++) {
                 CompoundTag idTag = nbtList.getCompound(i);
                 if (idTag.getString("id").equals(MMEnchantments.GRACE.getId().toString())) {
-                    if (livingEntity.hasEffect(MobEffects.DOLPHINS_GRACE) && playerEntity != null && !playerEntity.isCreative() && rand.nextInt(100) == 0) {
-                        stack.hurtAndBreak(1, livingEntity, (onBroken) -> {
-                            onBroken.broadcastBreakEvent(EquipmentSlot.CHEST);
-                        });
+                    if (livingEntity.hasEffect(MobEffects.DOLPHINS_GRACE) && playerEntity != null && !playerEntity.isCreative() && rand.nextInt(80) == 0) {
+                        stack.hurtAndBreak(1, livingEntity, (onBroken) -> onBroken.broadcastBreakEvent(EquipmentSlot.CHEST));
                     }
                     if (((LivingEntityAccess) livingEntity).getGraceRecharged()) {
-                        livingEntity.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 120 * idTag.getInt("lvl")));
+                        livingEntity.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 100 * idTag.getInt("lvl")));
                         ((LivingEntityAccess) livingEntity).setGraceRecharged(false);
                     }
                 }
