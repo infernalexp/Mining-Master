@@ -55,7 +55,7 @@ public class FreezingEnchantment extends Enchantment {
     @Override
     public boolean canEnchant(ItemStack stack) {
         Item stackItem = stack.getItem();
-        return stackItem instanceof AxeItem || stackItem instanceof BowItem || stackItem instanceof CrossbowItem || this.category.canEnchant(stackItem);
+        return stackItem instanceof AxeItem || stackItem instanceof BowItem || stackItem instanceof CrossbowItem || this.category.canEnchant(stackItem) || stack.canApplyAtEnchantingTable(this);
     }
 
     @Override
