@@ -27,8 +27,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.FireAspectEnchantment;
 
-import net.minecraft.world.item.enchantment.Enchantment.Rarity;
-
 public class FreezingEnchantment extends Enchantment {
     public FreezingEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
         super(rarityIn, EnchantmentCategory.WEAPON, slots);
@@ -57,7 +55,7 @@ public class FreezingEnchantment extends Enchantment {
     @Override
     public boolean canEnchant(ItemStack stack) {
         Item stackItem = stack.getItem();
-        return stackItem instanceof AxeItem || stackItem instanceof BowItem || stackItem instanceof CrossbowItem || this.category.canEnchant(stackItem);
+        return stackItem instanceof AxeItem || stackItem instanceof BowItem || stackItem instanceof CrossbowItem || this.category.canEnchant(stackItem) || stack.canApplyAtEnchantingTable(this);
     }
 
     @Override
