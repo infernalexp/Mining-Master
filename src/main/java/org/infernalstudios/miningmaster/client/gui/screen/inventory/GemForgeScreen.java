@@ -18,7 +18,6 @@ package org.infernalstudios.miningmaster.client.gui.screen.inventory;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -184,8 +183,9 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
         }
 
         public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-            Minecraft.getInstance().getTextureManager().bindForSetup(GemForgeScreen.GUI_TEXTURE);
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderTexture(0, GUI_TEXTURE);
             int i = 165;
             int j = 0;
             if (this.screen.menu.isForgeActive()) {
