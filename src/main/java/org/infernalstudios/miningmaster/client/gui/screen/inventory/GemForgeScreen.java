@@ -63,7 +63,7 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
             this.recipeGui.initVisuals();
             this.recipeGui.toggleVisibility();
             this.leftPos = this.recipeGui.updateScreenPosition(this.width, this.imageWidth);
-            ((ImageButton)button).setPosition(this.leftPos + 15, this.height / 2 - 49);
+            button.setPosition(this.leftPos + 15, this.height / 2 - 49);
         }));
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
     }
@@ -140,11 +140,6 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
         return this.recipeGui;
     }
 
-    public void removed() {
-        this.recipeGui.removed();
-        super.removed();
-    }
-
     @OnlyIn(Dist.CLIENT)
     class ConfirmButton extends GemForgeScreen.Button {
         public ConfirmButton(int x, int y, GemForgeScreen screen) {
@@ -162,7 +157,7 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
         }
 
         @Override
-        public void updateNarration(NarrationElementOutput narrationElementOutput) {
+        public void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
             this.defaultButtonNarrationText(narrationElementOutput);
         }
     }
@@ -178,8 +173,8 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
             this.screen = screen;
             this.xOffset = x;
             this.yOffset = y;
-            this.x = this.xOffset + this.screen.leftPos;
-            this.y = this. yOffset + this.screen.topPos;
+            this.setX(this.xOffset + this.screen.leftPos);
+            this.setY(this.yOffset + this.screen.topPos);
         }
 
         public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
@@ -196,13 +191,13 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
                 j += this.width * 3;
             }
 
-            this.x = this.xOffset + this.screen.leftPos;
-            this.y = this. yOffset + this.screen.topPos;
+            this.setX(this.xOffset + this.screen.leftPos);
+            this.setY(this.yOffset + this.screen.topPos);
 
             this.active = this.screen.menu.isRecipeValid() && !this.screen.menu.isForgeActive();
 
-            this.blit(matrixStack, this.x, this.y, j, i, this.width, this.height);
-            this.screen.itemRenderer.renderGuiItem(new ItemStack(Items.LAVA_BUCKET), this.x + 2, this.y + 2);
+            this.blit(matrixStack, this.getX(), this.getY(), j, i, this.width, this.height);
+            this.screen.itemRenderer.renderGuiItem(matrixStack, new ItemStack(Items.LAVA_BUCKET), this.getX() + 2, this.getY() + 2);
             this.renderIcon(matrixStack);
         }
 

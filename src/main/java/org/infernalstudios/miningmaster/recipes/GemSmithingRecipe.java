@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -32,27 +33,26 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.UpgradeRecipe;
+import net.minecraft.world.item.crafting.SmithingRecipe;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.infernalstudios.miningmaster.init.MMRecipes;
+import org.infernalstudios.miningmaster.init.MMTags;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 
-public class GemSmithingRecipe extends UpgradeRecipe implements Recipe<Container> {
+public class GemSmithingRecipe implements SmithingRecipe {
     private final Ingredient blacklist;
     private final ItemStack gem;
     private final NonNullList<Enchantment> enchantments;
     private final ResourceLocation recipeId;
 
     public GemSmithingRecipe(ResourceLocation recipeId, Ingredient blacklist, ItemStack gem, NonNullList<Enchantment> enchantments) {
-        super(recipeId, blacklist, Ingredient.EMPTY, ItemStack.EMPTY);
         this.recipeId = recipeId;
         this.blacklist = blacklist;
         this.gem = gem;
@@ -61,11 +61,11 @@ public class GemSmithingRecipe extends UpgradeRecipe implements Recipe<Container
 
     @Override
     public boolean matches(Container inv, Level worldIn) {
-        return !this.blacklist.test(inv.getItem(0)) && this.gem.sameItem(inv.getItem(1)) && assemble(inv) != null;
+        return !this.blacklist.test(inv.getItem(0)) && this.gem.sameItem(inv.getItem(1)) && assemble(inv, worldIn.registryAccess()) != null;
     }
 
     @Override
-    public ItemStack assemble(Container inv) {
+    public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
         ItemStack itemstack = inv.getItem(0).copy();
         CompoundTag compoundnbt = inv.getItem(0).getTag();
 
@@ -122,8 +122,23 @@ public class GemSmithingRecipe extends UpgradeRecipe implements Recipe<Container
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return ItemStack.EMPTY;
+    }
+
+    @Override
+    public boolean isTemplateIngredient(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public boolean isBaseIngredient(ItemStack stack) {
+        return !stack.is(MMTags.Items.GEM_ENCHANTING_BLACKLIST);
+    }
+
+    @Override
+    public boolean isAdditionIngredient(ItemStack stack) {
+        return stack.is(MMTags.Items.GEMS);
     }
 
     @Override

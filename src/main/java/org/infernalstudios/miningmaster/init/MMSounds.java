@@ -36,6 +36,6 @@ public class MMSounds {
     }
 
     public static RegistryObject<SoundEvent> registerSound(String name) {
-        return SOUNDS.register(name, () -> new SoundEvent(new ResourceLocation(MiningMaster.MOD_ID, name)));
+        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MiningMaster.MOD_ID, name)));
     }
 }

@@ -60,7 +60,7 @@ public class MMLootModifiers {
             for (ItemStack item : generatedLoot) {
                 Optional<SmeltingRecipe> optional = context.getLevel().getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SimpleContainer(item), context.getLevel());
                 if (optional.isPresent()) {
-                    ItemStack itemstack = optional.get().getResultItem();
+                    ItemStack itemstack = optional.get().getResultItem(context.getLevel().registryAccess());
                     if (!itemstack.isEmpty()) {
                         ItemStack itemstack1 = itemstack.copy();
                         itemstack1.setCount(item.getCount() * itemstack.getCount()); //Forge: Support smelting returning multiple

@@ -16,11 +16,11 @@
 
 package org.infernalstudios.miningmaster.recipes;
 
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.infernalstudios.miningmaster.MiningMaster;
 
 public interface IForgingRecipe extends Recipe<Container> {
@@ -28,7 +28,7 @@ public interface IForgingRecipe extends Recipe<Container> {
 
     @Override
     default RecipeType<?> getType() {
-        return Registry.RECIPE_TYPE.getOptional(TYPE_ID).get();
+        return ForgeRegistries.RECIPE_TYPES.getValue(TYPE_ID);
     }
 
     @Override

@@ -19,8 +19,6 @@ package org.infernalstudios.miningmaster;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -106,13 +104,4 @@ public class MiningMaster {
             MenuScreens.register(MMContainerTypes.GEM_FORGE_CONTAINER.get(), GemForgeScreen::new);
         });
     }
-
-    public static final CreativeModeTab TAB = new CreativeModeTab("MiningMasterTab") {
-
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(MMItems.TAB_ITEM.get());
-        }
-
-    };
 }

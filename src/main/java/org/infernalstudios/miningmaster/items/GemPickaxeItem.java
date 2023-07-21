@@ -17,8 +17,6 @@
 package org.infernalstudios.miningmaster.items;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
@@ -26,8 +24,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.function.Supplier;
-
-import net.minecraft.world.item.Item.Properties;
 
 public class GemPickaxeItem extends PickaxeItem {
     private final Ingredient repairItems;
@@ -43,18 +39,5 @@ public class GemPickaxeItem extends PickaxeItem {
     @Override
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
         return this.repairItems.test(repair);
-    }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        if (allowedIn(group)) {
-            ItemStack itemStack = new ItemStack(this);
-
-            for (Pair<Supplier<Enchantment>, Integer> enchantmentPair : enchantments) {
-                itemStack.enchant(enchantmentPair.getFirst().get(), enchantmentPair.getSecond());
-            }
-
-            items.add(itemStack);
-        }
     }
 }
