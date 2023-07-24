@@ -61,7 +61,7 @@ public class GraceEnchantment extends Enchantment {
 
     @Override
     public boolean canEnchant(ItemStack stack) {
-        return this.category.canEnchant(stack.getItem());
+        return this.category.canEnchant(stack.getItem()) || stack.canApplyAtEnchantingTable(this);
     }
 
     @Override

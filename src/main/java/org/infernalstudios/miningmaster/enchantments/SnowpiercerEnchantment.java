@@ -30,8 +30,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.infernalstudios.miningmaster.init.MMEnchantments;
 import org.infernalstudios.miningmaster.init.MMTags;
 
-import net.minecraft.world.item.enchantment.Enchantment.Rarity;
-
 public class SnowpiercerEnchantment extends Enchantment {
 
     public SnowpiercerEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
@@ -55,7 +53,7 @@ public class SnowpiercerEnchantment extends Enchantment {
 
     @Override
     public boolean canEnchant(ItemStack stack) {
-        return this.category.canEnchant(stack.getItem());
+        return this.category.canEnchant(stack.getItem()) || stack.canApplyAtEnchantingTable(this);
     }
 
     @Override

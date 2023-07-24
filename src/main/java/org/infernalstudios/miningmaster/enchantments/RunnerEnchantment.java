@@ -34,8 +34,6 @@ import org.infernalstudios.miningmaster.init.MMEnchantments;
 import java.util.Random;
 import java.util.UUID;
 
-import net.minecraft.world.item.enchantment.Enchantment.Rarity;
-
 public class RunnerEnchantment extends Enchantment {
 
     public RunnerEnchantment(Rarity rarityIn, EquipmentSlot... slots) {
@@ -59,7 +57,7 @@ public class RunnerEnchantment extends Enchantment {
 
     @Override
     public boolean canEnchant(ItemStack stack) {
-        return this.category.canEnchant(stack.getItem());
+        return this.category.canEnchant(stack.getItem()) || stack.canApplyAtEnchantingTable(this);
     }
 
     @Override
