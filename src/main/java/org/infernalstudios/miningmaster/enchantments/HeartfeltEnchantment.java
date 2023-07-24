@@ -103,7 +103,7 @@ public class HeartfeltEnchantment extends Enchantment {
         EquipmentSlot equipmentSlotType = null;
         if (itemStack.getItem() instanceof ArmorItem) {
             ArmorItem armorItem = (ArmorItem) itemStack.getItem();
-            equipmentSlotType = armorItem.getEquipmentSlot();
+            equipmentSlotType = armorItem.getSlot();
         }
 
         if (equipmentSlotType != null && event.getSlotType().equals(equipmentSlotType)) {

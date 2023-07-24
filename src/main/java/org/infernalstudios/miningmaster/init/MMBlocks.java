@@ -100,7 +100,7 @@ public class MMBlocks {
 
     public static <T extends Block> RegistryObject<T> registerBlockWithDefaultItem(String name, Supplier<? extends T> blockSupplier) {
         RegistryObject<T> block = BLOCKS.register(name, blockSupplier);
-        MMItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        MMItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(MiningMaster.TAB)));
         return block;
     }
 

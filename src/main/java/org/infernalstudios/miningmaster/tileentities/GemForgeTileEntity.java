@@ -200,7 +200,7 @@ public class GemForgeTileEntity extends BaseContainerBlockEntity implements Worl
 
     protected boolean canForge(@Nullable ForgingRecipe recipeIn) {
         if (recipeIn != null) {
-            ItemStack result = recipeIn.assemble(this, this.level.registryAccess());
+            ItemStack result = recipeIn.assemble(this);
 
             return !result.isEmpty();
         } else {
@@ -210,7 +210,7 @@ public class GemForgeTileEntity extends BaseContainerBlockEntity implements Worl
 
     private void forge(@Nullable ForgingRecipe recipe) {
         if (recipe != null && this.canForge(recipe)) {
-            ItemStack result = recipe.assemble(this, this.level.registryAccess());
+            ItemStack result = recipe.assemble(this);
 
             this.inventory.setStackInSlot(9, result.copy());
 

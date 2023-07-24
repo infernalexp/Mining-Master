@@ -22,7 +22,6 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -83,7 +82,7 @@ public class ForgingRecipe implements IForgingRecipe {
     }
 
     @Override
-    public ItemStack assemble(Container inv, RegistryAccess access) {
+    public ItemStack assemble(Container inv) {
         ItemStack itemstack = this.result.copy();
         CompoundTag compoundnbt = inv.getItem(0).getTag();
         if (compoundnbt != null) {
@@ -98,7 +97,7 @@ public class ForgingRecipe implements IForgingRecipe {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess access) {
+    public ItemStack getResultItem() {
         return this.result;
     }
 

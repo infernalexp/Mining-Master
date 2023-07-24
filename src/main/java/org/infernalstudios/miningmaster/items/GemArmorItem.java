@@ -17,20 +17,25 @@
 package org.infernalstudios.miningmaster.items;
 
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.function.Supplier;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class GemArmorItem extends ArmorItem {
     private final Ingredient repairItems;
     private final Pair<Supplier<Enchantment>, Integer>[] enchantments;
 
     @SafeVarargs
-    public GemArmorItem(ArmorMaterial materialIn, Ingredient repairItems, Type slot, Properties builderIn, Pair<Supplier<Enchantment>, Integer>... enchantments) {
+    public GemArmorItem(ArmorMaterial materialIn, Ingredient repairItems, EquipmentSlot slot, Properties builderIn, Pair<Supplier<Enchantment>, Integer>... enchantments) {
         super(materialIn, slot, builderIn);
         this.repairItems = repairItems;
         this.enchantments = enchantments;
@@ -39,5 +44,18 @@ public class GemArmorItem extends ArmorItem {
     @Override
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
         return this.repairItems.test(repair);
+    }
+
+    @Override
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        if (allowedIn(group)) {
+            ItemStack itemStack = new ItemStack(this);
+
+            for (Pair<Supplier<Enchantment>, Integer> enchantmentPair : enchantments) {
+                itemStack.enchant(enchantmentPair.getFirst().get(), enchantmentPair.getSecond());
+            }
+
+            items.add(itemStack);
+        }
     }
 }
