@@ -18,6 +18,7 @@ package org.infernalstudios.miningmaster.client.gui.screen.inventory;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -74,32 +75,32 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
     }
 
 
-    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(matrixStack);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground(graphics);
         if (this.recipeGui.isVisible() && this.widthTooNarrowIn) {
-            this.renderBg(matrixStack, partialTicks, mouseX, mouseY);
-            this.recipeGui.render(matrixStack, mouseX, mouseY, partialTicks);
+            this.renderBg(graphics, partialTicks, mouseX, mouseY);
+            this.recipeGui.render(graphics, mouseX, mouseY, partialTicks);
         } else {
-            this.recipeGui.render(matrixStack, mouseX, mouseY, partialTicks);
-            super.render(matrixStack, mouseX, mouseY, partialTicks);
-            this.recipeGui.renderGhostRecipe(matrixStack, this.leftPos, this.topPos, true, partialTicks);
+            this.recipeGui.render(graphics, mouseX, mouseY, partialTicks);
+            super.render(graphics, mouseX, mouseY, partialTicks);
+            this.recipeGui.renderGhostRecipe(graphics, this.leftPos, this.topPos, true, partialTicks);
         }
 
-        this.renderTooltip(matrixStack, mouseX, mouseY);
-        this.recipeGui.renderTooltip(matrixStack, this.leftPos, this.topPos, mouseX, mouseY);
+        this.renderTooltip(graphics, mouseX, mouseY);
+        this.recipeGui.renderTooltip(graphics, this.leftPos, this.topPos, mouseX, mouseY);
     }
 
-    protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
+    protected void renderBg(GuiGraphics graphics, float partialTicks, int x, int y) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, GUI_TEXTURE);
         int i = this.leftPos;
         int j = this.topPos;
-        this.blit(matrixStack, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        graphics.blit(GUI_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
         if (this.menu.isForgeActive()) {
             int k = this.menu.getForgeTimeScaled();
-            this.blit(matrixStack, i + 60 + k, Math.min(j + 33 + k, j + 49), 176 + k,  Math.min(k, 16), 56 - (2 * k), Math.max(36 - (2 * k), 3));
+            graphics.blit(GUI_TEXTURE, i + 60 + k, Math.min(j + 33 + k, j + 49), 176 + k,  Math.min(k, 16), 56 - (2 * k), Math.max(36 - (2 * k), 3));
         }
     }
 
@@ -177,7 +178,7 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
             this.setY(this.yOffset + this.screen.topPos);
         }
 
-        public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        public void renderButton(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             RenderSystem.setShaderTexture(0, GUI_TEXTURE);
@@ -196,9 +197,9 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
 
             this.active = this.screen.menu.isRecipeValid() && !this.screen.menu.isForgeActive();
 
-            this.blit(matrixStack, this.getX(), this.getY(), j, i, this.width, this.height);
-            this.screen.itemRenderer.renderGuiItem(matrixStack, new ItemStack(Items.LAVA_BUCKET), this.getX() + 2, this.getY() + 2);
-            this.renderIcon(matrixStack);
+            graphics.blit(GUI_TEXTURE, this.getX(), this.getY(), j, i, this.width, this.height);
+            graphics.renderItem(new ItemStack(Items.LAVA_BUCKET), this.getX() + 2, this.getY() + 2);
+            this.renderIcon(graphics.pose());
         }
 
         protected abstract void renderIcon(PoseStack p_230454_1_);

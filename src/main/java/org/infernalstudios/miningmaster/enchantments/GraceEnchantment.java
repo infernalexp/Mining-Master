@@ -106,7 +106,7 @@ public class GraceEnchantment extends Enchantment {
                     }
                 }
             }
-        } else if (!livingEntity.isInWater() && livingEntity.isOnGround() && !((LivingEntityAccess) livingEntity).getGraceRecharged()) {
+        } else if (!livingEntity.isInWater() && livingEntity.onGround() && !((LivingEntityAccess) livingEntity).getGraceRecharged()) {
             ((LivingEntityAccess) livingEntity).setGraceRecharged(true);
         }
     }

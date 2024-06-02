@@ -240,7 +240,7 @@ public class GemForgeServerRecipePlacer<C extends Container> implements PlaceRec
                     int k = this.playerInventory.getSlotWithRemainingSpace(itemstack);
                     if (k == -1 && list.size() <= i) {
                         for(ItemStack itemstack1 : list) {
-                            if (itemstack1.sameItem(itemstack) && itemstack1.getCount() != itemstack1.getMaxStackSize() && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize()) {
+                            if (ItemStack.isSameItem(itemstack1, itemstack) && itemstack1.getCount() != itemstack1.getMaxStackSize() && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize()) {
                                 itemstack1.grow(itemstack.getCount());
                                 itemstack.setCount(0);
                                 break;

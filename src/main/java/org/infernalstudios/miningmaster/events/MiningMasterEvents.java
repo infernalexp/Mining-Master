@@ -16,16 +16,11 @@
 
 package org.infernalstudios.miningmaster.events;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import org.infernalstudios.miningmaster.MiningMaster;
-import org.infernalstudios.miningmaster.init.MMItems;
 import org.infernalstudios.miningmaster.init.MMRecipes;
 import org.infernalstudios.miningmaster.recipes.ForgingRecipe;
 
@@ -37,10 +32,4 @@ public class MiningMasterEvents {
     public static void registerFeaturesAndRecipeTypes(RegisterEvent event) {
         event.register(ForgeRegistries.Keys.RECIPE_TYPES, helper -> helper.register(ForgingRecipe.TYPE_ID, MMRecipes.FORGING_RECIPE_TYPE));
     }
-
-    @SubscribeEvent
-    public static void registerCreativeModeTabs(CreativeModeTabEvent.Register event) {
-        event.registerCreativeModeTab(new ResourceLocation(MiningMaster.MOD_ID, "tab"), builder -> builder.icon(() -> new ItemStack(MMItems.TAB_ITEM.get())).title(Component.literal("Mining Master")).build());
-    }
-
 }
