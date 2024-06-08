@@ -17,7 +17,6 @@
 package org.infernalstudios.miningmaster.client.gui.screen.inventory;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.ImageButton;
@@ -31,8 +30,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.infernalstudios.miningmaster.MiningMaster;
@@ -147,9 +144,6 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
             super(x, y, screen);
         }
 
-        @Override
-        protected void renderIcon(PoseStack p_230454_1_) {
-        }
 
         public void onPress() {
             if (GemForgeScreen.this.menu.isRecipeValid()) {
@@ -178,7 +172,7 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
             this.setY(this.yOffset + this.screen.topPos);
         }
 
-        public void renderButton(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+        public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             RenderSystem.setShaderTexture(0, GUI_TEXTURE);
@@ -198,10 +192,7 @@ public class GemForgeScreen extends AbstractContainerScreen<GemForgeContainer> i
             this.active = this.screen.menu.isRecipeValid() && !this.screen.menu.isForgeActive();
 
             graphics.blit(GUI_TEXTURE, this.getX(), this.getY(), j, i, this.width, this.height);
-            graphics.renderItem(new ItemStack(Items.LAVA_BUCKET), this.getX() + 2, this.getY() + 2);
-            this.renderIcon(graphics.pose());
+            graphics.blit(GUI_TEXTURE, this.getX(), this.getY(), this.width * 4, i, this.width, this.height);
         }
-
-        protected abstract void renderIcon(PoseStack p_230454_1_);
     }
 }
