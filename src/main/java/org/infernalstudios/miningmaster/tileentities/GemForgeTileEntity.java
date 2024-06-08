@@ -232,7 +232,7 @@ public class GemForgeTileEntity extends BaseContainerBlockEntity implements Worl
             this.forgeActive = false;
 
             if (!GemForgeTileEntity.this.level.isClientSide()) {
-                GemForgeTileEntity.this.level.playSound(null, GemForgeTileEntity.this.worldPosition, SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.BLOCKS, 1.0F, GemForgeTileEntity.this.level.getRandom().nextFloat() * 0.8F + 0.25F);
+                GemForgeTileEntity.this.level.playSound(null, GemForgeTileEntity.this.worldPosition, MMSounds.GEM_FORGE_COMPLETE.get(), SoundSource.BLOCKS, 1.0F, GemForgeTileEntity.this.level.getRandom().nextFloat() * 0.8F + 0.25F);
             }
         }
     }

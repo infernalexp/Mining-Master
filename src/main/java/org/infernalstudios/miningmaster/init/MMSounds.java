@@ -29,7 +29,7 @@ public class MMSounds {
 
     // GEM FORGE
     public static final RegistryObject<SoundEvent> GEM_FORGE_COOK = registerSound("gemforge.cook");
-
+    public static final RegistryObject<SoundEvent> GEM_FORGE_COMPLETE = registerSound("gemforge.complete");
     public static void register(IEventBus eventBus) {
         SOUNDS.register(eventBus);
         MiningMaster.LOGGER.info("Mining Master: Sounds Registered!");
