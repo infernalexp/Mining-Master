@@ -67,15 +67,10 @@ public class GemSmithingRecipe implements SmithingRecipe {
 
     @Override
     public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
-        MiningMaster.LOGGER.debug("Slot 0: " + inv.getItem(0).copy());
-        MiningMaster.LOGGER.debug("Slot 1: " + inv.getItem(0).copy());
-        MiningMaster.LOGGER.debug("Slot 2: " + inv.getItem(0).copy());
-
         ItemStack templateSlot = inv.getItem(0).copy();
         ItemStack itemstack = inv.getItem(1).copy();
         CompoundTag compoundnbt = inv.getItem(1).getTag();
 
-        MiningMaster.LOGGER.debug(templateSlot);
         if (itemstack.is(Items.AIR)) return null;
 
         if (compoundnbt != null) {
