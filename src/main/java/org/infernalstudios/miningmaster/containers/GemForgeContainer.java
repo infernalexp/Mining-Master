@@ -53,7 +53,7 @@ public class GemForgeContainer extends RecipeBookMenu<Container> {
         super(MMContainerTypes.GEM_FORGE_CONTAINER.get(), id);
         this.forgeData = forgeData;
         this.forgeInventory = inventory;
-        this.world = playerInventory.player.level;
+        this.world = playerInventory.player.level();
         this.addSlot(new GemSlot(inventory, 0, 44, 53));
         this.addSlot(new GemSlot(inventory, 1, 44, 35));
         this.addSlot(new GemSlot(inventory, 2, 44, 17));

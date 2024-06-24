@@ -21,6 +21,15 @@
         "name": "miningmaster:gemforge/boil5",
         "stream": true
       }
-    ]
+    ],
+    "subtitle": "Gem Forge smelts"
+  },
+  "gemforge.complete": {
+    "sounds": [
+      "block/end_portal/eyeplace1",
+      "block/end_portal/eyeplace2",
+      "block/end_portal/eyeplace3"
+    ],
+    "subtitle": "Gem Forge imbues"
   }
 }

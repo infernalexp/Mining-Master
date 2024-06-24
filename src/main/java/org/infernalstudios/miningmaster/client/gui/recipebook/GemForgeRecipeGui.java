@@ -17,7 +17,7 @@
 package org.infernalstudios.miningmaster.client.gui.recipebook;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookTabButton;
 import net.minecraft.client.renderer.GameRenderer;
@@ -113,34 +113,34 @@ public class GemForgeRecipeGui extends RecipeBookComponent {
     }
 
     @Override
-    public void renderGhostRecipe(PoseStack matrixStack, int xOffset, int yOffset, boolean displayOutputSquare, float time) {
-        super.renderGhostRecipe(matrixStack, xOffset, yOffset, false, time);
+    public void renderGhostRecipe(GuiGraphics graphics, int xOffset, int yOffset, boolean displayOutputSquare, float time) {
+        super.renderGhostRecipe(graphics, xOffset, yOffset, false, time);
     }
 
     @Override
-    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         if (this.isVisible()) {
-            matrixStack.pushPose();
-            matrixStack.translate(0.0F, 0.0F, 100.0F);
+            graphics.pose().pushPose();
+            graphics.pose().translate(0.0F, 0.0F, 100.0F);
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.setShaderTexture(0, RECIPE_BOOK_GEM_FORGE);
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             int i = (this.width - 147) / 2 - this.xOffset;
             int j = (this.height - 166) / 2;
-            this.blit(matrixStack, i, j, 1, 1, 147, 166);
+            graphics.blit(RECIPE_BOOK_GEM_FORGE, i, j, 1, 1, 147, 166);
             if (!this.searchBox.isFocused() && this.searchBox.getValue().isEmpty()) {
-                drawString(matrixStack, this.minecraft.font, SEARCH_HINT, i + 25, j + 14, -1);
+                graphics.drawString(this.minecraft.font, SEARCH_HINT, i + 25, j + 14, -1);
             } else {
-                this.searchBox.render(matrixStack, mouseX, mouseY, partialTicks);
+                this.searchBox.render(graphics, mouseX, mouseY, partialTicks);
             }
 
             for (RecipeBookTabButton recipetabtogglewidget : this.tabButtons) {
-                recipetabtogglewidget.render(matrixStack, mouseX, mouseY, partialTicks);
+                recipetabtogglewidget.render(graphics, mouseX, mouseY, partialTicks);
             }
 
-            this.filterButton.render(matrixStack, mouseX, mouseY, partialTicks);
-            this.recipeBookPage.render(matrixStack, i, j, mouseX, mouseY, partialTicks);
-            matrixStack.popPose();
+            this.filterButton.render(graphics, mouseX, mouseY, partialTicks);
+            this.recipeBookPage.render(graphics, i, j, mouseX, mouseY, partialTicks);
+            graphics.pose().popPose();
         }
     }
 }

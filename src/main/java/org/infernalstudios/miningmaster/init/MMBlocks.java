@@ -21,7 +21,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -81,18 +80,6 @@ public class MMBlocks {
     public static final RegistryObject<Block> MALACORE = registerBlockWithDefaultItem("malacore", () -> new Block(getProperties(Blocks.END_STONE)));
     public static final RegistryObject<Block> MALACRUST = registerBlockWithDefaultItem("malacrust", () -> new Block(getProperties(Blocks.DEEPSLATE).strength(22.5F)));
     public static final RegistryObject<Block> GEM_FORGE = registerBlockWithDefaultItem("gem_forge", () -> new GemForgeBlock(getProperties(Blocks.FURNACE)));
-
-    public static BlockBehaviour.Properties getProperties(Material materialIn, float hardnessAndResistanceIn) {
-        return getProperties(materialIn, hardnessAndResistanceIn, hardnessAndResistanceIn);
-    }
-
-    public static BlockBehaviour.Properties getProperties(Material materialIn, float hardnessIn, float resistanceIn) {
-        return BlockBehaviour.Properties.of(materialIn).strength(hardnessIn, resistanceIn);
-    }
-
-    public static BlockBehaviour.Properties getProperties(Material materialIn) {
-        return BlockBehaviour.Properties.of(materialIn).instabreak();
-    }
 
     public static BlockBehaviour.Properties getProperties(Block block) {
         return BlockBehaviour.Properties.copy(block);

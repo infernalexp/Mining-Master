@@ -40,6 +40,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.init.MMRecipes;
 import org.infernalstudios.miningmaster.init.MMTags;
 
@@ -61,13 +62,14 @@ public class GemSmithingRecipe implements SmithingRecipe {
 
     @Override
     public boolean matches(Container inv, Level worldIn) {
-        return !this.blacklist.test(inv.getItem(0)) && this.gem.sameItem(inv.getItem(1)) && assemble(inv, worldIn.registryAccess()) != null;
+        return !this.blacklist.test(inv.getItem(1)) && ItemStack.isSameItem(this.gem, inv.getItem(2)) && assemble(inv, worldIn.registryAccess()) != null;
     }
 
     @Override
     public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
-        ItemStack itemstack = inv.getItem(0).copy();
-        CompoundTag compoundnbt = inv.getItem(0).getTag();
+        ItemStack templateSlot = inv.getItem(0).copy();
+        ItemStack itemstack = inv.getItem(1).copy();
+        CompoundTag compoundnbt = inv.getItem(1).getTag();
 
         if (itemstack.is(Items.AIR)) return null;
 
@@ -128,7 +130,7 @@ public class GemSmithingRecipe implements SmithingRecipe {
 
     @Override
     public boolean isTemplateIngredient(ItemStack stack) {
-        return false;
+        return stack.is(Items.AIR);
     }
 
     @Override

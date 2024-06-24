@@ -52,7 +52,7 @@ public abstract class MixinLivingEntity extends Entity implements LivingEntityAc
 
     @Inject(method = "aiStep", at = @At(value = "HEAD"))
     private void MM_countTicksFalling(CallbackInfo ci) {
-        if (this.onGround) {
+        if (this.onGround()) {
             this.knightJumpsUsed = 0;
         }
     }
@@ -62,7 +62,7 @@ public abstract class MixinLivingEntity extends Entity implements LivingEntityAc
     }
 
     public void useKnightJump() {
-        if (!this.onGround) {
+        if (!this.onGround()) {
             boolean hasKnightJump = false;
             int level = 0;
 

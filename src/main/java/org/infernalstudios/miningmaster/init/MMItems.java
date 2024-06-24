@@ -17,8 +17,12 @@
 package org.infernalstudios.miningmaster.init;
 
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -90,4 +94,17 @@ public class MMItems {
     public static <T extends Item> RegistryObject<T> registerItem(String name, Supplier<? extends T> itemSupplier) {
         return ITEMS.register(name, itemSupplier);
     }
+
+    // TAB
+    public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MiningMaster.MOD_ID);
+    public static final RegistryObject<CreativeModeTab> TAB = TABS.register("mining_master",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(TAB_ITEM.get()))
+                    .title(Component.literal("Mining Master"))
+                    .displayItems((features, output) -> {
+                        for (RegistryObject<Item> item : ITEMS.getEntries()) {
+                            if (item != TAB_ITEM) output.accept(item.get());
+                        }
+                    })
+            .build());
 }

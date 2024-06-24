@@ -64,6 +64,7 @@ public class MiningMaster {
 
         MMBlocks.register(modEventBus);
         MMItems.register(modEventBus);
+        MMItems.TABS.register(modEventBus);
         MMEnchantments.register(modEventBus);
         MMRecipes.register(modEventBus);
         MMContainerTypes.register(modEventBus);

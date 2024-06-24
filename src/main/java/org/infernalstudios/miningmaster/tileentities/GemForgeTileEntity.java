@@ -37,7 +37,14 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import org.infernalstudios.miningmaster.MiningMaster;
 import org.infernalstudios.miningmaster.blocks.GemForgeBlock;
 import org.infernalstudios.miningmaster.containers.GemForgeContainer;
@@ -225,7 +232,7 @@ public class GemForgeTileEntity extends BaseContainerBlockEntity implements Worl
             this.forgeActive = false;
 
             if (!GemForgeTileEntity.this.level.isClientSide()) {
-                GemForgeTileEntity.this.level.playSound(null, GemForgeTileEntity.this.worldPosition, SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.BLOCKS, 1.0F, GemForgeTileEntity.this.level.getRandom().nextFloat() * 0.8F + 0.25F);
+                GemForgeTileEntity.this.level.playSound(null, GemForgeTileEntity.this.worldPosition, MMSounds.GEM_FORGE_COMPLETE.get(), SoundSource.BLOCKS, 1.0F, GemForgeTileEntity.this.level.getRandom().nextFloat() * 0.8F + 0.25F);
             }
         }
     }
@@ -336,12 +343,12 @@ public class GemForgeTileEntity extends BaseContainerBlockEntity implements Worl
         }
     }
 
-    net.minecraftforge.common.util.LazyOptional<? extends net.minecraftforge.items.IItemHandler>[] handlers =
-            net.minecraftforge.items.wrapper.SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
+    LazyOptional<? extends IItemHandler>[] handlers =
+            SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
 
     @Override
-    public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable Direction facing) {
-        if (!this.remove && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
+        if (!this.remove && facing != null && capability == ForgeCapabilities.ITEM_HANDLER) {
             if (facing == Direction.UP)
                 return handlers[0].cast();
             else if (facing == Direction.DOWN)

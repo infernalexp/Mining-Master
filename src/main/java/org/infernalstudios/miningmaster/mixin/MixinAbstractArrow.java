@@ -52,7 +52,7 @@ public class MixinAbstractArrow {
     @Inject(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;doPostHurtEffects(Lnet/minecraft/world/entity/LivingEntity;)V"))
     private void MM_dealArrowEnchants(EntityHitResult hitResult, CallbackInfo ci) {
         if (this.freezingLevel > 0) {
-            if (hitResult.getEntity() instanceof LivingEntity livingEntity && !livingEntity.level.isClientSide() && !livingEntity.isDeadOrDying()) {
+            if (hitResult.getEntity() instanceof LivingEntity livingEntity && !livingEntity.level().isClientSide() && !livingEntity.isDeadOrDying()) {
                 livingEntity.setTicksFrozen(Math.max(livingEntity.getTicksFrozen(), livingEntity.getTicksRequiredToFreeze() + 120 * this.freezingLevel));
             }
         }

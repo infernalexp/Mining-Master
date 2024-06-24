@@ -55,7 +55,7 @@ public abstract class MixinPlayer {
     }
 
     private void applyFreezingEffects(Entity targetEntity, int level) {
-        if (targetEntity instanceof LivingEntity livingTarget && !livingTarget.level.isClientSide() && !livingTarget.isDeadOrDying()) {
+        if (targetEntity instanceof LivingEntity livingTarget && !livingTarget.level().isClientSide() && !livingTarget.isDeadOrDying()) {
             livingTarget.setTicksFrozen(Math.max(livingTarget.getTicksFrozen(), livingTarget.getTicksRequiredToFreeze() + 120 * level));
         }
     }
