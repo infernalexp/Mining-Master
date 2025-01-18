@@ -125,32 +125,6 @@
             "weight": 1
           }
         ]
-      },
-      {
-        "target": {
-          "predicate_type": "minecraft:tag_match",
-          "tag": "minecraft:base_stone_nether"
-        },
-        "states": [
-          {
-            "state": {
-              "Name": "miningmaster:power_pyrite_ore"
-            },
-            "weight": 1
-          },
-          {
-            "state": {
-              "Name": "miningmaster:kinetic_opal_ore"
-            },
-            "weight": 1
-          },
-          {
-            "state": {
-              "Name": "miningmaster:heart_rhodonite_ore"
-            },
-            "weight": 1
-          }
-        ]
       }
     ]
   },
