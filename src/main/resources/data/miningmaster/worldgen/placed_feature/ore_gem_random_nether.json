@@ -1,5 +1,5 @@
 {
-  "feature": "miningmaster:ore_gem_random",
+  "feature": "miningmaster:ore_gem_random_nether",
   "placement": [
     {
       "type": "minecraft:count",
